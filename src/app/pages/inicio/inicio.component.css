@@ -7,7 +7,7 @@
 .contenedor__slider .slider__img{
     width: 100%;
     height: 100%;
-    background-image: linear-gradient(120deg, #a6c0fe75 0%, #000000a2 100%), url("/slider1.jpg");
+    background-image: linear-gradient(120deg, #525f7e75 0%, #000000a2 100%), url("/slider1.jpg");
     background-size: cover;
     background-position: center;
     display: flex;
