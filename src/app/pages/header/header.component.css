@@ -1,0 +1,103 @@
+.header {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+  z-index: 100;
+}
+
+.cont1_header {
+  width: 100%;
+  height: 2.3rem;
+  background-color: #aed3da; /* color pedido */
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  z-index: inherit;
+}
+
+.cont1_header .nav1 {
+  display: flex;
+  gap: 1rem;
+  margin-right: 2rem;
+}
+
+.cont1_header .nav1 a {
+  text-decoration: none;
+  color: #000;
+  font-weight: 600;
+  font-size: 0.8rem;
+  transition: 0.3s;
+}
+
+/* ===== MENÚ PRINCIPAL ===== */
+
+.cont2_header {
+  background-color: #fff; /* color pedido */
+  width: 95%;
+  border-radius: 1.8rem;
+  z-index: inherit;
+}
+
+.cont2_header .nav2 {
+  display: flex;
+  justify-content: space-between;
+  gap: 2rem;
+  align-items: center;
+  padding: 0.6rem 0.9rem;
+}
+
+.cont2_header .nav2 .menu {
+  display: flex;
+  gap: 1.5rem;
+  align-items: center;
+  justify-content: center;
+  list-style: none;
+}
+
+.cont2_header .nav2 .menu a {
+  text-decoration: none;
+  color: #003E5C;
+  font-weight: 600;
+  font-size: .8rem;
+  text-transform: uppercase;
+  transition: 0.3s;
+}
+
+/* Logo igual */
+.cont2_header .nav2 .logo img {
+  width: 10rem;
+}
+
+/* Botón */
+.btn_header {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 0.5rem;
+  background-color: #d9b756; /* color pedido */
+  border-radius: 1.3rem;
+  border: none;
+  outline: none;
+  padding: 0.5rem 1.2rem;
+}
+
+.btn_header i {
+  color: #fff;
+  font-size: 1.5rem;
+}
+
+.btn_header .contact_header {
+  display: flex;
+  flex-direction: column;
+  color: #fff;
+  align-items: start;
+  font-size: 0.8rem;
+  font-weight: 500;
+}
+
+.btn_header .contact_header span {
+  font-weight: 600;
+  font-size: 1rem;
+}
