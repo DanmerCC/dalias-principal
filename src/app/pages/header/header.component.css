@@ -7,14 +7,14 @@
   z-index: 100;
 }
 
+/* ===== BARRA SUPERIOR ===== */
 .cont1_header {
   width: 100%;
   height: 2.3rem;
-  background-color: #aed3da; /* color pedido */
+  background-color: #aed3da;
   display: flex;
   justify-content: flex-end;
   align-items: center;
-  z-index: inherit;
 }
 
 .cont1_header .nav1 {
@@ -28,58 +28,63 @@
   color: #000;
   font-weight: 600;
   font-size: 0.8rem;
-  transition: 0.3s;
 }
 
-/* ===== MENÚ PRINCIPAL ===== */
-
+/* ===== HEADER PRINCIPAL ===== */
 .cont2_header {
-  background-color: #fff; /* color pedido */
+  background-color: #fff;
   width: 95%;
   border-radius: 1.8rem;
-  z-index: inherit;
+  transition: all 0.3s ease;
+  z-index: 200;
 }
 
+/* 🔥 ESTADO FIJO AL HACER SCROLL */
+.cont2_header.fixed {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  border-radius: 0;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+}
+
+/* ===== NAV ===== */
 .cont2_header .nav2 {
   display: flex;
   justify-content: space-between;
-  gap: 2rem;
   align-items: center;
-  padding: 0.5rem 0.9rem;
+  gap: 2rem;
+  padding: 0.5rem 1.5rem;
 }
 
-.cont2_header .nav2 .menu {
+.menu {
   display: flex;
   gap: 1.5rem;
-  align-items: center;
-  justify-content: center;
   list-style: none;
 }
 
-.cont2_header .nav2 .menu a {
+.menu a {
   text-decoration: none;
-  color: #003E5C;
+  color: #003e5c;
   font-weight: 600;
-  font-size: .8rem;
+  font-size: 0.8rem;
   text-transform: uppercase;
-  transition: 0.3s;
 }
 
-/* Logo igual */
-.cont2_header .nav2 .logo img {
+/* ===== LOGO ===== */
+.logo img {
   width: 10rem;
 }
 
-/* Botón */
+/* ===== BOTÓN ===== */
 .btn_header {
   display: flex;
-  justify-content: center;
   align-items: center;
   gap: 0.5rem;
-  background-color: #d9b756; /* color pedido */
+  background-color: #d9b756;
   border-radius: 1.3rem;
   border: none;
-  outline: none;
   padding: 0.5rem 1.2rem;
 }
 
@@ -88,16 +93,14 @@
   font-size: 1.5rem;
 }
 
-.btn_header .contact_header {
+.contact_header {
   display: flex;
   flex-direction: column;
   color: #fff;
-  align-items: start;
   font-size: 0.8rem;
-  font-weight: 500;
 }
 
-.btn_header .contact_header span {
+.contact_header span {
   font-weight: 600;
   font-size: 1rem;
 }

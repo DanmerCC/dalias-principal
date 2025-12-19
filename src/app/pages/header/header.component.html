@@ -9,7 +9,10 @@
   </div>
 
   <!-- Header principal -->
-  <div class="cont2_header">
+  <div
+    class="cont2_header"
+    [class.fixed]="isFixed"
+  >
     <nav class="nav2">
       <div class="logo">
         <a href="/">
@@ -28,7 +31,7 @@
       <button class="btn_header">
         <i class="bx bx-phone"></i>
         <div class="contact_header">
-          <span>(01) 000 1111 </span>
+          <span>(01) 000 1111</span>
           servicio&#64;lasdalias.com
         </div>
       </button>

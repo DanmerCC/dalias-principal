@@ -31,3 +31,97 @@
     </div>
   </div>
 </div>
+
+<!-- Nueva sección -->
+<section class="seccion__innovacion">
+  <div class="innovacion__contenedor">
+
+    <!-- Columna izquierda -->
+    <div class="innovacion__izquierda">
+      <p class="innovacion__subtitulo">SERVICIOS ASISTENCIALES</p>
+
+      <h2 class="innovacion__titulo">
+        Servicios pensados para el cuidado integral de nuestros residentes
+      </h2>
+
+      <div class="innovacion__acordeon">
+        <div
+          class="acordeon__item"
+          *ngFor="let item of acordeonItems"
+          [class.activo]="item.activo"
+          (click)="toggleAcordeon(item.id)"
+        >
+          <div class="acordeon__header">
+            <span>{{ item.titulo }}</span>
+            <i
+              class="bx"
+              [class.bx-chevron-down]="!item.activo"
+              [class.bx-chevron-up]="item.activo"
+            ></i>
+          </div>
+
+          <div class="acordeon__contenido" *ngIf="item.activo">
+            <p>{{ item.contenido }}</p>
+          </div>
+        </div>
+      </div>
+
+      <button class="btn__mas-info">
+        Ver todos los servicios
+        <i class="bx bx-right-arrow-alt"></i>
+      </button>
+    </div>
+
+    <!-- Columna derecha -->
+    <div class="innovacion__derecha">
+      <div class="servicio__card">
+
+        <!-- Header con títulos cortos -->
+        <div class="servicio__header">
+          <div class="servicio__titulo">
+            <h3>{{ slidesCarrusel[slideActual].titulo }}</h3>
+            <p class="servicio__subtitulo">
+              {{ slidesCarrusel[slideActual].subtitulo }}
+            </p>
+          </div>
+          <i [class]="slidesCarrusel[slideActual].icono"></i>
+        </div>
+
+        <div class="servicio__items">
+          <div
+            class="servicio__item"
+            *ngFor="let item of slidesCarrusel[slideActual].items"
+          >
+            <i class="bx bx-chevron-right"></i>
+            <div>
+              <strong>{{ item.titulo }}:</strong>
+              <span>{{ item.descripcion }}</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Carrusel de imágenes -->
+        <div class="servicio__carrusel">
+          <div class="carrusel__imagen-container">
+            <img
+              [src]="slidesCarrusel[slideActual].imagen"
+              [alt]="slidesCarrusel[slideActual].titulo"
+              class="carrusel__imagen"
+            />
+          </div>
+
+          <div class="carrusel__navegacion">
+            <button class="carrusel__btn" (click)="anteriorSlide()">
+              <i class="bx bx-chevron-left"></i>
+            </button>
+            <button class="carrusel__btn" (click)="siguienteSlide()">
+              <i class="bx bx-chevron-right"></i>
+            </button>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+  </div>
+</section>
