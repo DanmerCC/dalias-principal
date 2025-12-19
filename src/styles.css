@@ -13,7 +13,6 @@ html {
   scroll-behavior: smooth;
 }
 
-
 @media (min-width: 1024px) {
   html {
     font-size: 13px;
@@ -24,7 +23,6 @@ html {
     font-size: 15px;
   }
 }
-
 @media (min-width: 1400px) {
   html {
     font-size: 16px;
@@ -52,6 +50,11 @@ html {
 @media (min-width: 1800px) {
   html {
     font-size: 20px;
+  }
+}
+@media (min-width: 1900px) {
+  html {
+    font-size: 22px;
   }
 }
 @media (max-width: 410px) {
