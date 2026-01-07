@@ -1,3 +1,13 @@
 <app-header></app-header>
 <router-outlet></router-outlet>
 <app-footer></app-footer>
+
+<!-- Botón flotante de scroll to top (izquierda abajo) -->
+<button (click)="scrollToTop()" class="float-button scroll-top-button" [class.show]="showScrollButton">
+  <i class="fas fa-arrow-up"></i>
+</button>
+
+<!-- Botón flotante de WhatsApp (derecha abajo) -->
+<a href="https://wa.me/TU_NUMERO_AQUI" target="_blank" class="float-button whatsapp-button">
+  <i class="fab fa-whatsapp"></i>
+</a>

@@ -1,0 +1,156 @@
+/* Estilos base para botones flotantes */
+.float-button {
+  position: fixed;
+  bottom: 30px;
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 28px;
+  cursor: pointer;
+  z-index: 1000;
+  transition: all 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
+  border: none;
+  text-decoration: none;
+}
+
+.float-button i {
+  transition: transform 0.3s ease;
+}
+
+.float-button:hover i {
+  transform: scale(1.2) rotate(5deg);
+}
+
+/* Botón de scroll to top (izquierda) */
+.scroll-top-button {
+  left: 30px;
+  background: linear-gradient(135deg, #003e5c 0%, #005a82 100%);
+  color: white;
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(100px) scale(0);
+}
+
+.scroll-top-button.show {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0) scale(1);
+  animation: bounceIn 0.6s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+}
+
+.scroll-top-button:hover {
+  background: linear-gradient(135deg, #005a82 0%, #0077b3 100%);
+  transform: translateY(-8px) scale(1.05);
+  box-shadow: 0 12px 35px rgba(0, 62, 92, 0.5);
+}
+
+.scroll-top-button:active {
+  transform: translateY(-4px) scale(0.95);
+}
+
+/* Botón de WhatsApp (derecha) */
+.whatsapp-button {
+  right: 30px;
+  background: linear-gradient(135deg, #25D366 0%, #128C7E 100%);
+  color: white;
+  animation: pulse 2s ease-in-out infinite;
+}
+
+.whatsapp-button:hover {
+  background: linear-gradient(135deg, #128C7E 0%, #075E54 100%);
+  transform: translateY(-8px) scale(1.05) rotate(-5deg);
+  box-shadow: 0 12px 35px rgba(37, 211, 102, 0.4);
+  animation: none;
+}
+
+.whatsapp-button:active {
+  transform: translateY(-4px) scale(0.95);
+}
+
+/* Animaciones */
+@keyframes bounceIn {
+  0% {
+    opacity: 0;
+    transform: translateY(100px) scale(0.3);
+  }
+  50% {
+    opacity: 1;
+    transform: translateY(-10px) scale(1.05);
+  }
+  70% {
+    transform: translateY(5px) scale(0.95);
+  }
+  100% {
+    transform: translateY(0) scale(1);
+  }
+}
+
+@keyframes pulse {
+  0%, 100% {
+    transform: scale(1);
+    box-shadow: 0 8px 25px rgba(37, 211, 102, 0.2);
+  }
+  50% {
+    transform: scale(1.05);
+    box-shadow: 0 8px 35px rgba(37, 211, 102, 0.4);
+  }
+}
+
+/* Efecto de ondas al hacer hover */
+.float-button::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 0;
+  height: 0;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.3);
+  transform: translate(-50%, -50%);
+  transition: width 0.6s, height 0.6s;
+}
+
+.float-button:hover::before {
+  width: 100%;
+  height: 100%;
+}
+
+/* Responsive para móviles */
+@media (max-width: 768px) {
+  .float-button {
+    width: 50px;
+    height: 50px;
+    font-size: 24px;
+    bottom: 20px;
+  }
+  
+  .scroll-top-button {
+    left: 20px;
+  }
+  
+  .whatsapp-button {
+    right: 20px;
+  }
+}
+
+/* Mejora para pantallas muy pequeñas */
+@media (max-width: 480px) {
+  .float-button {
+    width: 45px;
+    height: 45px;
+    font-size: 20px;
+    bottom: 15px;
+  }
+  
+  .scroll-top-button {
+    left: 15px;
+  }
+  
+  .whatsapp-button {
+    right: 15px;
+  }
+}
