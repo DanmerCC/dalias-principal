@@ -87,7 +87,7 @@ export class InicioComponent implements OnInit, AfterViewInit {
     },
   ];
 
-  // ===== 4 SERVICIOS (SEGÚN LA IMAGEN) =====
+  // ===== 5 SERVICIOS (4 originales + 1 nuevo) =====
   slidesCarrusel: SlideItem[] = [
     {
       titulo: 'Salud médica',
@@ -98,8 +98,11 @@ export class InicioComponent implements OnInit, AfterViewInit {
       items: [
         {
           titulo: 'Consulta Geriátrica',
-          descripcion:
-            'Evaluación y control del estado de salud del residente.',
+          descripcion: 'Evaluación y control del estado de salud del residente.',
+        },
+        {
+          titulo: 'Monitoreo Continuo',
+          descripcion: 'Control de signos vitales y seguimiento médico permanente.',
         },
       ],
     },
@@ -112,12 +115,11 @@ export class InicioComponent implements OnInit, AfterViewInit {
       items: [
         {
           titulo: 'Fisioterapia',
-          descripcion:
-            'Tratamientos para mejorar la movilidad y el equilibrio.',
+          descripcion: 'Tratamientos para mejorar la movilidad y el equilibrio.',
         },
         {
-          titulo: 'Terapia Ocupacional y Cognitiva',
-          descripcion: 'Estimulación de capacidades físicas y mentales.',
+          titulo: 'Terapia Ocupacional',
+          descripcion: 'Estimulación de capacidades físicas para la autonomía.',
         },
       ],
     },
@@ -132,6 +134,10 @@ export class InicioComponent implements OnInit, AfterViewInit {
           titulo: 'Atención psicogeriátrica',
           descripcion: 'Acompañamiento emocional especializado.',
         },
+        {
+          titulo: 'Terapia Individual',
+          descripcion: 'Sesiones personalizadas para el bienestar emocional.',
+        },
       ],
     },
     {
@@ -142,40 +148,64 @@ export class InicioComponent implements OnInit, AfterViewInit {
       icono: 'bx bx-bowl-hot',
       items: [
         {
-          titulo: 'Nutrición',
+          titulo: 'Nutrición Personalizada',
           descripcion: 'Dietas equilibradas adaptadas a cada residente.',
+        },
+        {
+          titulo: 'Supervisión Dietética',
+          descripcion: 'Control de ingesta y necesidades nutricionales.',
+        },
+      ],
+    },
+    {
+      titulo: 'Planes de Estadía',
+      subtitulo: 'Opciones flexibles',
+      imagen:
+        'https://images.unsplash.com/photo-1586023492125-27b2c045efd7?w=800&q=80',
+      icono: 'bx bx-calendar-check',
+      items: [
+        {
+          titulo: 'Estadía Permanente',
+          descripcion: 'Residencia completa con todos los servicios incluidos.',
+        },
+        {
+          titulo: 'Estadía Temporal',
+          descripcion: 'Estancias cortas para recuperación o descanso.',
         },
       ],
     },
   ];
 
-  // ===== ACORDEÓN (4 SERVICIOS) =====
+  // ===== ACORDEÓN (5 SERVICIOS) =====
   acordeonItems: AcordeonItem[] = [
     {
       id: 1,
       titulo: 'Consulta Geriátrica',
-      contenido:
-        'Atención médica especializada orientada al control y seguimiento del adulto mayor.',
+      contenido: 'Atención médica especializada orientada al control y seguimiento del adulto mayor.',
       activo: false,
     },
     {
       id: 2,
       titulo: 'Terapias y Rehabilitación',
-      contenido:
-        'Programas de fisioterapia y terapia ocupacional orientados a la autonomía.',
+      contenido: 'Programas de fisioterapia y terapia ocupacional orientados a la autonomía.',
       activo: false,
     },
+    // {
+    //   id: 3,
+    //   titulo: 'Atención psicogeriátrica',
+    //   contenido: 'Apoyo psicológico especializado para el bienestar emocional.',
+    //   activo: false,
+    // },
     {
       id: 3,
-      titulo: 'Atención psicogeriátrica',
-      contenido: 'Apoyo psicológico especializado para el bienestar emocional.',
+      titulo: 'Nutrición',
+      contenido: 'Alimentación equilibrada y adaptada a las necesidades del residente.',
       activo: false,
     },
     {
       id: 4,
-      titulo: 'Nutrición',
-      contenido:
-        'Alimentación equilibrada y adaptada a las necesidades del residente.',
+      titulo: 'Planes de Estadía',
+      contenido: 'Opciones flexibles de residencia: permanente, temporal, centro de día y respiro familiar.',
       activo: false,
     },
   ];
@@ -339,14 +369,14 @@ export class InicioComponent implements OnInit, AfterViewInit {
   }
 
   // ===== FORMULARIO DE CONTACTO =====
-opcionesContacto = [
-  { value: 'residencia-permanente', label: 'Residencia Permanente' },
-  { value: 'centro-dia', label: 'Centro de Día' },
-  { value: 'atencion-domiciliaria', label: 'Atención Domiciliaria' },
-  { value: 'consulta-geriatrica', label: 'Consulta Geriátrica' },
-  { value: 'informacion-general', label: 'Información General' }
-];
-
+  opcionesContacto = [
+    { value: 'residencia-permanente', label: 'Residencia Permanente' },
+    { value: 'centro-dia', label: 'Centro de Día' },
+    { value: 'atencion-domiciliaria', label: 'Atención Domiciliaria' },
+    { value: 'consulta-geriatrica', label: 'Consulta Geriátrica' },
+    { value: 'planes-estadia', label: 'Planes de Estadía' },
+    { value: 'informacion-general', label: 'Información General' }
+  ];
 
   formularioContacto: FormularioContacto = {
     tipoConsulta: 'residencia-permanente',
