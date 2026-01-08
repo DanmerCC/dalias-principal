@@ -1681,7 +1681,7 @@
   height: 1.1rem;
   cursor: pointer;
   outline: none;
-  accent-color: #d9b756;
+  accent-color: #003e5c;
 }
 
 .radio__option input[type="radio"]:checked ~ span {
