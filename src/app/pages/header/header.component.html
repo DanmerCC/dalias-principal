@@ -9,10 +9,7 @@
   </div>
 
   <!-- Header principal -->
-  <div
-    class="cont2_header"
-    [class.fixed]="isFixed"
-  >
+  <div class="cont2_header" [class.fixed]="isFixed">
     <nav class="nav2">
       <div class="logo">
         <a href="/">
@@ -21,7 +18,9 @@
       </div>
 
       <ul class="menu">
-        <li><a href="/">Inicio</a></li>
+        <li *ngIf="showInicio">
+          <a href="/">Inicio</a>
+        </li>
         <li><a href="/nosotros">Nosotros</a></li>
         <li><a href="/servicios">Servicios</a></li>
         <li><a href="/actividades">Actividades</a></li>
@@ -32,7 +31,7 @@
         <i class="bx bx-phone"></i>
         <div class="contact_header">
           <span>+51 981 776 156</span>
-          ¿Alguna duda? Contáctanos 
+          ¿Alguna duda? Contáctanos
         </div>
       </button>
     </nav>

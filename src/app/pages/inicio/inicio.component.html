@@ -40,13 +40,10 @@
       <!-- Imagen destacada -->
       <div class="nosotros__imagen">
         <img
-          src="https://lh3.googleusercontent.com/p/AF1QipNihg-xouP4tNUCAxrU2y7dj-25iF_M1ZwIkDFt=s1360-w1360-h1020-rw"
+          [src]="imagenesNosotros[imagenActualNosotros]"
           alt="Residencia Las Dalias"
+          class="carousel-image"
         />
-        <!-- <div class="imagen__badge">
-          <i class="bx bx-heart"></i>
-          <span>+20 años de experiencia</span>
-        </div> -->
       </div>
 
       <!-- Texto descriptivo -->
@@ -180,87 +177,48 @@
   </div>
 </section>
 
-<!-- Sección  actividades-->
+<!-- Sección actividades-->
 <section class="section__actividades">
-  <div class="actividades__contenedor">
-    <article class="art__atv">
+  <div class="actividades__contenedor" #actividadesCarrusel>
+    <article class="art__atv" *ngFor="let actividad of actividades; let first = first" [class.first-item]="first">
       <div class="text__atv">
         <div>
-          <h3>Lorem ipsum dolor sit,</h3>
-          <p>
-            Lorem ipsum dolor, sit amet consectetur adipisicing elit. Quisquam
-            excepturi nobis adipisci sit eaque facere earum aliquid minima a
-            cupiditate? Deserunt cumque aut laborum, consequatur, repudiandae
-            eos
-          </p>
+          <h3>{{ actividad.titulo }}</h3>
+          <p>{{ actividad.descripcion }}</p>
         </div>
-        <button>Leer el articulo</button>
+        <button>Leer el artículo</button>
       </div>
-      <img
-        src="https://a.storyblok.com/f/245907/2454x1636/7de25bd8d4/resident-famille-equipe.jpg/m/480x320"
-        alt=""
-      />
-    </article>
-    <article class="art__atv">
-      <div class="text__atv">
-        <div>
-          <h3>Lorem ipsum dolor sit,</h3>
-          <p>
-            Lorem ipsum dolor, sit amet consectetur adipisicing elit. Quisquam
-            excepturi nobis adipisci sit eaque facere earum aliquid minima a
-            cupiditate? Deserunt cumque aut laborum, consequatur, repudiandae
-            eos
-          </p>
-        </div>
-        <button>Leer el articulo</button>
-      </div>
-      <img
-        src="https://a.storyblok.com/f/245907/2454x1636/7de25bd8d4/resident-famille-equipe.jpg/m/480x320"
-        alt=""
-      />
-    </article>
-    <article class="art__atv">
-      <div class="text__atv">
-        <div>
-          <h3>Lorem ipsum dolor sit,</h3>
-          <p>
-            Lorem ipsum dolor, sit amet consectetur adipisicing elit. Quisquam
-            excepturi nobis adipisci sit eaque facere earum aliquid minima a
-            cupiditate? Deserunt cumque aut laborum, consequatur, repudiandae
-            eos
-          </p>
-        </div>
-        <button>Leer el articulo</button>
-      </div>
-      <img
-        src="https://a.storyblok.com/f/245907/2454x1636/7de25bd8d4/resident-famille-equipe.jpg/m/480x320"
-        alt=""
-      />
+      <img [src]="actividad.imagen" [alt]="actividad.titulo" />
     </article>
   </div>
   <div class="arrows__actividades">
     <div class="arrows__content">
       <div class="dots__actividades">
-        <span class="active"></span>
-        <span></span>
-        <span></span>
-        <span></span>
-        <span></span>
-        <span></span>
+        <span 
+          *ngFor="let actividad of actividades; let i = index" 
+          [class.active]="slideActualActividades === i"
+          (click)="irAActividad(i)"
+        ></span>
       </div>
       <div class="btns__actividades">
-        <button class="btn__atv prev__atv">
+        <button 
+          class="btn__atv prev__atv" 
+          (click)="anteriorActividad()"
+          [disabled]="slideActualActividades === 0"
+        >
           <i class="bx bx-chevron-left"></i>
         </button>
-        <button class="btn__atv next__atv">
+        <button 
+          class="btn__atv next__atv" 
+          (click)="siguienteActividad()"
+          [disabled]="slideActualActividades === actividades.length - 1"
+        >
           <i class="bx bx-chevron-right"></i>
         </button>
       </div>
     </div>
   </div>
 </section>
-
-
 <!-- Sección estadísticas -->
 <section class="seccion__estadisticas">
   <div class="estadisticas__imagen"></div>
@@ -268,38 +226,37 @@
   <div class="estadisticas__contenido">
     <div class="estadisticas__grid">
       <div class="estadistica__item">
+        <i class="fa-solid fa-tree"></i>
+        <p><strong>+5000 m²</strong><br />de terreno natural</p>
+      </div>
+
+      <div class="estadistica__item">
+        <i class="fa-solid fa-leaf"></i>
+        <p>Amplios jardines<br />y zonas recreativas</p>
+      </div>
+
+      <div class="estadistica__item">
+        <i class="fa-solid fa-person-walking"></i>
+        <p>Terapias<br />al aire libre</p>
+      </div>
+
+      <div class="estadistica__item">
+        <i class="fa-solid fa-shield-heart"></i>
+        <p>Espacios seguros<br />y accesibles</p>
+      </div>
+
+      <div class="estadistica__item">
         <i class="fa-solid fa-house-medical"></i>
-        <p><strong>+8000 m2</strong><br />de instalaciones</p>
+        <p>Naturaleza, confort<br />y asistencia</p>
       </div>
 
       <div class="estadistica__item">
-        <i class="fa-solid fa-user-group"></i>
-        <p><strong>+ de 100</strong><br />profesionales</p>
-      </div>
-
-      <div class="estadistica__item">
-        <i class="fa-solid fa-bed"></i>
-        <p>Unidades<br />Convivenciales</p>
-      </div>
-
-      <div class="estadistica__item">
-        <i class="fa-solid fa-computer"></i>
-        <p>Instalaciones<br />vanguardistas</p>
-      </div>
-
-      <div class="estadistica__item">
-        <i class="fa-solid fa-window-maximize"></i>
-        <p>Vistas<br />despejadas</p>
-      </div>
-
-      <div class="estadistica__item">
-        <i class="fa-solid fa-location-dot"></i>
-        <p>Buenas<br />comunicaciones</p>
+        <i class="fa-solid fa-users"></i>
+        <p>Autonomía y<br />socialización</p>
       </div>
     </div>
   </div>
 </section>
-
 
 <!-- Sección CTA (Call to Action) -->
 <section class="seccion__cta">
@@ -307,7 +264,8 @@
     <div class="cta__contenido">
       <h2 class="cta__titulo">Es hora de cuidar a los que más amamos</h2>
       <p class="cta__subtitulo">
-        Brindamos atención profesional con calidez humana, porque el bienestar de tus seres queridos es nuestra prioridad
+        Brindamos atención profesional con calidez humana, porque el bienestar
+        de tus seres queridos es nuestra prioridad
       </p>
       <button class="btn__cta" (click)="abrirModalVisita()">
         <i class="bx bx-calendar-check"></i>
@@ -317,7 +275,11 @@
   </div>
 </section>
 <!-- Modal Agendar Visita -->
-<div class="modal__overlay" *ngIf="mostrarModalVisita" (click)="cerrarModalVisita()">
+<div
+  class="modal__overlay"
+  *ngIf="mostrarModalVisita"
+  (click)="cerrarModalVisita()"
+>
   <div class="modal__container" (click)="$event.stopPropagation()">
     <button class="modal__cerrar" (click)="cerrarModalVisita()">
       <i class="bx bx-x"></i>
@@ -333,10 +295,11 @@
         </div>
 
         <div class="modal__formulario">
-          
           <!-- Nombre y Apellido -->
           <div class="form__grupo">
-            <label class="form__label--modal">Nombre y Apellido del Solicitante *</label>
+            <label class="form__label--modal"
+              >Nombre y Apellido del Solicitante *</label
+            >
             <input
               type="text"
               class="form__input--modal"
@@ -397,7 +360,9 @@
 
           <!-- Observaciones salud -->
           <div class="form__grupo">
-            <label class="form__label--modal">Observaciones sobre su salud</label>
+            <label class="form__label--modal"
+              >Observaciones sobre su salud</label
+            >
             <textarea
               class="form__textarea--modal"
               placeholder="Ej: diabético, Parkinson, movilidad reducida..."
@@ -417,7 +382,9 @@
               <button class="calendario__btn" (click)="mesAnterior()">
                 <i class="bx bx-chevron-left"></i>
               </button>
-              <span class="calendario__mes">{{ nombreMes }} {{ anioActual }}</span>
+              <span class="calendario__mes"
+                >{{ nombreMes }} {{ anioActual }}</span
+              >
               <button class="calendario__btn" (click)="mesSiguiente()">
                 <i class="bx bx-chevron-right"></i>
               </button>
@@ -439,24 +406,32 @@
                 class="calendario__dia"
                 [class.vacio]="diaInfo.dia === 0"
                 [class.hoy]="diaInfo.esHoy"
-                [class.seleccionado]="formularioVisita.fechaSeleccionada === diaInfo.dia + '/' + (mesActual + 1) + '/' + anioActual"
+                [class.seleccionado]="
+                  formularioVisita.fechaSeleccionada ===
+                  diaInfo.dia + '/' + (mesActual + 1) + '/' + anioActual
+                "
                 [class.no-disponible]="!diaInfo.disponible"
                 [disabled]="diaInfo.dia === 0 || !diaInfo.disponible"
                 (click)="seleccionarFecha(diaInfo.dia)"
               >
-                {{ diaInfo.dia || '' }}
+                {{ diaInfo.dia || "" }}
               </button>
             </div>
           </div>
 
           <!-- Horas disponibles -->
-          <div class="horas__container" *ngIf="formularioVisita.fechaSeleccionada">
+          <div
+            class="horas__container"
+            *ngIf="formularioVisita.fechaSeleccionada"
+          >
             <label class="form__label--modal">Selecciona un horario *</label>
             <div class="horas__grid">
               <button
                 *ngFor="let hora of horasDisponibles"
                 class="hora__btn"
-                [class.seleccionado]="formularioVisita.horaSeleccionada === hora"
+                [class.seleccionado]="
+                  formularioVisita.horaSeleccionada === hora
+                "
                 (click)="seleccionarHora(hora)"
               >
                 {{ hora }}
@@ -470,17 +445,18 @@
             <i class="bx bx-check-circle"></i>
           </button>
 
-          <p class="nota__evaluacion">
+          <!-- <p class="nota__evaluacion">
             <i class="bx bx-info-circle"></i>
-            Test gratuito de evaluación (Escala de Barthel) disponible durante la visita
-          </p>
+            Test gratuito de evaluación (Escala de Barthel) disponible durante
+            la visita
+          </p> -->
         </div>
       </div>
 
       <!-- Columna derecha - Imagen -->
       <div class="modal__derecha">
         <img
-          src="https://images.unsplash.com/photo-1576765608535-5f04d1e3f289?w=600&q=80"
+          src="/cita.jpeg"
           alt="Adultos mayores felices"
         />
         <div class="imagen__overlay">
@@ -493,12 +469,12 @@
 </div>
 
 <!-- Sección Noticias/Blogs -->
-<!-- <section class="seccion__noticias">
+<section class="seccion__noticias">
   <div class="noticias__contenedor">
     <div class="noticias__header">
       <div>
         <p class="noticias__subtitulo">ACTUALIDAD</p>
-        <h2 class="noticias__titulo">Noticias DomusVi</h2>
+        <h2 class="noticias__titulo">Noticias</h2>
       </div>
     </div>
 
@@ -554,7 +530,7 @@
       </div>
     </div>
   </div>
-</section> -->
+</section>
 
 <!-- Sección Contacto -->
 <section class="seccion__contacto">
@@ -568,12 +544,7 @@
         </div>
         <div class="contacto__texto">
           <h3>Nuestra Dirección</h3>
-          <p>
-          Las Dalias 156, La Molina 15024, Perú
-
-
-
-          </p>
+          <p>Las Dalias 156, La Molina 15024, Perú</p>
         </div>
       </div>
 
@@ -582,10 +553,10 @@
         <h3 class="mapa__titulo">Ubicación</h3>
         <div class="mapa__contenedor">
           <iframe
-            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3901.3076890816245!2d-77.03824668515625!3d-12.088223991447625!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x9105c8b5d35662c7%3A0x2d9efc8b4e5b2f3d!2sSan%20Isidro%2C%20Lima!5e0!3m2!1ses!2spe!4v1234567890123!5m2!1ses!2spe"
+            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3901.3047184778707!2d-76.96143272624305!3d-12.091279488149015!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x9105c7a55f8bce07%3A0x61d3f6dc0f38542e!2sResidencia%20Las%20Dalias!5e0!3m2!1sen!2spe!4v1767904717240!5m2!1sen!2spe"
             width="100%"
             height="100%"
-            style="border:0;"
+            style="border: 0"
             allowfullscreen=""
             loading="lazy"
             referrerpolicy="no-referrer-when-downgrade"
@@ -674,7 +645,8 @@
       <p class="faq__subtitulo">PREGUNTAS FRECUENTES</p>
       <h2 class="faq__titulo">¿Tienes dudas? Estamos aquí para ayudarte</h2>
       <p class="faq__descripcion">
-        Encuentra respuestas a las preguntas más comunes sobre nuestros servicios y atención
+        Encuentra respuestas a las preguntas más comunes sobre nuestros
+        servicios y atención
       </p>
     </div>
 

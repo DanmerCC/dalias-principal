@@ -8,8 +8,8 @@
 .contenedor__slider .slider__img {
   width: 100%;
   height: 100%;
-  background-image: linear-gradient(120deg, #2a304094 0%, #000000a2 100%),
-    url("/slider1.png");
+  background-image: linear-gradient(120deg, #2a30406f 0%, #0000005a 100%),
+    url("/slider1.jpg");
   background-size: cover;
   background-position: center;
   display: flex;
@@ -460,20 +460,21 @@
   width: 100%;
   display: flex;
   align-items: center;
+  justify-content: space-between;
   gap: 1rem;
   overflow: auto;
   scroll-behavior: smooth;
 }
 
 .art__atv:first-child {
-  margin-left: 15rem;
+  margin-left: 16rem;
 }
 .art__atv {
   padding: 1rem;
   background: #f5f5ef;
   width: 60%;
   min-width: 60%;
-  height: 28rem;
+  height: 26rem;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -481,7 +482,7 @@
   border-radius: 1.5rem;
 }
 .art__atv img {
-  width: 50%;
+  width: 48%;
   height: 100%;
   object-fit: cover;
   border-radius: 1rem;
@@ -513,7 +514,8 @@
 }
 .text__atv {
   height: 100%;
-  padding: 1.5rem 3rem;
+  padding: 1.2rem 2.5rem;
+  width: 50%;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -615,13 +617,27 @@
   overflow: hidden;
   box-shadow: 0 0.625rem 2.5rem rgba(0, 62, 92, 0.15);
 }
-
 .nosotros__imagen img {
   width: 100%;
   height: 32rem;
   object-fit: cover;
   display: block;
-  transition: transform 0.5s ease;
+  transition: opacity 0.8s ease-in-out, transform 0.8s ease-in-out;
+}
+
+.nosotros__imagen img.carousel-image {
+  animation: fadeInZoom 0.8s ease-in-out;
+}
+
+@keyframes fadeInZoom {
+  0% {
+    opacity: 0;
+    transform: scale(1.1);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
 }
 
 .nosotros__imagen:hover img {
@@ -1278,7 +1294,7 @@
 
 .estadisticas__imagen {
   flex: 1;
-  background-image: url("https://a.storyblok.com/f/245907/2454x1636/7de25bd8d4/resident-famille-equipe.jpg");
+  background-image: url("/casa.png");
   background-size: cover;
   background-position: center;
 }

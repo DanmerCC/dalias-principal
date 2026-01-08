@@ -73,6 +73,11 @@
 }
 
 /* ===== LOGO ===== */
+.logo a {
+  display: flex;
+  align-items: center;
+  height: 100%;
+}
 .logo img {
   width: 10rem;
 }
@@ -89,7 +94,7 @@
   padding: 0.5rem 1.2rem;
 }
 
-.btn_header:hover{
+.btn_header:hover {
   transform: scale(1.03);
 }
 .btn_header i {

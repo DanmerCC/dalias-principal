@@ -1,4 +1,13 @@
-import { Component, OnInit, AfterViewInit, PLATFORM_ID, Inject } from '@angular/core';
+import {
+  Component,
+  OnInit,
+  AfterViewInit,
+  PLATFORM_ID,
+  Inject,
+  OnDestroy,
+  ViewChild,
+  ElementRef,
+} from '@angular/core';
 import { CommonModule, isPlatformBrowser } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 
@@ -51,6 +60,12 @@ interface FormularioVisita {
   horaSeleccionada: string;
 }
 
+interface Actividad {
+  titulo: string;
+  descripcion: string;
+  imagen: string;
+}
+
 @Component({
   selector: 'app-inicio',
   standalone: true,
@@ -58,12 +73,26 @@ interface FormularioVisita {
   templateUrl: './inicio.component.html',
   styleUrl: './inicio.component.css',
 })
-export class InicioComponent implements OnInit {
+export class InicioComponent implements OnInit, OnDestroy {
+  @ViewChild('actividadesCarrusel') actividadesCarrusel!: ElementRef;
+
   slideActual = 0;
   indicePaginaNoticias = 0;
   noticiasPorPagina = 2;
   noticiasVisibles: Noticia[] = [];
   paginasNoticias: number[] = [];
+  slideActualActividades = 0;
+
+  // Carrusel de imágenes nosotros
+  imagenActualNosotros = 0;
+  imagenesNosotros: string[] = [
+    '/nosotros1.png',
+    '/nosotros2.png',
+    '/nosotros3.png',
+    '/nosotros4.png',
+    '/nosotros5.png',
+  ];
+  intervaloNosotros: any;
 
   // Modal de visita
   mostrarModalVisita = false;
@@ -76,7 +105,7 @@ export class InicioComponent implements OnInit {
     '11:00 - 12:00',
     '14:00 - 15:00',
     '15:00 - 16:00',
-    '16:00 - 17:00'
+    '16:00 - 17:00',
   ];
 
   formularioVisita: FormularioVisita = {
@@ -85,8 +114,42 @@ export class InicioComponent implements OnInit {
     nivelDependencia: '',
     observacionesSalud: '',
     fechaSeleccionada: '',
-    horaSeleccionada: ''
+    horaSeleccionada: '',
   };
+
+  // Actividades para el carrusel
+  actividades: Actividad[] = [
+    {
+      titulo: 'Club de Lectura',
+      descripcion:
+        'Fomentamos el amor por la lectura con sesiones grupales donde compartimos historias, reflexiones y debates literarios, estimulando la mente y creando vínculos entre nuestros residentes. Un espacio de encuentro donde la literatura nos une y enriquece nuestras experiencias compartidas.',
+      imagen: '/actividades1.jpeg',
+    },
+    {
+      titulo: 'Musicoterapia',
+      descripcion:
+        'La música como herramienta terapéutica para mejorar el bienestar emocional, estimular la memoria y promover la expresión artística a través de sesiones de canto, instrumentos y baile. Aprovechamos el poder sanador de la música para conectar con las emociones y revivir momentos especiales.',
+      imagen: '/actividades2.jpeg',
+    },
+    {
+      titulo: 'Danza y Movimiento',
+      descripcion:
+        'Clases adaptadas de baile y movimiento rítmico que ayudan a mantener la movilidad, mejorar el equilibrio y disfrutar de momentos alegres llenos de música y compañía. Cada sesión está diseñada para que todos puedan participar según sus capacidades, promoviendo la actividad física de forma divertida.',
+      imagen: '/actividades3.jpeg',
+    },
+    {
+      titulo: 'Celebraciones Especiales',
+      descripcion:
+        'Organizamos celebraciones de cumpleaños, Día de la Madre, Día del Padre, Navidad y otras festividades para mantener vivas las tradiciones y crear momentos inolvidables con familiares. Cada evento es una oportunidad para reunirnos, compartir alegría y fortalecer los lazos afectivos en un ambiente festivo.',
+      imagen: '/actividades4.jpeg',
+    },
+    {
+      titulo: 'Meditación y Relajación',
+      descripcion:
+        'Sesiones de mindfulness y técnicas de relajación que promueven la paz interior, reducen el estrés y mejoran la calidad del sueño de nuestros residentes en un ambiente tranquilo. Aprendemos a conectar con el presente, respirar conscientemente y encontrar serenidad en nuestro día a día.',
+      imagen: '/actividades5.jpeg',
+    },
+  ];
 
   constructor(@Inject(PLATFORM_ID) private platformId: Object) {}
 
@@ -94,68 +157,155 @@ export class InicioComponent implements OnInit {
     {
       titulo: 'Salud médica',
       subtitulo: 'Seguimiento profesional',
-      imagen: 'https://www.vitaliahome.es/wp-content/uploads/2024/12/vitalia-ambiente-hogareno.webp',
+      imagen: '/servicios1.png',
       icono: 'bx bx-plus',
       items: [
-        { titulo: 'Consulta Geriátrica', descripcion: 'Evaluación y control del estado de salud del residente.' },
-        { titulo: 'Monitoreo Continuo', descripcion: 'Control de signos vitales y seguimiento médico permanente.' },
+        {
+          titulo: 'Consulta Geriátrica',
+          descripcion:
+            'Evaluación y control del estado de salud del residente.',
+        },
+        {
+          titulo: 'Monitoreo Continuo',
+          descripcion:
+            'Control de signos vitales y seguimiento médico permanente.',
+        },
       ],
     },
     {
       titulo: 'Rehabilitación',
       subtitulo: 'Movimiento y autonomía',
-      imagen: 'https://www.vitaliahome.es/wp-content/uploads/2024/04/vitalia-decalogo-2-1200x675.webp',
+      imagen: '/servicios2.png',
       icono: 'bx bx-dumbbell',
       items: [
-        { titulo: 'Fisioterapia', descripcion: 'Tratamientos para mejorar la movilidad y el equilibrio.' },
-        { titulo: 'Terapia Ocupacional', descripcion: 'Estimulación de capacidades físicas para la autonomía.' },
+        {
+          titulo: 'Fisioterapia',
+          descripcion:
+            'Tratamientos para mejorar la movilidad y el equilibrio.',
+        },
+        {
+          titulo: 'Terapia Ocupacional',
+          descripcion: 'Estimulación de capacidades físicas para la autonomía.',
+        },
       ],
     },
     {
       titulo: 'Apoyo emocional',
       subtitulo: 'Bienestar psicológico',
-      imagen: 'https://www.vitaliahome.es/wp-content/uploads/2024/04/vitalia-decalogo-3-1200x675.webp',
+      imagen: '/servicios3.png',
       icono: 'bx bx-brain',
       items: [
-        { titulo: 'Atención psicogeriátrica', descripcion: 'Acompañamiento emocional especializado.' },
-        { titulo: 'Terapia Individual', descripcion: 'Sesiones personalizadas para el bienestar emocional.' },
+        {
+          titulo: 'Atención psicogeriátrica',
+          descripcion: 'Acompañamiento emocional especializado.',
+        },
+        {
+          titulo: 'Terapia Individual',
+          descripcion: 'Sesiones personalizadas para el bienestar emocional.',
+        },
       ],
     },
     {
       titulo: 'Alimentación',
       subtitulo: 'Cuidado nutricional',
-      imagen: 'https://www.vitaliahome.es/wp-content/uploads/2024/04/vitalia-decalogo-4-1200x675.webp',
+      imagen: '/servicios4.png',
       icono: 'bx bx-bowl-hot',
       items: [
-        { titulo: 'Nutrición Personalizada', descripcion: 'Dietas equilibradas adaptadas a cada residente.' },
-        { titulo: 'Supervisión Dietética', descripcion: 'Control de ingesta y necesidades nutricionales.' },
+        {
+          titulo: 'Nutrición Personalizada',
+          descripcion: 'Dietas equilibradas adaptadas a cada residente.',
+        },
+        {
+          titulo: 'Supervisión Dietética',
+          descripcion: 'Control de ingesta y necesidades nutricionales.',
+        },
       ],
     },
     {
       titulo: 'Planes de Estadía',
       subtitulo: 'Opciones flexibles',
-      imagen: 'https://images.unsplash.com/photo-1586023492125-27b2c045efd7?w=800&q=80',
+      imagen: '/servicios5.png',
       icono: 'bx bx-calendar-check',
       items: [
-        { titulo: 'Estadía Permanente', descripcion: 'Residencia completa con todos los servicios incluidos.' },
-        { titulo: 'Estadía Temporal', descripcion: 'Estancias cortas para recuperación o descanso.' },
+        {
+          titulo: 'Estadía Permanente',
+          descripcion: 'Residencia completa con todos los servicios incluidos.',
+        },
+        {
+          titulo: 'Estadía Temporal',
+          descripcion: 'Estancias cortas para recuperación o descanso.',
+        },
       ],
     },
   ];
 
   acordeonItems: AcordeonItem[] = [
-    { id: 1, titulo: 'Consulta Geriátrica', contenido: 'Atención médica especializada orientada al control y seguimiento del adulto mayor.', activo: false },
-    { id: 2, titulo: 'Terapias y Rehabilitación', contenido: 'Programas de fisioterapia y terapia ocupacional orientados a la autonomía.', activo: false },
-    { id: 3, titulo: 'Nutrición', contenido: 'Alimentación equilibrada y adaptada a las necesidades del residente.', activo: false },
-    { id: 4, titulo: 'Planes de Estadía', contenido: 'Opciones flexibles de residencia: permanente, temporal, centro de día y respiro familiar.', activo: false },
+    {
+      id: 1,
+      titulo: 'Consulta Geriátrica',
+      contenido:
+        'Atención médica especializada orientada al control y seguimiento del adulto mayor.',
+      activo: false,
+    },
+    {
+      id: 2,
+      titulo: 'Terapias y Rehabilitación',
+      contenido:
+        'Programas de fisioterapia y terapia ocupacional orientados a la autonomía.',
+      activo: false,
+    },
+    {
+      id: 3,
+      titulo: 'Nutrición',
+      contenido:
+        'Alimentación equilibrada y adaptada a las necesidades del residente.',
+      activo: false,
+    },
+    {
+      id: 4,
+      titulo: 'Planes de Estadía',
+      contenido:
+        'Opciones flexibles de residencia: permanente, temporal, centro de día y respiro familiar.',
+      activo: false,
+    },
   ];
 
   preguntasFrecuentes: PreguntaFrecuente[] = [
-    { id: 1, pregunta: '¿Qué servicios incluye la residencia permanente?', respuesta: 'La residencia permanente incluye alojamiento completo, alimentación personalizada, atención médica y de enfermería 24/7, terapias de rehabilitación, actividades recreativas y seguimiento geriátrico continuo.', activo: false },
-    { id: 2, pregunta: '¿Puedo visitar a mi familiar en cualquier momento?', respuesta: 'Sí, contamos con horarios de visita flexibles. Puedes visitar a tu familiar todos los días. Te recomendamos consultar los horarios específicos con nuestro personal para coordinar mejor tu visita.', activo: false },
-    { id: 3, pregunta: '¿Cómo funciona el centro de día?', respuesta: 'El centro de día es una modalidad donde el residente participa de actividades terapéuticas, recreativas y sociales durante el día, regresando a su hogar por la noche. Incluye alimentación, transporte y todas las terapias necesarias.', activo: false },
-    { id: 4, pregunta: '¿Qué medidas de seguridad tienen implementadas?', respuesta: 'Contamos con monitoreo 24/7, personal de seguridad, sistemas de llamado de emergencia en todas las habitaciones, protocolos de prevención de caídas y equipamiento médico de última generación.', activo: false },
-    { id: 5, pregunta: '¿Aceptan personas con necesidades especiales?', respuesta: 'Sí, nuestra residencia está preparada para atender personas con diversas necesidades especiales, incluyendo movilidad reducida, demencia y otras condiciones. Evaluamos cada caso individualmente para brindar el mejor cuidado.', activo: false }
+    {
+      id: 1,
+      pregunta: '¿Qué servicios incluye la residencia permanente?',
+      respuesta:
+        'La residencia permanente incluye alojamiento completo, alimentación personalizada, atención médica y de enfermería 24/7, terapias de rehabilitación, actividades recreativas y seguimiento geriátrico continuo.',
+      activo: false,
+    },
+    {
+      id: 2,
+      pregunta: '¿Puedo visitar a mi familiar en cualquier momento?',
+      respuesta:
+        'Sí, contamos con horarios de visita flexibles. Puedes visitar a tu familiar todos los días. Te recomendamos consultar los horarios específicos con nuestro personal para coordinar mejor tu visita.',
+      activo: false,
+    },
+    {
+      id: 3,
+      pregunta: '¿Cómo funciona el centro de día?',
+      respuesta:
+        'El centro de día es una modalidad donde el residente participa de actividades terapéuticas, recreativas y sociales durante el día, regresando a su hogar por la noche. Incluye alimentación, transporte y todas las terapias necesarias.',
+      activo: false,
+    },
+    {
+      id: 4,
+      pregunta: '¿Qué medidas de seguridad tienen implementadas?',
+      respuesta:
+        'Contamos con monitoreo 24/7, personal de seguridad, sistemas de llamado de emergencia en todas las habitaciones, protocolos de prevención de caídas y equipamiento médico de última generación.',
+      activo: false,
+    },
+    {
+      id: 5,
+      pregunta: '¿Aceptan personas con necesidades especiales?',
+      respuesta:
+        'Sí, nuestra residencia está preparada para atender personas con diversas necesidades especiales, incluyendo movilidad reducida, demencia y otras condiciones. Evaluamos cada caso individualmente para brindar el mejor cuidado.',
+      activo: false,
+    },
   ];
 
   get preguntasColumna1(): PreguntaFrecuente[] {
@@ -167,17 +317,131 @@ export class InicioComponent implements OnInit {
   }
 
   noticias: Noticia[] = [
-    { id: 1, fecha: '16/12/2025', titulo: 'DomusVi impulsa la movilidad sostenible en sus residencias en colaboración con ChargeGuru', descripcion: 'El proyecto incluye la instalación y gestión de puntos de recarga en 21 residencias de personas mayores DomusVi de 11 provincias.', imagen: 'https://images.unsplash.com/photo-1593642532400-2682810df593?w=600&q=80', link: '#' },
-    { id: 2, fecha: '11/12/2025', titulo: '150 comercios de Chantada exponen árboles de Navidad con un ganchillo creado por personas residentes en DomusVi', descripcion: 'Gracias a la colaboración de Empresarios de Chantada, las creaciones de 15 residencias en Chantada se exponen en comercios.', imagen: 'https://images.unsplash.com/photo-1576091160550-2173dba999ef?w=600&q=80', link: '#' },
-    { id: 3, fecha: '05/12/2025', titulo: 'Nueva colaboración con centros educativos para actividades intergeneracionales', descripcion: 'Iniciamos un programa que conecta a nuestros residentes con estudiantes locales para fomentar el intercambio cultural y emocional.', imagen: 'https://images.unsplash.com/photo-1581579438747-1dc8d17bbce4?w=600&q=80', link: '#' },
-    { id: 4, fecha: '28/11/2025', titulo: 'Ampliación de servicios de fisioterapia y rehabilitación', descripcion: 'Incorporamos nuevos equipos especializados y profesionales para mejorar la calidad de vida de nuestros residentes.', imagen: 'https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?w=600&q=80', link: '#' },
-    { id: 5, fecha: '20/11/2025', titulo: 'Celebración del Día Universal del Niño con actividades especiales', descripcion: 'Nuestros residentes participaron en talleres y actividades junto a niños de la comunidad, celebrando la importancia de la infancia.', imagen: 'https://images.unsplash.com/photo-1503454537195-1dcabb73ffb9?w=600&q=80', link: '#' },
-    { id: 6, fecha: '15/11/2025', titulo: 'Nuevo programa de alimentación saludable y nutrición personalizada', descripcion: 'Lanzamos un programa de nutrición adaptado a las necesidades individuales de cada residente, con asesoramiento especializado.', imagen: 'https://images.unsplash.com/photo-1490818387583-1baba5e638af?w=600&q=80', link: '#' }
+    {
+      id: 1,
+      fecha: '15/01/2026',
+      titulo:
+        'Nuevos programas de estimulación cognitiva para prevenir el deterioro mental',
+      descripcion:
+        'Implementamos actividades innovadoras basadas en neurociencia que ayudan a mantener activa la mente de nuestros residentes, mejorando memoria, atención y capacidades cognitivas mediante ejercicios personalizados y dinámicas grupales.',
+      imagen:
+        'https://images.unsplash.com/photo-1576091160550-2173dba999ef?w=600&q=80',
+      link: '#',
+    },
+    {
+      id: 2,
+      fecha: '10/01/2026',
+      titulo:
+        'La importancia de la hidratación en el adulto mayor durante el verano',
+      descripcion:
+        'Nuestro equipo médico comparte recomendaciones esenciales sobre hidratación adecuada, signos de deshidratación y mejores prácticas para mantener a los residentes saludables durante las altas temperaturas del verano peruano.',
+      imagen:
+        'https://images.unsplash.com/photo-1576091160550-2173dba999ef?w=600&q=80',
+      link: '#',
+    },
+    {
+      id: 3,
+      fecha: '05/01/2026',
+      titulo:
+        'Beneficios de la musicoterapia en pacientes con Alzheimer y demencia',
+      descripcion:
+        'Descubre cómo la música se convierte en una poderosa herramienta terapéutica que mejora el estado de ánimo, reduce la ansiedad y estimula la memoria en personas con deterioro cognitivo, creando conexiones emocionales profundas.',
+      imagen:
+        'https://images.unsplash.com/photo-1576091160550-2173dba999ef?w=600&q=80',
+      link: '#',
+    },
+    {
+      id: 4,
+      fecha: '28/12/2025',
+      titulo:
+        'Celebramos las fiestas navideñas con actividades especiales para residentes',
+      descripcion:
+        'Revive los momentos más emotivos de nuestras celebraciones navideñas, donde familiares y residentes compartieron villancicos, cenas especiales y regalos en un ambiente lleno de amor, tradición y alegría festiva.',
+      imagen:
+        'https://images.unsplash.com/photo-1576091160550-2173dba999ef?w=600&q=80',
+      link: '#',
+    },
+    {
+      id: 5,
+      fecha: '20/12/2025',
+      titulo: 'Guía completa sobre nutrición saludable para adultos mayores',
+      descripcion:
+        'Conoce las recomendaciones nutricionales específicas para la tercera edad, incluyendo alimentos esenciales, porciones adecuadas y cómo prevenir deficiencias vitamínicas que afectan la salud y vitalidad de los adultos mayores.',
+      imagen:
+        'https://images.unsplash.com/photo-1576091160550-2173dba999ef?w=600&q=80',
+      link: '#',
+    },
+    {
+      id: 6,
+      fecha: '15/12/2025',
+      titulo:
+        'Ejercicios de bajo impacto: Mantén la movilidad y previene caídas',
+      descripcion:
+        'Nuestros fisioterapeutas presentan una serie de ejercicios seguros y efectivos diseñados específicamente para mejorar el equilibrio, fortalecer músculos y reducir significativamente el riesgo de caídas en adultos mayores.',
+      imagen:
+        'https://images.unsplash.com/photo-1576091160550-2173dba999ef?w=600&q=80',
+      link: '#',
+    },
   ];
 
   ngOnInit(): void {
     this.inicializarNoticias();
     this.generarCalendario();
+    this.iniciarCarruselNosotros();
+  }
+
+  ngOnDestroy(): void {
+    this.detenerCarruselNosotros();
+  }
+
+  iniciarCarruselNosotros(): void {
+    if (isPlatformBrowser(this.platformId)) {
+      this.intervaloNosotros = setInterval(() => {
+        this.imagenActualNosotros =
+          (this.imagenActualNosotros + 1) % this.imagenesNosotros.length;
+      }, 3000);
+    }
+  }
+
+  detenerCarruselNosotros(): void {
+    if (this.intervaloNosotros) {
+      clearInterval(this.intervaloNosotros);
+    }
+  }
+
+  // Métodos del carrusel de actividades
+  siguienteActividad(): void {
+    if (this.slideActualActividades < this.actividades.length - 1) {
+      this.slideActualActividades++;
+      this.scrollToActividad();
+    }
+  }
+
+  anteriorActividad(): void {
+    if (this.slideActualActividades > 0) {
+      this.slideActualActividades--;
+      this.scrollToActividad();
+    }
+  }
+
+  irAActividad(indice: number): void {
+    this.slideActualActividades = indice;
+    this.scrollToActividad();
+  }
+
+  scrollToActividad(): void {
+    if (isPlatformBrowser(this.platformId) && this.actividadesCarrusel) {
+      const container = this.actividadesCarrusel.nativeElement;
+      const articuloAncho =
+        container.querySelector('.art__atv')?.clientWidth || 0;
+      const gap = 16; // 1rem en píxeles
+      const scrollAmount = (articuloAncho + gap) * this.slideActualActividades;
+
+      container.scrollTo({
+        left: scrollAmount,
+        behavior: 'smooth',
+      });
+    }
   }
 
   toggleAcordeon(id: number): void {
@@ -192,11 +456,16 @@ export class InicioComponent implements OnInit {
   }
 
   anteriorSlide(): void {
-    this.slideActual = this.slideActual === 0 ? this.slidesCarrusel.length - 1 : this.slideActual - 1;
+    this.slideActual =
+      this.slideActual === 0
+        ? this.slidesCarrusel.length - 1
+        : this.slideActual - 1;
   }
 
   inicializarNoticias(): void {
-    const totalPaginas = Math.ceil(this.noticias.length / this.noticiasPorPagina);
+    const totalPaginas = Math.ceil(
+      this.noticias.length / this.noticiasPorPagina
+    );
     this.paginasNoticias = Array.from({ length: totalPaginas }, (_, i) => i);
     this.actualizarNoticiasVisibles();
   }
@@ -234,18 +503,16 @@ export class InicioComponent implements OnInit {
   }
 
   opcionesContacto = [
-    { value: 'residencia-permanente', label: 'Residencia Permanente' },
-    { value: 'centro-dia', label: 'Centro de Día' },
-    { value: 'atencion-domiciliaria', label: 'Atención Domiciliaria' },
-    { value: 'consulta-geriatrica', label: 'Consulta Geriátrica' },
+    { value: 'informacion-general', label: 'Información General' },
     { value: 'planes-estadia', label: 'Planes de Estadía' },
-    { value: 'informacion-general', label: 'Información General' }
+    { value: 'consulta-geriatrica', label: 'Consulta Geriátrica' },
+    { value: 'terapias-rehabilitacion', label: 'Terapias y Rehabilitación' },
   ];
 
   formularioContacto: FormularioContacto = {
-    tipoConsulta: 'residencia-permanente',
+    tipoConsulta: 'informacion-general',
     mensaje: '',
-    nombre: ''
+    nombre: '',
   };
 
   enviarFormulario(): void {
@@ -255,14 +522,13 @@ export class InicioComponent implements OnInit {
       this.formularioContacto = {
         tipoConsulta: 'residencia-permanente',
         mensaje: '',
-        nombre: ''
+        nombre: '',
       };
     } else {
       alert('Por favor complete todos los campos requeridos.');
     }
   }
 
-  // Métodos del modal de visita
   abrirModalVisita(): void {
     this.mostrarModalVisita = true;
     document.body.style.overflow = 'hidden';
@@ -275,20 +541,24 @@ export class InicioComponent implements OnInit {
 
   generarCalendario(): void {
     const primerDia = new Date(this.anioActual, this.mesActual, 1).getDay();
-    const ultimoDia = new Date(this.anioActual, this.mesActual + 1, 0).getDate();
+    const ultimoDia = new Date(
+      this.anioActual,
+      this.mesActual + 1,
+      0
+    ).getDate();
     const hoy = new Date();
-    
+
     this.diasDelMes = [];
-    
+
     for (let i = 0; i < primerDia; i++) {
       this.diasDelMes.push({ dia: 0, esHoy: false, disponible: false });
     }
-    
+
     for (let dia = 1; dia <= ultimoDia; dia++) {
       const fecha = new Date(this.anioActual, this.mesActual, dia);
       const esHoy = fecha.toDateString() === hoy.toDateString();
       const disponible = fecha >= hoy;
-      
+
       this.diasDelMes.push({ dia, esHoy, disponible });
     }
   }
@@ -314,14 +584,28 @@ export class InicioComponent implements OnInit {
   }
 
   get nombreMes(): string {
-    const meses = ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 
-                   'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'];
+    const meses = [
+      'Enero',
+      'Febrero',
+      'Marzo',
+      'Abril',
+      'Mayo',
+      'Junio',
+      'Julio',
+      'Agosto',
+      'Septiembre',
+      'Octubre',
+      'Noviembre',
+      'Diciembre',
+    ];
     return meses[this.mesActual];
   }
 
   seleccionarFecha(dia: number): void {
     if (dia > 0) {
-      this.formularioVisita.fechaSeleccionada = `${dia}/${this.mesActual + 1}/${this.anioActual}`;
+      this.formularioVisita.fechaSeleccionada = `${dia}/${this.mesActual + 1}/${
+        this.anioActual
+      }`;
     }
   }
 
@@ -330,24 +614,27 @@ export class InicioComponent implements OnInit {
   }
 
   enviarSolicitudVisita(): void {
-    if (this.formularioVisita.nombreApellido && 
-        this.formularioVisita.edadAdultoMayor && 
-        this.formularioVisita.nivelDependencia &&
-        this.formularioVisita.fechaSeleccionada &&
-        this.formularioVisita.horaSeleccionada) {
-      
+    if (
+      this.formularioVisita.nombreApellido &&
+      this.formularioVisita.edadAdultoMayor &&
+      this.formularioVisita.nivelDependencia &&
+      this.formularioVisita.fechaSeleccionada &&
+      this.formularioVisita.horaSeleccionada
+    ) {
       console.log('Solicitud de visita:', this.formularioVisita);
-      alert('¡Gracias! Tu solicitud de visita ha sido registrada. Pronto nos contactaremos contigo.');
-      
+      alert(
+        '¡Gracias! Tu solicitud de visita ha sido registrada. Pronto nos contactaremos contigo.'
+      );
+
       this.formularioVisita = {
         nombreApellido: '',
         edadAdultoMayor: '',
         nivelDependencia: '',
         observacionesSalud: '',
         fechaSeleccionada: '',
-        horaSeleccionada: ''
+        horaSeleccionada: '',
       };
-      
+
       this.cerrarModalVisita();
     } else {
       alert('Por favor completa todos los campos obligatorios.');

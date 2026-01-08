@@ -1,4 +1,6 @@
 import { Component, HostListener } from '@angular/core';
+import { Router, NavigationEnd } from '@angular/router';
+import { filter } from 'rxjs/operators';
 
 @Component({
   selector: 'app-header',
@@ -7,7 +9,18 @@ import { Component, HostListener } from '@angular/core';
   styleUrl: './header.component.css'
 })
 export class HeaderComponent {
+
   isFixed = false;
+  showInicio = true;
+
+  constructor(private router: Router) {
+    this.router.events
+      .pipe(filter(event => event instanceof NavigationEnd))
+      .subscribe((event: NavigationEnd) => {
+        const currentRoute = event.urlAfterRedirects;
+        this.showInicio = !(currentRoute === '/' || currentRoute === '/inicio');
+      });
+  }
 
   @HostListener('window:scroll', [])
   onWindowScroll() {
