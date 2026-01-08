@@ -124,7 +124,7 @@
 
       <button class="btn__mas-info">
         Ver todos los servicios
-        <i class="bx bx-right-arrow-alt"></i>
+        <i class="fa-solid fa-arrow-right"></i>
       </button>
     </div>
 
@@ -260,8 +260,240 @@
   </div>
 </section>
 
+
+<!-- Sección estadísticas -->
+<section class="seccion__estadisticas">
+  <div class="estadisticas__imagen"></div>
+
+  <div class="estadisticas__contenido">
+    <div class="estadisticas__grid">
+      <div class="estadistica__item">
+        <i class="fa-solid fa-house-medical"></i>
+        <p><strong>+8000 m2</strong><br />de instalaciones</p>
+      </div>
+
+      <div class="estadistica__item">
+        <i class="fa-solid fa-user-group"></i>
+        <p><strong>+ de 100</strong><br />profesionales</p>
+      </div>
+
+      <div class="estadistica__item">
+        <i class="fa-solid fa-bed"></i>
+        <p>Unidades<br />Convivenciales</p>
+      </div>
+
+      <div class="estadistica__item">
+        <i class="fa-solid fa-computer"></i>
+        <p>Instalaciones<br />vanguardistas</p>
+      </div>
+
+      <div class="estadistica__item">
+        <i class="fa-solid fa-window-maximize"></i>
+        <p>Vistas<br />despejadas</p>
+      </div>
+
+      <div class="estadistica__item">
+        <i class="fa-solid fa-location-dot"></i>
+        <p>Buenas<br />comunicaciones</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- Sección CTA (Call to Action) -->
+<section class="seccion__cta">
+  <div class="cta__card">
+    <div class="cta__contenido">
+      <h2 class="cta__titulo">Es hora de cuidar a los que más amamos</h2>
+      <p class="cta__subtitulo">
+        Brindamos atención profesional con calidez humana, porque el bienestar de tus seres queridos es nuestra prioridad
+      </p>
+      <button class="btn__cta" (click)="abrirModalVisita()">
+        <i class="bx bx-calendar-check"></i>
+        Agendar visita
+      </button>
+    </div>
+  </div>
+</section>
+<!-- Modal Agendar Visita -->
+<div class="modal__overlay" *ngIf="mostrarModalVisita" (click)="cerrarModalVisita()">
+  <div class="modal__container" (click)="$event.stopPropagation()">
+    <button class="modal__cerrar" (click)="cerrarModalVisita()">
+      <i class="bx bx-x"></i>
+    </button>
+
+    <div class="modal__contenido">
+      <!-- Columna izquierda - Formulario -->
+      <div class="modal__izquierda">
+        <div class="modal__header">
+          <i class="bx bx-calendar-heart"></i>
+          <h2>Agendar visita</h2>
+          <p>Residencia Las Dalias</p>
+        </div>
+
+        <div class="modal__formulario">
+          
+          <!-- Nombre y Apellido -->
+          <div class="form__grupo">
+            <label class="form__label--modal">Nombre y Apellido del Solicitante *</label>
+            <input
+              type="text"
+              class="form__input--modal"
+              placeholder="Ingresa tu nombre completo"
+              [(ngModel)]="formularioVisita.nombreApellido"
+            />
+          </div>
+
+          <div class="form__seccion-titulo">
+            <i class="bx bx-user-circle"></i>
+            <span>Información del adulto mayor</span>
+          </div>
+
+          <!-- Edad -->
+          <div class="form__grupo">
+            <label class="form__label--modal">Edad del adulto mayor *</label>
+            <input
+              type="number"
+              class="form__input--modal"
+              placeholder="Ej: 75"
+              [(ngModel)]="formularioVisita.edadAdultoMayor"
+            />
+          </div>
+
+          <!-- Nivel de dependencia -->
+          <div class="form__grupo">
+            <label class="form__label--modal">Nivel de dependencia *</label>
+            <div class="nivel__dependencia">
+              <label class="radio__option">
+                <input
+                  type="radio"
+                  name="dependencia"
+                  value="independiente"
+                  [(ngModel)]="formularioVisita.nivelDependencia"
+                />
+                <span>Independiente</span>
+              </label>
+              <label class="radio__option">
+                <input
+                  type="radio"
+                  name="dependencia"
+                  value="semi-dependiente"
+                  [(ngModel)]="formularioVisita.nivelDependencia"
+                />
+                <span>Semi dependiente</span>
+              </label>
+              <label class="radio__option">
+                <input
+                  type="radio"
+                  name="dependencia"
+                  value="dependiente"
+                  [(ngModel)]="formularioVisita.nivelDependencia"
+                />
+                <span>Dependiente</span>
+              </label>
+            </div>
+          </div>
+
+          <!-- Observaciones salud -->
+          <div class="form__grupo">
+            <label class="form__label--modal">Observaciones sobre su salud</label>
+            <textarea
+              class="form__textarea--modal"
+              placeholder="Ej: diabético, Parkinson, movilidad reducida..."
+              rows="2"
+              [(ngModel)]="formularioVisita.observacionesSalud"
+            ></textarea>
+          </div>
+
+          <div class="form__seccion-titulo">
+            <i class="bx bx-calendar-check"></i>
+            <span>Coordinar fecha de visita</span>
+          </div>
+
+          <!-- Calendario -->
+          <div class="calendario__container">
+            <div class="calendario__header">
+              <button class="calendario__btn" (click)="mesAnterior()">
+                <i class="bx bx-chevron-left"></i>
+              </button>
+              <span class="calendario__mes">{{ nombreMes }} {{ anioActual }}</span>
+              <button class="calendario__btn" (click)="mesSiguiente()">
+                <i class="bx bx-chevron-right"></i>
+              </button>
+            </div>
+
+            <div class="calendario__dias-semana">
+              <span>D</span>
+              <span>L</span>
+              <span>M</span>
+              <span>M</span>
+              <span>J</span>
+              <span>V</span>
+              <span>S</span>
+            </div>
+
+            <div class="calendario__grid">
+              <button
+                *ngFor="let diaInfo of diasDelMes"
+                class="calendario__dia"
+                [class.vacio]="diaInfo.dia === 0"
+                [class.hoy]="diaInfo.esHoy"
+                [class.seleccionado]="formularioVisita.fechaSeleccionada === diaInfo.dia + '/' + (mesActual + 1) + '/' + anioActual"
+                [class.no-disponible]="!diaInfo.disponible"
+                [disabled]="diaInfo.dia === 0 || !diaInfo.disponible"
+                (click)="seleccionarFecha(diaInfo.dia)"
+              >
+                {{ diaInfo.dia || '' }}
+              </button>
+            </div>
+          </div>
+
+          <!-- Horas disponibles -->
+          <div class="horas__container" *ngIf="formularioVisita.fechaSeleccionada">
+            <label class="form__label--modal">Selecciona un horario *</label>
+            <div class="horas__grid">
+              <button
+                *ngFor="let hora of horasDisponibles"
+                class="hora__btn"
+                [class.seleccionado]="formularioVisita.horaSeleccionada === hora"
+                (click)="seleccionarHora(hora)"
+              >
+                {{ hora }}
+              </button>
+            </div>
+          </div>
+
+          <!-- Botón enviar -->
+          <button class="btn__enviar-visita" (click)="enviarSolicitudVisita()">
+            <span>Confirmar visita</span>
+            <i class="bx bx-check-circle"></i>
+          </button>
+
+          <p class="nota__evaluacion">
+            <i class="bx bx-info-circle"></i>
+            Test gratuito de evaluación (Escala de Barthel) disponible durante la visita
+          </p>
+        </div>
+      </div>
+
+      <!-- Columna derecha - Imagen -->
+      <div class="modal__derecha">
+        <img
+          src="https://images.unsplash.com/photo-1576765608535-5f04d1e3f289?w=600&q=80"
+          alt="Adultos mayores felices"
+        />
+        <div class="imagen__overlay">
+          <i class="bx bx-heart"></i>
+          <p>Cuidado con calidez</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
 <!-- Sección Noticias/Blogs -->
-<section class="seccion__noticias">
+<!-- <section class="seccion__noticias">
   <div class="noticias__contenedor">
     <div class="noticias__header">
       <div>
@@ -322,50 +554,42 @@
       </div>
     </div>
   </div>
-</section>
+</section> -->
 
 <!-- Sección Contacto -->
 <section class="seccion__contacto">
   <div class="contacto__contenedor">
-    <!-- Columna izquierda - Características -->
+    <!-- Columna izquierda - Ubicación y Dirección -->
     <div class="contacto__izquierda">
+      <!-- Dirección -->
       <div class="contacto__item">
         <div class="contacto__icono">
-          <i class="bx bx-shield-alt-2"></i>
+          <i class="bx bx-map"></i>
         </div>
         <div class="contacto__texto">
-          <h3>Atención personalizada</h3>
+          <h3>Nuestra Dirección</h3>
           <p>
-            Cada residente recibe un plan de cuidados diseñado específicamente
-            según sus necesidades y preferencias.
+          Las Dalias 156, La Molina 15024, Perú
+
+
+
           </p>
         </div>
       </div>
 
-      <div class="contacto__item">
-        <div class="contacto__icono">
-          <i class="bx bx-user-check"></i>
-        </div>
-        <div class="contacto__texto">
-          <h3>Equipo multidisciplinario</h3>
-          <p>
-            Contamos con profesionales especializados en geriatría,
-            fisioterapia, nutrición y psicología para garantizar el bienestar
-            integral.
-          </p>
-        </div>
-      </div>
-
-      <div class="contacto__item">
-        <div class="contacto__icono">
-          <i class="bx bx-timer"></i>
-        </div>
-        <div class="contacto__texto">
-          <h3>Disponibilidad 24/7</h3>
-          <p>
-            Nuestro equipo está disponible las 24 horas del día, los 7 días de
-            la semana para atender cualquier eventualidad.
-          </p>
+      <!-- Mapa -->
+      <div class="contacto__mapa">
+        <h3 class="mapa__titulo">Ubicación</h3>
+        <div class="mapa__contenedor">
+          <iframe
+            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3901.3076890816245!2d-77.03824668515625!3d-12.088223991447625!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x9105c8b5d35662c7%3A0x2d9efc8b4e5b2f3d!2sSan%20Isidro%2C%20Lima!5e0!3m2!1ses!2spe!4v1234567890123!5m2!1ses!2spe"
+            width="100%"
+            height="100%"
+            style="border:0;"
+            allowfullscreen=""
+            loading="lazy"
+            referrerpolicy="no-referrer-when-downgrade"
+          ></iframe>
         </div>
       </div>
     </div>
@@ -439,6 +663,77 @@
           </button>
         </form>
       </div>
+    </div>
+  </div>
+</section>
+
+<!-- Sección Preguntas Frecuentes -->
+<section class="seccion__faq">
+  <div class="faq__contenedor">
+    <div class="faq__header">
+      <p class="faq__subtitulo">PREGUNTAS FRECUENTES</p>
+      <h2 class="faq__titulo">¿Tienes dudas? Estamos aquí para ayudarte</h2>
+      <p class="faq__descripcion">
+        Encuentra respuestas a las preguntas más comunes sobre nuestros servicios y atención
+      </p>
+    </div>
+
+    <div class="faq__grid">
+      <div class="faq__columna">
+        <div
+          class="faq__item"
+          *ngFor="let pregunta of preguntasColumna1"
+          [class.activo]="pregunta.activo"
+          (click)="togglePregunta(pregunta.id)"
+        >
+          <div class="faq__pregunta">
+            <h3>{{ pregunta.pregunta }}</h3>
+            <i
+              class="bx"
+              [class.bx-plus]="!pregunta.activo"
+              [class.bx-minus]="pregunta.activo"
+            ></i>
+          </div>
+          <div class="faq__respuesta" *ngIf="pregunta.activo">
+            <p>{{ pregunta.respuesta }}</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="faq__columna">
+        <div
+          class="faq__item"
+          *ngFor="let pregunta of preguntasColumna2"
+          [class.activo]="pregunta.activo"
+          (click)="togglePregunta(pregunta.id)"
+        >
+          <div class="faq__pregunta">
+            <h3>{{ pregunta.pregunta }}</h3>
+            <i
+              class="bx"
+              [class.bx-plus]="!pregunta.activo"
+              [class.bx-minus]="pregunta.activo"
+            ></i>
+          </div>
+          <div class="faq__respuesta" *ngIf="pregunta.activo">
+            <p>{{ pregunta.respuesta }}</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="faq__cta">
+      <div class="faq__cta-contenido">
+        <i class="bx bx-support"></i>
+        <div>
+          <h3>¿No encontraste lo que buscabas?</h3>
+          <p>Nuestro equipo está listo para resolver todas tus dudas</p>
+        </div>
+      </div>
+      <button class="btn__faq-contacto">
+        Contactar ahora
+        <i class="bx bx-right-arrow-alt"></i>
+      </button>
     </div>
   </div>
 </section>
