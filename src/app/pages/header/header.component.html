@@ -1,6 +1,6 @@
 <header class="header">
   <!-- Barra superior -->
-  <div class="cont1_header">
+  <div class="cont1_header" *ngIf="!isFixed">
     <div class="nav1">
       <a href="/blog">Blog</a>
       <a href="/trabaja-con-nosotros">Trabaja con nosotros</a>
@@ -25,15 +25,31 @@
         <li><a href="/servicios">Servicios</a></li>
         <li><a href="/actividades">Actividades</a></li>
         <li><a href="/contactanos">Contáctanos</a></li>
+
+        <!-- Enlaces adicionales cuando el header está fijo -->
+        <li *ngIf="isFixed">
+          <a href="/blog">Blog</a>
+        </li>
+        <li *ngIf="isFixed">
+          <a href="/trabaja-con-nosotros">Trabaja con nosotros</a>
+        </li>
       </ul>
 
-      <button class="btn_header">
-        <i class="bx bx-phone"></i>
-        <div class="contact_header">
-          <span>+51 981 776 156</span>
-          ¿Alguna duda? Contáctanos
-        </div>
-      </button>
+      <div class="header-actions">
+        <!-- Botón de contacto -->
+        <button class="btn_header">
+          <i class="bx bx-phone"></i>
+          <div class="contact_header">
+            <span>+51 981 776 156</span>
+            ¿Alguna duda? Contáctanos
+          </div>
+        </button>
+        <!-- Botón Residente (aparece cuando está fijo) -->
+        <a href="/residente" class="btn-residente" *ngIf="isFixed">
+          <i class="bx bx-user"></i>
+          <span>Portal <br> residente</span>
+        </a>
+      </div>
     </nav>
   </div>
 </header>

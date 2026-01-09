@@ -42,7 +42,7 @@
         <img
           [src]="imagenesNosotros[imagenActualNosotros]"
           alt="Residencia Las Dalias"
-          class="carousel-image"
+          [@fadeInOut]="imagenActualNosotros"
         />
       </div>
 
@@ -84,6 +84,7 @@
       </div>
     </div>
   </div>
+  <img src="/logo_small.png" class="logo__small1" alt="" />
 </section>
 
 <!-- Sección Innovación -->
@@ -180,7 +181,11 @@
 <!-- Sección actividades-->
 <section class="section__actividades">
   <div class="actividades__contenedor" #actividadesCarrusel>
-    <article class="art__atv" *ngFor="let actividad of actividades; let first = first" [class.first-item]="first">
+    <article
+      class="art__atv"
+      *ngFor="let actividad of actividades; let first = first"
+      [class.first-item]="first"
+    >
       <div class="text__atv">
         <div>
           <h3>{{ actividad.titulo }}</h3>
@@ -194,22 +199,22 @@
   <div class="arrows__actividades">
     <div class="arrows__content">
       <div class="dots__actividades">
-        <span 
-          *ngFor="let actividad of actividades; let i = index" 
+        <span
+          *ngFor="let actividad of actividades; let i = index"
           [class.active]="slideActualActividades === i"
           (click)="irAActividad(i)"
         ></span>
       </div>
       <div class="btns__actividades">
-        <button 
-          class="btn__atv prev__atv" 
+        <button
+          class="btn__atv prev__atv"
           (click)="anteriorActividad()"
           [disabled]="slideActualActividades === 0"
         >
           <i class="bx bx-chevron-left"></i>
         </button>
-        <button 
-          class="btn__atv next__atv" 
+        <button
+          class="btn__atv next__atv"
           (click)="siguienteActividad()"
           [disabled]="slideActualActividades === actividades.length - 1"
         >
@@ -455,10 +460,7 @@
 
       <!-- Columna derecha - Imagen -->
       <div class="modal__derecha">
-        <img
-          src="/cita.jpeg"
-          alt="Adultos mayores felices"
-        />
+        <img src="/cita.jpeg" alt="Adultos mayores felices" />
         <div class="imagen__overlay">
           <i class="bx bx-heart"></i>
           <p>Cuidado con calidez</p>

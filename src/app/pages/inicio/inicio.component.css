@@ -8,10 +8,12 @@
 .contenedor__slider .slider__img {
   width: 100%;
   height: 100%;
-  background-image: linear-gradient(120deg, #2a30406f 0%, #0000005a 100%),
-    url("/slider1.jpg");
+  /* background-image: linear-gradient(120deg, #2a30406f 0%, #0000005a 100%),
+    url("/slider1.png"); */
+  background-image: linear-gradient(120deg, #2a30409d 0%, #0000003b 100%),
+    url("/slider1.png");
   background-size: cover;
-  background-position: center;
+  background-position: top;
   display: flex;
   justify-content: start;
   align-items: center;
@@ -593,8 +595,13 @@
   width: 100%;
   padding: 5rem 10rem;
   background: #fff;
+  position: relative;
 }
-
+.logo__small1{
+  position: absolute;
+  bottom: 1rem;
+  right:35rem;
+}
 .nosotros__contenedor {
   max-width: 1400px;
   margin: 0 auto;
@@ -622,22 +629,6 @@
   height: 32rem;
   object-fit: cover;
   display: block;
-  transition: opacity 0.8s ease-in-out, transform 0.8s ease-in-out;
-}
-
-.nosotros__imagen img.carousel-image {
-  animation: fadeInZoom 0.8s ease-in-out;
-}
-
-@keyframes fadeInZoom {
-  0% {
-    opacity: 0;
-    transform: scale(1.1);
-  }
-  100% {
-    opacity: 1;
-    transform: scale(1);
-  }
 }
 
 .nosotros__imagen:hover img {

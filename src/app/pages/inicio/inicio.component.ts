@@ -9,6 +9,7 @@ import {
   ElementRef,
 } from '@angular/core';
 import { CommonModule, isPlatformBrowser } from '@angular/common';
+import { trigger, transition, style, animate } from '@angular/animations';
 import { FormsModule } from '@angular/forms';
 
 interface AcordeonItem {
@@ -72,6 +73,14 @@ interface Actividad {
   imports: [CommonModule, FormsModule],
   templateUrl: './inicio.component.html',
   styleUrl: './inicio.component.css',
+  animations: [
+    trigger('fadeInOut', [
+      transition('* => *', [
+        style({ opacity: 0, transform: 'scale(1.05)' }),
+        animate('800ms ease-in-out', style({ opacity: 1, transform: 'scale(1)' }))
+      ])
+    ])
+  ]
 })
 export class InicioComponent implements OnInit, OnDestroy {
   @ViewChild('actividadesCarrusel') actividadesCarrusel!: ElementRef;
@@ -91,6 +100,7 @@ export class InicioComponent implements OnInit, OnDestroy {
     '/nosotros3.png',
     '/nosotros4.png',
     '/nosotros5.png',
+    '/nosotros6.png',
   ];
   intervaloNosotros: any;
 
