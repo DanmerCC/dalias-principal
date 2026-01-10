@@ -28,11 +28,12 @@
 /* Botón de scroll to top (izquierda) */
 .scroll-top-button {
   left: 30px;
-  background: linear-gradient(135deg, #003e5c 0%, #005a82 100%);
-  color: white;
+  background: linear-gradient(135deg, #b89a3f 0%, #d9b756 100%);
+  color: #ffffff;
   opacity: 0;
   visibility: hidden;
   transform: translateY(100px) scale(0);
+  transition: all 0.3s ease;
 }
 
 .scroll-top-button.show {
@@ -43,11 +44,10 @@
 }
 
 .scroll-top-button:hover {
-  background: linear-gradient(135deg, #005a82 0%, #0077b3 100%);
+  background: linear-gradient(135deg, #d9b756 0%, #f0d98a 100%);
   transform: translateY(-8px) scale(1.05);
-  box-shadow: 0 12px 35px rgba(0, 62, 92, 0.5);
+  box-shadow: 0 12px 35px rgba(217, 183, 86, 0.5);
 }
-
 .scroll-top-button:active {
   transform: translateY(-4px) scale(0.95);
 }
