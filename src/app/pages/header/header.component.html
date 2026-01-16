@@ -2,9 +2,9 @@
   <!-- Barra superior -->
   <div class="cont1_header" *ngIf="!isFixed">
     <div class="nav1">
-      <a href="/blog">Blog</a>
+      <!-- <a href="/blog">Blog</a>
       <a href="/trabaja-con-nosotros">Trabaja con nosotros</a>
-      <a href="/residente">Residente</a>
+      <a href="/residente">Residente</a> -->
     </div>
   </div>
 
@@ -24,14 +24,20 @@
         <li><a href="/nosotros">Nosotros</a></li>
         <li><a href="/servicios">Servicios</a></li>
         <li><a href="/actividades">Actividades</a></li>
+        <li>
+          <a href="/trabaja-con-nosotros">Trabaja con nosotros</a>
+        </li>
         <li><a href="/contactanos">Contáctanos</a></li>
 
         <!-- Enlaces adicionales cuando el header está fijo -->
-        <li *ngIf="isFixed">
-          <a href="/blog">Blog</a>
+        <!-- <li *ngIf="isFixed">
+          <a href="/trabaja-con-nosotros">Trabaja con nosotros</a>
         </li>
         <li *ngIf="isFixed">
-          <a href="/trabaja-con-nosotros">Trabaja con nosotros</a>
+          <a href="/blog">Blog</a>
+        </li> -->
+        <li>
+          <a href="/blog">Blog</a>
         </li>
       </ul>
 
@@ -45,9 +51,19 @@
           </div>
         </button>
         <!-- Botón Residente (aparece cuando está fijo) -->
-        <a href="/residente" class="btn-residente" *ngIf="isFixed">
+        <!-- <a href="/residente" class="btn-residente" *ngIf="isFixed">
           <i class="bx bx-user"></i>
-          <span>Portal <br> residente</span>
+          <span
+            >Portal <br />
+            residente</span
+          >
+        </a> -->
+        <a href="/residente" class="btn-residente">
+          <i class="bx bx-user"></i>
+          <span
+            >Portal <br />
+            residente</span
+          >
         </a>
       </div>
     </nav>

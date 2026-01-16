@@ -54,9 +54,19 @@ interface PreguntaFrecuente {
 
 interface FormularioVisita {
   nombreApellido: string;
+  correoElectronico: string;
   edadAdultoMayor: string;
   nivelDependencia: string;
   observacionesSalud: string;
+  fechaSeleccionada: string;
+  horaSeleccionada: string;
+}
+
+interface ErroresFormulario {
+  nombreApellido: string;
+  correoElectronico: string;
+  edadAdultoMayor: string;
+  nivelDependencia: string;
   fechaSeleccionada: string;
   horaSeleccionada: string;
 }
@@ -65,6 +75,24 @@ interface Actividad {
   titulo: string;
   descripcion: string;
   imagen: string;
+}
+
+interface EvaluacionForm {
+  movilidad: string;
+  avd: string;
+  cognitivo: string;
+  emocional: string;
+  condiciones: {
+    hipertension: boolean;
+    diabetes: boolean;
+    dificultadesCaminar: boolean;
+    incontinencia: boolean;
+    problemasAudicionVision: boolean;
+    postOperatoria: boolean;
+    otra: boolean;
+  };
+  medicacion: string;
+  motivo: string;
 }
 
 @Component({
@@ -77,10 +105,13 @@ interface Actividad {
     trigger('fadeInOut', [
       transition('* => *', [
         style({ opacity: 0, transform: 'scale(1.05)' }),
-        animate('800ms ease-in-out', style({ opacity: 1, transform: 'scale(1)' }))
-      ])
-    ])
-  ]
+        animate(
+          '1500ms ease-in-out',
+          style({ opacity: 1, transform: 'scale(1)' })
+        ),
+      ]),
+    ]),
+  ],
 })
 export class InicioComponent implements OnInit, OnDestroy {
   @ViewChild('actividadesCarrusel') actividadesCarrusel!: ElementRef;
@@ -95,17 +126,20 @@ export class InicioComponent implements OnInit, OnDestroy {
   // Carrusel de imágenes nosotros
   imagenActualNosotros = 0;
   imagenesNosotros: string[] = [
-    '/nosotros1.png',
-    '/nosotros2.png',
-    '/nosotros3.png',
-    '/nosotros4.png',
-    '/nosotros5.png',
-    '/nosotros6.png',
+    '/nosotros1.jpg',
+    '/nosotros2.jpg',
+    '/nosotros3.jpg',
+    '/nosotros4.jpg',
+    '/nosotros5.jpg',
+    '/nosotros6.jpg',
+    '/nosotros7.jpg',
   ];
   intervaloNosotros: any;
 
   // Modal de visita
   mostrarModalVisita = false;
+  mostrarEvaluacion = false;
+  mostrarModalEvaluacion = false;
   mesActual = new Date().getMonth();
   anioActual = new Date().getFullYear();
   diasDelMes: { dia: number; esHoy: boolean; disponible: boolean }[] = [];
@@ -120,6 +154,7 @@ export class InicioComponent implements OnInit, OnDestroy {
 
   formularioVisita: FormularioVisita = {
     nombreApellido: '',
+    correoElectronico: '',
     edadAdultoMayor: '',
     nivelDependencia: '',
     observacionesSalud: '',
@@ -127,37 +162,71 @@ export class InicioComponent implements OnInit, OnDestroy {
     horaSeleccionada: '',
   };
 
+  erroresVisita: ErroresFormulario = {
+    nombreApellido: '',
+    correoElectronico: '',
+    edadAdultoMayor: '',
+    nivelDependencia: '',
+    fechaSeleccionada: '',
+    horaSeleccionada: '',
+  };
+
+  // Formulario de evaluación
+  evaluacionForm: EvaluacionForm = {
+    movilidad: '',
+    avd: '',
+    cognitivo: '',
+    emocional: '',
+    condiciones: {
+      hipertension: false,
+      diabetes: false,
+      dificultadesCaminar: false,
+      incontinencia: false,
+      problemasAudicionVision: false,
+      postOperatoria: false,
+      otra: false,
+    },
+    medicacion: '',
+    motivo: '',
+  };
+
   // Actividades para el carrusel
   actividades: Actividad[] = [
     {
-      titulo: 'Club de Lectura',
+      titulo: 'Club de Lectura para Adultos Mayores',
       descripcion:
-        'Fomentamos el amor por la lectura con sesiones grupales donde compartimos historias, reflexiones y debates literarios, estimulando la mente y creando vínculos entre nuestros residentes. Un espacio de encuentro donde la literatura nos une y enriquece nuestras experiencias compartidas.',
-      imagen: '/actividades1.jpeg',
+        'La lectura compartida estimula la memoria, el lenguaje y la atención, al mismo tiempo que fomenta la conversación y la conexión social. Un espacio que fortalece la mente y genera bienestar emocional en un entorno cálido y participativo.',
+      imagen: '/actividades1.png',
     },
     {
-      titulo: 'Musicoterapia',
+      titulo: 'Pintura y Dibujo Terapéutico',
       descripcion:
-        'La música como herramienta terapéutica para mejorar el bienestar emocional, estimular la memoria y promover la expresión artística a través de sesiones de canto, instrumentos y baile. Aprovechamos el poder sanador de la música para conectar con las emociones y revivir momentos especiales.',
-      imagen: '/actividades2.jpeg',
+        'A través del arte, los adultos mayores expresan emociones, estimulan la creatividad y fortalecen la motricidad fina. Una actividad que relaja, mejora el ánimo y refuerza la autoestima de forma natural.',
+      imagen: '/actividades2.png',
     },
     {
-      titulo: 'Danza y Movimiento',
+      titulo: 'Musicoterapia Geriátrica',
       descripcion:
-        'Clases adaptadas de baile y movimiento rítmico que ayudan a mantener la movilidad, mejorar el equilibrio y disfrutar de momentos alegres llenos de música y compañía. Cada sesión está diseñada para que todos puedan participar según sus capacidades, promoviendo la actividad física de forma divertida.',
-      imagen: '/actividades3.jpeg',
+        'La música despierta recuerdos, emociones y sensaciones positivas. Estas sesiones favorecen la comunicación, reducen la ansiedad y generan momentos de conexión emocional, incluso en adultos mayores con deterioro cognitivo.',
+      imagen: '/actividades3.png',
     },
     {
-      titulo: 'Celebraciones Especiales',
+      titulo: 'Meditación y Relajación Guiada',
       descripcion:
-        'Organizamos celebraciones de cumpleaños, Día de la Madre, Día del Padre, Navidad y otras festividades para mantener vivas las tradiciones y crear momentos inolvidables con familiares. Cada evento es una oportunidad para reunirnos, compartir alegría y fortalecer los lazos afectivos en un ambiente festivo.',
-      imagen: '/actividades4.jpeg',
+        'Momentos de calma diseñados para favorecer la tranquilidad, el descanso y el equilibrio emocional. La relajación guiada ayuda a reducir el estrés y promueve una mejor calidad de vida en el adulto mayor.',
+      imagen: '/actividades4.png',
     },
     {
-      titulo: 'Meditación y Relajación',
+      titulo: 'Misas y Celebraciones Religiosas',
       descripcion:
-        'Sesiones de mindfulness y técnicas de relajación que promueven la paz interior, reducen el estrés y mejoran la calidad del sueño de nuestros residentes en un ambiente tranquilo. Aprendemos a conectar con el presente, respirar conscientemente y encontrar serenidad en nuestro día a día.',
-      imagen: '/actividades5.jpeg',
+        'Espacios de recogimiento y acompañamiento espiritual que brindan paz y contención emocional. Estas celebraciones fortalecen la fe, la serenidad y el bienestar interior de los adultos mayores.',
+      imagen: '/actividades5.png',
+    },
+    {
+      titulo: 'Momentos Compartidos en Familia',
+      descripcion:
+        'Celebraciones y encuentros que fortalecen los vínculos afectivos en un entorno seguro y acogedor. Compartir tiempo en familia refuerza la sensación de hogar y el bienestar emocional del adulto mayor.',
+      imagen: '/actividades6.png',
     },
   ];
 
@@ -165,85 +234,66 @@ export class InicioComponent implements OnInit, OnDestroy {
 
   slidesCarrusel: SlideItem[] = [
     {
-      titulo: 'Salud médica',
-      subtitulo: 'Seguimiento profesional',
+      titulo: 'Planes de Estadía',
+      subtitulo: 'Opciones Variadas',
       imagen: '/servicios1.png',
+      icono: 'bx bx-calendar-check',
+      items: [
+        {
+          titulo: 'Estadía Permanente',
+          descripcion: 'Cuidado integral y acompañamiento continuo.',
+        },
+        {
+          titulo: 'Estadía Temporal',
+          descripcion: 'Estancias cortas con atención profesional.',
+        },
+        {
+          titulo: 'Centro de Día',
+          descripcion: 'Acompañamiento diurno y actividades.',
+        },
+        {
+          titulo: 'Post Operatoria',
+          descripcion: 'Recuperación segura y supervisada.',
+        },
+      ],
+    },
+    {
+      titulo: 'Salud Médica',
+      subtitulo: 'Revisión Preventiva Profesional',
+      imagen: '/servicios2.png',
       icono: 'bx bx-plus',
       items: [
         {
           titulo: 'Consulta Geriátrica',
-          descripcion:
-            'Evaluación y control del estado de salud del residente.',
+          descripcion: 'Evaluación integral de la salud.',
         },
         {
-          titulo: 'Monitoreo Continuo',
-          descripcion:
-            'Control de signos vitales y seguimiento médico permanente.',
+          titulo: 'Consulta a Domicilio',
+          descripcion: 'Atención médica en casa.',
+        },
+        {
+          titulo: 'Consulta Online',
+          descripcion: 'Seguimiento médico virtual.',
         },
       ],
     },
     {
       titulo: 'Rehabilitación',
-      subtitulo: 'Movimiento y autonomía',
-      imagen: '/servicios2.png',
+      subtitulo: 'Movimiento y Autonomía',
+      imagen: '/servicios3.png',
       icono: 'bx bx-dumbbell',
       items: [
         {
           titulo: 'Fisioterapia',
-          descripcion:
-            'Tratamientos para mejorar la movilidad y el equilibrio.',
+          descripcion: 'Mejora movilidad y equilibrio.',
         },
         {
           titulo: 'Terapia Ocupacional',
-          descripcion: 'Estimulación de capacidades físicas para la autonomía.',
-        },
-      ],
-    },
-    {
-      titulo: 'Apoyo emocional',
-      subtitulo: 'Bienestar psicológico',
-      imagen: '/servicios3.png',
-      icono: 'bx bx-brain',
-      items: [
-        {
-          titulo: 'Atención psicogeriátrica',
-          descripcion: 'Acompañamiento emocional especializado.',
+          descripcion: 'Fomenta independencia diaria.',
         },
         {
-          titulo: 'Terapia Individual',
-          descripcion: 'Sesiones personalizadas para el bienestar emocional.',
-        },
-      ],
-    },
-    {
-      titulo: 'Alimentación',
-      subtitulo: 'Cuidado nutricional',
-      imagen: '/servicios4.png',
-      icono: 'bx bx-bowl-hot',
-      items: [
-        {
-          titulo: 'Nutrición Personalizada',
-          descripcion: 'Dietas equilibradas adaptadas a cada residente.',
-        },
-        {
-          titulo: 'Supervisión Dietética',
-          descripcion: 'Control de ingesta y necesidades nutricionales.',
-        },
-      ],
-    },
-    {
-      titulo: 'Planes de Estadía',
-      subtitulo: 'Opciones flexibles',
-      imagen: '/servicios5.png',
-      icono: 'bx bx-calendar-check',
-      items: [
-        {
-          titulo: 'Estadía Permanente',
-          descripcion: 'Residencia completa con todos los servicios incluidos.',
-        },
-        {
-          titulo: 'Estadía Temporal',
-          descripcion: 'Estancias cortas para recuperación o descanso.',
+          titulo: 'Spa Geriátrico',
+          descripcion: 'Relajación y bienestar integral.',
         },
       ],
     },
@@ -252,30 +302,23 @@ export class InicioComponent implements OnInit, OnDestroy {
   acordeonItems: AcordeonItem[] = [
     {
       id: 1,
+      titulo: 'Planes de Estadía',
+      contenido:
+        'Opciones flexibles de residencia: permanente, temporal, centro de día y respiro familiar.',
+      activo: false,
+    },
+    {
+      id: 2,
       titulo: 'Consulta Geriátrica',
       contenido:
         'Atención médica especializada orientada al control y seguimiento del adulto mayor.',
       activo: false,
     },
     {
-      id: 2,
+      id: 3,
       titulo: 'Terapias y Rehabilitación',
       contenido:
         'Programas de fisioterapia y terapia ocupacional orientados a la autonomía.',
-      activo: false,
-    },
-    {
-      id: 3,
-      titulo: 'Nutrición',
-      contenido:
-        'Alimentación equilibrada y adaptada a las necesidades del residente.',
-      activo: false,
-    },
-    {
-      id: 4,
-      titulo: 'Planes de Estadía',
-      contenido:
-        'Opciones flexibles de residencia: permanente, temporal, centro de día y respiro familiar.',
       activo: false,
     },
   ];
@@ -283,37 +326,42 @@ export class InicioComponent implements OnInit, OnDestroy {
   preguntasFrecuentes: PreguntaFrecuente[] = [
     {
       id: 1,
-      pregunta: '¿Qué servicios incluye la residencia permanente?',
+      pregunta:
+        '¿Cuándo debería considerar una residencia geriátrica para mi familiar?',
       respuesta:
-        'La residencia permanente incluye alojamiento completo, alimentación personalizada, atención médica y de enfermería 24/7, terapias de rehabilitación, actividades recreativas y seguimiento geriátrico continuo.',
+        'Es recomendable considerar una residencia geriátrica para adultos mayores cuando el familiar comienza a necesitar mayor acompañamiento, supervisión, apoyo en actividades diarias o cuando la familia busca mejorar su calidad de vida en un entorno seguro y socialmente activo. También es una excelente opción para prevenir riesgos como caídas, aislamiento o desatención médica. 👉 Para ayudarle en esta decisión, hemos preparado una guía completa sobre cómo elegir la residencia adecuada: https://goo.su/Lis06yx',
       activo: false,
     },
     {
       id: 2,
-      pregunta: '¿Puedo visitar a mi familiar en cualquier momento?',
+      pregunta:
+        '¿Qué tipo de adultos mayores pueden vivir la experiencia Las Dalias?',
       respuesta:
-        'Sí, contamos con horarios de visita flexibles. Puedes visitar a tu familiar todos los días. Te recomendamos consultar los horarios específicos con nuestro personal para coordinar mejor tu visita.',
+        'Residencia Las Dalias está orientada principalmente a adultos mayores independientes o semi dependientes que desean vivir en un entorno cómodo, seguro y acompañado, manteniendo su autonomía y recibiendo apoyo profesional cuando lo necesiten.',
       activo: false,
     },
     {
       id: 3,
-      pregunta: '¿Cómo funciona el centro de día?',
+      pregunta:
+        '¿Cuáles son los servicios de cuidado para un adulto mayor y en qué se diferencian?',
       respuesta:
-        'El centro de día es una modalidad donde el residente participa de actividades terapéuticas, recreativas y sociales durante el día, regresando a su hogar por la noche. Incluye alimentación, transporte y todas las terapias necesarias.',
+        'Ofrecemos residencia permanente, residencia temporal, centro de día, residencia post operatoria y consultas geriátricas, adaptándonos a distintas necesidades. Cada servicio se diferencia por el nivel de acompañamiento, duración de la estadía y tipo de cuidado requerido, siempre con un enfoque personalizado.',
       activo: false,
     },
     {
       id: 4,
-      pregunta: '¿Qué medidas de seguridad tienen implementadas?',
+      pregunta:
+        '¿Cómo se garantiza la seguridad y el bienestar de los residentes?',
       respuesta:
-        'Contamos con monitoreo 24/7, personal de seguridad, sistemas de llamado de emergencia en todas las habitaciones, protocolos de prevención de caídas y equipamiento médico de última generación.',
+        'La seguridad del adulto mayor es prioritaria. Contamos con personal de enfermería las 24 horas, monitoreo permanente, protocolos de salud, sistema de emergencias médicas, instalaciones adaptadas y seguimiento geriátrico continuo para actuar de forma rápida y segura ante cualquier situación.',
       activo: false,
     },
     {
       id: 5,
-      pregunta: '¿Aceptan personas con necesidades especiales?',
+      pregunta:
+        '¿Cómo pueden los familiares participar en la vida del residente y cómo es la comunicación con el personal?',
       respuesta:
-        'Sí, nuestra residencia está preparada para atender personas con diversas necesidades especiales, incluyendo movilidad reducida, demencia y otras condiciones. Evaluamos cada caso individualmente para brindar el mejor cuidado.',
+        'En Residencia Las Dalias fomentamos una integración activa de la familia. Los familiares pueden visitar, participar en actividades y mantenerse informados mediante una comunicación constante y transparente con nuestro equipo, fortaleciendo la confianza y el bienestar del residente.',
       activo: false,
     },
   ];
@@ -397,19 +445,50 @@ export class InicioComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     this.inicializarNoticias();
     this.generarCalendario();
-    this.iniciarCarruselNosotros();
+    this.precargarImagenes();
   }
 
   ngOnDestroy(): void {
     this.detenerCarruselNosotros();
   }
 
+  // Agrega este nuevo método ANTES de iniciarCarruselNosotros
+  precargarImagenes(): void {
+    if (isPlatformBrowser(this.platformId)) {
+      let imagenesPreCargadas = 0;
+      const totalImagenes = this.imagenesNosotros.length;
+
+      this.imagenesNosotros.forEach((src) => {
+        const img = new Image();
+        img.onload = () => {
+          imagenesPreCargadas++;
+          // Cuando todas las imágenes estén cargadas, inicia el carrusel
+          if (imagenesPreCargadas === totalImagenes) {
+            this.iniciarCarruselNosotros();
+          }
+        };
+        img.onerror = () => {
+          imagenesPreCargadas++;
+          console.error(`Error cargando imagen: ${src}`);
+          // Aún así inicia el carrusel si todas las imágenes se procesaron
+          if (imagenesPreCargadas === totalImagenes) {
+            this.iniciarCarruselNosotros();
+          }
+        };
+        img.src = src;
+      });
+    }
+  }
+
+  carruselKey = 0;
+
   iniciarCarruselNosotros(): void {
     if (isPlatformBrowser(this.platformId)) {
       this.intervaloNosotros = setInterval(() => {
         this.imagenActualNosotros =
           (this.imagenActualNosotros + 1) % this.imagenesNosotros.length;
-      }, 3000);
+        this.carruselKey++;
+      }, 5000);
     }
   }
 
@@ -444,7 +523,7 @@ export class InicioComponent implements OnInit, OnDestroy {
       const container = this.actividadesCarrusel.nativeElement;
       const articuloAncho =
         container.querySelector('.art__atv')?.clientWidth || 0;
-      const gap = 16; // 1rem en píxeles
+      const gap = 16;
       const scrollAmount = (articuloAncho + gap) * this.slideActualActividades;
 
       container.scrollTo({
@@ -459,6 +538,10 @@ export class InicioComponent implements OnInit, OnDestroy {
       ...item,
       activo: item.id === id ? !item.activo : false,
     }));
+  }
+
+  onAcordeonHover(id: number): void {
+    this.slideActual = id - 1;
   }
 
   siguienteSlide(): void {
@@ -546,7 +629,43 @@ export class InicioComponent implements OnInit, OnDestroy {
 
   cerrarModalVisita(): void {
     this.mostrarModalVisita = false;
+    this.mostrarEvaluacion = false;
     document.body.style.overflow = 'auto';
+  }
+
+  // Métodos para la evaluación
+  toggleEvaluacion(): void {
+    if (this.mostrarEvaluacion) {
+      this.cerrarModalVisita();
+      setTimeout(() => {
+        this.mostrarModalEvaluacion = true;
+      }, 300);
+    }
+  }
+
+  cerrarModalEvaluacion(): void {
+    this.mostrarModalEvaluacion = false;
+    document.body.style.overflow = 'auto';
+  }
+
+  volverAAgendarVisita(): void {
+    this.mostrarModalEvaluacion = false;
+    this.mostrarEvaluacion = false;
+    setTimeout(() => {
+      this.mostrarModalVisita = true;
+    }, 300);
+  }
+
+  guardarEvaluacionYContinuar(): void {
+    console.log('Evaluación guardada:', this.evaluacionForm);
+
+    // Marcar el checkbox como completado
+    this.mostrarEvaluacion = true;
+
+    this.mostrarModalEvaluacion = false;
+    setTimeout(() => {
+      this.mostrarModalVisita = true;
+    }, 300);
   }
 
   generarCalendario(): void {
@@ -623,31 +742,149 @@ export class InicioComponent implements OnInit, OnDestroy {
     this.formularioVisita.horaSeleccionada = hora;
   }
 
-  enviarSolicitudVisita(): void {
-    if (
-      this.formularioVisita.nombreApellido &&
-      this.formularioVisita.edadAdultoMayor &&
-      this.formularioVisita.nivelDependencia &&
-      this.formularioVisita.fechaSeleccionada &&
-      this.formularioVisita.horaSeleccionada
-    ) {
-      console.log('Solicitud de visita:', this.formularioVisita);
-      alert(
-        '¡Gracias! Tu solicitud de visita ha sido registrada. Pronto nos contactaremos contigo.'
-      );
-
-      this.formularioVisita = {
-        nombreApellido: '',
-        edadAdultoMayor: '',
-        nivelDependencia: '',
-        observacionesSalud: '',
-        fechaSeleccionada: '',
-        horaSeleccionada: '',
-      };
-
-      this.cerrarModalVisita();
+  // Método completo para validar el campo de nombre
+  validarNombreApellido(): void {
+    const valor = this.formularioVisita.nombreApellido.trim();
+    if (!valor) {
+      this.erroresVisita.nombreApellido = 'El nombre y apellido es obligatorio';
+    } else if (valor.length < 3) {
+      this.erroresVisita.nombreApellido = 'Debe tener al menos 3 caracteres';
+    } else if (!/^[a-záéíóúñ\s]+$/i.test(valor)) {
+      this.erroresVisita.nombreApellido = 'Solo se permiten letras y espacios';
     } else {
-      alert('Por favor completa todos los campos obligatorios.');
+      this.erroresVisita.nombreApellido = '';
     }
+  }
+
+  // Método completo para validar el correo electrónico
+  validarCorreoElectronico(): void {
+    const valor = this.formularioVisita.correoElectronico.trim();
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+    if (!valor) {
+      this.erroresVisita.correoElectronico =
+        'El correo electrónico es obligatorio';
+    } else if (!emailRegex.test(valor)) {
+      this.erroresVisita.correoElectronico =
+        'Ingresa un correo electrónico válido';
+    } else {
+      this.erroresVisita.correoElectronico = '';
+    }
+  }
+
+  // Método completo para validar la edad
+  validarEdadAdultoMayor(): void {
+    const valor = this.formularioVisita.edadAdultoMayor;
+    const edad = parseInt(valor);
+
+    if (!valor) {
+      this.erroresVisita.edadAdultoMayor = 'La edad es obligatoria';
+    } else if (isNaN(edad)) {
+      this.erroresVisita.edadAdultoMayor = 'Ingresa un número válido';
+    } else if (edad < 60) {
+      this.erroresVisita.edadAdultoMayor = 'La edad debe ser 60 años o mayor';
+    } else if (edad > 120) {
+      this.erroresVisita.edadAdultoMayor = 'Ingresa una edad válida';
+    } else {
+      this.erroresVisita.edadAdultoMayor = '';
+    }
+  }
+
+  // Método completo para validar el nivel de dependencia
+  validarNivelDependencia(): void {
+    if (!this.formularioVisita.nivelDependencia) {
+      this.erroresVisita.nivelDependencia =
+        'Selecciona un nivel de dependencia';
+    } else {
+      this.erroresVisita.nivelDependencia = '';
+    }
+  }
+
+  // Método completo para validar la fecha seleccionada
+  validarFechaSeleccionada(): void {
+    if (!this.formularioVisita.fechaSeleccionada) {
+      this.erroresVisita.fechaSeleccionada =
+        'Selecciona una fecha para la visita';
+    } else {
+      this.erroresVisita.fechaSeleccionada = '';
+    }
+  }
+
+  // Método completo para validar la hora seleccionada
+  validarHoraSeleccionada(): void {
+    if (!this.formularioVisita.horaSeleccionada) {
+      this.erroresVisita.horaSeleccionada =
+        'Selecciona un horario para la visita';
+    } else {
+      this.erroresVisita.horaSeleccionada = '';
+    }
+  }
+
+  // Reemplazar el método enviarSolicitudVisita completo
+  enviarSolicitudVisita(): void {
+    // Validar todos los campos
+    this.validarNombreApellido();
+    this.validarCorreoElectronico();
+    this.validarEdadAdultoMayor();
+    this.validarNivelDependencia();
+    this.validarFechaSeleccionada();
+    this.validarHoraSeleccionada();
+
+    // Verificar si hay errores
+    const hayErrores = Object.values(this.erroresVisita).some(
+      (error) => error !== ''
+    );
+
+    if (hayErrores) {
+      // No hacer nada, solo mostrar los mensajes de error rojos
+      return;
+    }
+
+    // Si no hay errores, proceder con el envío
+    console.log('Solicitud de visita:', this.formularioVisita);
+    console.log('Evaluación (si se completó):', this.evaluacionForm);
+    alert(
+      '¡Gracias! Tu solicitud de visita ha sido registrada. Pronto nos contactaremos contigo.'
+    );
+
+    // Limpiar formulario y errores
+    this.formularioVisita = {
+      nombreApellido: '',
+      correoElectronico: '',
+      edadAdultoMayor: '',
+      nivelDependencia: '',
+      observacionesSalud: '',
+      fechaSeleccionada: '',
+      horaSeleccionada: '',
+    };
+
+    this.erroresVisita = {
+      nombreApellido: '',
+      correoElectronico: '',
+      edadAdultoMayor: '',
+      nivelDependencia: '',
+      fechaSeleccionada: '',
+      horaSeleccionada: '',
+    };
+
+    this.evaluacionForm = {
+      movilidad: '',
+      avd: '',
+      cognitivo: '',
+      emocional: '',
+      condiciones: {
+        hipertension: false,
+        diabetes: false,
+        dificultadesCaminar: false,
+        incontinencia: false,
+        problemasAudicionVision: false,
+        postOperatoria: false,
+        otra: false,
+      },
+      medicacion: '',
+      motivo: '',
+    };
+
+    this.cerrarModalVisita();
   }
 }

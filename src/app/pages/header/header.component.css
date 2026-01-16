@@ -60,7 +60,7 @@
 
 .menu {
   display: flex;
-  gap: 1.5rem;
+  gap: 1rem;
   list-style: none;
   transition: gap 0.3s ease;
 }

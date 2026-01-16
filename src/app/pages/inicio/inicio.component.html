@@ -1,15 +1,24 @@
 <div class="contenedor__slider">
   <div class="slider__img">
     <div class="content__slider">
-      <img src="/logo_slider.png" alt="Las Dalias" />
+      <!-- <div class="card__text">
+        <img src="/logo_slider2.png" alt="Las Dalias" />
 
-      <p>
-        En <strong>Residencia Las Dalias</strong> ofrecemos planes de estadía
-        pensados para el bienestar, cuidado y tranquilidad de nuestros
-        residentes, adaptándonos a cada necesidad y etapa.
-      </p>
+        <p>
+          En <strong>Residencia Las Dalias</strong> ofrecemos planes de estadía
+          pensados para el bienestar, cuidado y tranquilidad de nuestros
+          residentes, adaptándonos a cada necesidad y etapa.
+        </p>
+      </div> -->
 
       <div class="card__input">
+        <img src="/logo_slider2.png" alt="Las Dalias" />
+
+        <p>
+          En <strong>Residencia Las Dalias</strong> ofrecemos planes de estadía
+          pensados para el bienestar, cuidado y tranquilidad de nuestros
+          residentes, adaptándonos a cada necesidad y etapa.
+        </p>
         <div class="text__input">
           <i class="bx bx-heart"></i>
 
@@ -19,11 +28,10 @@
         <div class="select__slider">
           <select>
             <option value="" disabled selected>Selecciona un plan</option>
-            <option value="permanente">Residencia permanente</option>
-            <option value="temporal">Residencia temporal</option>
+            <option value="permanente">Residencia Permanente</option>
+            <option value="temporal">Residencia Temporal</option>
             <option value="centro-dia">Centro de Día</option>
-            <option value="post-operatoria">Residencia post operatoria</option>
-            <option value="geriatrica">Consulta geriátrica</option>
+            <option value="post-operatoria">Residencia Post Operatoria</option>
           </select>
           <i class="bx bx-search"></i>
         </div>
@@ -34,6 +42,9 @@
 
 <!-- Sección Nosotros -->
 <section class="seccion__nosotros">
+  <img src="/figure1.png" class="figure1" alt="">
+  <img src="/figure2.png" class="figure2" alt="">
+  <img src="/figure3.png" class="figure3" alt="">
   <div class="nosotros__contenedor">
     <!-- Contenido principal -->
     <div class="nosotros__contenido">
@@ -42,7 +53,7 @@
         <img
           [src]="imagenesNosotros[imagenActualNosotros]"
           alt="Residencia Las Dalias"
-          [@fadeInOut]="imagenActualNosotros"
+          [@fadeInOut]="carruselKey"
         />
       </div>
 
@@ -84,11 +95,11 @@
       </div>
     </div>
   </div>
-  <img src="/logo_small.png" class="logo__small1" alt="" />
 </section>
 
 <!-- Sección Innovación -->
 <section class="seccion__innovacion">
+  <img src="/figure4.png" class="figure4" alt="">
   <div class="innovacion__contenedor">
     <!-- Columna izquierda -->
     <div class="innovacion__izquierda">
@@ -104,6 +115,7 @@
           *ngFor="let item of acordeonItems"
           [class.activo]="item.activo"
           (click)="toggleAcordeon(item.id)"
+          (mouseenter)="onAcordeonHover(item.id)"
         >
           <div class="acordeon__header">
             <span>{{ item.titulo }}</span>
@@ -154,7 +166,7 @@
           </div>
         </div>
 
-        <!-- Carrusel de imágenes -->
+        <!-- Carrusel de imágenes (SIN BOTONES DE NAVEGACIÓN) -->
         <div class="servicio__carrusel">
           <div class="carrusel__imagen-container">
             <img
@@ -163,16 +175,85 @@
               class="carrusel__imagen"
             />
           </div>
-
-          <div class="carrusel__navegacion">
-            <button class="carrusel__btn" (click)="anteriorSlide()">
-              <i class="bx bx-chevron-left"></i>
-            </button>
-            <button class="carrusel__btn" (click)="siguienteSlide()">
-              <i class="bx bx-chevron-right"></i>
-            </button>
-          </div>
         </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Sección por qué elegirnos -->
+<section class="seccion__elegirnos">
+  <img src="/figure5.png" class="figure5" alt="">
+  <img src="/figure5.png" class="figure6" alt="">
+  <div class="elegirnos__contenedor">
+    <div class="elegirnos__header">
+      <p class="elegirnos__subtitulo">NUESTRO COMPROMISO</p>
+      <h2 class="elegirnos__titulo">¿Por qué elegirnos?</h2>
+      <p class="elegirnos__descripcion">
+        Nos diferenciamos por nuestra atención profesional con calidez humana,
+        donde cada residente es parte de nuestra familia.
+      </p>
+    </div>
+
+    <div class="elegirnos__grid">
+      <div class="elegirnos__card">
+        <div class="card__icono">
+          <i class="fa-solid fa-user-check"></i>
+        </div>
+        <h3>Atención centrada en la persona</h3>
+        <p>
+          Cada residente recibe un plan de cuidado personalizado adaptado a sus
+          necesidades físicas, emocionales y cognitivas, promoviendo autonomía y
+          calidad de vida.
+        </p>
+      </div>
+
+      <div class="elegirnos__card">
+        <div class="card__icono">
+          <i class="fa-solid fa-heart-pulse"></i>
+        </div>
+        <h3>Enfoque geriátrico integral</h3>
+        <p>
+          No solo cuidamos, acompañamos profesionalmente. Contamos con
+          seguimiento médico geriátrico, enfermería permanente y coordinación
+          constante con especialistas.
+        </p>
+      </div>
+
+      <div class="elegirnos__card">
+        <div class="card__icono">
+          <i class="fa-solid fa-comments"></i>
+        </div>
+        <h3>Comunicación y transparencia</h3>
+        <p>
+          Mantenemos a las familias informadas sobre la evolución, cuidados y
+          bienestar de su familiar, fortaleciendo la confianza y la tranquilidad
+          en todo momento.
+        </p>
+      </div>
+
+      <div class="elegirnos__card">
+        <div class="card__icono">
+          <i class="fa-solid fa-utensils"></i>
+        </div>
+        <h3>Alimentación terapéutica</h3>
+        <p>
+          Planes nutricionales supervisados, adaptados a patologías y
+          necesidades específicas, cuidando la salud sin descuidar el gusto y el
+          disfrute de cada comida.
+        </p>
+      </div>
+
+      <div class="elegirnos__card">
+        <div class="card__icono">
+          <i class="fa-solid fa-people-group"></i>
+        </div>
+        <h3>Integración con la familia</h3>
+        <p>
+          Facilitamos la participación activa de la familia en la vida diaria
+          del residente, promoviendo visitas amplias, encuentros familiares y
+          momentos compartidos.
+        </p>
       </div>
     </div>
   </div>
@@ -180,6 +261,11 @@
 
 <!-- Sección actividades-->
 <section class="section__actividades">
+  <div class="actividades__header">
+    <p class="actividades__subtitulo">EXPERIENCIAS ENRIQUECEDORAS</p>
+    <h2 class="actividades__titulo">Nuestras Actividades</h2>
+  </div>
+  
   <div class="actividades__contenedor" #actividadesCarrusel>
     <article
       class="art__atv"
@@ -191,7 +277,7 @@
           <h3>{{ actividad.titulo }}</h3>
           <p>{{ actividad.descripcion }}</p>
         </div>
-        <button>Leer el artículo</button>
+        <button>Saber más</button>
       </div>
       <img [src]="actividad.imagen" [alt]="actividad.titulo" />
     </article>
@@ -265,6 +351,8 @@
 
 <!-- Sección CTA (Call to Action) -->
 <section class="seccion__cta">
+  <img src="/figure7.png" class="figure7" alt="">
+  <img src="/figure1.png" class="figure8" alt="">
   <div class="cta__card">
     <div class="cta__contenido">
       <h2 class="cta__titulo">Es hora de cuidar a los que más amamos</h2>
@@ -279,6 +367,7 @@
     </div>
   </div>
 </section>
+<!-- Modal Agendar Visita -->
 <!-- Modal Agendar Visita -->
 <div
   class="modal__overlay"
@@ -296,12 +385,12 @@
         <div class="modal__header">
           <i class="bx bx-calendar-heart"></i>
           <h2>Agendar visita</h2>
-          <p>Residencia Las Dalias</p>
+          <p><img src="/logo_small.png" alt="" /> Residencia Las Dalias</p>
         </div>
 
         <div class="modal__formulario">
           <!-- Nombre y Apellido -->
-          <div class="form__grupo">
+          <div class="form__grupo__modal">
             <label class="form__label--modal"
               >Nombre y Apellido del Solicitante *</label
             >
@@ -310,7 +399,28 @@
               class="form__input--modal"
               placeholder="Ingresa tu nombre completo"
               [(ngModel)]="formularioVisita.nombreApellido"
+              (blur)="validarNombreApellido()"
+              (input)="validarNombreApellido()"
             />
+            <span class="error__mensaje" *ngIf="erroresVisita.nombreApellido">
+              {{ erroresVisita.nombreApellido }}
+            </span>
+          </div>
+
+          <!-- Correo Electrónico -->
+          <div class="form__grupo__modal">
+            <label class="form__label--modal">Correo Electrónico *</label>
+            <input
+              type="email"
+              class="form__input--modal"
+              placeholder="ejemplo@correo.com"
+              [(ngModel)]="formularioVisita.correoElectronico"
+              (blur)="validarCorreoElectronico()"
+              (input)="validarCorreoElectronico()"
+            />
+            <span class="error__mensaje" *ngIf="erroresVisita.correoElectronico">
+              {{ erroresVisita.correoElectronico }}
+            </span>
           </div>
 
           <div class="form__seccion-titulo">
@@ -319,18 +429,23 @@
           </div>
 
           <!-- Edad -->
-          <div class="form__grupo">
+          <div class="form__grupo__modal">
             <label class="form__label--modal">Edad del adulto mayor *</label>
             <input
               type="number"
               class="form__input--modal"
               placeholder="Ej: 75"
               [(ngModel)]="formularioVisita.edadAdultoMayor"
+              (blur)="validarEdadAdultoMayor()"
+              (input)="validarEdadAdultoMayor()"
             />
+            <span class="error__mensaje" *ngIf="erroresVisita.edadAdultoMayor">
+              {{ erroresVisita.edadAdultoMayor }}
+            </span>
           </div>
 
           <!-- Nivel de dependencia -->
-          <div class="form__grupo">
+          <div class="form__grupo__modal">
             <label class="form__label--modal">Nivel de dependencia *</label>
             <div class="nivel__dependencia">
               <label class="radio__option">
@@ -339,6 +454,7 @@
                   name="dependencia"
                   value="independiente"
                   [(ngModel)]="formularioVisita.nivelDependencia"
+                  (change)="validarNivelDependencia()"
                 />
                 <span>Independiente</span>
               </label>
@@ -348,6 +464,7 @@
                   name="dependencia"
                   value="semi-dependiente"
                   [(ngModel)]="formularioVisita.nivelDependencia"
+                  (change)="validarNivelDependencia()"
                 />
                 <span>Semi dependiente</span>
               </label>
@@ -357,23 +474,43 @@
                   name="dependencia"
                   value="dependiente"
                   [(ngModel)]="formularioVisita.nivelDependencia"
+                  (change)="validarNivelDependencia()"
                 />
                 <span>Dependiente</span>
               </label>
             </div>
+            <span class="error__mensaje" *ngIf="erroresVisita.nivelDependencia">
+              {{ erroresVisita.nivelDependencia }}
+            </span>
           </div>
 
           <!-- Observaciones salud -->
-          <div class="form__grupo">
+          <div class="form__grupo__modal">
             <label class="form__label--modal"
               >Observaciones sobre su salud</label
             >
             <textarea
               class="form__textarea--modal"
-              placeholder="Ej: diabético, Parkinson, movilidad reducida..."
+              placeholder="Ej: Diabético, Parkinson, Hipertenso..."
               rows="2"
               [(ngModel)]="formularioVisita.observacionesSalud"
             ></textarea>
+          </div>
+
+          <!-- Checkbox para evaluación inicial -->
+          <div class="form__grupo__modal">
+            <label class="checkbox__evaluacion">
+              <input
+                type="checkbox"
+                [(ngModel)]="mostrarEvaluacion"
+                (change)="toggleEvaluacion()"
+              />
+              <span class="checkbox__texto">
+                <strong>Evaluación Inicial del Adulto Mayor</strong> - Ayúdenos
+                a conocer mejor a su familiar para brindarle una atención
+                adecuada (opcional)
+              </span>
+            </label>
           </div>
 
           <div class="form__seccion-titulo">
@@ -381,67 +518,83 @@
             <span>Coordinar fecha de visita</span>
           </div>
 
-          <!-- Calendario -->
-          <div class="calendario__container">
-            <div class="calendario__header">
-              <button class="calendario__btn" (click)="mesAnterior()">
-                <i class="bx bx-chevron-left"></i>
-              </button>
-              <span class="calendario__mes"
-                >{{ nombreMes }} {{ anioActual }}</span
-              >
-              <button class="calendario__btn" (click)="mesSiguiente()">
-                <i class="bx bx-chevron-right"></i>
-              </button>
+          <!-- Contenedor que agrupa calendario y horas -->
+          <div class="fecha-hora__contenedor">
+            <!-- Calendario -->
+            <div class="calendario__container">
+              <div class="calendario__header">
+                <button class="calendario__btn" (click)="mesAnterior()">
+                  <i class="bx bx-chevron-left"></i>
+                </button>
+                <span class="calendario__mes"
+                  >{{ nombreMes }} {{ anioActual }}</span
+                >
+                <button class="calendario__btn" (click)="mesSiguiente()">
+                  <i class="bx bx-chevron-right"></i>
+                </button>
+              </div>
+
+              <div class="calendario__dias-semana">
+                <span>D</span>
+                <span>L</span>
+                <span>M</span>
+                <span>M</span>
+                <span>J</span>
+                <span>V</span>
+                <span>S</span>
+              </div>
+
+              <div class="calendario__grid">
+                <button
+                  *ngFor="let diaInfo of diasDelMes"
+                  class="calendario__dia"
+                  [class.vacio]="diaInfo.dia === 0"
+                  [class.hoy]="diaInfo.esHoy"
+                  [class.seleccionado]="
+                    formularioVisita.fechaSeleccionada ===
+                    diaInfo.dia + '/' + (mesActual + 1) + '/' + anioActual
+                  "
+                  [class.no-disponible]="!diaInfo.disponible"
+                  [disabled]="diaInfo.dia === 0 || !diaInfo.disponible"
+                  (click)="seleccionarFecha(diaInfo.dia); validarFechaSeleccionada()"
+                >
+                  {{ diaInfo.dia || "" }}
+                </button>
+              </div>
             </div>
 
-            <div class="calendario__dias-semana">
-              <span>D</span>
-              <span>L</span>
-              <span>M</span>
-              <span>M</span>
-              <span>J</span>
-              <span>V</span>
-              <span>S</span>
-            </div>
-
-            <div class="calendario__grid">
-              <button
-                *ngFor="let diaInfo of diasDelMes"
-                class="calendario__dia"
-                [class.vacio]="diaInfo.dia === 0"
-                [class.hoy]="diaInfo.esHoy"
-                [class.seleccionado]="
-                  formularioVisita.fechaSeleccionada ===
-                  diaInfo.dia + '/' + (mesActual + 1) + '/' + anioActual
-                "
-                [class.no-disponible]="!diaInfo.disponible"
-                [disabled]="diaInfo.dia === 0 || !diaInfo.disponible"
-                (click)="seleccionarFecha(diaInfo.dia)"
-              >
-                {{ diaInfo.dia || "" }}
-              </button>
+            <!-- Horas disponibles -->
+            <div
+              class="horas__container"
+              *ngIf="formularioVisita.fechaSeleccionada"
+            >
+              <p class="horas__titulo">Selecciona un horario *</p>
+              <div class="horas__grid">
+                <button
+                  *ngFor="let hora of horasDisponibles"
+                  class="hora__btn"
+                  [class.seleccionado]="
+                    formularioVisita.horaSeleccionada === hora
+                  "
+                  (click)="seleccionarHora(hora); validarHoraSeleccionada()"
+                >
+                  {{ hora }}
+                </button>
+              </div>
             </div>
           </div>
 
-          <!-- Horas disponibles -->
-          <div
-            class="horas__container"
-            *ngIf="formularioVisita.fechaSeleccionada"
-          >
-            <label class="form__label--modal">Selecciona un horario *</label>
-            <div class="horas__grid">
-              <button
-                *ngFor="let hora of horasDisponibles"
-                class="hora__btn"
-                [class.seleccionado]="
-                  formularioVisita.horaSeleccionada === hora
-                "
-                (click)="seleccionarHora(hora)"
-              >
-                {{ hora }}
-              </button>
-            </div>
+          <!-- Mensajes de error para fecha y hora -->
+          <div class="form__grupo__modal" *ngIf="erroresVisita.fechaSeleccionada">
+            <span class="error__mensaje">
+              {{ erroresVisita.fechaSeleccionada }}
+            </span>
+          </div>
+
+          <div class="form__grupo__modal" *ngIf="erroresVisita.horaSeleccionada && formularioVisita.fechaSeleccionada">
+            <span class="error__mensaje">
+              {{ erroresVisita.horaSeleccionada }}
+            </span>
           </div>
 
           <!-- Botón enviar -->
@@ -449,23 +602,410 @@
             <span>Confirmar visita</span>
             <i class="bx bx-check-circle"></i>
           </button>
-
-          <!-- <p class="nota__evaluacion">
-            <i class="bx bx-info-circle"></i>
-            Test gratuito de evaluación (Escala de Barthel) disponible durante
-            la visita
-          </p> -->
         </div>
       </div>
 
       <!-- Columna derecha - Imagen -->
       <div class="modal__derecha">
-        <img src="/cita.jpeg" alt="Adultos mayores felices" />
-        <div class="imagen__overlay">
-          <i class="bx bx-heart"></i>
-          <p>Cuidado con calidez</p>
+        <img src="/cita.jpg" alt="Adultos mayores felices" />
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Modal Evaluación Inicial -->
+<div
+  class="modal__overlay modal__evaluacion-overlay"
+  *ngIf="mostrarModalEvaluacion"
+  (click)="cerrarModalEvaluacion()"
+>
+  <div
+    class="modal__container modal__evaluacion-container"
+    (click)="$event.stopPropagation()"
+  >
+    <button class="modal__cerrar" (click)="cerrarModalEvaluacion()">
+      <i class="bx bx-x"></i>
+    </button>
+
+    <div class="evaluacion__contenido">
+      <div class="evaluacion__header">
+        <button class="btn__volver" (click)="volverAAgendarVisita()">
+          <i class="bx bx-arrow-back"></i>
+          Volver
+        </button>
+        <div class="evaluacion__titulo-principal">
+          <i class="bx bx-clipboard-check"></i>
+          <h2>Evaluación Inicial del Adulto Mayor</h2>
+          <p>
+            Ayúdenos a conocer mejor a su familiar para brindarle una atención
+            adecuada
+          </p>
         </div>
       </div>
+
+      <form class="evaluacion__formulario">
+        <!-- Pregunta 1 -->
+        <div class="evaluacion__pregunta">
+          <label class="pregunta__titulo">1. Autonomía y movilidad</label>
+          <p class="pregunta__subtitulo">
+            ¿Su familiar puede movilizarse de manera independiente?
+          </p>
+          <div class="opciones__radio">
+            <label class="opcion__radio">
+              <input
+                type="radio"
+                name="movilidad"
+                value="solo"
+                [(ngModel)]="evaluacionForm.movilidad"
+              />
+              <span>Se moviliza solo</span>
+            </label>
+            <label class="opcion__radio">
+              <input
+                type="radio"
+                name="movilidad"
+                value="apoyo-parcial"
+                [(ngModel)]="evaluacionForm.movilidad"
+              />
+              <span>Necesita apoyo parcial</span>
+            </label>
+            <label class="opcion__radio">
+              <input
+                type="radio"
+                name="movilidad"
+                value="ayuda-constante"
+                [(ngModel)]="evaluacionForm.movilidad"
+              />
+              <span>Requiere ayuda constante</span>
+            </label>
+            <label class="opcion__radio">
+              <input
+                type="radio"
+                name="movilidad"
+                value="en-cama"
+                [(ngModel)]="evaluacionForm.movilidad"
+              />
+              <span>Permanece mayormente en cama</span>
+            </label>
+          </div>
+        </div>
+
+        <!-- Pregunta 2 -->
+        <div class="evaluacion__pregunta">
+          <label class="pregunta__titulo"
+            >2. Actividades de la vida diaria (AVD)</label
+          >
+          <p class="pregunta__subtitulo">
+            ¿Puede realizar actividades básicas como vestirse, alimentarse o
+            asearse?
+          </p>
+          <div class="opciones__radio">
+            <label class="opcion__radio">
+              <input
+                type="radio"
+                name="avd"
+                value="independiente"
+                [(ngModel)]="evaluacionForm.avd"
+              />
+              <span>De forma independiente</span>
+            </label>
+            <label class="opcion__radio">
+              <input
+                type="radio"
+                name="avd"
+                value="supervision"
+                [(ngModel)]="evaluacionForm.avd"
+              />
+              <span>Con supervisión</span>
+            </label>
+            <label class="opcion__radio">
+              <input
+                type="radio"
+                name="avd"
+                value="ayuda-constante"
+                [(ngModel)]="evaluacionForm.avd"
+              />
+              <span>Con ayuda constante</span>
+            </label>
+            <label class="opcion__radio">
+              <input
+                type="radio"
+                name="avd"
+                value="no-puede"
+                [(ngModel)]="evaluacionForm.avd"
+              />
+              <span>No puede realizarlas solo</span>
+            </label>
+          </div>
+        </div>
+
+        <!-- Pregunta 3 -->
+        <div class="evaluacion__pregunta">
+          <label class="pregunta__titulo"
+            >3. Estado cognitivo (orientativo)</label
+          >
+          <p class="pregunta__subtitulo">
+            ¿Ha notado dificultades recientes en la memoria u orientación?
+          </p>
+          <div class="opciones__radio">
+            <label class="opcion__radio">
+              <input
+                type="radio"
+                name="cognitivo"
+                value="sin-dificultades"
+                [(ngModel)]="evaluacionForm.cognitivo"
+              />
+              <span>No presenta dificultades</span>
+            </label>
+            <label class="opcion__radio">
+              <input
+                type="radio"
+                name="cognitivo"
+                value="olvidos-ocasionales"
+                [(ngModel)]="evaluacionForm.cognitivo"
+              />
+              <span>Olvidos ocasionales</span>
+            </label>
+            <label class="opcion__radio">
+              <input
+                type="radio"
+                name="cognitivo"
+                value="confusion-frecuente"
+                [(ngModel)]="evaluacionForm.cognitivo"
+              />
+              <span>Confusión frecuente</span>
+            </label>
+            <label class="opcion__radio">
+              <input
+                type="radio"
+                name="cognitivo"
+                value="diagnostico-deterioro"
+                [(ngModel)]="evaluacionForm.cognitivo"
+              />
+              <span>Diagnóstico de deterioro cognitivo o demencia</span>
+            </label>
+          </div>
+        </div>
+
+        <!-- Pregunta 4 -->
+        <div class="evaluacion__pregunta">
+          <label class="pregunta__titulo">4. Estado emocional y conducta</label>
+          <p class="pregunta__subtitulo">En general, su estado de ánimo es:</p>
+          <div class="opciones__radio">
+            <label class="opcion__radio">
+              <input
+                type="radio"
+                name="emocional"
+                value="estable"
+                [(ngModel)]="evaluacionForm.emocional"
+              />
+              <span>Estable y tranquilo</span>
+            </label>
+            <label class="opcion__radio">
+              <input
+                type="radio"
+                name="emocional"
+                value="a-veces-triste"
+                [(ngModel)]="evaluacionForm.emocional"
+              />
+              <span>A veces triste o ansioso</span>
+            </label>
+            <label class="opcion__radio">
+              <input
+                type="radio"
+                name="emocional"
+                value="irritable"
+                [(ngModel)]="evaluacionForm.emocional"
+              />
+              <span>Frecuentemente irritable o deprimido</span>
+            </label>
+            <label class="opcion__radio">
+              <input
+                type="radio"
+                name="emocional"
+                value="cambios-conducta"
+                [(ngModel)]="evaluacionForm.emocional"
+              />
+              <span>Presenta cambios de conducta importantes</span>
+            </label>
+          </div>
+        </div>
+
+        <!-- Pregunta 5 -->
+        <div class="evaluacion__pregunta">
+          <label class="pregunta__titulo"
+            >5. Condiciones médicas relevantes</label
+          >
+          <p class="pregunta__subtitulo">
+            ¿Su familiar presenta alguna de estas condiciones? (marque las que
+            correspondan)
+          </p>
+          <div class="opciones__checkbox">
+            <label class="opcion__checkbox">
+              <input
+                type="checkbox"
+                [(ngModel)]="evaluacionForm.condiciones.hipertension"
+                [ngModelOptions]="{ standalone: true }"
+              />
+              <span>Hipertensión</span>
+            </label>
+            <label class="opcion__checkbox">
+              <input
+                type="checkbox"
+                [(ngModel)]="evaluacionForm.condiciones.diabetes"
+                [ngModelOptions]="{ standalone: true }"
+              />
+              <span>Diabetes</span>
+            </label>
+            <label class="opcion__checkbox">
+              <input
+                type="checkbox"
+                [(ngModel)]="evaluacionForm.condiciones.dificultadesCaminar"
+                [ngModelOptions]="{ standalone: true }"
+              />
+              <span>Dificultades para caminar</span>
+            </label>
+            <label class="opcion__checkbox">
+              <input
+                type="checkbox"
+                [(ngModel)]="evaluacionForm.condiciones.incontinencia"
+                [ngModelOptions]="{ standalone: true }"
+              />
+              <span>Incontinencia</span>
+            </label>
+            <label class="opcion__checkbox">
+              <input
+                type="checkbox"
+                [(ngModel)]="evaluacionForm.condiciones.problemasAudicionVision"
+                [ngModelOptions]="{ standalone: true }"
+              />
+              <span>Problemas de audición o visión</span>
+            </label>
+            <label class="opcion__checkbox">
+              <input
+                type="checkbox"
+                [(ngModel)]="evaluacionForm.condiciones.postOperatoria"
+                [ngModelOptions]="{ standalone: true }"
+              />
+              <span>Recuperación post operatoria</span>
+            </label>
+            <label class="opcion__checkbox">
+              <input
+                type="checkbox"
+                [(ngModel)]="evaluacionForm.condiciones.otra"
+                [ngModelOptions]="{ standalone: true }"
+              />
+              <span>Otra</span>
+            </label>
+          </div>
+        </div>
+
+        <!-- Pregunta 6 -->
+        <div class="evaluacion__pregunta">
+          <label class="pregunta__titulo"
+            >6. Medicación y cuidados especiales</label
+          >
+          <p class="pregunta__subtitulo">
+            ¿Requiere supervisión o ayuda con la medicación?
+          </p>
+          <div class="opciones__radio">
+            <label class="opcion__radio">
+              <input
+                type="radio"
+                name="medicacion"
+                value="no"
+                [(ngModel)]="evaluacionForm.medicacion"
+              />
+              <span>No</span>
+            </label>
+            <label class="opcion__radio">
+              <input
+                type="radio"
+                name="medicacion"
+                value="recordatorio"
+                [(ngModel)]="evaluacionForm.medicacion"
+              />
+              <span>Sí, recordatorio</span>
+            </label>
+            <label class="opcion__radio">
+              <input
+                type="radio"
+                name="medicacion"
+                value="administracion-completa"
+                [(ngModel)]="evaluacionForm.medicacion"
+              />
+              <span>Sí, administración completa</span>
+            </label>
+          </div>
+        </div>
+
+        <!-- Pregunta 7 -->
+        <div class="evaluacion__pregunta">
+          <label class="pregunta__titulo"
+            >7. Motivo principal de la consulta</label
+          >
+          <p class="pregunta__subtitulo">
+            ¿Por qué está buscando una residencia para su familiar?
+          </p>
+          <div class="opciones__radio">
+            <label class="opcion__radio">
+              <input
+                type="radio"
+                name="motivo"
+                value="cuidado-permanente"
+                [(ngModel)]="evaluacionForm.motivo"
+              />
+              <span>Cuidado permanente</span>
+            </label>
+            <label class="opcion__radio">
+              <input
+                type="radio"
+                name="motivo"
+                value="recuperacion-temporal"
+                [(ngModel)]="evaluacionForm.motivo"
+              />
+              <span>Recuperación temporal / post operatoria</span>
+            </label>
+            <label class="opcion__radio">
+              <input
+                type="radio"
+                name="motivo"
+                value="centro-dia"
+                [(ngModel)]="evaluacionForm.motivo"
+              />
+              <span>Centro de día</span>
+            </label>
+            <label class="opcion__radio">
+              <input
+                type="radio"
+                name="motivo"
+                value="descanso-cuidador"
+                [(ngModel)]="evaluacionForm.motivo"
+              />
+              <span>Descanso del cuidador</span>
+            </label>
+            <label class="opcion__radio">
+              <input
+                type="radio"
+                name="motivo"
+                value="otro"
+                [(ngModel)]="evaluacionForm.motivo"
+              />
+              <span>Otro</span>
+            </label>
+          </div>
+        </div>
+
+        <!-- Botón continuar -->
+        <button
+          type="button"
+          class="btn__continuar-evaluacion"
+          (click)="guardarEvaluacionYContinuar()"
+        >
+          <span>Continuar a coordinar fecha</span>
+          <i class="bx bx-right-arrow-alt"></i>
+        </button>
+      </form>
     </div>
   </div>
 </div>
@@ -475,8 +1015,8 @@
   <div class="noticias__contenedor">
     <div class="noticias__header">
       <div>
-        <p class="noticias__subtitulo">ACTUALIDAD</p>
-        <h2 class="noticias__titulo">Noticias</h2>
+        <p class="noticias__subtitulo">BLOG</p>
+        <h2 class="noticias__titulo">Nuestros Artículos</h2>
       </div>
     </div>
 
@@ -540,6 +1080,15 @@
     <!-- Columna izquierda - Ubicación y Dirección -->
     <div class="contacto__izquierda">
       <!-- Dirección -->
+      <div class="contacto__item">
+        <div class="contacto__icono">
+          <i class="bx bxs-envelope"></i>
+        </div>
+        <div class="contacto__texto">
+          <h3>Nuestro Correo</h3>
+          <p>residencialasdalias156&#64;gmail.com</p>
+        </div>
+      </div>
       <div class="contacto__item">
         <div class="contacto__icono">
           <i class="bx bx-map"></i>
@@ -645,7 +1194,7 @@
   <div class="faq__contenedor">
     <div class="faq__header">
       <p class="faq__subtitulo">PREGUNTAS FRECUENTES</p>
-      <h2 class="faq__titulo">¿Tienes dudas? Estamos aquí para ayudarte</h2>
+      <h2 class="faq__titulo">Preguntas FAQ</h2>
       <p class="faq__descripcion">
         Encuentra respuestas a las preguntas más comunes sobre nuestros
         servicios y atención
@@ -694,20 +1243,6 @@
           </div>
         </div>
       </div>
-    </div>
-
-    <div class="faq__cta">
-      <div class="faq__cta-contenido">
-        <i class="bx bx-support"></i>
-        <div>
-          <h3>¿No encontraste lo que buscabas?</h3>
-          <p>Nuestro equipo está listo para resolver todas tus dudas</p>
-        </div>
-      </div>
-      <button class="btn__faq-contacto">
-        Contactar ahora
-        <i class="bx bx-right-arrow-alt"></i>
-      </button>
     </div>
   </div>
 </section>
