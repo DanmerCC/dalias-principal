@@ -35,9 +35,9 @@
 
 <!-- Sección Nosotros -->
 <section class="seccion__nosotros">
-  <img src="/figure1.png" class="figure1" alt="">
-  <img src="/figure2.png" class="figure2" alt="">
-  <img src="/figure3.png" class="figure3" alt="">
+  <img src="/figure1.png" class="figure1" alt="" />
+  <img src="/figure2.png" class="figure2" alt="" />
+  <img src="/figure3.png" class="figure3" alt="" />
   <div class="nosotros__contenedor">
     <!-- Contenido principal -->
     <div class="nosotros__contenido">
@@ -92,7 +92,7 @@
 
 <!-- Sección Innovación -->
 <section class="seccion__innovacion">
-  <img src="/figure4.png" class="figure4" alt="">
+  <img src="/figure4.png" class="figure4" alt="" />
   <div class="innovacion__contenedor">
     <!-- Columna izquierda -->
     <div class="innovacion__izquierda">
@@ -176,8 +176,8 @@
 
 <!-- Sección por qué elegirnos -->
 <section class="seccion__elegirnos">
-  <img src="/figure5.png" class="figure5" alt="">
-  <img src="/figure5.png" class="figure6" alt="">
+  <img src="/figure5.png" class="figure5" alt="" />
+  <img src="/figure5.png" class="figure6" alt="" />
   <div class="elegirnos__contenedor">
     <div class="elegirnos__header">
       <p class="elegirnos__subtitulo">NUESTRO COMPROMISO</p>
@@ -258,7 +258,7 @@
     <p class="actividades__subtitulo">EXPERIENCIAS ENRIQUECEDORAS</p>
     <h2 class="actividades__titulo">Nuestras Actividades</h2>
   </div>
-  
+
   <div class="actividades__contenedor" #actividadesCarrusel>
     <article
       class="art__atv"
@@ -344,8 +344,8 @@
 
 <!-- Sección CTA (Call to Action) -->
 <section class="seccion__cta">
-  <img src="/figure7.png" class="figure7" alt="">
-  <img src="/figure1.png" class="figure8" alt="">
+  <img src="/figure7.png" class="figure7" alt="" />
+  <img src="/figure1.png" class="figure8" alt="" />
   <div class="cta__card">
     <div class="cta__contenido">
       <h2 class="cta__titulo">Es hora de cuidar a los que más amamos</h2>
@@ -382,6 +382,11 @@
         </div>
 
         <div class="modal__formulario">
+          <div class="form__seccion-titulo">
+            <i class="fa-solid fa-user-check"></i>
+            <span>Información del solicitante</span>
+          </div>
+
           <!-- Nombre y Apellido -->
           <div class="form__grupo__modal">
             <label class="form__label--modal"
@@ -411,13 +416,16 @@
               (blur)="validarCorreoElectronico()"
               (input)="validarCorreoElectronico()"
             />
-            <span class="error__mensaje" *ngIf="erroresVisita.correoElectronico">
+            <span
+              class="error__mensaje"
+              *ngIf="erroresVisita.correoElectronico"
+            >
               {{ erroresVisita.correoElectronico }}
             </span>
           </div>
 
           <div class="form__seccion-titulo">
-            <i class="bx bx-user-circle"></i>
+            <i class="fa-solid fa-person-cane"></i>
             <span>Información del adulto mayor</span>
           </div>
 
@@ -499,9 +507,9 @@
                 (change)="toggleEvaluacion()"
               />
               <span class="checkbox__texto">
-                <strong>Evaluación Inicial del Adulto Mayor</strong> Ayúdenos
-                a conocer mejor a su familiar para brindarle una atención
-                adecuada <b>(opcional)</b>
+                <strong>Evaluación Inicial del Adulto Mayor</strong> Ayúdenos a
+                conocer mejor a su familiar para brindarle una atención adecuada
+                <b>(opcional)</b>
               </span>
             </label>
           </div>
@@ -549,7 +557,9 @@
                   "
                   [class.no-disponible]="!diaInfo.disponible"
                   [disabled]="diaInfo.dia === 0 || !diaInfo.disponible"
-                  (click)="seleccionarFecha(diaInfo.dia); validarFechaSeleccionada()"
+                  (click)="
+                    seleccionarFecha(diaInfo.dia); validarFechaSeleccionada()
+                  "
                 >
                   {{ diaInfo.dia || "" }}
                 </button>
@@ -578,13 +588,22 @@
           </div>
 
           <!-- Mensajes de error para fecha y hora -->
-          <div class="form__grupo__modal" *ngIf="erroresVisita.fechaSeleccionada">
+          <div
+            class="form__grupo__modal"
+            *ngIf="erroresVisita.fechaSeleccionada"
+          >
             <span class="error__mensaje">
               {{ erroresVisita.fechaSeleccionada }}
             </span>
           </div>
 
-          <div class="form__grupo__modal" *ngIf="erroresVisita.horaSeleccionada && formularioVisita.fechaSeleccionada">
+          <div
+            class="form__grupo__modal"
+            *ngIf="
+              erroresVisita.horaSeleccionada &&
+              formularioVisita.fechaSeleccionada
+            "
+          >
             <span class="error__mensaje">
               {{ erroresVisita.horaSeleccionada }}
             </span>
