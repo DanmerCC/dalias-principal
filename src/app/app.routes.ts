@@ -1,18 +1,48 @@
 import { Routes } from '@angular/router';
 import { InicioComponent } from './pages/inicio/inicio.component';
+import { NosotrosComponent } from './pages/nosotros/nosotros.component';
+import { ServiciosComponent } from './pages/servicios/servicios.component';
+import { TrabajaConNosotrosComponent } from './pages/trabaja-con-nosotros/trabaja-con-nosotros.component';
+import { ContactanosComponent } from './pages/contactanos/contactanos.component';
+import { BlogComponent } from './pages/blog/blog.component';
+import { ResidenteComponent } from './pages/residente/residente.component';
 
 export const routes: Routes = [
   {
     path: 'inicio',
-    component: InicioComponent
+    component: InicioComponent,
+  },
+  {
+    path: 'nosotros',
+    component: NosotrosComponent,
+  },
+  {
+    path: 'servicios',
+    component: ServiciosComponent,
+  },
+  {
+    path: 'trabaja-con-nosotros',
+    component: TrabajaConNosotrosComponent,
+  },
+  {
+    path: 'contactanos',
+    component: ContactanosComponent,
+  },
+  {
+    path: 'blog',
+    component: BlogComponent,
+  },
+  {
+    path: 'residente',
+    component: ResidenteComponent,
   },
   {
     path: '',
     redirectTo: '/inicio',
-    pathMatch: 'full'
+    pathMatch: 'full',
   },
   {
     path: '**',
-    redirectTo: '/inicio' 
-  }
+    redirectTo: '/inicio',
+  },
 ];
