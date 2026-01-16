@@ -6,6 +6,7 @@ import { TrabajaConNosotrosComponent } from './pages/trabaja-con-nosotros/trabaj
 import { ContactanosComponent } from './pages/contactanos/contactanos.component';
 import { BlogComponent } from './pages/blog/blog.component';
 import { ResidenteComponent } from './pages/residente/residente.component';
+import { ActividadesComponent } from './pages/actividades/actividades.component';
 
 export const routes: Routes = [
   {
@@ -15,6 +16,10 @@ export const routes: Routes = [
   {
     path: 'nosotros',
     component: NosotrosComponent,
+  },
+  {
+    path: 'actividades',
+    component: ActividadesComponent
   },
   {
     path: 'servicios',

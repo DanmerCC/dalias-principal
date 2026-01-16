@@ -75,6 +75,7 @@ interface Actividad {
   titulo: string;
   descripcion: string;
   imagen: string;
+  fecha: string;
 }
 
 interface EvaluacionForm {
@@ -137,6 +138,18 @@ export class InicioComponent implements OnInit, OnDestroy {
   intervaloNosotros: any;
 
   // Modal de visita
+  mostrarModalConfirmacion = false;
+  evaluacionIniciada = false;
+  erroresEvaluacion = {
+    movilidad: false,
+    avd: false,
+    cognitivo: false,
+    emocional: false,
+    medicacion: false,
+    motivo: false,
+    condiciones: false,
+  };
+
   mostrarModalVisita = false;
   mostrarEvaluacion = false;
   mostrarModalEvaluacion = false;
@@ -196,39 +209,49 @@ export class InicioComponent implements OnInit, OnDestroy {
       titulo: 'Club de Lectura para Adultos Mayores',
       descripcion:
         'La lectura compartida estimula la memoria, el lenguaje y la atención, al mismo tiempo que fomenta la conversación y la conexión social. Un espacio que fortalece la mente y genera bienestar emocional en un entorno cálido y participativo.',
-      imagen: '/actividades1.png',
+      imagen: '/actividades1.jpg',
+      fecha: '15/03/2025',
     },
     {
       titulo: 'Pintura y Dibujo Terapéutico',
       descripcion:
         'A través del arte, los adultos mayores expresan emociones, estimulan la creatividad y fortalecen la motricidad fina. Una actividad que relaja, mejora el ánimo y refuerza la autoestima de forma natural.',
       imagen: '/actividades2.png',
+      fecha: '18/03/2025',
     },
     {
       titulo: 'Musicoterapia Geriátrica',
       descripcion:
         'La música despierta recuerdos, emociones y sensaciones positivas. Estas sesiones favorecen la comunicación, reducen la ansiedad y generan momentos de conexión emocional, incluso en adultos mayores con deterioro cognitivo.',
       imagen: '/actividades3.png',
+      fecha: '20/03/2025',
     },
     {
       titulo: 'Meditación y Relajación Guiada',
       descripcion:
         'Momentos de calma diseñados para favorecer la tranquilidad, el descanso y el equilibrio emocional. La relajación guiada ayuda a reducir el estrés y promueve una mejor calidad de vida en el adulto mayor.',
       imagen: '/actividades4.png',
+      fecha: '22/03/2025',
     },
     {
       titulo: 'Misas y Celebraciones Religiosas',
       descripcion:
         'Espacios de recogimiento y acompañamiento espiritual que brindan paz y contención emocional. Estas celebraciones fortalecen la fe, la serenidad y el bienestar interior de los adultos mayores.',
-      imagen: '/actividades5.png',
+      imagen: '/actividades5.jpg',
+      fecha: '24/03/2025',
     },
     {
       titulo: 'Momentos Compartidos en Familia',
       descripcion:
         'Celebraciones y encuentros que fortalecen los vínculos afectivos en un entorno seguro y acogedor. Compartir tiempo en familia refuerza la sensación de hogar y el bienestar emocional del adulto mayor.',
       imagen: '/actividades6.png',
+      fecha: '25/03/2025',
     },
   ];
+
+  get actividadesConFinal() {
+    return [...this.actividades, { final: true }];
+  }
 
   constructor(@Inject(PLATFORM_ID) private platformId: Object) {}
 
@@ -304,7 +327,7 @@ export class InicioComponent implements OnInit, OnDestroy {
       id: 1,
       titulo: 'Planes de Estadía',
       contenido:
-        'Opciones flexibles de residencia: permanente, temporal, centro de día y respiro familiar.',
+        'Incluye alojamiento, alimentación balanceada, atención de enfermería, seguimiento geriátrico, terapias y actividades.',
       activo: false,
     },
     {
@@ -323,48 +346,38 @@ export class InicioComponent implements OnInit, OnDestroy {
     },
   ];
 
-  preguntasFrecuentes: PreguntaFrecuente[] = [
-    {
-      id: 1,
-      pregunta:
-        '¿Cuándo debería considerar una residencia geriátrica para mi familiar?',
-      respuesta:
-        'Es recomendable considerar una residencia geriátrica para adultos mayores cuando el familiar comienza a necesitar mayor acompañamiento, supervisión, apoyo en actividades diarias o cuando la familia busca mejorar su calidad de vida en un entorno seguro y socialmente activo. También es una excelente opción para prevenir riesgos como caídas, aislamiento o desatención médica. 👉 Para ayudarle en esta decisión, hemos preparado una guía completa sobre cómo elegir la residencia adecuada: https://goo.su/Lis06yx',
-      activo: false,
-    },
-    {
-      id: 2,
-      pregunta:
-        '¿Qué tipo de adultos mayores pueden vivir la experiencia Las Dalias?',
-      respuesta:
-        'Residencia Las Dalias está orientada principalmente a adultos mayores independientes o semi dependientes que desean vivir en un entorno cómodo, seguro y acompañado, manteniendo su autonomía y recibiendo apoyo profesional cuando lo necesiten.',
-      activo: false,
-    },
-    {
-      id: 3,
-      pregunta:
-        '¿Cuáles son los servicios de cuidado para un adulto mayor y en qué se diferencian?',
-      respuesta:
-        'Ofrecemos residencia permanente, residencia temporal, centro de día, residencia post operatoria y consultas geriátricas, adaptándonos a distintas necesidades. Cada servicio se diferencia por el nivel de acompañamiento, duración de la estadía y tipo de cuidado requerido, siempre con un enfoque personalizado.',
-      activo: false,
-    },
-    {
-      id: 4,
-      pregunta:
-        '¿Cómo se garantiza la seguridad y el bienestar de los residentes?',
-      respuesta:
-        'La seguridad del adulto mayor es prioritaria. Contamos con personal de enfermería las 24 horas, monitoreo permanente, protocolos de salud, sistema de emergencias médicas, instalaciones adaptadas y seguimiento geriátrico continuo para actuar de forma rápida y segura ante cualquier situación.',
-      activo: false,
-    },
-    {
-      id: 5,
-      pregunta:
-        '¿Cómo pueden los familiares participar en la vida del residente y cómo es la comunicación con el personal?',
-      respuesta:
-        'En Residencia Las Dalias fomentamos una integración activa de la familia. Los familiares pueden visitar, participar en actividades y mantenerse informados mediante una comunicación constante y transparente con nuestro equipo, fortaleciendo la confianza y el bienestar del residente.',
-      activo: false,
-    },
-  ];
+preguntasFrecuentes: PreguntaFrecuente[] = [
+  {
+    id: 1,
+    pregunta: '¿Cuándo debería considerar una residencia geriátrica para mi familiar?',
+    respuesta: 'Es recomendable considerar una <strong>residencia geriátrica para adultos mayores</strong> cuando el familiar comienza a necesitar mayor acompañamiento, supervisión, apoyo en actividades diarias o cuando la familia busca mejorar su <strong>calidad de vida</strong>, previniendo riesgos como caídas o aislamiento. <br><br>👉 Revise nuestra guía para elegir la residencia adecuada: <a href="https://goo.su/Lis06yx" target="_blank" rel="noopener noreferrer">https://goo.su/Lis06yx</a>',
+    activo: false,
+  },
+  {
+    id: 2,
+    pregunta: '¿Qué tipo de adultos mayores pueden vivir la experiencia Las Dalias?',
+    respuesta: '<strong>Residencia Las Dalias</strong> está orientada principalmente a adultos mayores independientes o semi dependientes que desean vivir en un entorno cómodo, seguro y acompañado, manteniendo su autonomía y recibiendo apoyo profesional cuando lo necesiten.',
+    activo: false,
+  },
+  {
+    id: 3,
+    pregunta: '¿Cuáles son los servicios de cuidado para un adulto mayor y en qué se diferencian?',
+    respuesta: 'Ofrecemos <strong>residencia permanente, residencia temporal, centro de día, residencia post operatoria</strong> y <strong>consultas geriátricas</strong>, adaptándonos a distintas necesidades.<br><br>Cada servicio se diferencia por el nivel de acompañamiento, duración de la estadía y tipo de cuidado requerido, siempre con un <strong>enfoque personalizado</strong>.',
+    activo: false,
+  },
+  {
+    id: 4,
+    pregunta: '¿Cómo se garantiza la seguridad y el bienestar de los residentes?',
+    respuesta: 'La seguridad del adulto mayor es prioritaria. Contamos con personal de enfermería las 24 horas, monitoreo permanente, protocolos de salud, sistema de emergencias médicas, instalaciones adaptadas y seguimiento geriátrico continuo para actuar de forma rápida y segura ante cualquier situación.',
+    activo: false,
+  },
+  {
+    id: 5,
+    pregunta: '¿Cómo pueden los familiares participar en la vida del residente y cómo es la comunicación con el personal?',
+    respuesta: 'En <strong>Residencia Las Dalias</strong>, la familia participa activamente mediante <strong>visitas, actividades compartidas</strong> y una <strong>comunicación constante y transparente</strong> con el equipo, fortaleciendo la confianza y el bienestar del residente.',
+    activo: false,
+  },
+];
 
   get preguntasColumna1(): PreguntaFrecuente[] {
     return this.preguntasFrecuentes.filter((_, index) => index % 2 === 0);
@@ -500,7 +513,7 @@ export class InicioComponent implements OnInit, OnDestroy {
 
   // Métodos del carrusel de actividades
   siguienteActividad(): void {
-    if (this.slideActualActividades < this.actividades.length - 1) {
+    if (this.slideActualActividades < this.actividadesConFinal.length - 1) {
       this.slideActualActividades++;
       this.scrollToActividad();
     }
@@ -533,16 +546,17 @@ export class InicioComponent implements OnInit, OnDestroy {
     }
   }
 
-  toggleAcordeon(id: number): void {
-    this.acordeonItems = this.acordeonItems.map((item) => ({
-      ...item,
-      activo: item.id === id ? !item.activo : false,
-    }));
-  }
+ toggleAcordeon(id: number): void {
+  this.acordeonItems = this.acordeonItems.map((item) => ({
+    ...item,
+    activo: item.id === id ? !item.activo : false,
+  }));
+  
+  // Cambiar el slide cuando se hace clic
+  this.slideActual = id - 1;
+}
 
-  onAcordeonHover(id: number): void {
-    this.slideActual = id - 1;
-  }
+
 
   siguienteSlide(): void {
     this.slideActual = (this.slideActual + 1) % this.slidesCarrusel.length;
@@ -656,10 +670,133 @@ export class InicioComponent implements OnInit, OnDestroy {
     }, 300);
   }
 
+  // Método completo para verificar si se inició la evaluación
+  verificarEvaluacionIniciada(): void {
+    const tieneRespuestas =
+      this.evaluacionForm.movilidad !== '' ||
+      this.evaluacionForm.avd !== '' ||
+      this.evaluacionForm.cognitivo !== '' ||
+      this.evaluacionForm.emocional !== '' ||
+      this.evaluacionForm.medicacion !== '' ||
+      this.evaluacionForm.motivo !== '' ||
+      Object.values(this.evaluacionForm.condiciones).some((v) => v === true);
+
+    this.evaluacionIniciada = tieneRespuestas;
+
+    // Limpiar errores si se está llenando
+    if (tieneRespuestas) {
+      this.limpiarErroresEvaluacion();
+    }
+  }
+
+  // Modificar el método limpiarErroresEvaluacion
+  limpiarErroresEvaluacion(): void {
+    if (this.evaluacionForm.movilidad !== '')
+      this.erroresEvaluacion.movilidad = false;
+    if (this.evaluacionForm.avd !== '') this.erroresEvaluacion.avd = false;
+    if (this.evaluacionForm.cognitivo !== '')
+      this.erroresEvaluacion.cognitivo = false;
+    if (this.evaluacionForm.emocional !== '')
+      this.erroresEvaluacion.emocional = false;
+    if (this.evaluacionForm.medicacion !== '')
+      this.erroresEvaluacion.medicacion = false;
+    if (this.evaluacionForm.motivo !== '')
+      this.erroresEvaluacion.motivo = false;
+
+    // Limpiar error de condiciones si hay alguna marcada
+    const tieneCondiciones = Object.values(
+      this.evaluacionForm.condiciones
+    ).some((v) => v === true);
+    if (tieneCondiciones) this.erroresEvaluacion.condiciones = false;
+  }
+
+  // Método completo para validar la evaluación
+  validarEvaluacionCompleta(): boolean {
+    if (!this.evaluacionIniciada) {
+      return true; // Si no se inició, no es obligatorio
+    }
+
+    // Resetear errores
+    this.erroresEvaluacion = {
+      movilidad: false,
+      avd: false,
+      cognitivo: false,
+      emocional: false,
+      medicacion: false,
+      motivo: false,
+      condiciones: false,
+    };
+
+    // Si se inició, marcar campos faltantes
+    let esValido = true;
+
+    if (this.evaluacionForm.movilidad === '') {
+      this.erroresEvaluacion.movilidad = true;
+      esValido = false;
+    }
+    if (this.evaluacionForm.avd === '') {
+      this.erroresEvaluacion.avd = true;
+      esValido = false;
+    }
+    if (this.evaluacionForm.cognitivo === '') {
+      this.erroresEvaluacion.cognitivo = true;
+      esValido = false;
+    }
+    if (this.evaluacionForm.emocional === '') {
+      this.erroresEvaluacion.emocional = true;
+      esValido = false;
+    }
+    if (this.evaluacionForm.medicacion === '') {
+      this.erroresEvaluacion.medicacion = true;
+      esValido = false;
+    }
+    if (this.evaluacionForm.motivo === '') {
+      this.erroresEvaluacion.motivo = true;
+      esValido = false;
+    }
+
+    // Validar que al menos un checkbox de condiciones esté marcado
+    const tieneCondiciones = Object.values(
+      this.evaluacionForm.condiciones
+    ).some((v) => v === true);
+    if (!tieneCondiciones) {
+      this.erroresEvaluacion.condiciones = true;
+      esValido = false;
+    }
+
+    return esValido;
+  }
+
+  // Método completo guardarEvaluacionYContinuar (REEMPLAZAR)
   guardarEvaluacionYContinuar(): void {
+    this.verificarEvaluacionIniciada();
+
+    // Si no se inició la evaluación, solo cerrar el modal sin marcar el check
+    if (!this.evaluacionIniciada) {
+      this.mostrarModalEvaluacion = false;
+      setTimeout(() => {
+        this.mostrarModalVisita = true;
+      }, 300);
+      return;
+    }
+
+    // Si se inició pero no está completa, mostrar errores
+    if (!this.validarEvaluacionCompleta()) {
+      // Hacer scroll al primer error
+      setTimeout(() => {
+        const primerError = document.querySelector(
+          '.evaluacion__pregunta--error'
+        );
+        if (primerError) {
+          primerError.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        }
+      }, 100);
+      return;
+    }
+
     console.log('Evaluación guardada:', this.evaluacionForm);
 
-    // Marcar el checkbox como completado
+    // Marcar el checkbox como completado SOLO si está completa
     this.mostrarEvaluacion = true;
 
     this.mostrarModalEvaluacion = false;
@@ -820,7 +957,7 @@ export class InicioComponent implements OnInit, OnDestroy {
     }
   }
 
-  // Reemplazar el método enviarSolicitudVisita completo
+  // Reemplazar completamente el método enviarSolicitudVisita
   enviarSolicitudVisita(): void {
     // Validar todos los campos
     this.validarNombreApellido();
@@ -836,18 +973,18 @@ export class InicioComponent implements OnInit, OnDestroy {
     );
 
     if (hayErrores) {
-      // No hacer nada, solo mostrar los mensajes de error rojos
       return;
     }
 
-    // Si no hay errores, proceder con el envío
-    console.log('Solicitud de visita:', this.formularioVisita);
-    console.log('Evaluación (si se completó):', this.evaluacionForm);
-    alert(
-      '¡Gracias! Tu solicitud de visita ha sido registrada. Pronto nos contactaremos contigo.'
-    );
+    // Si no hay errores, mostrar modal de confirmación
+    this.mostrarModalConfirmacion = true;
+  }
 
-    // Limpiar formulario y errores
+  // Agregar este nuevo método
+  cerrarModalConfirmacion(): void {
+    this.mostrarModalConfirmacion = false;
+
+    // Limpiar formularios
     this.formularioVisita = {
       nombreApellido: '',
       correoElectronico: '',

@@ -36,7 +36,7 @@
 <!-- Sección Nosotros -->
 <section class="seccion__nosotros">
   <img src="/figure1.png" class="figure1" alt="" />
-  <img src="/figure2.png" class="figure2" alt="" />
+  <img src="/figure8.png" class="figure2" alt="" />
   <img src="/figure3.png" class="figure3" alt="" />
   <div class="nosotros__contenedor">
     <!-- Contenido principal -->
@@ -93,6 +93,8 @@
 <!-- Sección Innovación -->
 <section class="seccion__innovacion">
   <img src="/figure4.png" class="figure4" alt="" />
+  <img src="/figure11.png" class="figure44" alt="" />
+  <img src="/figure12.png" class="figure55" alt="" />
   <div class="innovacion__contenedor">
     <!-- Columna izquierda -->
     <div class="innovacion__izquierda">
@@ -108,7 +110,6 @@
           *ngFor="let item of acordeonItems"
           [class.activo]="item.activo"
           (click)="toggleAcordeon(item.id)"
-          (mouseenter)="onAcordeonHover(item.id)"
         >
           <div class="acordeon__header">
             <span>{{ item.titulo }}</span>
@@ -194,11 +195,11 @@
           <i class="fa-solid fa-user-check"></i>
         </div>
         <h3>Atención centrada en la persona</h3>
-        <p>
-          Cada residente recibe un plan de cuidado personalizado adaptado a sus
-          necesidades físicas, emocionales y cognitivas, promoviendo autonomía y
-          calidad de vida.
-        </p>
+        <p
+          [innerHTML]="
+            'Cada residente recibe un <strong>plan de cuidado personalizado</strong> adaptado a sus <strong>necesidades físicas, emocionales y cognitivas</strong>, promoviendo autonomía y calidad de vida.'
+          "
+        ></p>
       </div>
 
       <div class="elegirnos__card">
@@ -206,11 +207,11 @@
           <i class="fa-solid fa-heart-pulse"></i>
         </div>
         <h3>Enfoque geriátrico integral</h3>
-        <p>
-          No solo cuidamos, acompañamos profesionalmente. Contamos con
-          seguimiento médico geriátrico, enfermería permanente y coordinación
-          constante con especialistas.
-        </p>
+        <p
+          [innerHTML]="
+            'No solo cuidamos, acompañamos profesionalmente. Contamos con <strong>seguimiento médico geriátrico, enfermería permanente y coordinación constante con especialistas</strong>.'
+          "
+        ></p>
       </div>
 
       <div class="elegirnos__card">
@@ -218,11 +219,11 @@
           <i class="fa-solid fa-comments"></i>
         </div>
         <h3>Comunicación y transparencia</h3>
-        <p>
-          Mantenemos a las familias informadas sobre la evolución, cuidados y
-          bienestar de su familiar, fortaleciendo la confianza y la tranquilidad
-          en todo momento.
-        </p>
+        <p
+          [innerHTML]="
+            'Mantenemos a las <strong>familias informadas sobre la evolución, cuidados y bienestar</strong> de su familiar, fortaleciendo <strong>la confianza y la tranquilidad</strong> en todo momento.'
+          "
+        ></p>
       </div>
 
       <div class="elegirnos__card">
@@ -230,11 +231,11 @@
           <i class="fa-solid fa-utensils"></i>
         </div>
         <h3>Alimentación terapéutica</h3>
-        <p>
-          Planes nutricionales supervisados, adaptados a patologías y
-          necesidades específicas, cuidando la salud sin descuidar el gusto y el
-          disfrute de cada comida.
-        </p>
+        <p
+          [innerHTML]="
+            '<strong>Planes nutricionales supervisados, adaptados a patologías y necesidades específicas</strong>, cuidando la salud sin descuidar el gusto y el disfrute de cada comida.'
+          "
+        ></p>
       </div>
 
       <div class="elegirnos__card">
@@ -242,20 +243,32 @@
           <i class="fa-solid fa-people-group"></i>
         </div>
         <h3>Integración con la familia</h3>
-        <p>
-          Facilitamos la participación activa de la familia en la vida diaria
-          del residente, promoviendo visitas amplias, encuentros familiares y
-          momentos compartidos.
-        </p>
+        <p
+          [innerHTML]="
+            '<strong>Facilitamos la participación activa de la familia</strong> en la vida diaria del residente, promoviendo visitas amplias, encuentros familiares y momentos compartidos.'
+          "
+        ></p>
+      </div>
+
+      <div class="elegirnos__card">
+        <div class="card__icono">
+          <i class="fa-solid fa-people-group"></i>
+        </div>
+        <h3>Vida activa y estimulación integral todos los días</h3>
+        <p
+          [innerHTML]="
+            'Diseñamos rutinas diarias de <strong>estimulación cognitiva, física y emocional</strong>, con actividades significativas que mantienen a los adultos mayores activos, motivados y con propósito, <strong>reduciendo el deterioro funcional</strong> y <strong>mejorando su bienestar integral</strong> en un entorno seguro y acompañante.'
+          "
+        ></p>
       </div>
     </div>
   </div>
 </section>
-
 <!-- Sección actividades-->
 <section class="section__actividades">
+  <img src="/figure13.png" class="figure66" alt="" />
   <div class="actividades__header">
-    <p class="actividades__subtitulo">EXPERIENCIAS ENRIQUECEDORAS</p>
+    <p class="actividades__subtitulo">Experiencia Las Dalias</p>
     <h2 class="actividades__titulo">Nuestras Actividades</h2>
   </div>
 
@@ -267,19 +280,32 @@
     >
       <div class="text__atv">
         <div>
+          <p class="fecha__atv">{{ actividad.fecha }}</p>
           <h3>{{ actividad.titulo }}</h3>
-          <p>{{ actividad.descripcion }}</p>
+          <p class="descripcion__atv">{{ actividad.descripcion }}</p>
         </div>
-        <button>Saber más</button>
       </div>
       <img [src]="actividad.imagen" [alt]="actividad.titulo" />
     </article>
+
+    <!-- Slide final "Ver todas las actividades" -->
+    <article class="art__atv art__atv--final">
+      <div class="text__atv--final">
+        <h3>Ver todas las actividades</h3>
+        <p>
+          Descubre todas las experiencias que ofrecemos para el bienestar de
+          nuestros residentes
+        </p>
+        <button class="btn__ver-todas">Ver más</button>
+      </div>
+    </article>
   </div>
+
   <div class="arrows__actividades">
     <div class="arrows__content">
       <div class="dots__actividades">
         <span
-          *ngFor="let actividad of actividades; let i = index"
+          *ngFor="let actividad of actividadesConFinal; let i = index"
           [class.active]="slideActualActividades === i"
           (click)="irAActividad(i)"
         ></span>
@@ -295,7 +321,7 @@
         <button
           class="btn__atv next__atv"
           (click)="siguienteActividad()"
-          [disabled]="slideActualActividades === actividades.length - 1"
+          [disabled]="slideActualActividades === actividadesConFinal.length - 1"
         >
           <i class="bx bx-chevron-right"></i>
         </button>
@@ -303,6 +329,7 @@
     </div>
   </div>
 </section>
+
 <!-- Sección estadísticas -->
 <section class="seccion__estadisticas">
   <div class="estadisticas__imagen"></div>
@@ -360,7 +387,6 @@
     </div>
   </div>
 </section>
-<!-- Modal Agendar Visita -->
 <!-- Modal Agendar Visita -->
 <div
   class="modal__overlay"
@@ -655,10 +681,14 @@
         </div>
       </div>
 
+      <!-- REEMPLAZAR todo el <form class="evaluacion__formulario"> -->
       <form class="evaluacion__formulario">
         <!-- Pregunta 1 -->
-        <div class="evaluacion__pregunta">
-          <label class="pregunta__titulo">1. Autonomía y movilidad</label>
+        <div
+          class="evaluacion__pregunta"
+          [class.evaluacion__pregunta--error]="erroresEvaluacion.movilidad"
+        >
+          <label class="pregunta__titulo">1. Autonomía y movilidad *</label>
           <p class="pregunta__subtitulo">
             ¿Su familiar puede movilizarse de manera independiente?
           </p>
@@ -669,6 +699,7 @@
                 name="movilidad"
                 value="solo"
                 [(ngModel)]="evaluacionForm.movilidad"
+                (change)="verificarEvaluacionIniciada()"
               />
               <span>Se moviliza solo</span>
             </label>
@@ -678,6 +709,7 @@
                 name="movilidad"
                 value="apoyo-parcial"
                 [(ngModel)]="evaluacionForm.movilidad"
+                (change)="verificarEvaluacionIniciada()"
               />
               <span>Necesita apoyo parcial</span>
             </label>
@@ -687,6 +719,7 @@
                 name="movilidad"
                 value="ayuda-constante"
                 [(ngModel)]="evaluacionForm.movilidad"
+                (change)="verificarEvaluacionIniciada()"
               />
               <span>Requiere ayuda constante</span>
             </label>
@@ -696,16 +729,26 @@
                 name="movilidad"
                 value="en-cama"
                 [(ngModel)]="evaluacionForm.movilidad"
+                (change)="verificarEvaluacionIniciada()"
               />
               <span>Permanece mayormente en cama</span>
             </label>
           </div>
+          <span
+            class="error__mensaje-evaluacion"
+            *ngIf="erroresEvaluacion.movilidad"
+          >
+            Por favor selecciona una opción
+          </span>
         </div>
 
         <!-- Pregunta 2 -->
-        <div class="evaluacion__pregunta">
+        <div
+          class="evaluacion__pregunta"
+          [class.evaluacion__pregunta--error]="erroresEvaluacion.avd"
+        >
           <label class="pregunta__titulo"
-            >2. Actividades de la vida diaria (AVD)</label
+            >2. Actividades de la vida diaria (AVD) *</label
           >
           <p class="pregunta__subtitulo">
             ¿Puede realizar actividades básicas como vestirse, alimentarse o
@@ -718,6 +761,7 @@
                 name="avd"
                 value="independiente"
                 [(ngModel)]="evaluacionForm.avd"
+                (change)="verificarEvaluacionIniciada()"
               />
               <span>De forma independiente</span>
             </label>
@@ -727,6 +771,7 @@
                 name="avd"
                 value="supervision"
                 [(ngModel)]="evaluacionForm.avd"
+                (change)="verificarEvaluacionIniciada()"
               />
               <span>Con supervisión</span>
             </label>
@@ -736,6 +781,7 @@
                 name="avd"
                 value="ayuda-constante"
                 [(ngModel)]="evaluacionForm.avd"
+                (change)="verificarEvaluacionIniciada()"
               />
               <span>Con ayuda constante</span>
             </label>
@@ -745,16 +791,23 @@
                 name="avd"
                 value="no-puede"
                 [(ngModel)]="evaluacionForm.avd"
+                (change)="verificarEvaluacionIniciada()"
               />
               <span>No puede realizarlas solo</span>
             </label>
           </div>
+          <span class="error__mensaje-evaluacion" *ngIf="erroresEvaluacion.avd">
+            Por favor selecciona una opción
+          </span>
         </div>
 
         <!-- Pregunta 3 -->
-        <div class="evaluacion__pregunta">
+        <div
+          class="evaluacion__pregunta"
+          [class.evaluacion__pregunta--error]="erroresEvaluacion.cognitivo"
+        >
           <label class="pregunta__titulo"
-            >3. Estado cognitivo (orientativo)</label
+            >3. Estado cognitivo (orientativo) *</label
           >
           <p class="pregunta__subtitulo">
             ¿Ha notado dificultades recientes en la memoria u orientación?
@@ -766,6 +819,7 @@
                 name="cognitivo"
                 value="sin-dificultades"
                 [(ngModel)]="evaluacionForm.cognitivo"
+                (change)="verificarEvaluacionIniciada()"
               />
               <span>No presenta dificultades</span>
             </label>
@@ -775,6 +829,7 @@
                 name="cognitivo"
                 value="olvidos-ocasionales"
                 [(ngModel)]="evaluacionForm.cognitivo"
+                (change)="verificarEvaluacionIniciada()"
               />
               <span>Olvidos ocasionales</span>
             </label>
@@ -784,6 +839,7 @@
                 name="cognitivo"
                 value="confusion-frecuente"
                 [(ngModel)]="evaluacionForm.cognitivo"
+                (change)="verificarEvaluacionIniciada()"
               />
               <span>Confusión frecuente</span>
             </label>
@@ -793,15 +849,27 @@
                 name="cognitivo"
                 value="diagnostico-deterioro"
                 [(ngModel)]="evaluacionForm.cognitivo"
+                (change)="verificarEvaluacionIniciada()"
               />
               <span>Diagnóstico de deterioro cognitivo o demencia</span>
             </label>
           </div>
+          <span
+            class="error__mensaje-evaluacion"
+            *ngIf="erroresEvaluacion.cognitivo"
+          >
+            Por favor selecciona una opción
+          </span>
         </div>
 
         <!-- Pregunta 4 -->
-        <div class="evaluacion__pregunta">
-          <label class="pregunta__titulo">4. Estado emocional y conducta</label>
+        <div
+          class="evaluacion__pregunta"
+          [class.evaluacion__pregunta--error]="erroresEvaluacion.emocional"
+        >
+          <label class="pregunta__titulo"
+            >4. Estado emocional y conducta *</label
+          >
           <p class="pregunta__subtitulo">En general, su estado de ánimo es:</p>
           <div class="opciones__radio">
             <label class="opcion__radio">
@@ -810,6 +878,7 @@
                 name="emocional"
                 value="estable"
                 [(ngModel)]="evaluacionForm.emocional"
+                (change)="verificarEvaluacionIniciada()"
               />
               <span>Estable y tranquilo</span>
             </label>
@@ -819,6 +888,7 @@
                 name="emocional"
                 value="a-veces-triste"
                 [(ngModel)]="evaluacionForm.emocional"
+                (change)="verificarEvaluacionIniciada()"
               />
               <span>A veces triste o ansioso</span>
             </label>
@@ -828,6 +898,7 @@
                 name="emocional"
                 value="irritable"
                 [(ngModel)]="evaluacionForm.emocional"
+                (change)="verificarEvaluacionIniciada()"
               />
               <span>Frecuentemente irritable o deprimido</span>
             </label>
@@ -837,16 +908,26 @@
                 name="emocional"
                 value="cambios-conducta"
                 [(ngModel)]="evaluacionForm.emocional"
+                (change)="verificarEvaluacionIniciada()"
               />
               <span>Presenta cambios de conducta importantes</span>
             </label>
           </div>
+          <span
+            class="error__mensaje-evaluacion"
+            *ngIf="erroresEvaluacion.emocional"
+          >
+            Por favor selecciona una opción
+          </span>
         </div>
 
         <!-- Pregunta 5 -->
-        <div class="evaluacion__pregunta">
+        <div
+          class="evaluacion__pregunta"
+          [class.evaluacion__pregunta--error]="erroresEvaluacion.condiciones"
+        >
           <label class="pregunta__titulo"
-            >5. Condiciones médicas relevantes</label
+            >5. Condiciones médicas relevantes *</label
           >
           <p class="pregunta__subtitulo">
             ¿Su familiar presenta alguna de estas condiciones? (marque las que
@@ -858,6 +939,7 @@
                 type="checkbox"
                 [(ngModel)]="evaluacionForm.condiciones.hipertension"
                 [ngModelOptions]="{ standalone: true }"
+                (change)="verificarEvaluacionIniciada()"
               />
               <span>Hipertensión</span>
             </label>
@@ -866,6 +948,7 @@
                 type="checkbox"
                 [(ngModel)]="evaluacionForm.condiciones.diabetes"
                 [ngModelOptions]="{ standalone: true }"
+                (change)="verificarEvaluacionIniciada()"
               />
               <span>Diabetes</span>
             </label>
@@ -874,6 +957,7 @@
                 type="checkbox"
                 [(ngModel)]="evaluacionForm.condiciones.dificultadesCaminar"
                 [ngModelOptions]="{ standalone: true }"
+                (change)="verificarEvaluacionIniciada()"
               />
               <span>Dificultades para caminar</span>
             </label>
@@ -882,6 +966,7 @@
                 type="checkbox"
                 [(ngModel)]="evaluacionForm.condiciones.incontinencia"
                 [ngModelOptions]="{ standalone: true }"
+                (change)="verificarEvaluacionIniciada()"
               />
               <span>Incontinencia</span>
             </label>
@@ -890,6 +975,7 @@
                 type="checkbox"
                 [(ngModel)]="evaluacionForm.condiciones.problemasAudicionVision"
                 [ngModelOptions]="{ standalone: true }"
+                (change)="verificarEvaluacionIniciada()"
               />
               <span>Problemas de audición o visión</span>
             </label>
@@ -898,6 +984,7 @@
                 type="checkbox"
                 [(ngModel)]="evaluacionForm.condiciones.postOperatoria"
                 [ngModelOptions]="{ standalone: true }"
+                (change)="verificarEvaluacionIniciada()"
               />
               <span>Recuperación post operatoria</span>
             </label>
@@ -906,16 +993,26 @@
                 type="checkbox"
                 [(ngModel)]="evaluacionForm.condiciones.otra"
                 [ngModelOptions]="{ standalone: true }"
+                (change)="verificarEvaluacionIniciada()"
               />
               <span>Otra</span>
             </label>
           </div>
+          <span
+            class="error__mensaje-evaluacion"
+            *ngIf="erroresEvaluacion.condiciones"
+          >
+            Por favor selecciona al menos una condición
+          </span>
         </div>
 
         <!-- Pregunta 6 -->
-        <div class="evaluacion__pregunta">
+        <div
+          class="evaluacion__pregunta"
+          [class.evaluacion__pregunta--error]="erroresEvaluacion.medicacion"
+        >
           <label class="pregunta__titulo"
-            >6. Medicación y cuidados especiales</label
+            >6. Medicación y cuidados especiales *</label
           >
           <p class="pregunta__subtitulo">
             ¿Requiere supervisión o ayuda con la medicación?
@@ -927,6 +1024,7 @@
                 name="medicacion"
                 value="no"
                 [(ngModel)]="evaluacionForm.medicacion"
+                (change)="verificarEvaluacionIniciada()"
               />
               <span>No</span>
             </label>
@@ -936,6 +1034,7 @@
                 name="medicacion"
                 value="recordatorio"
                 [(ngModel)]="evaluacionForm.medicacion"
+                (change)="verificarEvaluacionIniciada()"
               />
               <span>Sí, recordatorio</span>
             </label>
@@ -945,16 +1044,26 @@
                 name="medicacion"
                 value="administracion-completa"
                 [(ngModel)]="evaluacionForm.medicacion"
+                (change)="verificarEvaluacionIniciada()"
               />
               <span>Sí, administración completa</span>
             </label>
           </div>
+          <span
+            class="error__mensaje-evaluacion"
+            *ngIf="erroresEvaluacion.medicacion"
+          >
+            Por favor selecciona una opción
+          </span>
         </div>
 
         <!-- Pregunta 7 -->
-        <div class="evaluacion__pregunta">
+        <div
+          class="evaluacion__pregunta"
+          [class.evaluacion__pregunta--error]="erroresEvaluacion.motivo"
+        >
           <label class="pregunta__titulo"
-            >7. Motivo principal de la consulta</label
+            >7. Motivo principal de la consulta *</label
           >
           <p class="pregunta__subtitulo">
             ¿Por qué está buscando una residencia para su familiar?
@@ -966,6 +1075,7 @@
                 name="motivo"
                 value="cuidado-permanente"
                 [(ngModel)]="evaluacionForm.motivo"
+                (change)="verificarEvaluacionIniciada()"
               />
               <span>Cuidado permanente</span>
             </label>
@@ -975,6 +1085,7 @@
                 name="motivo"
                 value="recuperacion-temporal"
                 [(ngModel)]="evaluacionForm.motivo"
+                (change)="verificarEvaluacionIniciada()"
               />
               <span>Recuperación temporal / post operatoria</span>
             </label>
@@ -984,6 +1095,7 @@
                 name="motivo"
                 value="centro-dia"
                 [(ngModel)]="evaluacionForm.motivo"
+                (change)="verificarEvaluacionIniciada()"
               />
               <span>Centro de día</span>
             </label>
@@ -993,6 +1105,7 @@
                 name="motivo"
                 value="descanso-cuidador"
                 [(ngModel)]="evaluacionForm.motivo"
+                (change)="verificarEvaluacionIniciada()"
               />
               <span>Descanso del cuidador</span>
             </label>
@@ -1002,10 +1115,17 @@
                 name="motivo"
                 value="otro"
                 [(ngModel)]="evaluacionForm.motivo"
+                (change)="verificarEvaluacionIniciada()"
               />
               <span>Otro</span>
             </label>
           </div>
+          <span
+            class="error__mensaje-evaluacion"
+            *ngIf="erroresEvaluacion.motivo"
+          >
+            Por favor selecciona una opción
+          </span>
         </div>
 
         <!-- Botón continuar -->
@@ -1019,6 +1139,27 @@
         </button>
       </form>
     </div>
+  </div>
+</div>
+
+<!-- Modal de Confirmación -->
+<div
+  class="modal__overlay"
+  *ngIf="mostrarModalConfirmacion"
+  (click)="cerrarModalConfirmacion()"
+>
+  <div class="modal__confirmacion" (click)="$event.stopPropagation()">
+    <div class="confirmacion__icono">
+      <i class="bx bx-check-circle"></i>
+    </div>
+    <h2>¡Solicitud enviada!</h2>
+    <p>Nos contactaremos contigo pronto</p>
+    <button
+      class="btn__cerrar-confirmacion"
+      (click)="cerrarModalConfirmacion()"
+    >
+      Entendido
+    </button>
   </div>
 </div>
 
@@ -1230,7 +1371,7 @@
             ></i>
           </div>
           <div class="faq__respuesta" *ngIf="pregunta.activo">
-            <p>{{ pregunta.respuesta }}</p>
+            <p [innerHTML]="pregunta.respuesta"></p>
           </div>
         </div>
       </div>
@@ -1251,7 +1392,7 @@
             ></i>
           </div>
           <div class="faq__respuesta" *ngIf="pregunta.activo">
-            <p>{{ pregunta.respuesta }}</p>
+            <p [innerHTML]="pregunta.respuesta"></p>
           </div>
         </div>
       </div>
