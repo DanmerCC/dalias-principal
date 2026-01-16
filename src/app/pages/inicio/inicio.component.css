@@ -23,7 +23,7 @@
   display: flex;
   flex-direction: column;
   justify-content: center;
-  gap: 1rem;
+  gap: 1.5rem;
   align-items: center;
 }
 
@@ -64,7 +64,7 @@
 }
 .card__input {
   width: 100%;
-  background-color: #ffffffdd;
+  background-color: #ffffff;
   border-radius: 1.5rem;
   display: flex;
   flex-direction: column;
