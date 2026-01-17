@@ -237,7 +237,7 @@ export class InicioComponent implements OnInit, OnDestroy {
       titulo: 'Misas y Celebraciones Religiosas',
       descripcion:
         'Espacios de recogimiento y acompañamiento espiritual que brindan paz y contención emocional. Estas celebraciones fortalecen la fe, la serenidad y el bienestar interior de los adultos mayores.',
-      imagen: '/actividades5.jpg',
+      imagen: 'https://res.cloudinary.com/dd5mnpde5/image/upload/f_auto,q_auto/v1768668816/MISA_k4alhd.jpg',
       fecha: '24/03/2025',
     },
     {
