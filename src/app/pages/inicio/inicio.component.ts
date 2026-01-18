@@ -108,7 +108,7 @@ interface EvaluacionForm {
         style({ opacity: 0, transform: 'scale(1.05)' }),
         animate(
           '1500ms ease-in-out',
-          style({ opacity: 1, transform: 'scale(1)' })
+          style({ opacity: 1, transform: 'scale(1)' }),
         ),
       ]),
     ]),
@@ -237,7 +237,8 @@ export class InicioComponent implements OnInit, OnDestroy {
       titulo: 'Misas y Celebraciones Religiosas',
       descripcion:
         'Espacios de recogimiento y acompañamiento espiritual que brindan paz y contención emocional. Estas celebraciones fortalecen la fe, la serenidad y el bienestar interior de los adultos mayores.',
-      imagen: 'https://res.cloudinary.com/dd5mnpde5/image/upload/f_auto,q_auto/v1768668816/MISA_k4alhd.jpg',
+      imagen:
+        'https://res.cloudinary.com/dd5mnpde5/image/upload/f_auto,q_auto/v1768668816/MISA_k4alhd.jpg',
       fecha: '24/03/2025',
     },
     {
@@ -346,38 +347,48 @@ export class InicioComponent implements OnInit, OnDestroy {
     },
   ];
 
-preguntasFrecuentes: PreguntaFrecuente[] = [
-  {
-    id: 1,
-    pregunta: '¿Cuándo debería considerar una residencia geriátrica para mi familiar?',
-    respuesta: 'Es recomendable considerar una <strong>residencia geriátrica para adultos mayores</strong> cuando el familiar comienza a necesitar mayor acompañamiento, supervisión, apoyo en actividades diarias o cuando la familia busca mejorar su <strong>calidad de vida</strong>, previniendo riesgos como caídas o aislamiento. <br><br>👉 Revise nuestra guía para elegir la residencia adecuada: <a href="https://goo.su/Lis06yx" target="_blank" rel="noopener noreferrer">https://goo.su/Lis06yx</a>',
-    activo: false,
-  },
-  {
-    id: 2,
-    pregunta: '¿Qué tipo de adultos mayores pueden vivir la experiencia Las Dalias?',
-    respuesta: '<strong>Residencia Las Dalias</strong> está orientada principalmente a adultos mayores independientes o semi dependientes que desean vivir en un entorno cómodo, seguro y acompañado, manteniendo su autonomía y recibiendo apoyo profesional cuando lo necesiten.',
-    activo: false,
-  },
-  {
-    id: 3,
-    pregunta: '¿Cuáles son los servicios de cuidado para un adulto mayor y en qué se diferencian?',
-    respuesta: 'Ofrecemos <strong>residencia permanente, residencia temporal, centro de día, residencia post operatoria</strong> y <strong>consultas geriátricas</strong>, adaptándonos a distintas necesidades.<br><br>Cada servicio se diferencia por el nivel de acompañamiento, duración de la estadía y tipo de cuidado requerido, siempre con un <strong>enfoque personalizado</strong>.',
-    activo: false,
-  },
-  {
-    id: 4,
-    pregunta: '¿Cómo se garantiza la seguridad y el bienestar de los residentes?',
-    respuesta: 'La seguridad del adulto mayor es prioritaria. Contamos con personal de enfermería las 24 horas, monitoreo permanente, protocolos de salud, sistema de emergencias médicas, instalaciones adaptadas y seguimiento geriátrico continuo para actuar de forma rápida y segura ante cualquier situación.',
-    activo: false,
-  },
-  {
-    id: 5,
-    pregunta: '¿Cómo pueden los familiares participar en la vida del residente y cómo es la comunicación con el personal?',
-    respuesta: 'En <strong>Residencia Las Dalias</strong>, la familia participa activamente mediante <strong>visitas, actividades compartidas</strong> y una <strong>comunicación constante y transparente</strong> con el equipo, fortaleciendo la confianza y el bienestar del residente.',
-    activo: false,
-  },
-];
+  preguntasFrecuentes: PreguntaFrecuente[] = [
+    {
+      id: 1,
+      pregunta:
+        '¿Cuándo debería considerar una residencia geriátrica para mi familiar?',
+      respuesta:
+        'Es recomendable considerar una <strong>residencia geriátrica para adultos mayores</strong> cuando el familiar comienza a necesitar mayor acompañamiento, supervisión, apoyo en actividades diarias o cuando la familia busca mejorar su <strong>calidad de vida</strong>, previniendo riesgos como caídas o aislamiento. <br><br>👉 Revise nuestra guía para elegir la residencia adecuada: <a href="https://goo.su/Lis06yx" target="_blank" rel="noopener noreferrer">https://goo.su/Lis06yx</a>',
+      activo: false,
+    },
+    {
+      id: 2,
+      pregunta:
+        '¿Qué tipo de adultos mayores pueden vivir la experiencia Las Dalias?',
+      respuesta:
+        '<strong>Residencia Las Dalias</strong> está orientada principalmente a adultos mayores independientes o semi dependientes que desean vivir en un entorno cómodo, seguro y acompañado, manteniendo su autonomía y recibiendo apoyo profesional cuando lo necesiten.',
+      activo: false,
+    },
+    {
+      id: 3,
+      pregunta:
+        '¿Cuáles son los servicios de cuidado para un adulto mayor y en qué se diferencian?',
+      respuesta:
+        'Ofrecemos <strong>residencia permanente, residencia temporal, centro de día, residencia post operatoria</strong> y <strong>consultas geriátricas</strong>, adaptándonos a distintas necesidades.<br><br>Cada servicio se diferencia por el nivel de acompañamiento, duración de la estadía y tipo de cuidado requerido, siempre con un <strong>enfoque personalizado</strong>.',
+      activo: false,
+    },
+    {
+      id: 4,
+      pregunta:
+        '¿Cómo se garantiza la seguridad y el bienestar de los residentes?',
+      respuesta:
+        'La seguridad del adulto mayor es prioritaria. Contamos con personal de enfermería las 24 horas, monitoreo permanente, protocolos de salud, sistema de emergencias médicas, instalaciones adaptadas y seguimiento geriátrico continuo para actuar de forma rápida y segura ante cualquier situación.',
+      activo: false,
+    },
+    {
+      id: 5,
+      pregunta:
+        '¿Cómo pueden los familiares participar en la vida del residente y cómo es la comunicación con el personal?',
+      respuesta:
+        'En <strong>Residencia Las Dalias</strong>, la familia participa activamente mediante <strong>visitas, actividades compartidas</strong> y una <strong>comunicación constante y transparente</strong> con el equipo, fortaleciendo la confianza y el bienestar del residente.',
+      activo: false,
+    },
+  ];
 
   get preguntasColumna1(): PreguntaFrecuente[] {
     return this.preguntasFrecuentes.filter((_, index) => index % 2 === 0);
@@ -546,17 +557,15 @@ preguntasFrecuentes: PreguntaFrecuente[] = [
     }
   }
 
- toggleAcordeon(id: number): void {
-  this.acordeonItems = this.acordeonItems.map((item) => ({
-    ...item,
-    activo: item.id === id ? !item.activo : false,
-  }));
-  
-  // Cambiar el slide cuando se hace clic
-  this.slideActual = id - 1;
-}
+  toggleAcordeon(id: number): void {
+    this.acordeonItems = this.acordeonItems.map((item) => ({
+      ...item,
+      activo: item.id === id ? !item.activo : false,
+    }));
 
-
+    // Cambiar el slide cuando se hace clic
+    this.slideActual = id - 1;
+  }
 
   siguienteSlide(): void {
     this.slideActual = (this.slideActual + 1) % this.slidesCarrusel.length;
@@ -571,7 +580,7 @@ preguntasFrecuentes: PreguntaFrecuente[] = [
 
   inicializarNoticias(): void {
     const totalPaginas = Math.ceil(
-      this.noticias.length / this.noticiasPorPagina
+      this.noticias.length / this.noticiasPorPagina,
     );
     this.paginasNoticias = Array.from({ length: totalPaginas }, (_, i) => i);
     this.actualizarNoticiasVisibles();
@@ -705,7 +714,7 @@ preguntasFrecuentes: PreguntaFrecuente[] = [
 
     // Limpiar error de condiciones si hay alguna marcada
     const tieneCondiciones = Object.values(
-      this.evaluacionForm.condiciones
+      this.evaluacionForm.condiciones,
     ).some((v) => v === true);
     if (tieneCondiciones) this.erroresEvaluacion.condiciones = false;
   }
@@ -757,7 +766,7 @@ preguntasFrecuentes: PreguntaFrecuente[] = [
 
     // Validar que al menos un checkbox de condiciones esté marcado
     const tieneCondiciones = Object.values(
-      this.evaluacionForm.condiciones
+      this.evaluacionForm.condiciones,
     ).some((v) => v === true);
     if (!tieneCondiciones) {
       this.erroresEvaluacion.condiciones = true;
@@ -785,7 +794,7 @@ preguntasFrecuentes: PreguntaFrecuente[] = [
       // Hacer scroll al primer error
       setTimeout(() => {
         const primerError = document.querySelector(
-          '.evaluacion__pregunta--error'
+          '.evaluacion__pregunta--error',
         );
         if (primerError) {
           primerError.scrollIntoView({ behavior: 'smooth', block: 'center' });
@@ -810,7 +819,7 @@ preguntasFrecuentes: PreguntaFrecuente[] = [
     const ultimoDia = new Date(
       this.anioActual,
       this.mesActual + 1,
-      0
+      0,
     ).getDate();
     const hoy = new Date();
 
@@ -969,7 +978,7 @@ preguntasFrecuentes: PreguntaFrecuente[] = [
 
     // Verificar si hay errores
     const hayErrores = Object.values(this.erroresVisita).some(
-      (error) => error !== ''
+      (error) => error !== '',
     );
 
     if (hayErrores) {
