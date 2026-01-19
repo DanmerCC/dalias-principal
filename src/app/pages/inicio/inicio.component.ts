@@ -137,6 +137,10 @@ export class InicioComponent implements OnInit, OnDestroy {
   ];
   intervaloNosotros: any;
 
+  get esPrimeraImagen(): boolean {
+    return this.imagenActualNosotros === 0;
+  }
+
   // Modal de visita
   mostrarModalConfirmacion = false;
   evaluacionIniciada = false;
@@ -210,28 +214,28 @@ export class InicioComponent implements OnInit, OnDestroy {
       descripcion:
         'La lectura compartida estimula la memoria, el lenguaje y la atención, al mismo tiempo que fomenta la conversación y la conexión social. Un espacio que fortalece la mente y genera bienestar emocional en un entorno cálido y participativo.',
       imagen: '/actividades1.jpg',
-      fecha: '15/03/2025',
+      fecha: 'Desarrollo Cognitivo',
     },
     {
       titulo: 'Pintura y Dibujo Terapéutico',
       descripcion:
         'A través del arte, los adultos mayores expresan emociones, estimulan la creatividad y fortalecen la motricidad fina. Una actividad que relaja, mejora el ánimo y refuerza la autoestima de forma natural.',
       imagen: '/actividades2.png',
-      fecha: '18/03/2025',
+      fecha: 'Desarrollo Motriz',
     },
     {
       titulo: 'Musicoterapia Geriátrica',
       descripcion:
         'La música despierta recuerdos, emociones y sensaciones positivas. Estas sesiones favorecen la comunicación, reducen la ansiedad y generan momentos de conexión emocional, incluso en adultos mayores con deterioro cognitivo.',
       imagen: '/actividades3.png',
-      fecha: '20/03/2025',
+      fecha: 'Desarrollo emocional',
     },
     {
       titulo: 'Meditación y Relajación Guiada',
       descripcion:
         'Momentos de calma diseñados para favorecer la tranquilidad, el descanso y el equilibrio emocional. La relajación guiada ayuda a reducir el estrés y promueve una mejor calidad de vida en el adulto mayor.',
       imagen: '/actividades4.png',
-      fecha: '22/03/2025',
+      fecha: 'Desarrollo del bienestar emocional',
     },
     {
       titulo: 'Misas y Celebraciones Religiosas',
@@ -239,14 +243,14 @@ export class InicioComponent implements OnInit, OnDestroy {
         'Espacios de recogimiento y acompañamiento espiritual que brindan paz y contención emocional. Estas celebraciones fortalecen la fe, la serenidad y el bienestar interior de los adultos mayores.',
       imagen:
         'https://res.cloudinary.com/dd5mnpde5/image/upload/f_auto,q_60,w_1200,c_limit/v1768668816/MISA_k4alhd.jpg',
-      fecha: '24/03/2025',
+      fecha: 'Desarrollo espiritual',
     },
     {
       titulo: 'Momentos Compartidos en Familia',
       descripcion:
         'Celebraciones y encuentros que fortalecen los vínculos afectivos en un entorno seguro y acogedor. Compartir tiempo en familia refuerza la sensación de hogar y el bienestar emocional del adulto mayor.',
-      imagen: '/actividades6.png',
-      fecha: '25/03/2025',
+      imagen: '/actividades6.jpg',
+      fecha: 'Desarrollo socioemocional',
     },
   ];
 
