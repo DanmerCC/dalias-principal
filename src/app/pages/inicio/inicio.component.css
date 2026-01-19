@@ -1,6 +1,6 @@
 .contenedor__slider {
   width: 100%;
-  height: 110vh;
+  height: 120vh;
   z-index: 10;
   margin-top: -8rem;
 }
@@ -193,7 +193,7 @@
 .figure1 {
   position: absolute;
   bottom: -3rem;
-  left: -9rem;
+  left: -10rem;
   width: 19rem;
   z-index: 0;
 }
@@ -215,8 +215,8 @@
 
 .figure4 {
   position: absolute;
-  top: 9rem;
-  right: 33rem;
+  top: -3rem;
+  right: 24rem;
   width: 14rem;
   z-index: 0;
 }
@@ -372,6 +372,7 @@
 .btn__mas-info {
   background: transparent;
   border: 0.125rem solid #d9b756;
+  text-decoration: none;
   color: #d9b756;
   padding: 0.8rem 1.8rem;
   border-radius: 0.5rem;
@@ -402,7 +403,7 @@
 }
 
 .servicio__card {
-  background-color: #aed3da7a;
+  background-color: #d4e7ea;
   border-radius: 1.5rem;
   padding: 1.8rem;
   box-shadow: 0 0.25rem 1.25rem rgba(0, 62, 92, 0.08);
@@ -689,6 +690,10 @@
   margin-bottom: 1rem;
 }
 
+.btn__ver-todas:hover {
+  background: #f0d98a;
+  transform: translateY(-8px) scale(1.05);
+}
 .btn__ver-todas {
   background: #d9b756;
   color: #fff;
@@ -704,10 +709,6 @@
   align-items: center;
   gap: 0.5rem;
   transition: all 0.3s ease;
-}
-
-.btn__ver-todas:hover i {
-  transform: translateX(5px);
 }
 
 .arrows__actividades {
@@ -817,6 +818,9 @@
   box-shadow: 0 0.625rem 2.5rem rgba(0, 62, 92, 0.15);
 }
 
+.nosotros__imagen img:nth-child(1) {
+  object-position: top;
+}
 .nosotros__imagen img {
   width: 100%;
   height: 32rem;
@@ -2390,23 +2394,11 @@ MODAL DE EVALUACIÓN
 .modal__confirmacion {
   background: #fff;
   border-radius: 1.5rem;
-  padding: 3rem 2.5rem;
-  max-width: 400px;
+  padding: 2.5rem 1.5rem;
+  width: 27rem;
   text-align: center;
   animation: slideUp 0.4s ease;
   box-shadow: 0 1rem 3rem rgba(0, 0, 0, 0.3);
-}
-
-.confirmacion__icono {
-  width: 5rem;
-  height: 5rem;
-  background: linear-gradient(135deg, #d9b756 0%, #c9a746 100%);
-  border-radius: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  margin: 0 auto 1.5rem;
-  animation: scaleIn 0.5s ease 0.2s backwards;
 }
 
 @keyframes scaleIn {
@@ -2418,6 +2410,10 @@ MODAL DE EVALUACIÓN
   }
 }
 
+.confirmacion__icono img {
+  width: 10rem;
+  object-fit: contain;
+}
 .confirmacion__icono i {
   font-size: 3rem;
   color: #fff;

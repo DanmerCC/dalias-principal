@@ -238,7 +238,7 @@ export class InicioComponent implements OnInit, OnDestroy {
       descripcion:
         'Espacios de recogimiento y acompañamiento espiritual que brindan paz y contención emocional. Estas celebraciones fortalecen la fe, la serenidad y el bienestar interior de los adultos mayores.',
       imagen:
-        'https://res.cloudinary.com/dd5mnpde5/image/upload/f_auto,q_auto/v1768668816/MISA_k4alhd.jpg',
+        'https://res.cloudinary.com/dd5mnpde5/image/upload/f_auto,q_60,w_1200,c_limit/v1768668816/MISA_k4alhd.jpg',
       fecha: '24/03/2025',
     },
     {
@@ -289,15 +289,18 @@ export class InicioComponent implements OnInit, OnDestroy {
       items: [
         {
           titulo: 'Consulta Geriátrica',
-          descripcion: 'Evaluación integral de la salud.',
+          descripcion:
+            'Evaluación integral de la salud, evaluación integral de la salud.',
         },
         {
           titulo: 'Consulta a Domicilio',
-          descripcion: 'Atención médica en casa.',
+          descripcion:
+            'Atención médica en casa, facilitando un diagnóstico más preciso.',
         },
         {
           titulo: 'Consulta Online',
-          descripcion: 'Seguimiento médico virtual.',
+          descripcion:
+            'Seguimiento médico virtual, ideal para consultas de control',
         },
       ],
     },
@@ -309,15 +312,18 @@ export class InicioComponent implements OnInit, OnDestroy {
       items: [
         {
           titulo: 'Fisioterapia',
-          descripcion: 'Mejora movilidad y equilibrio.',
+          descripcion:
+            'Mejora movilidad y equilibrio, favoreciendo su autonomía y previniendo caídas.',
         },
         {
           titulo: 'Terapia Ocupacional',
-          descripcion: 'Fomenta independencia diaria.',
+          descripcion:
+            'Fomenta independencia diaria, estimulando funciones cognitivas.',
         },
         {
           titulo: 'Spa Geriátrico',
-          descripcion: 'Relajación y bienestar integral.',
+          descripcion:
+            'Relajación y bienestar integral, educen el estrés y mejoran el descanso.',
         },
       ],
     },
@@ -353,7 +359,7 @@ export class InicioComponent implements OnInit, OnDestroy {
       pregunta:
         '¿Cuándo debería considerar una residencia geriátrica para mi familiar?',
       respuesta:
-        'Es recomendable considerar una <strong>residencia geriátrica para adultos mayores</strong> cuando el familiar comienza a necesitar mayor acompañamiento, supervisión, apoyo en actividades diarias o cuando la familia busca mejorar su <strong>calidad de vida</strong>, previniendo riesgos como caídas o aislamiento. <br><br>👉 Revise nuestra guía para elegir la residencia adecuada: <a href="https://goo.su/Lis06yx" target="_blank" rel="noopener noreferrer">https://goo.su/Lis06yx</a>',
+        'Es recomendable considerar una residencia geriátrica para adultos mayores cuando el familiar comienza a necesitar mayor acompañamiento, supervisión, apoyo en actividades diarias o cuando la familia busca mejorar su calidad de vida, previniendo riesgos como caídas o aislamiento. <br><br>👉 Revise nuestra guía para elegir la residencia adecuada: <a href="https://goo.su/Lis06yx" target="_blank" rel="noopener noreferrer">https://goo.su/Lis06yx</a>',
       activo: false,
     },
     {
@@ -361,7 +367,7 @@ export class InicioComponent implements OnInit, OnDestroy {
       pregunta:
         '¿Qué tipo de adultos mayores pueden vivir la experiencia Las Dalias?',
       respuesta:
-        '<strong>Residencia Las Dalias</strong> está orientada principalmente a adultos mayores independientes o semi dependientes que desean vivir en un entorno cómodo, seguro y acompañado, manteniendo su autonomía y recibiendo apoyo profesional cuando lo necesiten.',
+        'Residencia Las Dalias está orientada principalmente a adultos mayores independientes o semi dependientes que desean vivir en un entorno cómodo, seguro y acompañado, manteniendo su autonomía y recibiendo apoyo profesional cuando lo necesiten.',
       activo: false,
     },
     {
@@ -369,7 +375,7 @@ export class InicioComponent implements OnInit, OnDestroy {
       pregunta:
         '¿Cuáles son los servicios de cuidado para un adulto mayor y en qué se diferencian?',
       respuesta:
-        'Ofrecemos <strong>residencia permanente, residencia temporal, centro de día, residencia post operatoria</strong> y <strong>consultas geriátricas</strong>, adaptándonos a distintas necesidades.<br><br>Cada servicio se diferencia por el nivel de acompañamiento, duración de la estadía y tipo de cuidado requerido, siempre con un <strong>enfoque personalizado</strong>.',
+        'Ofrecemos residencia permanente, residencia temporal, centro de día, residencia post operatoria y consultas geriátricas, adaptándonos a distintas necesidades.<br><br>Cada servicio se diferencia por el nivel de acompañamiento, duración de la estadía y tipo de cuidado requerido, siempre con un enfoque personalizado.',
       activo: false,
     },
     {
@@ -385,7 +391,7 @@ export class InicioComponent implements OnInit, OnDestroy {
       pregunta:
         '¿Cómo pueden los familiares participar en la vida del residente y cómo es la comunicación con el personal?',
       respuesta:
-        'En <strong>Residencia Las Dalias</strong>, la familia participa activamente mediante <strong>visitas, actividades compartidas</strong> y una <strong>comunicación constante y transparente</strong> con el equipo, fortaleciendo la confianza y el bienestar del residente.',
+        'En Residencia Las Dalias, la familia participa activamente mediante visitas, actividades compartidas y una comunicación constante y transparente con el equipo, fortaleciendo la confianza y el bienestar del residente.',
       activo: false,
     },
   ];

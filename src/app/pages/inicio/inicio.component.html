@@ -126,10 +126,10 @@
         </div>
       </div>
 
-      <button class="btn__mas-info">
+      <a href="/servicios" class="btn__mas-info">
         Ver todos los servicios
         <i class="fa-solid fa-arrow-right"></i>
-      </button>
+      </a>
     </div>
 
     <!-- Columna derecha -->
@@ -197,7 +197,7 @@
         <h3>Atención centrada en la persona</h3>
         <p
           [innerHTML]="
-            'Cada residente recibe un <strong>plan de cuidado personalizado</strong> adaptado a sus <strong>necesidades físicas, emocionales y cognitivas</strong>, promoviendo autonomía y calidad de vida.'
+            'Cada residente recibe un plan de cuidado personalizado adaptado a sus necesidades físicas, emocionales y cognitivas, promoviendo autonomía y calidad de vida.'
           "
         ></p>
       </div>
@@ -209,7 +209,7 @@
         <h3>Enfoque geriátrico integral</h3>
         <p
           [innerHTML]="
-            'No solo cuidamos, acompañamos profesionalmente. Contamos con <strong>seguimiento médico geriátrico, enfermería permanente y coordinación constante con especialistas</strong>.'
+            'No solo cuidamos, acompañamos profesionalmente. Contamos con seguimiento médico geriátrico, enfermería permanente y coordinación constante con especialistas.'
           "
         ></p>
       </div>
@@ -221,7 +221,7 @@
         <h3>Comunicación y transparencia</h3>
         <p
           [innerHTML]="
-            'Mantenemos a las <strong>familias informadas sobre la evolución, cuidados y bienestar</strong> de su familiar, fortaleciendo <strong>la confianza y la tranquilidad</strong> en todo momento.'
+            'Mantenemos a las familias informadas sobre la evolución, cuidados y bienestar de su familiar, fortaleciendo la confianza y la tranquilidad en todo momento.'
           "
         ></p>
       </div>
@@ -233,7 +233,7 @@
         <h3>Alimentación terapéutica</h3>
         <p
           [innerHTML]="
-            '<strong>Planes nutricionales supervisados, adaptados a patologías y necesidades específicas</strong>, cuidando la salud sin descuidar el gusto y el disfrute de cada comida.'
+            'Planes nutricionales supervisados, adaptados a patologías y necesidades específicas, cuidando la salud sin descuidar el gusto y el disfrute de cada comida.'
           "
         ></p>
       </div>
@@ -245,7 +245,7 @@
         <h3>Integración con la familia</h3>
         <p
           [innerHTML]="
-            '<strong>Facilitamos la participación activa de la familia</strong> en la vida diaria del residente, promoviendo visitas amplias, encuentros familiares y momentos compartidos.'
+            'Facilitamos la participación activa de la familia en la vida diaria del residente, promoviendo visitas amplias, encuentros familiares y momentos compartidos.'
           "
         ></p>
       </div>
@@ -254,10 +254,10 @@
         <div class="card__icono">
           <i class="fa-solid fa-people-group"></i>
         </div>
-        <h3>Vida activa y estimulación integral todos los días</h3>
+        <h3>Vida activa y estimulación integral diaria</h3>
         <p
           [innerHTML]="
-            'Diseñamos rutinas diarias de <strong>estimulación cognitiva, física y emocional</strong>, con actividades significativas que mantienen a los adultos mayores activos, motivados y con propósito, <strong>reduciendo el deterioro funcional</strong> y <strong>mejorando su bienestar integral</strong> en un entorno seguro y acompañante.'
+            'Actividades diarias de estimulación cognitiva, física y emocional que mantienen a los adultos mayores activos, motivados y con bienestar integral, en un entorno seguro y acompañado.'
           "
         ></p>
       </div>
@@ -1150,10 +1150,10 @@
 >
   <div class="modal__confirmacion" (click)="$event.stopPropagation()">
     <div class="confirmacion__icono">
-      <i class="bx bx-check-circle"></i>
+      <img src="/logo_header.png" alt="" />
     </div>
-    <h2>¡Solicitud enviada!</h2>
-    <p>Nos contactaremos contigo pronto</p>
+    <h2>Visita Agendada</h2>
+    <p>En breve te llegará un correo de confirmación</p>
     <button
       class="btn__cerrar-confirmacion"
       (click)="cerrarModalConfirmacion()"
