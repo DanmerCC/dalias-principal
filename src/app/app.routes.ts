@@ -7,6 +7,7 @@ import { ContactanosComponent } from './pages/contactanos/contactanos.component'
 import { BlogComponent } from './pages/blog/blog.component';
 import { ResidenteComponent } from './pages/residente/residente.component';
 import { ActividadesComponent } from './pages/actividades/actividades.component';
+import { PlanesDeEstadiaComponent } from './pages/servicios/planes-de-estadia/planes-de-estadia.component';
 
 export const routes: Routes = [
   {
@@ -19,11 +20,20 @@ export const routes: Routes = [
   },
   {
     path: 'actividades',
-    component: ActividadesComponent
+    component: ActividadesComponent,
   },
   {
     path: 'servicios',
-    component: ServiciosComponent,
+    children: [
+      {
+        path: '',
+        component: ServiciosComponent
+      },
+      {
+        path: 'planes-de-estadia',
+        component: PlanesDeEstadiaComponent
+      }
+    ]
   },
   {
     path: 'trabaja-con-nosotros',
