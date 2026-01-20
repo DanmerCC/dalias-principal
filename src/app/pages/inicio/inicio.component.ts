@@ -294,7 +294,7 @@ export class InicioComponent implements OnInit, OnDestroy {
         {
           titulo: 'Consulta Geriátrica',
           descripcion:
-            'Evaluación integral de la salud, evaluación integral de la salud.',
+            'Evaluación integral de la salud, adaptada a las necesidades del adulto mayor.',
         },
         {
           titulo: 'Consulta a Domicilio',
@@ -327,7 +327,7 @@ export class InicioComponent implements OnInit, OnDestroy {
         {
           titulo: 'Spa Geriátrico',
           descripcion:
-            'Relajación y bienestar integral, educen el estrés y mejoran el descanso.',
+            'Relajación y bienestar integral, reduce el estrés y mejoran el descanso.',
         },
       ],
     },

@@ -1,6 +1,6 @@
 <header class="header">
   <!-- Barra superior -->
-  <div class="cont1_header" *ngIf="!isFixed">
+   <div class="cont1_header" [class.hide]="isFixed">
     <div class="nav1">
       <!-- <a href="/blog">Blog</a>
       <a href="/trabaja-con-nosotros">Trabaja con nosotros</a>
@@ -9,35 +9,35 @@
   </div>
 
   <!-- Header principal -->
-  <div class="cont2_header" [class.fixed]="isFixed">
+     <div class="cont2_header" [class.fixed]="isFixed">
     <nav class="nav2">
       <div class="logo">
-        <a href="/">
+        <a routerLink="/">
           <img src="/logo_header.png" alt="Dalias" />
         </a>
       </div>
 
       <ul class="menu">
         <li *ngIf="showInicio">
-          <a href="/">Inicio</a>
+          <a routerLink="/">Inicio</a>
         </li>
-        <li><a href="/nosotros">Nosotros</a></li>
-        <li><a href="/servicios">Servicios</a></li>
-        <li><a href="/actividades">Actividades</a></li>
+        <li><a routerLink="/nosotros">Nosotros</a></li>
+        <li><a routerLink="/servicios">Servicios</a></li>
+        <li><a routerLink="/actividades">Actividades</a></li>
         <li>
-          <a href="/trabaja-con-nosotros">Trabaja con nosotros</a>
+          <a routerLink="/trabaja-con-nosotros">Trabaja con nosotros</a>
         </li>
-        <li><a href="/contactanos">Contáctanos</a></li>
+        <li><a routerLink="/contactanos">Contáctanos</a></li>
 
         <!-- Enlaces adicionales cuando el header está fijo -->
         <!-- <li *ngIf="isFixed">
-          <a href="/trabaja-con-nosotros">Trabaja con nosotros</a>
+          <a routerLink="/trabaja-con-nosotros">Trabaja con nosotros</a>
         </li>
         <li *ngIf="isFixed">
-          <a href="/blog">Blog</a>
+          <a routerLink="/blog">Blog</a>
         </li> -->
         <li>
-          <a href="/blog">Blog</a>
+          <a routerLink="/blog">Blog</a>
         </li>
       </ul>
 
@@ -51,14 +51,14 @@
           </div>
         </button>
         <!-- Botón Residente (aparece cuando está fijo) -->
-        <!-- <a href="/residente" class="btn-residente" *ngIf="isFixed">
+        <!-- <a routerLink="/residente" class="btn-residente" *ngIf="isFixed">
           <i class="bx bx-user"></i>
           <span
             >Portal <br />
             residente</span
           >
         </a> -->
-        <a href="/residente" class="btn-residente">
+        <a routerLink="/residente" class="btn-residente">
           <i class="bx bx-user"></i>
           <span
             >Portal <br />

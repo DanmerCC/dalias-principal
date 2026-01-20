@@ -1,198 +1,214 @@
-<!-- Hero Section con slider -->
+<!-- Hero Slider -->
 <div class="contenedor__slider">
-  <div
-    class="slider__img"
-    style="background-image: url(&quot;/slider1.png&quot;)"
-  >
+  <div class="slider__img">
     <div class="content__slider">
-      <div class="card__text">
-        <img src="/logo_slider2.png" alt="Las Dalias" />
-        <p>
-          Descubre nuestros <strong>servicios especializados</strong> diseñados
-          para el bienestar integral de nuestros residentes
-        </p>
-      </div>
+      <h1 class="slider__titulo">Nuestros Servicios</h1>
+      <div class="linea__decorativa"></div>
+      <p class="slider__subtitulo">
+        Comprometidos con la excelencia y el bienestar integral del adulto mayor en un entorno de lujo y calidad.
+      </p>
     </div>
   </div>
 </div>
 
-<!-- SECCIÓN 1: Servicios Principales -->
-<section class="seccion__servicios">
-  <div class="servicios__contenedor">
-    <!-- Header -->
-    <div class="servicios__header">
-      <p class="servicios__subtitulo">NUESTROS SERVICIOS</p>
-      <h1 class="servicios__titulo">Atención integral para cada necesidad</h1>
-      <p class="servicios__descripcion">
-        Ofrecemos una amplia gama de servicios especializados para garantizar el
-        bienestar, la salud y la felicidad de nuestros residentes
-      </p>
-    </div>
+<!-- Sección 1: Planes de Estadía (IMAGEN IZQUIERDA - TEXTO DERECHA) -->
+<section class="seccion__servicio">
+  <div class="servicio__contenedor">
+    <div class="servicio__contenido">
+      <div class="servicio__imagen">
+        <img src="/slider1.png" alt="Planes de Estadía" />
+      </div>
 
-    <!-- Grid de Servicios Principales -->
-    <div class="servicios__grid">
-      <div *ngFor="let servicio of serviciosPrincipales" class="servicio__card">
-        <!-- Imagen del servicio -->
-        <div class="servicio__imagen-container">
-          <img [src]="servicio.imagen" [alt]="servicio.titulo" />
-          <div class="servicio__imagen-overlay">
-            <div
-              class="servicio__icono-grande"
-              [style.background]="
-                'linear-gradient(135deg, ' +
-                servicio.color +
-                'ee 0%, ' +
-                servicio.color +
-                'cc 100%)'
-              "
-            >
-              <i [class]="servicio.icono"></i>
+      <div class="servicio__texto">
+        <p class="servicio__subtitulo">PLANES DE ESTADÍA</p>
+        <h2 class="servicio__titulo">
+          Opciones pensadas para cada necesidad
+        </h2>
+        <p class="servicio__descripcion">
+          Ofrecemos diferentes planes de estadía adaptados a las necesidades de
+          cada residente y su familia.
+        </p>
+
+        <div class="servicio__beneficios">
+          <div class="beneficio__item">
+            <i class="fa-solid fa-house-medical"></i>
+            <div>
+              <strong>Residencia Permanente</strong>
+              <span>Hogar definitivo con atención integral 24/7</span>
+            </div>
+          </div>
+
+          <div class="beneficio__item">
+            <i class="fa-solid fa-calendar-check"></i>
+            <div>
+              <strong>Residencia Temporal</strong>
+              <span>Estadías cortas adaptadas a situaciones específicas</span>
+            </div>
+          </div>
+
+          <div class="beneficio__item">
+            <i class="fa-solid fa-sun"></i>
+            <div>
+              <strong>Centro de Día</strong>
+              <span>Cuidado diurno de 8 AM a 5 PM con actividades</span>
             </div>
           </div>
         </div>
 
-        <!-- Contenido del servicio -->
-        <div class="servicio__contenido">
-          <h3>{{ servicio.titulo }}</h3>
-          <p class="servicio__descripcion">{{ servicio.descripcion }}</p>
-
-          <ul class="servicio__detalles">
-            <li *ngFor="let detalle of servicio.detalles">
-              <i
-                class="fa-solid fa-circle-check"
-                [style.color]="servicio.color"
-              ></i>
-              <span>{{ detalle }}</span>
-            </li>
-          </ul>
-
-          <button
-            class="btn__ver-servicio"
-            [style.background]="servicio.color"
-            (click)="irAServicio(servicio.ruta)"
-          >
-            <span>Ver más detalles</span>
-            <i class="fa-solid fa-arrow-right"></i>
-          </button>
-        </div>
+        <a href="/planes" class="btn__servicio">
+          Ver todos los planes
+        </a>
       </div>
     </div>
   </div>
 </section>
 
-<!-- SECCIÓN 2: Procedimiento de Ingreso - REDISEÑADO -->
-<section class="seccion__ingreso">
-  <div class="ingreso__contenedor">
-    <!-- Header -->
-    <div class="ingreso__header">
-      <p class="ingreso__subtitulo">PROCESO DE ADMISIÓN</p>
-      <h2 class="ingreso__titulo">Comienza tu proceso en 3 simples pasos</h2>
-      <p class="ingreso__descripcion">
-        Un proceso transparente y personalizado, diseñado para que tanto el
-        adulto mayor como su familia se sientan acompañados desde el primer
-        contacto
-      </p>
-    </div>
+<!-- Sección 2: Consulta Geriátrica (TEXTO IZQUIERDA - IMAGEN DERECHA) -->
+<section class="seccion__servicio">
+  <div class="servicio__contenedor">
+    <div class="servicio__contenido">
+      <div class="servicio__texto">
+        <p class="servicio__subtitulo">ATENCIÓN MÉDICA ESPECIALIZADA</p>
+        <h2 class="servicio__titulo">Consulta Geriátrica</h2>
+        <p class="servicio__descripcion">
+          Evaluación integral y tratamiento especializado para adultos mayores
+          con enfoque preventivo.
+        </p>
 
-    <!-- Pasos en grid -->
-    <div class="ingreso__pasos">
-      <!-- Paso 1 -->
-      <div class="paso__card">
-        <div class="paso__numero">
-          <i class="fa-solid fa-phone"></i>
-        </div>
-        <div class="paso__contenido">
-          <h3>Contacto Inicial</h3>
-          <p>
-            Agenda una visita o solicita información. Te atenderemos con calidez
-            y profesionalismo para resolver todas tus dudas.
-          </p>
-        </div>
-      </div>
+        <div class="servicio__beneficios">
+          <div class="beneficio__item">
+            <i class="fa-solid fa-stethoscope"></i>
+            <div>
+              <strong>Evaluación Geriátrica Integral</strong>
+              <span>Valoración completa del estado físico, mental y social</span>
+            </div>
+          </div>
 
-      <!-- Paso 2 -->
-      <div class="paso__card">
-        <div class="paso__numero">
-          <i class="fa-solid fa-clipboard-list"></i>
-        </div>
-        <div class="paso__contenido">
-          <h3>Evaluación Personalizada</h3>
-          <p>
-            Realizamos una valoración completa del estado de salud y necesidades
-            del adulto mayor para diseñar el mejor plan de atención.
-          </p>
-        </div>
-      </div>
+          <div class="beneficio__item">
+            <i class="fa-solid fa-notes-medical"></i>
+            <div>
+              <strong>Plan de Cuidados Personalizado</strong>
+              <span>Estrategias terapéuticas adaptadas a cada paciente</span>
+            </div>
+          </div>
 
-      <!-- Paso 3 -->
-      <div class="paso__card">
-        <div class="paso__numero">
-            <i class="fa-solid fa-hand-holding-heart"></i>
-        </div>
-        <div class="paso__contenido">
-          <h3>Bienvenida y Cuidado</h3>
-          <p>
-            Acompañamos al residente desde su llegada, creando un ambiente
-            familiar y acogedor para una adaptación natural.
-          </p>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- SECCIÓN 3: Testimonios -->
-<section class="seccion__testimonios">
-  <div class="testimonios__contenedor">
-    <div class="testimonios__header">
-      <p class="testimonios__subtitulo">EXPERIENCIAS</p>
-      <h2 class="testimonios__titulo">Lo que dicen las familias</h2>
-      <p class="testimonios__descripcion">
-        La satisfacción de nuestras familias es nuestro mayor logro
-      </p>
-    </div>
-
-    <div class="testimonios__grid">
-      <div *ngFor="let testimonio of testimonios" class="testimonio__card">
-        <div class="testimonio__comillas">
-          <i class="fa-solid fa-quote-left"></i>
-        </div>
-
-        <p class="testimonio__texto">{{ testimonio.comentario }}</p>
-
-        <div class="testimonio__autor">
-          <img [src]="testimonio.imagen" [alt]="testimonio.nombre" />
-          <div>
-            <h4>{{ testimonio.nombre }}</h4>
-            <span>{{ testimonio.servicio }}</span>
+          <div class="beneficio__item">
+            <i class="fa-solid fa-user-doctor"></i>
+            <div>
+              <strong>Seguimiento Continuo</strong>
+              <span>Monitoreo regular y ajustes según evolución</span>
+            </div>
           </div>
         </div>
 
-        <div class="testimonio__estrellas">
-          <i class="fa-solid fa-star"></i>
-          <i class="fa-solid fa-star"></i>
-          <i class="fa-solid fa-star"></i>
-          <i class="fa-solid fa-star"></i>
-          <i class="fa-solid fa-star"></i>
-        </div>
+        <a href="/consulta-geriatrica" class="btn__servicio">
+          Conocer más
+        </a>
+      </div>
+
+      <div class="servicio__imagen">
+        <img src="/slider1.png" alt="Consulta Geriátrica" />
       </div>
     </div>
   </div>
 </section>
 
-<!-- SECCIÓN 4: Banner CTA - Agendar Visita -->
-<section class="seccion__cta">
-  <div class="cta__card">
-    <div class="cta__contenido">
-      <h2 class="cta__titulo">Es hora de cuidar a los que más amamos</h2>
-      <p class="cta__subtitulo">
-        Brindamos atención profesional con calidez humana, porque el bienestar
-        de tus seres queridos es nuestra prioridad
-      </p>
-      <button class="btn__cta" (click)="abrirModalVisita()">
-        <i class="fa-solid fa-calendar-check"></i>
-        Agendar visita
-      </button>
+<!-- Sección 3: Terapias y Rehabilitación (IMAGEN IZQUIERDA - TEXTO DERECHA) -->
+<section class="seccion__servicio">
+  <div class="servicio__contenedor">
+    <div class="servicio__contenido">
+      <div class="servicio__imagen">
+        <img src="/slider1.png" alt="Terapias y Rehabilitación" />
+      </div>
+
+      <div class="servicio__texto">
+        <p class="servicio__subtitulo">BIENESTAR INTEGRAL</p>
+        <h2 class="servicio__titulo">Terapias y Rehabilitación</h2>
+        <p class="servicio__descripcion">
+          Programas terapéuticos para mejorar las capacidades físicas,
+          cognitivas y emocionales de nuestros residentes.
+        </p>
+
+        <div class="servicio__beneficios">
+          <div class="beneficio__item">
+            <i class="fa-solid fa-person-walking"></i>
+            <div>
+              <strong>Terapia Física</strong>
+              <span>Ejercicios para mejorar movilidad y equilibrio</span>
+            </div>
+          </div>
+
+          <div class="beneficio__item">
+            <i class="fa-solid fa-brain"></i>
+            <div>
+              <strong>Estimulación Cognitiva</strong>
+              <span>Actividades para mantener memoria y atención</span>
+            </div>
+          </div>
+
+          <div class="beneficio__item">
+            <i class="fa-solid fa-music"></i>
+            <div>
+              <strong>Terapia Recreativa</strong>
+              <span>Actividades musicales y artísticas</span>
+            </div>
+          </div>
+        </div>
+
+        <a href="/terapias" class="btn__servicio">
+          Ver todas las terapias
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Sección 4: Nutrición (TEXTO IZQUIERDA - IMAGEN DERECHA) -->
+<section class="seccion__servicio">
+  <div class="servicio__contenedor">
+    <div class="servicio__contenido">
+      <div class="servicio__texto">
+        <p class="servicio__subtitulo">ALIMENTACIÓN SALUDABLE</p>
+        <h2 class="servicio__titulo">Nutrición Especializada</h2>
+        <p class="servicio__descripcion">
+          Planes alimenticios personalizados que consideran las necesidades y
+          preferencias de cada residente.
+        </p>
+
+        <div class="servicio__beneficios">
+          <div class="beneficio__item">
+            <i class="fa-solid fa-user-nurse"></i>
+            <div>
+              <strong>Evaluación Nutricional</strong>
+              <span>Valoración del estado nutricional individual</span>
+            </div>
+          </div>
+
+          <div class="beneficio__item">
+            <i class="fa-solid fa-bowl-food"></i>
+            <div>
+              <strong>Menús Adaptados</strong>
+              <span>Dietas especiales según condiciones médicas</span>
+            </div>
+          </div>
+
+          <div class="beneficio__item">
+            <i class="fa-solid fa-heart"></i>
+            <div>
+              <strong>Alimentación con Amor</strong>
+              <span>Preparaciones caseras y sabrosas</span>
+            </div>
+          </div>
+        </div>
+
+        <a href="/nutricion" class="btn__servicio">
+          Conocer nuestros menús
+        </a>
+      </div>
+
+      <div class="servicio__imagen">
+        <img src="/slider1.png" alt="Nutrición" />
+      </div>
     </div>
   </div>
 </section>

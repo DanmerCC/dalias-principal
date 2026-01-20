@@ -1,12 +1,12 @@
 import { Component, HostListener } from '@angular/core';
-import { Router, NavigationEnd } from '@angular/router';
+import { Router, NavigationEnd, RouterLink } from '@angular/router';
 import { filter } from 'rxjs/operators';
 import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-header',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, RouterLink],
   templateUrl: './header.component.html',
   styleUrl: './header.component.css'
 })
@@ -24,9 +24,8 @@ export class HeaderComponent {
       });
   }
 
-  @HostListener('window:scroll', [])
-  onWindowScroll() {
-    const scrollY = window.scrollY || document.documentElement.scrollTop;
-    this.isFixed = scrollY > 60;
+  @HostListener('window:scroll')
+  onWindowScroll(): void {
+    this.isFixed = window.scrollY > 10;
   }
 }
