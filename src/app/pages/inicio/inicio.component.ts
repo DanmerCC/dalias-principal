@@ -305,7 +305,7 @@ export class InicioComponent implements OnInit, OnDestroy {
         {
           titulo: 'Consulta Online',
           descripcion:
-            'Seguimiento médico virtual, ideal para consultas de control',
+            'Seguimiento médico virtual, ideal para consultas de control.',
         },
       ],
     },
