@@ -11,6 +11,7 @@ import {
 import { CommonModule, isPlatformBrowser } from '@angular/common';
 import { trigger, transition, style, animate } from '@angular/animations';
 import { FormsModule } from '@angular/forms';
+import { RouterLink } from '@angular/router';
 
 interface AcordeonItem {
   id: number;
@@ -99,7 +100,7 @@ interface EvaluacionForm {
 @Component({
   selector: 'app-inicio',
   standalone: true,
-  imports: [CommonModule, FormsModule],
+  imports: [CommonModule, FormsModule, RouterLink],
   templateUrl: './inicio.component.html',
   styleUrl: './inicio.component.css',
   animations: [
@@ -249,7 +250,7 @@ export class InicioComponent implements OnInit, OnDestroy {
       titulo: 'Momentos Compartidos en Familia',
       descripcion:
         'Celebraciones y encuentros que fortalecen los vínculos afectivos en un entorno seguro y acogedor. Compartir tiempo en familia refuerza la sensación de hogar y el bienestar emocional del adulto mayor.',
-      imagen: '/actividades6.jpg',
+      imagen: 'https://res.cloudinary.com/dd5mnpde5/image/upload/f_auto,q_60,w_1200,c_limit/v1768923380/actividades6_qb1myf.jpg',
       fecha: 'Desarrollo socioemocional',
     },
   ];
@@ -327,7 +328,7 @@ export class InicioComponent implements OnInit, OnDestroy {
         {
           titulo: 'Spa Geriátrico',
           descripcion:
-            'Relajación y bienestar integral, reduce el estrés y mejoran el descanso.',
+            'Relajación y bienestar integral, reduce el estrés y mejora el descanso.',
         },
       ],
     },

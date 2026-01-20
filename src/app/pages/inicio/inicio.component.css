@@ -271,6 +271,21 @@
   z-index: 0;
 }
 
+.figure9{
+  position: absolute;
+  top: -3rem;
+  left: -8rem;
+  width: 16rem;
+  z-index: 0;
+}
+.figure10{
+  position: absolute;
+  bottom: 3rem;
+  right: 0rem;
+  width: 5rem;
+  z-index: 0;
+}
+
 /* Sección innovación */
 .seccion__innovacion {
   position: relative;
@@ -699,6 +714,7 @@
   border: none;
   padding: 1rem 2.5rem;
   border-radius: 2rem;
+  text-decoration: none;
   font-size: 1.05rem;
   font-weight: 600;
   cursor: pointer;
@@ -2432,26 +2448,27 @@ MODAL DE EVALUACIÓN
   margin: 0 0 2rem 0;
 }
 
-.btn__cerrar-confirmacion:hover {
-  background: #f0d98a;
-  transform: translateY(-8px) scale(1.05);
-}
 .btn__cerrar-confirmacion {
-  background: linear-gradient(135deg, #d9b756 0%, #c9a746 100%);
+  background: #d9b756;
   color: #fff;
   border: none;
-  padding: 1rem 3rem;
-  border-radius: 0.8rem;
-  font-size: 1rem;
+  padding: 1rem 2.5rem;
+  border-radius: 2rem;
+  text-decoration: none;
+  font-size: 1.05rem;
   font-weight: 600;
   cursor: pointer;
+  display: inline-flex;
+  justify-content: center;
+  text-align: center;
+  align-items: center;
+  gap: 0.5rem;
   transition: all 0.3s ease;
-  box-shadow: 0 0.25rem 1rem rgba(217, 183, 86, 0.3);
 }
 
 .btn__cerrar-confirmacion:hover {
-  transform: translateY(-3px);
-  box-shadow: 0 0.5rem 1.5rem rgba(217, 183, 86, 0.4);
+  background: #f0d98a;
+  transform: translateY(-8px) scale(1.05);
 }
 
 /* Mensaje de error para evaluación */
@@ -2663,6 +2680,8 @@ MODAL DE EVALUACIÓN
 .seccion__faq {
   width: 100%;
   padding: 6rem 10rem;
+  overflow: hidden;
+  position: relative;
   background: linear-gradient(135deg, #f8f9fa 0%, #ffffff 100%);
 }
 
