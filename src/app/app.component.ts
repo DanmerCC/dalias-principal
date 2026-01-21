@@ -1,8 +1,10 @@
-import { Component, HostListener } from '@angular/core';
-import { RouterOutlet } from '@angular/router';
+import { Component, HostListener, OnInit, OnDestroy } from '@angular/core';
+import { Router, RouterOutlet, NavigationEnd } from '@angular/router';
 import { HeaderComponent } from "./pages/header/header.component";
 import { FooterComponent } from "./pages/footer/footer.component";
 import { CommonModule } from '@angular/common';
+import { Subscription } from 'rxjs';
+import { filter } from 'rxjs/operators';
 
 @Component({
   selector: 'app-root',
@@ -10,9 +12,52 @@ import { CommonModule } from '@angular/common';
   templateUrl: './app.component.html',
   styleUrl: './app.component.css'
 })
-export class AppComponent {
+export class AppComponent implements OnInit, OnDestroy {
   title = 'dalias';
   showScrollButton = false;
+  whatsappLink = 'https://wa.link/58djkj'; // Enlace por defecto
+  
+  private routerSubscription?: Subscription;
+
+  // Mapa de enlaces de WhatsApp por ruta
+  private whatsappLinks: { [key: string]: string } = {
+    '/': 'https://wa.link/58djkj',
+    '/inicio': 'https://wa.link/58djkj',
+    '/servicios': 'https://wa.link/thafd4'
+    // Aquí puedes agregar más rutas en el futuro
+    // '/contacto': 'https://wa.link/otro_enlace',
+    // '/productos': 'https://wa.link/otro_enlace',
+  };
+
+  constructor(private router: Router) {}
+
+  ngOnInit() {
+    // Establecer el enlace inicial
+    this.updateWhatsappLink(this.router.url);
+
+    // Suscribirse a los cambios de ruta
+    this.routerSubscription = this.router.events
+      .pipe(filter(event => event instanceof NavigationEnd))
+      .subscribe((event: any) => {
+        this.updateWhatsappLink(event.urlAfterRedirects);
+      });
+  }
+
+  ngOnDestroy() {
+    // Limpiar la suscripción al destruir el componente
+    if (this.routerSubscription) {
+      this.routerSubscription.unsubscribe();
+    }
+  }
+
+  // Actualizar el enlace de WhatsApp según la ruta actual
+  private updateWhatsappLink(url: string) {
+    // Limpiar la URL de parámetros query y fragmentos
+    const cleanUrl = url.split('?')[0].split('#')[0];
+    
+    // Buscar el enlace correspondiente o usar el por defecto
+    this.whatsappLink = this.whatsappLinks[cleanUrl] || this.whatsappLinks['/'];
+  }
 
   // Detectar el scroll para mostrar/ocultar el botón
   @HostListener('window:scroll', [])

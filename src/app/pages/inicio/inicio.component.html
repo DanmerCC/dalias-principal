@@ -1284,16 +1284,19 @@
           </div>
         </div>
 
-        <form class="formulario__contacto" (ngSubmit)="enviarFormulario()">
+        <form
+          class="formulario__contacto"
+          (ngSubmit)="enviarFormularioContacto()"
+        >
           <!-- Qué busca -->
           <div class="form__grupo">
-            <label class="form__label">¿Qué servicio te interesa?</label>
-
+            <label class="form__label">¿Qué servicio te interesa? *</label>
             <div class="select__wrapper">
               <select
                 class="form__select"
                 name="tipoConsulta"
                 [(ngModel)]="formularioContacto.tipoConsulta"
+                (blur)="validarTipoConsulta()"
                 required
               >
                 <option
@@ -1303,25 +1306,68 @@
                   {{ opcion.label }}
                 </option>
               </select>
-
               <i class="bx bx-chevron-down select__icon"></i>
             </div>
+            <span class="error__mensaje" *ngIf="erroresContacto.tipoConsulta">
+              {{ erroresContacto.tipoConsulta }}
+            </span>
           </div>
 
           <!-- Nombre -->
           <div class="form__grupo">
-            <label class="form__label">Nombre completo</label>
+            <label class="form__label">Nombre completo *</label>
             <input
               type="text"
               class="form__input"
               placeholder="Ingresa tu nombre completo"
               [(ngModel)]="formularioContacto.nombre"
+              (blur)="validarNombreContacto()"
+              (input)="validarNombreContacto()"
               name="nombre"
               required
             />
+            <span class="error__mensaje" *ngIf="erroresContacto.nombre">
+              {{ erroresContacto.nombre }}
+            </span>
           </div>
 
-          <!-- Mensaje -->
+          <!-- Correo -->
+          <div class="form__grupo">
+            <label class="form__label">Correo electrónico *</label>
+            <input
+              type="email"
+              class="form__input"
+              placeholder="ejemplo@correo.com"
+              [(ngModel)]="formularioContacto.correo"
+              (blur)="validarCorreoContacto()"
+              (input)="validarCorreoContacto()"
+              name="correo"
+              required
+            />
+            <span class="error__mensaje" *ngIf="erroresContacto.correo">
+              {{ erroresContacto.correo }}
+            </span>
+          </div>
+
+          <!-- Número de móvil -->
+          <div class="form__grupo">
+            <label class="form__label">Número de móvil *</label>
+            <input
+              type="tel"
+              class="form__input"
+              placeholder="Ej: 987654321"
+              [(ngModel)]="formularioContacto.numeroMovil"
+              (blur)="validarNumeroMovil()"
+              (input)="validarNumeroMovil()"
+              name="numeroMovil"
+              required
+            />
+            <span class="error__mensaje" *ngIf="erroresContacto.numeroMovil">
+              {{ erroresContacto.numeroMovil }}
+            </span>
+          </div>
+
+          <!-- Mensaje (opcional) -->
           <div class="form__grupo">
             <label class="form__label">Mensaje</label>
             <textarea
@@ -1330,7 +1376,6 @@
               rows="5"
               [(ngModel)]="formularioContacto.mensaje"
               name="mensaje"
-              required
             >
             </textarea>
           </div>
@@ -1346,8 +1391,29 @@
   </div>
 </section>
 
+<!-- Modal de Confirmación Contacto -->
+<div
+  class="modal__overlay"
+  *ngIf="mostrarModalConfirmacionContacto"
+  (click)="cerrarModalConfirmacionContacto()"
+>
+  <div class="modal__confirmacion" (click)="$event.stopPropagation()">
+    <div class="confirmacion__icono">
+      <img src="/logo_header.png" alt="" />
+    </div>
+    <h2>¡Solicitud enviada!</h2>
+    <p>Nos contactaremos contigo pronto.</p>
+    <button
+      class="btn__cerrar-confirmacion"
+      (click)="cerrarModalConfirmacionContacto()"
+    >
+      Entendido
+    </button>
+  </div>
+</div>
+
 <!-- Sección Preguntas Frecuentes -->
- <section class="seccion__faq" id="preguntas-frecuentes">
+<section class="seccion__faq" id="preguntas-frecuentes">
   <img src="/figure4.png" class="figure9" />
   <img src="/figure13.png" class="figure10" />
   <div class="faq__contenedor">

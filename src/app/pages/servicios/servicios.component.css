@@ -1,3 +1,6 @@
+/* ============================================
+   HERO SLIDER
+============================================ */
 .contenedor__slider {
   width: 100%;
   height: 100vh;
@@ -7,7 +10,7 @@
 .contenedor__slider .slider__img {
   width: 100%;
   height: 100%;
-  background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url("/slider1.png");
+  background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url("/slider2.jpeg");
   background-size: cover;
   background-position: center;
   display: flex;
@@ -16,7 +19,7 @@
 }
 
 .content__slider {
-  width: 50%;
+  width: 60%;
   padding: 0 2rem;
   display: flex;
   flex-direction: column;
@@ -53,7 +56,7 @@
 }
 
 /* ============================================
-   SECCIONES DE SERVICIOS (estilo uniforme)
+   SECCIONES DE SERVICIOS
 ============================================ */
 .seccion__servicio {
   width: 100%;
@@ -86,69 +89,95 @@
 
 .servicio__subtitulo {
   color: #aed3da;
-  font-size: 0.9rem;
+  font-size: 0.85rem;
   font-weight: 600;
   letter-spacing: 0.1rem;
   text-transform: uppercase;
-  margin: 0 0 1rem 0;
+  margin: 0 0 0.8rem 0;
 }
 
 .servicio__titulo {
   color: #003e5c;
-  font-size: 2.8rem;
+  font-size: 2.5rem;
   font-weight: 400;
-  line-height: 1.3;
-  margin: 0 0 1rem 0;
+  line-height: 1.2;
+  margin: 0 0 0.8rem 0;
 }
 
 .servicio__descripcion {
   color: #666;
-  font-size: 1.05rem;
-  line-height: 1.7;
-  margin: 0 0 2rem 0;
+  font-size: 1rem;
+  line-height: 1.6;
+  margin: 0 0 1.5rem 0;
 }
 
-.servicio__beneficios {
-  display: flex;
-  flex-direction: column;
-  gap: 1.2rem;
+/* ============================================
+   GRID DE PLANES (Más compacto)
+============================================ */
+.planes__grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 0.9rem;
+  margin-bottom: 1.5rem;
 }
 
-.beneficio__item {
-  display: flex;
-  gap: 1rem;
-  align-items: start;
-  padding: 1.2rem;
-  background: rgba(174, 211, 218, 0.1);
-  border-radius: 1rem;
+.plan__card {
+  background: rgba(174, 211, 218, 0.05);
+  border: 1px solid rgba(174, 211, 218, 0.2);
+  border-radius: 0.9rem;
+  padding: 1.1rem;
   transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
 }
 
-.beneficio__item:hover {
-  background: rgba(174, 211, 218, 0.2);
-  transform: translateX(0.5rem);
+.plan__card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 3px;
+  height: 0;
+  background: linear-gradient(180deg, #d9b756, #aed3da);
+  transition: height 0.3s ease;
 }
 
-.beneficio__item i {
-  font-size: 2rem;
+.plan__card:hover {
+  background: rgba(174, 211, 218, 0.1);
+  border-color: rgba(217, 183, 86, 0.4);
+  transform: translateY(-3px);
+  box-shadow: 0 8px 20px rgba(0, 62, 92, 0.08);
+}
+
+.plan__card:hover::before {
+  height: 100%;
+}
+
+.plan__card i {
+  font-size: 1.7rem;
   color: #d9b756;
-  flex-shrink: 0;
-}
-
-.beneficio__item strong {
-  color: #003e5c;
-  font-size: 1.05rem;
-  font-weight: 600;
+  margin-bottom: 0.8rem;
   display: block;
-  margin-bottom: 0.3rem;
 }
 
-.beneficio__item span {
+.plan__card h3 {
+  color: #003e5c;
+  font-size: 1rem;
+  font-weight: 600;
+  margin: 0 0 0.4rem 0;
+  line-height: 1.3;
+}
+
+.plan__card p {
   color: #666;
-  font-size: 0.9rem;
-  line-height: 1.5;
+  font-size: 0.85rem;
+  line-height: 1.4;
+  margin: 0;
 }
 
+/* ============================================
+   IMAGEN DE SERVICIO
+============================================ */
 .servicio__imagen {
   flex: 1;
   position: relative;
@@ -159,7 +188,7 @@
 
 .servicio__imagen img {
   width: 100%;
-  height: 35rem;
+  height: 33rem;
   object-fit: cover;
   display: block;
   transition: transform 0.5s ease;
@@ -169,22 +198,23 @@
   transform: scale(1.05);
 }
 
-/* Botón de servicio */
+/* ============================================
+   BOTÓN DE SERVICIO
+============================================ */
 .btn__servicio {
   background: transparent;
   border: 0.125rem solid #d9b756;
   text-decoration: none;
   color: #d9b756;
-  padding: 0.9rem 2rem;
+  padding: 0.85rem 1.8rem;
   border-radius: 2rem;
-  font-size: 1rem;
+  font-size: 0.95rem;
   font-weight: 600;
   cursor: pointer;
   display: inline-flex;
   align-items: center;
   gap: 0.5rem;
   transition: all 0.3s ease;
-  margin-top: 1.5rem;
   width: fit-content;
 }
 
@@ -194,17 +224,350 @@
   transform: translateY(-0.2rem);
 }
 
+/* ============================================
+   SECCIÓN POR QUÉ ELEGIRNOS
+============================================ */
+.seccion__porque__elegirnos {
+  width: 100%;
+  padding: 6rem 10rem;
+  background: #f8f9fa;
+  position: relative;
+  overflow: hidden;
+}
+
+.porque__elegirnos__contenedor {
+  max-width: 1400px;
+  margin: 0 auto;
+  position: relative;
+  z-index: 1;
+}
+
+.porque__elegirnos__contenido {
+  display: flex;
+  gap: 6rem;
+  align-items: center;
+}
+
+/* ============================================
+   IMAGEN
+============================================ */
+.porque__elegirnos__imagen {
+  width: 42%;
+}
+
+.porque__elegirnos__imagen img {
+  width: 100%;
+  height: 32rem;
+  object-fit: cover;
+  display: block;
+  border-radius: 2rem;
+  transition: transform 0.5s ease;
+}
+
+.porque__elegirnos__imagen:hover img {
+  transform: scale(1.03);
+}
+
+/* ============================================
+   TEXTO Y CONTENIDO
+============================================ */
+.porque__elegirnos__texto {
+  flex: 1;
+}
+
+.porque__elegirnos__titulo {
+  color: #003e5c;
+  font-size: 2.5rem;
+  font-weight: 300;
+  line-height: 1.3;
+  margin: 0 0 2.5rem 0;
+}
+
+.titulo__destacado {
+  color: #d9b756;
+  font-weight: 600;
+}
+
+/* ============================================
+   LISTA DE RAZONES - ESTILO MINIMALISTA
+============================================ */
+.razones__lista {
+  display: flex;
+  flex-direction: column;
+  gap: 1.2rem;
+  margin-bottom: 3rem;
+  padding-left: 1rem;
+  border-left: 0.125rem solid rgba(174, 211, 218, 0.3);
+}
+
+.razon__item {
+  display: flex;
+  gap: 1.5rem;
+  align-items: flex-start;
+  padding: 0;
+  position: relative;
+  transition: all 0.3s ease;
+}
+
+.razon__item::before {
+  content: '';
+  position: absolute;
+  left: -1.0625rem;
+  top: 0.4rem;
+  width: 0.5rem;
+  height: 0.5rem;
+  background: #d9b756;
+  border-radius: 50%;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.razon__item:hover::before {
+  opacity: 1;
+}
+
+.razon__numero {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: #aed3da;
+  line-height: 1;
+  min-width: 2.5rem;
+  transition: color 0.3s ease;
+}
+
+.razon__item:hover .razon__numero {
+  color: #d9b756;
+}
+
+.razon__item h3 {
+  color: #666;
+  font-size: 1.05rem;
+  font-weight: 400;
+  margin: 0;
+  line-height: 1.5;
+  transition: color 0.3s ease;
+}
+
+.razon__item:hover h3 {
+  color: #003e5c;
+}
+
+/* ============================================
+   BOTÓN
+============================================ */
+.btn__conocenos {
+  background: #d9b756;
+  border: none;
+  text-decoration: none;
+  color: #fff;
+  padding: 1rem 2.5rem;
+  border-radius: 0;
+  font-size: 0.95rem;
+  font-weight: 700;
+  letter-spacing: 0.05rem;
+  text-transform: uppercase;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.8rem;
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.btn__conocenos::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: #003e5c;
+  transition: left 0.3s ease;
+  z-index: -1;
+}
+
+.btn__conocenos:hover {
+  transform: translateX(0.5rem);
+}
+
+.btn__conocenos:hover::before {
+  left: 0;
+}
+
+.btn__conocenos i {
+  transition: transform 0.3s ease;
+}
+
+.btn__conocenos:hover i {
+  transform: translateX(0.3rem);
+}
+
+/* CTA final */
+
+.seccion__faq{
+   width: 100%;
+  padding: 6rem 10rem;
+}
+.faq__cta {
+  max-width: 1400px;
+  margin: auto;
+  background: linear-gradient(135deg, #003e5c 0%, #1a4d6d 100%);
+  border-radius: 1.5rem;
+  padding: 2.5rem 2rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 2rem;
+  box-shadow: 0 0.5rem 2rem rgba(0, 62, 92, 0.2);
+  position: relative;
+  overflow: hidden;
+}
+
+.faq__cta::before {
+  content: "";
+  position: absolute;
+  top: -50%;
+  right: -10%;
+  width: 15rem;
+  height: 15rem;
+  background: radial-gradient(
+    circle,
+    rgba(217, 183, 86, 0.15) 0%,
+    transparent 70%
+  );
+  border-radius: 50%;
+}
+
+.faq__cta-contenido {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+  flex: 1;
+  position: relative;
+  z-index: 1;
+}
+
+.faq__cta-contenido i {
+  font-size: 3.5rem;
+  color: #d9b756;
+  flex-shrink: 0;
+}
+
+.faq__cta-contenido h3 {
+  color: #fff;
+  font-size: 1.5rem;
+  font-weight: 600;
+  margin: 0 0 0.3rem 0;
+  line-height: 1.3;
+}
+
+.faq__cta-contenido p {
+  color: rgba(255, 255, 255, 0.9);
+  font-size: 1rem;
+  margin: 0;
+}
+
+.btn__faq-contacto {
+  background: #d9b756;
+  color: #fff;
+  text-decoration: none;
+  border: none;
+  padding: 1.1rem 2.5rem;
+  border-radius: 3rem;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  transition: all 0.3s ease;
+  box-shadow: 0 0.3rem 1rem rgba(217, 183, 86, 0.3);
+  position: relative;
+  z-index: 1;
+  white-space: nowrap;
+}
+
+.btn__faq-contacto:hover {
+  background: #e0c066;
+  transform: translateY(-0.2rem);
+  box-shadow: 0 0.5rem 1.5rem rgba(217, 183, 86, 0.4);
+}
+
+.btn__faq-contacto i {
+  font-size: 1.3rem;
+  transition: transform 0.3s ease;
+}
+
+.btn__faq-contacto:hover i {
+  transform: translateX(0.3rem);
+}
+
 /* ===============================
-   ANIMACIONES
+   MEDIA QUERIES
 ================================ */
-@keyframes fadeInUp {
-  from {
-    opacity: 0;
-    transform: translateY(1.875rem);
+
+@media (max-width: 768px) {
+  .seccion__porque__elegirnos {
+    padding: 4rem 2rem;
   }
-  to {
-    opacity: 1;
-    transform: translateY(0);
+
+  .porque__elegirnos__contenido {
+    flex-direction: column;
+    gap: 3rem;
+  }
+
+  .porque__elegirnos__imagen {
+    flex: 1;
+    width: 100%;
+  }
+
+  .porque__elegirnos__imagen img {
+    height: 28rem;
+  }
+
+  .porque__elegirnos__titulo {
+    font-size: 2rem;
+  }
+
+  .razones__lista {
+    gap: 1rem;
+  }
+
+  .razon__item h3 {
+    font-size: 0.95rem;
+  }
+}
+
+@media (max-width: 680px) {
+  .seccion__porque__elegirnos {
+    padding: 3rem 1rem;
+  }
+
+  .porque__elegirnos__imagen img {
+    height: 22rem;
+  }
+
+  .porque__elegirnos__titulo {
+    font-size: 1.7rem;
+    margin-bottom: 2rem;
+  }
+
+  .razon__numero {
+    font-size: 1.3rem;
+    min-width: 2rem;
+  }
+
+  .razon__item h3 {
+    font-size: 0.9rem;
+    line-height: 1.4;
+  }
+
+  .btn__conocenos {
+    width: 100%;
+    justify-content: center;
+    padding: 0.9rem 2rem;
+    font-size: 0.85rem;
   }
 }
 
@@ -246,12 +609,25 @@
     height: 20rem;
   }
 
-  .beneficio__item {
+  .planes__grid {
+    grid-template-columns: 1fr;
+    gap: 0.8rem;
+  }
+
+  .plan__card {
     padding: 1rem;
   }
 
-  .beneficio__item i {
+  .plan__card i {
     font-size: 1.5rem;
+  }
+
+  .plan__card h3 {
+    font-size: 0.95rem;
+  }
+
+  .plan__card p {
+    font-size: 0.8rem;
   }
 }
 
@@ -284,20 +660,19 @@
     height: 15rem;
   }
 
-  .beneficio__item {
-    padding: 0.8rem;
-    gap: 0.8rem;
+  .plan__card {
+    padding: 0.9rem;
   }
 
-  .beneficio__item i {
-    font-size: 1.3rem;
+  .plan__card i {
+    font-size: 1.4rem;
   }
 
-  .beneficio__item strong {
-    font-size: 0.95rem;
+  .plan__card h3 {
+    font-size: 0.9rem;
   }
 
-  .beneficio__item span {
-    font-size: 0.85rem;
+  .plan__card p {
+    font-size: 0.75rem;
   }
 }

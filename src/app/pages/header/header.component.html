@@ -1,6 +1,6 @@
 <header class="header">
   <!-- Barra superior -->
-   <div class="cont1_header" [class.hide]="isFixed">
+  <div class="cont1_header" [class.hide]="isFixed">
     <div class="nav1">
       <!-- <a href="/blog">Blog</a>
       <a href="/trabaja-con-nosotros">Trabaja con nosotros</a>
@@ -9,7 +9,7 @@
   </div>
 
   <!-- Header principal -->
-     <div class="cont2_header" [class.fixed]="isFixed">
+  <div class="cont2_header" [class.fixed]="isFixed">
     <nav class="nav2">
       <div class="logo">
         <a routerLink="/">
@@ -43,13 +43,18 @@
 
       <div class="header-actions">
         <!-- Botón de contacto -->
-        <button class="btn_header">
+        <a
+          href="https://wa.link/iv575a"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="btn_header"
+        >
           <i class="bx bx-phone"></i>
           <div class="contact_header">
             <span>+51 981 776 156</span>
             ¿Alguna duda? Contáctanos
           </div>
-        </button>
+        </a>
         <!-- Botón Residente (aparece cuando está fijo) -->
         <!-- <a routerLink="/residente" class="btn-residente" *ngIf="isFixed">
           <i class="bx bx-user"></i>

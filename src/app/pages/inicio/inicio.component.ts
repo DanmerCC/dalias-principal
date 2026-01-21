@@ -44,6 +44,15 @@ interface FormularioContacto {
   tipoConsulta: string;
   mensaje: string;
   nombre: string;
+  correo: string;
+  numeroMovil: string;
+}
+
+interface ErroresContacto {
+  tipoConsulta: string;
+  nombre: string;
+  correo: string;
+  numeroMovil: string;
 }
 
 interface PreguntaFrecuente {
@@ -250,7 +259,8 @@ export class InicioComponent implements OnInit, OnDestroy {
       titulo: 'Momentos Compartidos en Familia',
       descripcion:
         'Celebraciones y encuentros que fortalecen los vínculos afectivos en un entorno seguro y acogedor. Compartir tiempo en familia refuerza la sensación de hogar y el bienestar emocional del adulto mayor.',
-      imagen: 'https://res.cloudinary.com/dd5mnpde5/image/upload/f_auto,q_60,w_1200,c_limit/v1768923380/actividades6_qb1myf.jpg',
+      imagen:
+        'https://res.cloudinary.com/dd5mnpde5/image/upload/f_auto,q_60,w_1200,c_limit/v1768923380/actividades6_qb1myf.jpg',
       fecha: 'Desarrollo socioemocional',
     },
   ];
@@ -487,7 +497,6 @@ export class InicioComponent implements OnInit, OnDestroy {
     this.detenerCarruselNosotros();
   }
 
-  // Agrega este nuevo método ANTES de iniciarCarruselNosotros
   precargarImagenes(): void {
     if (isPlatformBrowser(this.platformId)) {
       let imagenesPreCargadas = 0;
@@ -497,7 +506,6 @@ export class InicioComponent implements OnInit, OnDestroy {
         const img = new Image();
         img.onload = () => {
           imagenesPreCargadas++;
-          // Cuando todas las imágenes estén cargadas, inicia el carrusel
           if (imagenesPreCargadas === totalImagenes) {
             this.iniciarCarruselNosotros();
           }
@@ -505,7 +513,6 @@ export class InicioComponent implements OnInit, OnDestroy {
         img.onerror = () => {
           imagenesPreCargadas++;
           console.error(`Error cargando imagen: ${src}`);
-          // Aún así inicia el carrusel si todas las imágenes se procesaron
           if (imagenesPreCargadas === totalImagenes) {
             this.iniciarCarruselNosotros();
           }
@@ -533,7 +540,6 @@ export class InicioComponent implements OnInit, OnDestroy {
     }
   }
 
-  // Métodos del carrusel de actividades
   siguienteActividad(): void {
     if (this.slideActualActividades < this.actividadesConFinal.length - 1) {
       this.slideActualActividades++;
@@ -640,20 +646,112 @@ export class InicioComponent implements OnInit, OnDestroy {
     tipoConsulta: 'informacion-general',
     mensaje: '',
     nombre: '',
+    correo: '',
+    numeroMovil: '',
   };
 
-  enviarFormulario(): void {
-    if (this.formularioContacto.nombre && this.formularioContacto.mensaje) {
-      console.log('Formulario enviado:', this.formularioContacto);
-      alert('Gracias por contactarnos. Pronto nos comunicaremos con usted.');
-      this.formularioContacto = {
-        tipoConsulta: 'residencia-permanente',
-        mensaje: '',
-        nombre: '',
-      };
-    } else {
-      alert('Por favor complete todos los campos requeridos.');
+  // AGREGAR errores de validación
+  erroresContacto: ErroresContacto = {
+    tipoConsulta: '',
+    nombre: '',
+    correo: '',
+    numeroMovil: '',
+  };
+
+  enviarFormularioContacto(): void {
+    // Ejecutar todas las validaciones
+    this.validarTipoConsulta();
+    this.validarNombreContacto();
+    this.validarCorreoContacto();
+    this.validarNumeroMovil();
+
+    // Verificar si hay errores
+    const hayErrores = Object.values(this.erroresContacto).some(
+      (error) => error !== '',
+    );
+
+    if (hayErrores) {
+      return;
     }
+
+    // Si no hay errores, mostrar modal de confirmación
+    console.log('Formulario de contacto enviado:', this.formularioContacto);
+    this.mostrarModalConfirmacionContacto = true;
+  }
+
+  mostrarModalConfirmacionContacto = false;
+
+  // AGREGAR métodos de validación
+  validarTipoConsulta(): void {
+    if (!this.formularioContacto.tipoConsulta) {
+      this.erroresContacto.tipoConsulta = 'Selecciona un servicio';
+    } else {
+      this.erroresContacto.tipoConsulta = '';
+    }
+  }
+
+  validarNombreContacto(): void {
+    const valor = this.formularioContacto.nombre.trim();
+    if (!valor) {
+      this.erroresContacto.nombre = 'El nombre es obligatorio';
+    } else if (valor.length < 3) {
+      this.erroresContacto.nombre = 'Debe tener al menos 3 caracteres';
+    } else if (!/^[a-záéíóúñ\s]+$/i.test(valor)) {
+      this.erroresContacto.nombre = 'Solo se permiten letras y espacios';
+    } else {
+      this.erroresContacto.nombre = '';
+    }
+  }
+
+  validarCorreoContacto(): void {
+    const valor = this.formularioContacto.correo.trim();
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+    if (!valor) {
+      this.erroresContacto.correo = 'El correo electrónico es obligatorio';
+    } else if (!emailRegex.test(valor)) {
+      this.erroresContacto.correo = 'Ingresa un correo electrónico válido';
+    } else {
+      this.erroresContacto.correo = '';
+    }
+  }
+
+  validarNumeroMovil(): void {
+    const valor = this.formularioContacto.numeroMovil.trim();
+    // Solo números, puede tener 9 dígitos (Perú) o más dependiendo del país
+    const telRegex = /^[0-9]{9,15}$/;
+
+    if (!valor) {
+      this.erroresContacto.numeroMovil = 'El número de móvil es obligatorio';
+    } else if (!/^[0-9]+$/.test(valor)) {
+      this.erroresContacto.numeroMovil = 'Solo se permiten números';
+    } else if (!telRegex.test(valor)) {
+      this.erroresContacto.numeroMovil =
+        'Ingresa un número válido (9-15 dígitos)';
+    } else {
+      this.erroresContacto.numeroMovil = '';
+    }
+  }
+
+  // AGREGAR método para cerrar modal de confirmación
+  cerrarModalConfirmacionContacto(): void {
+    this.mostrarModalConfirmacionContacto = false;
+
+    // Limpiar formulario
+    this.formularioContacto = {
+      tipoConsulta: 'informacion-general',
+      mensaje: '',
+      nombre: '',
+      correo: '',
+      numeroMovil: '',
+    };
+
+    this.erroresContacto = {
+      tipoConsulta: '',
+      nombre: '',
+      correo: '',
+      numeroMovil: '',
+    };
   }
 
   abrirModalVisita(): void {
@@ -667,7 +765,6 @@ export class InicioComponent implements OnInit, OnDestroy {
     document.body.style.overflow = 'auto';
   }
 
-  // Métodos para la evaluación
   toggleEvaluacion(): void {
     if (this.mostrarEvaluacion) {
       this.cerrarModalVisita();
@@ -690,7 +787,6 @@ export class InicioComponent implements OnInit, OnDestroy {
     }, 300);
   }
 
-  // Método completo para verificar si se inició la evaluación
   verificarEvaluacionIniciada(): void {
     const tieneRespuestas =
       this.evaluacionForm.movilidad !== '' ||
@@ -703,13 +799,11 @@ export class InicioComponent implements OnInit, OnDestroy {
 
     this.evaluacionIniciada = tieneRespuestas;
 
-    // Limpiar errores si se está llenando
     if (tieneRespuestas) {
       this.limpiarErroresEvaluacion();
     }
   }
 
-  // Modificar el método limpiarErroresEvaluacion
   limpiarErroresEvaluacion(): void {
     if (this.evaluacionForm.movilidad !== '')
       this.erroresEvaluacion.movilidad = false;
@@ -723,20 +817,17 @@ export class InicioComponent implements OnInit, OnDestroy {
     if (this.evaluacionForm.motivo !== '')
       this.erroresEvaluacion.motivo = false;
 
-    // Limpiar error de condiciones si hay alguna marcada
     const tieneCondiciones = Object.values(
       this.evaluacionForm.condiciones,
     ).some((v) => v === true);
     if (tieneCondiciones) this.erroresEvaluacion.condiciones = false;
   }
 
-  // Método completo para validar la evaluación
   validarEvaluacionCompleta(): boolean {
     if (!this.evaluacionIniciada) {
-      return true; // Si no se inició, no es obligatorio
+      return true;
     }
 
-    // Resetear errores
     this.erroresEvaluacion = {
       movilidad: false,
       avd: false,
@@ -747,7 +838,6 @@ export class InicioComponent implements OnInit, OnDestroy {
       condiciones: false,
     };
 
-    // Si se inició, marcar campos faltantes
     let esValido = true;
 
     if (this.evaluacionForm.movilidad === '') {
@@ -775,7 +865,6 @@ export class InicioComponent implements OnInit, OnDestroy {
       esValido = false;
     }
 
-    // Validar que al menos un checkbox de condiciones esté marcado
     const tieneCondiciones = Object.values(
       this.evaluacionForm.condiciones,
     ).some((v) => v === true);
@@ -787,11 +876,9 @@ export class InicioComponent implements OnInit, OnDestroy {
     return esValido;
   }
 
-  // Método completo guardarEvaluacionYContinuar (REEMPLAZAR)
   guardarEvaluacionYContinuar(): void {
     this.verificarEvaluacionIniciada();
 
-    // Si no se inició la evaluación, solo cerrar el modal sin marcar el check
     if (!this.evaluacionIniciada) {
       this.mostrarModalEvaluacion = false;
       setTimeout(() => {
@@ -800,9 +887,7 @@ export class InicioComponent implements OnInit, OnDestroy {
       return;
     }
 
-    // Si se inició pero no está completa, mostrar errores
     if (!this.validarEvaluacionCompleta()) {
-      // Hacer scroll al primer error
       setTimeout(() => {
         const primerError = document.querySelector(
           '.evaluacion__pregunta--error',
@@ -816,7 +901,6 @@ export class InicioComponent implements OnInit, OnDestroy {
 
     console.log('Evaluación guardada:', this.evaluacionForm);
 
-    // Marcar el checkbox como completado SOLO si está completa
     this.mostrarEvaluacion = true;
 
     this.mostrarModalEvaluacion = false;
@@ -899,7 +983,6 @@ export class InicioComponent implements OnInit, OnDestroy {
     this.formularioVisita.horaSeleccionada = hora;
   }
 
-  // Método completo para validar el campo de nombre
   validarNombreApellido(): void {
     const valor = this.formularioVisita.nombreApellido.trim();
     if (!valor) {
@@ -913,7 +996,6 @@ export class InicioComponent implements OnInit, OnDestroy {
     }
   }
 
-  // Método completo para validar el correo electrónico
   validarCorreoElectronico(): void {
     const valor = this.formularioVisita.correoElectronico.trim();
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
@@ -929,7 +1011,6 @@ export class InicioComponent implements OnInit, OnDestroy {
     }
   }
 
-  // Método completo para validar la edad
   validarEdadAdultoMayor(): void {
     const valor = this.formularioVisita.edadAdultoMayor;
     const edad = parseInt(valor);
@@ -947,7 +1028,6 @@ export class InicioComponent implements OnInit, OnDestroy {
     }
   }
 
-  // Método completo para validar el nivel de dependencia
   validarNivelDependencia(): void {
     if (!this.formularioVisita.nivelDependencia) {
       this.erroresVisita.nivelDependencia =
@@ -957,7 +1037,6 @@ export class InicioComponent implements OnInit, OnDestroy {
     }
   }
 
-  // Método completo para validar la fecha seleccionada
   validarFechaSeleccionada(): void {
     if (!this.formularioVisita.fechaSeleccionada) {
       this.erroresVisita.fechaSeleccionada =
@@ -967,7 +1046,6 @@ export class InicioComponent implements OnInit, OnDestroy {
     }
   }
 
-  // Método completo para validar la hora seleccionada
   validarHoraSeleccionada(): void {
     if (!this.formularioVisita.horaSeleccionada) {
       this.erroresVisita.horaSeleccionada =
@@ -977,9 +1055,7 @@ export class InicioComponent implements OnInit, OnDestroy {
     }
   }
 
-  // Reemplazar completamente el método enviarSolicitudVisita
   enviarSolicitudVisita(): void {
-    // Validar todos los campos
     this.validarNombreApellido();
     this.validarCorreoElectronico();
     this.validarEdadAdultoMayor();
