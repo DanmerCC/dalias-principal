@@ -8,6 +8,11 @@ import {
   ViewChild,
   ElementRef,
 } from '@angular/core';
+import {
+  HttpClient,
+  HttpClientModule,
+  HttpHeaders,
+} from '@angular/common/http';
 import { CommonModule, isPlatformBrowser } from '@angular/common';
 import { trigger, transition, style, animate } from '@angular/animations';
 import { FormsModule } from '@angular/forms';
@@ -109,7 +114,7 @@ interface EvaluacionForm {
 @Component({
   selector: 'app-inicio',
   standalone: true,
-  imports: [CommonModule, FormsModule, RouterLink],
+  imports: [CommonModule, FormsModule, RouterLink, HttpClientModule],
   templateUrl: './inicio.component.html',
   styleUrl: './inicio.component.css',
   animations: [
@@ -269,7 +274,10 @@ export class InicioComponent implements OnInit, OnDestroy {
     return [...this.actividades, { final: true }];
   }
 
-  constructor(@Inject(PLATFORM_ID) private platformId: Object) {}
+  constructor(
+    @Inject(PLATFORM_ID) private platformId: Object,
+    private http: HttpClient,
+  ) {}
 
   slidesCarrusel: SlideItem[] = [
     {
@@ -981,6 +989,14 @@ export class InicioComponent implements OnInit, OnDestroy {
 
   seleccionarHora(hora: string): void {
     this.formularioVisita.horaSeleccionada = hora;
+
+    // Verificar disponibilidad si ya hay fecha seleccionada
+    if (this.formularioVisita.fechaSeleccionada) {
+      this.verificarDisponibilidadAPI(
+        this.formularioVisita.fechaSeleccionada,
+        hora,
+      );
+    }
   }
 
   validarNombreApellido(): void {
@@ -1056,6 +1072,7 @@ export class InicioComponent implements OnInit, OnDestroy {
   }
 
   enviarSolicitudVisita(): void {
+    // Validar todos los campos
     this.validarNombreApellido();
     this.validarCorreoElectronico();
     this.validarEdadAdultoMayor();
@@ -1072,8 +1089,79 @@ export class InicioComponent implements OnInit, OnDestroy {
       return;
     }
 
-    // Si no hay errores, mostrar modal de confirmación
-    this.mostrarModalConfirmacion = true;
+    // Preparar el payload según el formato de la API
+    const payload: any = {
+      nombreApellido: this.formularioVisita.nombreApellido,
+      correoElectronico: this.formularioVisita.correoElectronico,
+      edadAdultoMayor: parseInt(this.formularioVisita.edadAdultoMayor),
+      nivelDependencia: this.formularioVisita.nivelDependencia,
+      observacionesSalud: this.formularioVisita.observacionesSalud || undefined,
+      fechaSeleccionada: this.formularioVisita.fechaSeleccionada,
+      horaSeleccionada: this.formularioVisita.horaSeleccionada,
+    };
+
+    // Si hay evaluación completada, agregarla al payload
+    if (this.mostrarEvaluacion && this.evaluacionIniciada) {
+      payload.evaluacion = {
+        movilidad: this.evaluacionForm.movilidad,
+        avd: this.evaluacionForm.avd,
+        cognitivo: this.evaluacionForm.cognitivo,
+        emocional: this.evaluacionForm.emocional,
+        condiciones: this.evaluacionForm.condiciones,
+        medicacion: this.evaluacionForm.medicacion,
+        motivo: this.evaluacionForm.motivo,
+      };
+    }
+
+    // Realizar la petición POST a la API
+    const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
+
+    this.http
+      .post('https://backend-dalias.onrender.com/visitas/agendar', payload, { headers })
+      .subscribe({
+        next: (response: any) => {
+          console.log('Respuesta exitosa:', response);
+          // Mostrar modal de confirmación
+          this.mostrarModalConfirmacion = true;
+        },
+        error: (error) => {
+          console.error('Error al enviar solicitud:', error);
+
+          // Manejar error de fecha/hora ocupada (409)
+          if (error.status === 409) {
+            this.erroresVisita.horaSeleccionada =
+              'Esta fecha y hora ya está reservada. Por favor, selecciona otro horario.';
+          } else if (error.status === 400) {
+            // Error de validación
+            alert(
+              'Error en los datos enviados. Por favor verifica el formulario.',
+            );
+          } else {
+            // Error genérico
+            alert(
+              'Ocurrió un error al agendar la visita. Por favor intenta nuevamente.',
+            );
+          }
+        },
+      });
+  }
+
+  verificarDisponibilidadAPI(fecha: string, hora: string): void {
+    this.http
+      .get(`https://backend-dalias.onrender.com/visitas/verificar-disponibilidad`, {
+        params: { fecha, hora },
+      })
+      .subscribe({
+        next: (response: any) => {
+          if (!response.disponible) {
+            this.erroresVisita.horaSeleccionada =
+              'Este horario ya está ocupado';
+          }
+        },
+        error: (error) => {
+          console.error('Error al verificar disponibilidad:', error);
+        },
+      });
   }
 
   // Agregar este nuevo método
