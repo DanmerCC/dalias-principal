@@ -16,7 +16,7 @@ import {
 import { CommonModule, isPlatformBrowser } from '@angular/common';
 import { trigger, transition, style, animate } from '@angular/animations';
 import { FormsModule } from '@angular/forms';
-import { RouterLink } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 
 interface AcordeonItem {
   id: number;
@@ -236,7 +236,27 @@ export class InicioComponent implements OnInit, OnDestroy {
   constructor(
     @Inject(PLATFORM_ID) private platformId: Object,
     private http: HttpClient,
+    private router: Router,
   ) {}
+
+  navegarAPlan(plan: string): void {
+    if (!plan) {
+      return;
+    }
+
+    const rutasPlanes: { [key: string]: string } = {
+      'residencia-permanente':
+        '/servicios/planes-de-estadia/residencia-permanente',
+      'centro-de-dia': '/servicios/planes-de-estadia/centro-de-dia',
+      temporal: '/servicios/planes-de-estadia/temporal',
+      'post-operatoria': '/servicios/planes-de-estadia/post-operatoria',
+    };
+
+    const ruta = rutasPlanes[plan];
+    if (ruta) {
+      this.router.navigate([ruta]);
+    }
+  }
 
   slidesCarrusel: SlideItem[] = [
     {
@@ -461,20 +481,22 @@ export class InicioComponent implements OnInit, OnDestroy {
     this.cargarActividades();
   }
   cargarActividades(): void {
-    this.http.get<Actividad[]>('https://backend-dalias.onrender.com/actividades').subscribe({
-      next: (response) => {
-        this.actividades = response.map((actividad) => ({
-          ...actividad,
-          fecha: actividad.subtitulo, // Mapear subtitulo a fecha para mantener compatibilidad
-        })) as any;
-        console.log('Actividades cargadas:', this.actividades);
-      },
-      error: (error) => {
-        console.error('Error al cargar actividades:', error);
-        // Mantener actividades vacías o mostrar mensaje de error
-        this.actividades = [];
-      },
-    });
+    this.http
+      .get<Actividad[]>('https://backend-dalias.onrender.com/actividades')
+      .subscribe({
+        next: (response) => {
+          this.actividades = response.map((actividad) => ({
+            ...actividad,
+            fecha: actividad.subtitulo, // Mapear subtitulo a fecha para mantener compatibilidad
+          })) as any;
+          console.log('Actividades cargadas:', this.actividades);
+        },
+        error: (error) => {
+          console.error('Error al cargar actividades:', error);
+          // Mantener actividades vacías o mostrar mensaje de error
+          this.actividades = [];
+        },
+      });
   }
 
   ngOnDestroy(): void {
@@ -671,7 +693,9 @@ export class InicioComponent implements OnInit, OnDestroy {
     const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
 
     this.http
-      .post('https://backend-dalias.onrender.com/contacto', payload, { headers })
+      .post('https://backend-dalias.onrender.com/contacto', payload, {
+        headers,
+      })
       .subscribe({
         next: (response: any) => {
           console.log('Respuesta exitosa:', response);
@@ -698,12 +722,12 @@ export class InicioComponent implements OnInit, OnDestroy {
 
   // AGREGAR métodos de validación
   validarTipoConsulta(): void {
-  if (!this.formularioContacto.tipoConsulta) {
-    this.erroresContacto.tipoConsulta = 'Selecciona un tipo de consulta';
-  } else {
-    this.erroresContacto.tipoConsulta = '';
+    if (!this.formularioContacto.tipoConsulta) {
+      this.erroresContacto.tipoConsulta = 'Selecciona un tipo de consulta';
+    } else {
+      this.erroresContacto.tipoConsulta = '';
+    }
   }
-}
 
   validarNombreContacto(): void {
     const valor = this.formularioContacto.nombre.trim();
@@ -1124,7 +1148,9 @@ export class InicioComponent implements OnInit, OnDestroy {
     const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
 
     this.http
-      .post('https://backend-dalias.onrender.com/visitas/agendar', payload, { headers })
+      .post('https://backend-dalias.onrender.com/visitas/agendar', payload, {
+        headers,
+      })
       .subscribe({
         next: (response: any) => {
           console.log('Respuesta exitosa:', response);
@@ -1155,9 +1181,12 @@ export class InicioComponent implements OnInit, OnDestroy {
 
   verificarDisponibilidadAPI(fecha: string, hora: string): void {
     this.http
-      .get(`https://backend-dalias.onrender.com/visitas/verificar-disponibilidad`, {
-        params: { fecha, hora },
-      })
+      .get(
+        `https://backend-dalias.onrender.com/visitas/verificar-disponibilidad`,
+        {
+          params: { fecha, hora },
+        },
+      )
       .subscribe({
         next: (response: any) => {
           if (!response.disponible) {

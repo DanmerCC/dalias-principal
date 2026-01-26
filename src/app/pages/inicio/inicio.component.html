@@ -19,14 +19,17 @@
         </div>
 
         <div class="select__slider">
-          <select>
+          <select #planSelector>
             <option value="" disabled selected>Selecciona un plan</option>
-            <option value="permanente">Residencia Permanente</option>
+            <option value="residencia-permanente">Residencia Permanente</option>
             <option value="temporal">Residencia Temporal</option>
-            <option value="centro-dia">Centro de Día</option>
+            <option value="centro-de-dia">Centro de Día</option>
             <option value="post-operatoria">Residencia Post Operatoria</option>
           </select>
-          <i class="bx bx-search"></i>
+          <i
+            class="bx bx-search"
+            (click)="navegarAPlan(planSelector.value)"
+          ></i>
         </div>
       </div>
     </div>
