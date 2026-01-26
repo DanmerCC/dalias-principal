@@ -8,6 +8,8 @@ import { BlogComponent } from './pages/blog/blog.component';
 import { ResidenteComponent } from './pages/residente/residente.component';
 import { ActividadesComponent } from './pages/actividades/actividades.component';
 import { PlanesDeEstadiaComponent } from './pages/servicios/planes-de-estadia/planes-de-estadia.component';
+import { CentroDeDiaComponent } from './pages/servicios/planes-de-estadia/centro-de-dia/centro-de-dia.component';
+import { ResidenciaPermanenteComponent } from './pages/servicios/planes-de-estadia/residencia-permanente/residencia-permanente.component';
 
 export const routes: Routes = [
   {
@@ -25,13 +27,24 @@ export const routes: Routes = [
   {
     path: 'servicios',
     children: [
-      {
-        path: '',
-        component: ServiciosComponent
-      },
+      { path: '', component: ServiciosComponent },
+
       {
         path: 'planes-de-estadia',
-        component: PlanesDeEstadiaComponent
+        children: [
+          {
+            path: '',
+            component: PlanesDeEstadiaComponent
+          },
+          {
+            path: 'residencia-permanente',
+            component: ResidenciaPermanenteComponent
+          },
+          {
+            path: 'centro-de-dia',
+            component: CentroDeDiaComponent
+          },
+        ]
       }
     ]
   },

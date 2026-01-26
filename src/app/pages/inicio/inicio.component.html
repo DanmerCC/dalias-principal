@@ -281,7 +281,7 @@
     >
       <div class="text__atv">
         <div>
-          <p class="fecha__atv">{{ actividad.fecha }}</p>
+          <p class="fecha__atv">{{ actividad.subtitulo }}</p>
           <h3>{{ actividad.titulo }}</h3>
           <p class="descripcion__atv">{{ actividad.descripcion }}</p>
         </div>
@@ -1234,92 +1234,62 @@
 <!-- Sección Contacto -->
 <section class="seccion__contacto">
   <div class="contacto__contenedor">
-    <!-- Columna izquierda - Ubicación y Dirección -->
+    <!-- Columna izquierda - Información -->
     <div class="contacto__izquierda">
-      <!-- Dirección -->
-      <div class="contacto__item">
-        <div class="contacto__icono">
-          <i class="bx bxs-envelope"></i>
+      <p class="contacto__etiqueta">CONTACTO EN LÍNEA</p>
+
+      <h2 class="contacto__titulo">
+        Agende una<br />
+        <span class="contacto__titulo--dorado">visita exclusiva</span>
+      </h2>
+
+      <p class="contacto__descripcion">
+        Descubra un espacio donde el cuidado profesional se une con el calor de
+        un hogar. Un lugar pensado para que sus seres queridos vivan con la
+        plenitud y el respeto que siempre les han brindado en casa.
+      </p>
+
+      <div class="contacto__info">
+        <div class="info__item">
+          <p class="info__label">ENCUÉNTRANOS EN</p>
+          <p class="info__valor">Las Dalias 156,</p>
+          <p class="info__valor">La Molina 15024, Perú</p>
         </div>
-        <div class="contacto__texto">
-          <h3>Nuestro Correo</h3>
-          <p>residencialasdalias156&#64;gmail.com</p>
+
+        <div class="info__item">
+          <p class="info__label">ATENCIÓN DIRECTA</p>
+          <p class="info__valor">+51 981 776 156</p>
         </div>
-      </div>
-      <div class="contacto__item">
-        <div class="contacto__icono">
-          <i class="bx bx-map"></i>
-        </div>
-        <div class="contacto__texto">
-          <h3>Nuestra Dirección</h3>
-          <p>Las Dalias 156, La Molina 15024, Perú</p>
+
+        <div class="info__item">
+          <p class="info__label">CORREO ELECTRÓNICO</p>
+          <p class="info__valor">residencialasdalias156&#64;gmail.com</p>
         </div>
       </div>
 
-      <!-- Mapa -->
-      <div class="contacto__mapa">
-        <h3 class="mapa__titulo">Ubicación</h3>
-        <div class="mapa__contenedor">
-          <iframe
-            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3901.3047184778707!2d-76.96143272624305!3d-12.091279488149015!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x9105c7a55f8bce07%3A0x61d3f6dc0f38542e!2sResidencia%20Las%20Dalias!5e0!3m2!1sen!2spe!4v1767904717240!5m2!1sen!2spe"
-            width="100%"
-            height="100%"
-            style="border: 0"
-            allowfullscreen=""
-            loading="lazy"
-            referrerpolicy="no-referrer-when-downgrade"
-          ></iframe>
-        </div>
+      <div class="contacto__imagen">
+        <iframe
+          src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3901.3047184778707!2d-76.96143272624305!3d-12.091279488149015!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x9105c7a55f8bce07%3A0x61d3f6dc0f38542e!2sResidencia%20Las%20Dalias!5e0!3m2!1sen!2spe!4v1769136924810!5m2!1sen!2spe"
+          allowfullscreen=""
+          loading="lazy"
+          referrerpolicy="no-referrer-when-downgrade"
+        ></iframe>
       </div>
     </div>
 
     <!-- Columna derecha - Formulario -->
     <div class="contacto__derecha">
       <div class="formulario__card">
-        <div class="formulario__header">
-          <i class="bx bx-envelope"></i>
-          <div>
-            <h2>Contáctanos</h2>
-            <p>Estamos aquí para ayudarte y resolver tus dudas</p>
-          </div>
-        </div>
-
         <form
           class="formulario__contacto"
           (ngSubmit)="enviarFormularioContacto()"
         >
-          <!-- Qué busca -->
-          <div class="form__grupo">
-            <label class="form__label">¿Qué servicio te interesa? *</label>
-            <div class="select__wrapper">
-              <select
-                class="form__select"
-                name="tipoConsulta"
-                [(ngModel)]="formularioContacto.tipoConsulta"
-                (blur)="validarTipoConsulta()"
-                required
-              >
-                <option
-                  *ngFor="let opcion of opcionesContacto"
-                  [value]="opcion.value"
-                >
-                  {{ opcion.label }}
-                </option>
-              </select>
-              <i class="bx bx-chevron-down select__icon"></i>
-            </div>
-            <span class="error__mensaje" *ngIf="erroresContacto.tipoConsulta">
-              {{ erroresContacto.tipoConsulta }}
-            </span>
-          </div>
-
           <!-- Nombre -->
           <div class="form__grupo">
-            <label class="form__label">Nombre completo *</label>
+            <label class="form__label">NOMBRE COMPLETO</label>
             <input
               type="text"
               class="form__input"
-              placeholder="Ingresa tu nombre completo"
               [(ngModel)]="formularioContacto.nombre"
               (blur)="validarNombreContacto()"
               (input)="validarNombreContacto()"
@@ -1333,11 +1303,10 @@
 
           <!-- Correo -->
           <div class="form__grupo">
-            <label class="form__label">Correo electrónico *</label>
+            <label class="form__label">CORREO ELECTRÓNICO</label>
             <input
               type="email"
               class="form__input"
-              placeholder="ejemplo@correo.com"
               [(ngModel)]="formularioContacto.correo"
               (blur)="validarCorreoContacto()"
               (input)="validarCorreoContacto()"
@@ -1349,13 +1318,36 @@
             </span>
           </div>
 
-          <!-- Número de móvil -->
+          <!-- Tipo de Consulta -->
           <div class="form__grupo">
-            <label class="form__label">Número de móvil *</label>
+            <label class="form__label">TIPO DE CONSULTA</label>
+            <select
+              class="form__input"
+              [(ngModel)]="formularioContacto.tipoConsulta"
+              (blur)="validarTipoConsulta()"
+              (change)="validarTipoConsulta()"
+              name="tipoConsulta"
+              required
+            >
+              <option value="">Selecciona una opción</option>
+              <option value="informacion-general">Información General</option>
+              <option value="planes-estadia">Planes de Estadía</option>
+              <option value="consulta-geriatrica">Consulta Geriátrica</option>
+              <option value="terapia-rehabilitacion">
+                Terapia y Rehabilitación
+              </option>
+            </select>
+            <span class="error__mensaje" *ngIf="erroresContacto.tipoConsulta">
+              {{ erroresContacto.tipoConsulta }}
+            </span>
+          </div>
+
+          <!-- Teléfono -->
+          <div class="form__grupo">
+            <label class="form__label">TELÉFONO DE CONTACTO</label>
             <input
               type="tel"
               class="form__input"
-              placeholder="Ej: 987654321"
               [(ngModel)]="formularioContacto.numeroMovil"
               (blur)="validarNumeroMovil()"
               (input)="validarNumeroMovil()"
@@ -1367,24 +1359,26 @@
             </span>
           </div>
 
-          <!-- Mensaje (opcional) -->
+          <!-- Mensaje -->
           <div class="form__grupo">
-            <label class="form__label">Mensaje</label>
+            <label class="form__label">MENSAJE O CONSULTA ESPECÍFICA</label>
             <textarea
               class="form__textarea"
-              placeholder="Cuéntanos cómo podemos ayudarte..."
-              rows="5"
+              rows="4"
               [(ngModel)]="formularioContacto.mensaje"
               name="mensaje"
-            >
-            </textarea>
+            ></textarea>
           </div>
 
           <!-- Botón -->
           <button type="submit" class="btn__enviar">
-            <span>Enviar mensaje</span>
-            <i class="bx bx-send"></i>
+            <span>ENVIAR MENSAJE</span>
+            <i class="bx bx-right-arrow-alt"></i>
           </button>
+
+          <p class="form__privacidad">
+            Al proporcionar tus datos, aceptas nuestra política de privacidad
+          </p>
         </form>
       </div>
     </div>

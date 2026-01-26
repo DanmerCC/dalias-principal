@@ -10,7 +10,9 @@
 .contenedor__slider .slider__img {
   width: 100%;
   height: 100%;
-  background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url("/slider2.jpeg");
+  background-image:
+    linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),
+    url("/slider2.jpeg");
   background-size: cover;
   background-position: center;
   display: flex;
@@ -33,7 +35,7 @@
   color: #fff;
   font-size: 3rem;
   font-weight: 700;
-  line-height: .9;
+  line-height: 0.9;
   text-transform: uppercase;
   margin: 0;
   text-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.3);
@@ -55,12 +57,112 @@
   margin: 0.5rem 0;
 }
 
+
+.figure1 {
+  position: absolute;
+  top: -3rem;
+  left: -10rem;
+  width: 19rem;
+  z-index: 0;
+}
+.figure2 {
+  position: absolute;
+  bottom: 3rem;
+  right: 0rem;
+  width: 4rem;
+  z-index: 0;
+}
+.figure3 {
+  position: absolute;
+  bottom: -3rem;
+  right: 1rem;
+  width: 10rem;
+  z-index: 0;
+  display: none;
+}
+
+.figure4 {
+  position: absolute;
+  top: -4rem;
+  right: 36rem;
+  width: 14rem;
+  z-index: 0;
+}
+.figure44 {
+  position: absolute;
+  bottom: 4rem;
+  left: 0;
+  width: 5rem;
+  z-index: 0;
+  display: none;
+}
+.figure55 {
+  position: absolute;
+  top: 5rem;
+  right: 0;
+  width: 5rem;
+  display: none;
+  z-index: 0;
+}
+
+.figure5 {
+  position: absolute;
+  top: -2rem;
+  right: -1rem;
+  width: 14rem;
+  z-index: 0;
+}
+
+.figure66 {
+  position: absolute;
+  right: 0;
+  width: 4rem;
+  top: 2rem;
+  z-index: 0;
+}
+.figure6 {
+  position: absolute;
+  top: 35rem;
+  left: -7rem;
+  width: 14rem;
+  z-index: 0;
+}
+.figure7 {
+  position: absolute;
+  top: -4rem;
+  left: 3rem;
+  width: 17rem;
+  z-index: 0;
+}
+.figure8 {
+  position: absolute;
+  bottom: 2rem;
+  right: 3rem;
+  width: 15rem;
+  z-index: 0;
+}
+
+.figure9{
+  position: absolute;
+  top: -3rem;
+  left: -8rem;
+  width: 16rem;
+  z-index: 0;
+}
+.figure10{
+  position: absolute;
+  bottom: 3rem;
+  right: 0rem;
+  width: 5rem;
+  z-index: 0;
+}
+
 /* ============================================
    SECCIONES DE SERVICIOS
 ============================================ */
 .seccion__servicio {
   width: 100%;
-  padding: 6rem 10rem;
+  padding: 4rem 10rem;
   background: #fff;
   position: relative;
   overflow: hidden;
@@ -132,7 +234,7 @@
 }
 
 .plan__card::before {
-  content: '';
+  content: "";
   position: absolute;
   top: 0;
   left: 0;
@@ -230,7 +332,7 @@
 .seccion__porque__elegirnos {
   width: 100%;
   padding: 6rem 10rem;
-  background: #f8f9fa;
+  background: #f5f5ef;
   position: relative;
   overflow: hidden;
 }
@@ -252,7 +354,7 @@
    IMAGEN
 ============================================ */
 .porque__elegirnos__imagen {
-  width: 42%;
+  width: 48%;
 }
 
 .porque__elegirnos__imagen img {
@@ -310,7 +412,7 @@
 }
 
 .razon__item::before {
-  content: '';
+  content: "";
   position: absolute;
   left: -1.0625rem;
   top: 0.4rem;
@@ -341,7 +443,7 @@
 
 .razon__item h3 {
   color: #666;
-  font-size: 1.05rem;
+  font-size: 1.1rem;
   font-weight: 400;
   margin: 0;
   line-height: 1.5;
@@ -352,61 +454,10 @@
   color: #003e5c;
 }
 
-/* ============================================
-   BOTÓN
-============================================ */
-.btn__conocenos {
-  background: #d9b756;
-  border: none;
-  text-decoration: none;
-  color: #fff;
-  padding: 1rem 2.5rem;
-  border-radius: 0;
-  font-size: 0.95rem;
-  font-weight: 700;
-  letter-spacing: 0.05rem;
-  text-transform: uppercase;
-  cursor: pointer;
-  display: inline-flex;
-  align-items: center;
-  gap: 0.8rem;
-  transition: all 0.3s ease;
-  position: relative;
-  overflow: hidden;
-}
-
-.btn__conocenos::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: -100%;
-  width: 100%;
-  height: 100%;
-  background: #003e5c;
-  transition: left 0.3s ease;
-  z-index: -1;
-}
-
-.btn__conocenos:hover {
-  transform: translateX(0.5rem);
-}
-
-.btn__conocenos:hover::before {
-  left: 0;
-}
-
-.btn__conocenos i {
-  transition: transform 0.3s ease;
-}
-
-.btn__conocenos:hover i {
-  transform: translateX(0.3rem);
-}
-
 /* CTA final */
 
-.seccion__faq{
-   width: 100%;
+.seccion__faq {
+  width: 100%;
   padding: 6rem 10rem;
 }
 .faq__cta {

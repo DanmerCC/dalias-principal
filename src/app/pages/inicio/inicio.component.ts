@@ -87,10 +87,14 @@ interface ErroresFormulario {
 }
 
 interface Actividad {
+  id: number;
   titulo: string;
+  subtitulo: string;
   descripcion: string;
   imagen: string;
-  fecha: string;
+  imagePublicId: string;
+  createdAt: string;
+  updatedAt: string;
 }
 
 interface EvaluacionForm {
@@ -223,52 +227,7 @@ export class InicioComponent implements OnInit, OnDestroy {
   };
 
   // Actividades para el carrusel
-  actividades: Actividad[] = [
-    {
-      titulo: 'Club de Lectura para Adultos Mayores',
-      descripcion:
-        'La lectura compartida estimula la memoria, el lenguaje y la atención, al mismo tiempo que fomenta la conversación y la conexión social. Un espacio que fortalece la mente y genera bienestar emocional en un entorno cálido y participativo.',
-      imagen: '/actividades1.jpg',
-      fecha: 'Desarrollo Cognitivo',
-    },
-    {
-      titulo: 'Pintura y Dibujo Terapéutico',
-      descripcion:
-        'A través del arte, los adultos mayores expresan emociones, estimulan la creatividad y fortalecen la motricidad fina. Una actividad que relaja, mejora el ánimo y refuerza la autoestima de forma natural.',
-      imagen: '/actividades2.png',
-      fecha: 'Desarrollo Motriz',
-    },
-    {
-      titulo: 'Musicoterapia Geriátrica',
-      descripcion:
-        'La música despierta recuerdos, emociones y sensaciones positivas. Estas sesiones favorecen la comunicación, reducen la ansiedad y generan momentos de conexión emocional, incluso en adultos mayores con deterioro cognitivo.',
-      imagen: '/actividades3.png',
-      fecha: 'Desarrollo emocional',
-    },
-    {
-      titulo: 'Meditación y Relajación Guiada',
-      descripcion:
-        'Momentos de calma diseñados para favorecer la tranquilidad, el descanso y el equilibrio emocional. La relajación guiada ayuda a reducir el estrés y promueve una mejor calidad de vida en el adulto mayor.',
-      imagen: '/actividades4.png',
-      fecha: 'Desarrollo del bienestar emocional',
-    },
-    {
-      titulo: 'Misas y Celebraciones Religiosas',
-      descripcion:
-        'Espacios de recogimiento y acompañamiento espiritual que brindan paz y contención emocional. Estas celebraciones fortalecen la fe, la serenidad y el bienestar interior de los adultos mayores.',
-      imagen:
-        'https://res.cloudinary.com/dd5mnpde5/image/upload/f_auto,q_60,w_1200,c_limit/v1768668816/MISA_k4alhd.jpg',
-      fecha: 'Desarrollo espiritual',
-    },
-    {
-      titulo: 'Momentos Compartidos en Familia',
-      descripcion:
-        'Celebraciones y encuentros que fortalecen los vínculos afectivos en un entorno seguro y acogedor. Compartir tiempo en familia refuerza la sensación de hogar y el bienestar emocional del adulto mayor.',
-      imagen:
-        'https://res.cloudinary.com/dd5mnpde5/image/upload/f_auto,q_60,w_1200,c_limit/v1768923380/actividades6_qb1myf.jpg',
-      fecha: 'Desarrollo socioemocional',
-    },
-  ];
+  actividades: Actividad[] = [];
 
   get actividadesConFinal() {
     return [...this.actividades, { final: true }];
@@ -499,6 +458,23 @@ export class InicioComponent implements OnInit, OnDestroy {
     this.inicializarNoticias();
     this.generarCalendario();
     this.precargarImagenes();
+    this.cargarActividades();
+  }
+  cargarActividades(): void {
+    this.http.get<Actividad[]>('https://backend-dalias.onrender.com/actividades').subscribe({
+      next: (response) => {
+        this.actividades = response.map((actividad) => ({
+          ...actividad,
+          fecha: actividad.subtitulo, // Mapear subtitulo a fecha para mantener compatibilidad
+        })) as any;
+        console.log('Actividades cargadas:', this.actividades);
+      },
+      error: (error) => {
+        console.error('Error al cargar actividades:', error);
+        // Mantener actividades vacías o mostrar mensaje de error
+        this.actividades = [];
+      },
+    });
   }
 
   ngOnDestroy(): void {
@@ -651,7 +627,7 @@ export class InicioComponent implements OnInit, OnDestroy {
   ];
 
   formularioContacto: FormularioContacto = {
-    tipoConsulta: 'informacion-general',
+    tipoConsulta: '',
     mensaje: '',
     nombre: '',
     correo: '',
@@ -682,21 +658,52 @@ export class InicioComponent implements OnInit, OnDestroy {
       return;
     }
 
-    // Si no hay errores, mostrar modal de confirmación
-    console.log('Formulario de contacto enviado:', this.formularioContacto);
-    this.mostrarModalConfirmacionContacto = true;
+    // Preparar el payload según el formato de la API
+    const payload = {
+      tipoConsulta: this.formularioContacto.tipoConsulta,
+      nombre: this.formularioContacto.nombre,
+      correo: this.formularioContacto.correo,
+      numeroMovil: this.formularioContacto.numeroMovil,
+      mensaje: this.formularioContacto.mensaje || '',
+    };
+
+    // Realizar la petición POST a la API
+    const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
+
+    this.http
+      .post('https://backend-dalias.onrender.com/contacto', payload, { headers })
+      .subscribe({
+        next: (response: any) => {
+          console.log('Respuesta exitosa:', response);
+          // Mostrar modal de confirmación
+          this.mostrarModalConfirmacionContacto = true;
+        },
+        error: (error) => {
+          console.error('Error al enviar formulario:', error);
+
+          if (error.status === 400) {
+            alert(
+              'Error en los datos enviados. Por favor verifica el formulario.',
+            );
+          } else {
+            alert(
+              'Ocurrió un error al enviar el mensaje. Por favor intenta nuevamente.',
+            );
+          }
+        },
+      });
   }
 
   mostrarModalConfirmacionContacto = false;
 
   // AGREGAR métodos de validación
   validarTipoConsulta(): void {
-    if (!this.formularioContacto.tipoConsulta) {
-      this.erroresContacto.tipoConsulta = 'Selecciona un servicio';
-    } else {
-      this.erroresContacto.tipoConsulta = '';
-    }
+  if (!this.formularioContacto.tipoConsulta) {
+    this.erroresContacto.tipoConsulta = 'Selecciona un tipo de consulta';
+  } else {
+    this.erroresContacto.tipoConsulta = '';
   }
+}
 
   validarNombreContacto(): void {
     const valor = this.formularioContacto.nombre.trim();
@@ -747,7 +754,7 @@ export class InicioComponent implements OnInit, OnDestroy {
 
     // Limpiar formulario
     this.formularioContacto = {
-      tipoConsulta: 'informacion-general',
+      tipoConsulta: '',
       mensaje: '',
       nombre: '',
       correo: '',

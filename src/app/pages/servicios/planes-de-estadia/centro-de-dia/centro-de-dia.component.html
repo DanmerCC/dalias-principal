@@ -1,0 +1,153 @@
+<!-- Hero Banner -->
+<div class="hero__centro-dia">
+  <div class="hero__overlay"></div>
+  <div class="hero__contenido">
+    <span class="hero__badge">Centro de Día</span>
+    <h1 class="hero__titulo">
+      Un día lleno de vida,<br />
+      una noche en casa
+    </h1>
+    <p class="hero__descripcion">
+      Atención profesional durante el día mientras tu ser querido continúa
+      viviendo en su hogar familiar
+    </p>
+    <div class="hero__info-rapida">
+      <div class="info__item">
+        <i class="fa-solid fa-clock"></i>
+        <span>8:30 AM - 5:00 PM</span>
+      </div>
+      <div class="info__item">
+        <i class="fa-solid fa-hand-holding-heart"></i>
+        <span>Atención Personalizada</span>
+      </div>
+      <div class="info__item">
+        <i class="fa-solid fa-utensils"></i>
+        <span>Alimentación Incluida</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- SECCIÓN: Introducción -->
+<section class="seccion__intro">
+  <div class="intro__container">
+    <div class="intro__imagen">
+      <img
+        src="https://dalias.pablogutierrezz.com/nosotros1.jpg"
+        alt="Centro de Día"
+      />
+      <div class="imagen__overlay"></div>
+    </div>
+
+    <div class="intro__content">
+      <h2 class="intro__titulo">La mejor alternativa familiar</h2>
+
+      <div class="intro__texto">
+        <p>
+          La residencia de día ofrece una alternativa más flexible y centrada
+          en la familia, permitiendo a los seres queridos recibir atención
+          adecuada mientras continúan viviendo en su entorno familiar.
+        </p>
+      </div>
+
+      <div class="intro__caracteristicas">
+        <div class="caracteristica">
+          <div class="caracteristica__icono">
+            <i class="fa-solid fa-hand-holding-dollar"></i>
+          </div>
+          <div class="caracteristica__info">
+            <h3>Económicamente Accesible</h3>
+            <p>Más asequible que una residencia permanente</p>
+          </div>
+        </div>
+
+        <div class="caracteristica">
+          <div class="caracteristica__icono">
+            <i class="fa-solid fa-users"></i>
+          </div>
+          <div class="caracteristica__info">
+            <h3>Vida Social Activa</h3>
+            <p>Mantiene conexiones sociales y bienestar emocional</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SECCIÓN: Horario del Día -->
+<section class="seccion__horario">
+  <div class="horario__container">
+    <div class="horario__header">
+      <h2 class="horario__titulo">Estructura de nuestro día</h2>
+      <p class="horario__subtitulo">
+        Propuesta horaria diseñada desde las 8:30 am hasta las 5:00 pm para el
+        bienestar integral del adulto mayor
+      </p>
+    </div>
+
+    <div class="horario__timeline">
+      <div
+        *ngFor="let actividad of actividadesDiarias; let i = index"
+        class="timeline__item"
+      >
+        <div class="timeline__line" *ngIf="i !== actividadesDiarias.length - 1">
+          <div class="line__vertical"></div>
+        </div>
+
+        <div class="timeline__card">
+          <div class="card__hora">{{ actividad.hora }}</div>
+          <div class="card__separador"></div>
+          <div class="card__info">
+            <h3 class="card__titulo">{{ actividad.titulo }}</h3>
+            <p class="card__descripcion">{{ actividad.descripcion }}</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SECCIÓN: Precio -->
+<section class="seccion__inversion">
+  <div class="inversion__container">
+    <div class="inversion__card">
+      <div class="inversion__left">
+        <h2 class="inversion__titulo">Inversión por día</h2>
+        <div class="inversion__precio">
+          <span class="precio__moneda">S/</span>
+          <span class="precio__cantidad">200</span>
+          <span class="precio__decimal">.00</span>
+        </div>
+        <p class="inversion__nota">
+          Incluye todas las actividades, alimentación y atención profesional
+        </p>
+      </div>
+      <div class="inversion__right">
+        <h3>¿Qué está incluido?</h3>
+        <ul class="inversion__lista">
+          <li>
+            <i class="fa-solid fa-check-circle"></i>
+            Actividades cognitivas y físicas
+          </li>
+          <li>
+            <i class="fa-solid fa-check-circle"></i>
+            Terapias ocupacionales
+          </li>
+          <li>
+            <i class="fa-solid fa-check-circle"></i>
+            Almuerzo y merienda balanceados
+          </li>
+          <li>
+            <i class="fa-solid fa-check-circle"></i>
+            Supervisión médica continua
+          </li>
+          <li>
+            <i class="fa-solid fa-check-circle"></i>
+            Actividades recreativas y sociales
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>

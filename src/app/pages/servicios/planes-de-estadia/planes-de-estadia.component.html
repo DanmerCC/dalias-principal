@@ -2,18 +2,27 @@
 <div class="contenedor__slider">
   <div class="slider__img">
     <div class="content__slider">
-      <h1 class="slider__titulo">Planes de Estadía</h1>
-      <div class="linea__decorativa"></div>
+      <p class="slider__label">EXCELENCIA EN EL CUIDADO</p>
+      <h1 class="slider__titulo">
+        Planes de Estadía Diseñados<br />
+        <span class="slider__titulo--dorado">para Cada Necesidad</span>
+      </h1>
       <p class="slider__subtitulo">
-        Comprometidos con la excelencia y el bienestar integral del adulto mayor
-        en un entorno de lujo y calidad.
+        Acompañamos cada etapa con atención personalizada, fomentando una vida
+        activa y plena en un entorno seguro y tranquilo.
       </p>
+      <div class="slider__botones">
+        <button class="btn__primario" (click)="scrollToServicios()">
+          <span>Explorar Planes</span>
+          <i class="fa-solid fa-chevron-down"></i>
+        </button>
+      </div>
     </div>
   </div>
 </div>
 
 <!-- SECCIÓN 1: Servicios Principales -->
-<section class="seccion__servicios">
+<section class="seccion__servicios" id="seccion-servicios">
   <div class="servicios__contenedor">
     <!-- Header -->
     <div class="servicios__header">
@@ -31,20 +40,7 @@
         <!-- Imagen del servicio -->
         <div class="servicio__imagen-container">
           <img [src]="servicio.imagen" [alt]="servicio.titulo" />
-          <div class="servicio__imagen-overlay">
-            <div
-              class="servicio__icono-grande"
-              [style.background]="
-                'linear-gradient(135deg, ' +
-                servicio.color +
-                'ee 0%, ' +
-                servicio.color +
-                'cc 100%)'
-              "
-            >
-              <i [class]="servicio.icono"></i>
-            </div>
-          </div>
+          <div class="servicio__imagen-overlay"></div>
         </div>
 
         <!-- Contenido del servicio -->
@@ -54,20 +50,16 @@
 
           <ul class="servicio__detalles">
             <li *ngFor="let detalle of servicio.detalles">
-              <i
-                class="fa-solid fa-circle-check"
-                [style.color]="servicio.color"
-              ></i>
+              <i class="fa-solid fa-circle-check"></i>
               <span>{{ detalle }}</span>
             </li>
           </ul>
 
           <button
             class="btn__ver-servicio"
-            [style.background]="servicio.color"
             (click)="irAServicio(servicio.ruta)"
           >
-            <span>Ver más detalles</span>
+            <span>Ver detalles</span>
             <i class="fa-solid fa-arrow-right"></i>
           </button>
         </div>
@@ -76,10 +68,388 @@
   </div>
 </section>
 
-<!-- SECCIÓN 2: Procedimiento de Ingreso - REDISEÑADO -->
-<section class="seccion__ingreso">
-  <div class="ingreso__contenedor">
+<!-- SECCIÓN: ¿Cuál es el mejor Plan de Estadía? -->
+<section class="seccion__plan-ideal">
+  <div class="plan-ideal__contenedor">
     <!-- Header -->
+    <div class="plan-ideal__header">
+      <h2 class="plan-ideal__titulo">¿Cuál es el mejor Plan de Estadía?</h2>
+      <p class="plan-ideal__descripcion">
+        Selecciona la situación que mejor describa lo que buscas para recibir
+        nuestra recomendación personalizada.
+      </p>
+    </div>
+
+    <!-- Grid de Opciones -->
+    <div class="plan-ideal__grid">
+      <!-- Opción 1: Independencia -->
+      <div class="plan-ideal__card">
+        <div class="plan-ideal__borde-decorativo"></div>
+        <div class="plan-ideal__icono">
+          <i class="fa-solid fa-person-walking"></i>
+        </div>
+        <h3 class="plan-ideal__card-titulo">Si buscas independencia...</h3>
+        <p class="plan-ideal__card-descripcion">
+          Para adultos mayores que aún mantienen su autonomía pero desean un
+          entorno seguro con actividades sociales constantes.
+        </p>
+        <div class="plan-ideal__recomendacion">
+          <span class="recomendacion__label">Recomendamos:</span>
+          <span class="recomendacion__servicio">Residencia Permanente</span>
+        </div>
+      </div>
+
+      <!-- Opción 2: Apoyo Médico -->
+      <div class="plan-ideal__card">
+        <div class="plan-ideal__borde-decorativo"></div>
+        <div class="plan-ideal__icono">
+          <i class="fa-solid fa-hand-holding-medical"></i>
+        </div>
+        <h3 class="plan-ideal__card-titulo">Si necesitas apoyo médico...</h3>
+        <p class="plan-ideal__card-descripcion">
+          Para aquellos que requieren asistencia en actividades diarias,
+          administración de medicamentos y supervisión profesional constante.
+        </p>
+        <div class="plan-ideal__recomendacion">
+          <span class="recomendacion__label">Recomendamos:</span>
+          <span class="recomendacion__servicio">Cuidado Especializado</span>
+        </div>
+      </div>
+
+      <!-- Opción 3: Alivio Familiar -->
+      <div class="plan-ideal__card">
+        <div class="plan-ideal__borde-decorativo"></div>
+        <div class="plan-ideal__icono">
+          <i class="fa-solid fa-people-roof"></i>
+        </div>
+        <h3 class="plan-ideal__card-titulo">Si buscas alivio familiar...</h3>
+        <p class="plan-ideal__card-descripcion">
+          Perfecto para familias que cuidan de su ser querido en casa pero
+          necesitan apoyo profesional durante el día o por períodos cortos.
+        </p>
+        <div class="plan-ideal__recomendacion">
+          <span class="recomendacion__label">Recomendamos:</span>
+          <span class="recomendacion__servicio">Centro de Día / Temporal</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SECCIÓN: Nuestras Actividades -->
+<section class="seccion__actividades">
+  <div class="actividades__contenedor">
+    <!-- Header -->
+    <div class="actividades__header">
+      <p class="actividades__subtitulo">VIDA ACTIVA</p>
+      <div class="actividades__header-flex">
+        <h2 class="actividades__titulo">Nuestras Actividades</h2>
+        <a href="#" class="actividades__ver-todos">
+          Ver todos los artículos
+          <i class="fa-solid fa-chevron-right"></i>
+        </a>
+      </div>
+    </div>
+
+    <!-- Grid de Artículos -->
+    <div class="actividades__grid">
+      <!-- Artículo 1 -->
+      <article class="actividad__card">
+        <div class="actividad__imagen">
+          <img
+            src="https://dalias.pablogutierrezz.com/nosotros1.jpg"
+            alt="Club de Lectura para Adultos Mayores"
+          />
+          <span class="actividad__fecha">15/05/2024</span>
+        </div>
+        <div class="actividad__contenido">
+          <h3 class="actividad__titulo">
+            Club de Lectura para Adultos Mayores
+          </h3>
+          <p class="actividad__descripcion">
+            Una actividad que fortalece la mente y genera bienestar emocional en
+            un entorno cálido y participativo.
+          </p>
+        </div>
+      </article>
+
+      <!-- Artículo 2 -->
+      <article class="actividad__card">
+        <div class="actividad__imagen">
+          <img
+            src="https://dalias.pablogutierrezz.com/nosotros1.jpg"
+            alt="Pintura y Dibujo Terapéutico"
+          />
+          <span class="actividad__fecha">18/05/2024</span>
+        </div>
+        <div class="actividad__contenido">
+          <h3 class="actividad__titulo">Pintura y Dibujo Terapéutico</h3>
+          <p class="actividad__descripcion">
+            A través del arte, los adultos mayores expresan emociones, estimulan
+            la creatividad y fortalecen la motricidad fina.
+          </p>
+        </div>
+      </article>
+
+      <!-- Artículo 3 -->
+      <article class="actividad__card">
+        <div class="actividad__imagen">
+          <img
+            src="https://dalias.pablogutierrezz.com/nosotros1.jpg"
+            alt="Yoga y Meditación Suave"
+          />
+          <span class="actividad__fecha">22/05/2024</span>
+        </div>
+        <div class="actividad__contenido">
+          <h3 class="actividad__titulo">Yoga y Meditación Suave</h3>
+          <p class="actividad__descripcion">
+            Sesiones adaptadas para mejorar la flexibilidad, el equilibrio y la
+            paz interior de nuestros residentes.
+          </p>
+        </div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- Sección Contacto -->
+<section class="seccion__contacto">
+  <div class="contacto__contenedor">
+    <!-- Columna izquierda - Información -->
+    <div class="contacto__izquierda">
+      <p class="contacto__etiqueta">CONTACTO EN LÍNEA</p>
+
+      <h2 class="contacto__titulo">
+        Agende una<br />
+        <span class="contacto__titulo--dorado">visita exclusiva</span>
+      </h2>
+
+      <p class="contacto__descripcion">
+        Descubra un espacio donde el cuidado profesional se une con el calor de
+        un hogar. Un lugar pensado para que sus seres queridos vivan con la
+        plenitud y el respeto que siempre les han brindado en casa.
+      </p>
+
+      <div class="contacto__info">
+        <div class="info__item">
+          <p class="info__label">ENCUÉNTRANOS EN</p>
+          <p class="info__valor">Las Dalias 156,</p>
+          <p class="info__valor">La Molina 15024, Perú</p>
+        </div>
+
+        <div class="info__item">
+          <p class="info__label">ATENCIÓN DIRECTA</p>
+          <p class="info__valor">+51 981 776 156</p>
+        </div>
+
+        <div class="info__item">
+          <p class="info__label">CORREO ELECTRÓNICO</p>
+          <p class="info__valor">residencialasdalias156&#64;gmail.com</p>
+        </div>
+      </div>
+
+      <div class="contacto__imagen">
+        <iframe
+          src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3901.3047184778707!2d-76.96143272624305!3d-12.091279488149015!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x9105c7a55f8bce07%3A0x61d3f6dc0f38542e!2sResidencia%20Las%20Dalias!5e0!3m2!1sen!2spe!4v1769136924810!5m2!1sen!2spe"
+          allowfullscreen=""
+          loading="lazy"
+          referrerpolicy="no-referrer-when-downgrade"
+        ></iframe>
+      </div>
+    </div>
+
+    <!-- Columna derecha - Formulario -->
+    <div class="contacto__derecha">
+      <div class="formulario__card">
+        <form
+          class="formulario__contacto"
+          (ngSubmit)="enviarFormularioContacto()"
+        >
+          <!-- Nombre -->
+          <div class="form__grupo">
+            <label class="form__label">NOMBRE COMPLETO</label>
+            <input
+              type="text"
+              class="form__input"
+              [(ngModel)]="formularioContacto.nombre"
+              (blur)="validarNombreContacto()"
+              (input)="validarNombreContacto()"
+              name="nombre"
+              required
+            />
+            <span class="error__mensaje" *ngIf="erroresContacto.nombre">
+              {{ erroresContacto.nombre }}
+            </span>
+          </div>
+
+          <!-- Correo -->
+          <div class="form__grupo">
+            <label class="form__label">CORREO ELECTRÓNICO</label>
+            <input
+              type="email"
+              class="form__input"
+              [(ngModel)]="formularioContacto.correo"
+              (blur)="validarCorreoContacto()"
+              (input)="validarCorreoContacto()"
+              name="correo"
+              required
+            />
+            <span class="error__mensaje" *ngIf="erroresContacto.correo">
+              {{ erroresContacto.correo }}
+            </span>
+          </div>
+
+          <!-- Tipo de Consulta -->
+          <div class="form__grupo">
+            <label class="form__label">TIPO DE CONSULTA</label>
+            <select
+              class="form__input"
+              [(ngModel)]="formularioContacto.tipoConsulta"
+              (blur)="validarTipoConsulta()"
+              (change)="validarTipoConsulta()"
+              name="tipoConsulta"
+              required
+            >
+              <option value="">Selecciona una opción</option>
+              <option value="informacion-general">Información General</option>
+              <option value="planes-estadia">Planes de Estadía</option>
+              <option value="consulta-geriatrica">Consulta Geriátrica</option>
+              <option value="terapia-rehabilitacion">
+                Terapia y Rehabilitación
+              </option>
+            </select>
+            <span class="error__mensaje" *ngIf="erroresContacto.tipoConsulta">
+              {{ erroresContacto.tipoConsulta }}
+            </span>
+          </div>
+
+          <!-- Teléfono -->
+          <div class="form__grupo">
+            <label class="form__label">TELÉFONO DE CONTACTO</label>
+            <input
+              type="tel"
+              class="form__input"
+              [(ngModel)]="formularioContacto.numeroMovil"
+              (blur)="validarNumeroMovil()"
+              (input)="validarNumeroMovil()"
+              name="numeroMovil"
+              required
+            />
+            <span class="error__mensaje" *ngIf="erroresContacto.numeroMovil">
+              {{ erroresContacto.numeroMovil }}
+            </span>
+          </div>
+
+          <!-- Mensaje -->
+          <div class="form__grupo">
+            <label class="form__label">MENSAJE O CONSULTA ESPECÍFICA</label>
+            <textarea
+              class="form__textarea"
+              rows="4"
+              [(ngModel)]="formularioContacto.mensaje"
+              name="mensaje"
+            ></textarea>
+          </div>
+
+          <!-- Botón -->
+          <button type="submit" class="btn__enviar">
+            <span>ENVIAR MENSAJE</span>
+            <i class="bx bx-right-arrow-alt"></i>
+          </button>
+
+          <p class="form__privacidad">
+            Al proporcionar tus datos, aceptas nuestra política de privacidad
+          </p>
+        </form>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Modal de Confirmación Contacto -->
+<div
+  class="modal__overlay"
+  *ngIf="mostrarModalConfirmacionContacto"
+  (click)="cerrarModalConfirmacionContacto()"
+>
+  <div class="modal__confirmacion" (click)="$event.stopPropagation()">
+    <div class="confirmacion__icono">
+      <img src="/logo_header.png" alt="" />
+    </div>
+    <h2>¡Solicitud enviada!</h2>
+    <p>Nos contactaremos contigo pronto.</p>
+    <button
+      class="btn__cerrar-confirmacion"
+      (click)="cerrarModalConfirmacionContacto()"
+    >
+      Entendido
+    </button>
+  </div>
+</div>
+
+<!-- Sección Preguntas Frecuentes -->
+<section class="seccion__faq" id="preguntas-frecuentes">
+  <img src="/figure4.png" class="figure9" />
+  <img src="/figure13.png" class="figure10" />
+  <div class="faq__contenedor">
+    <div class="faq__header">
+      <p class="faq__subtitulo">¿Algo no quedó claro?</p>
+      <h2 class="faq__titulo">Preguntas Frecuentes</h2>
+      <p class="faq__descripcion">
+        Encuentra respuestas a las preguntas más comunes sobre nuestros
+        servicios y atención
+      </p>
+    </div>
+
+    <div class="faq__grid">
+      <div class="faq__columna">
+        <div
+          class="faq__item"
+          *ngFor="let pregunta of preguntasColumna1"
+          [class.activo]="pregunta.activo"
+          (click)="togglePregunta(pregunta.id)"
+        >
+          <div class="faq__pregunta">
+            <h3>{{ pregunta.pregunta }}</h3>
+            <i
+              class="bx"
+              [class.bx-plus]="!pregunta.activo"
+              [class.bx-minus]="pregunta.activo"
+            ></i>
+          </div>
+          <div class="faq__respuesta" *ngIf="pregunta.activo">
+            <p [innerHTML]="pregunta.respuesta"></p>
+          </div>
+        </div>
+      </div>
+
+      <div class="faq__columna">
+        <div
+          class="faq__item"
+          *ngFor="let pregunta of preguntasColumna2"
+          [class.activo]="pregunta.activo"
+          (click)="togglePregunta(pregunta.id)"
+        >
+          <div class="faq__pregunta">
+            <h3>{{ pregunta.pregunta }}</h3>
+            <i
+              class="bx"
+              [class.bx-plus]="!pregunta.activo"
+              [class.bx-minus]="pregunta.activo"
+            ></i>
+          </div>
+          <div class="faq__respuesta" *ngIf="pregunta.activo">
+            <p [innerHTML]="pregunta.respuesta"></p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SECCIÓN 2: Procedimiento de Ingreso - REDISEÑADO -->
+<!-- <section class="seccion__ingreso">
+  <div class="ingreso__contenedor">
     <div class="ingreso__header">
       <p class="ingreso__subtitulo">PROCESO DE ADMISIÓN</p>
       <h2 class="ingreso__titulo">Comienza tu proceso en 3 simples pasos</h2>
@@ -90,9 +460,7 @@
       </p>
     </div>
 
-    <!-- Pasos en grid -->
     <div class="ingreso__pasos">
-      <!-- Paso 1 -->
       <div class="paso__card">
         <div class="paso__numero">
           <i class="fa-solid fa-phone"></i>
@@ -106,7 +474,6 @@
         </div>
       </div>
 
-      <!-- Paso 2 -->
       <div class="paso__card">
         <div class="paso__numero">
           <i class="fa-solid fa-clipboard-list"></i>
@@ -120,7 +487,6 @@
         </div>
       </div>
 
-      <!-- Paso 3 -->
       <div class="paso__card">
         <div class="paso__numero">
             <i class="fa-solid fa-hand-holding-heart"></i>
@@ -135,10 +501,10 @@
       </div>
     </div>
   </div>
-</section>
+</section> -->
 
 <!-- SECCIÓN 3: Testimonios -->
-<section class="seccion__testimonios">
+<!-- <section class="seccion__testimonios">
   <div class="testimonios__contenedor">
     <div class="testimonios__header">
       <p class="testimonios__subtitulo">EXPERIENCIAS</p>
@@ -174,10 +540,10 @@
       </div>
     </div>
   </div>
-</section>
+</section> -->
 
 <!-- SECCIÓN 4: Banner CTA - Agendar Visita -->
-<section class="seccion__cta">
+<!-- <section class="seccion__cta">
   <div class="cta__card">
     <div class="cta__contenido">
       <h2 class="cta__titulo">Es hora de cuidar a los que más amamos</h2>
@@ -191,4 +557,4 @@
       </button>
     </div>
   </div>
-</section>
+</section> -->

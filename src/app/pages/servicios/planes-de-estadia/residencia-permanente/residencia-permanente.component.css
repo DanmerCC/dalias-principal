@@ -1,0 +1,564 @@
+/* Hero Banner */
+.hero__residencia {
+  width: 100%;
+  height: 110vh;
+  background: linear-gradient(
+      145deg,
+      rgba(45, 45, 45, 0.88) 0%,
+      rgba(101, 101, 101, 0.82) 100%
+    ),
+    url("/banner-permanente.png");
+  background-size: cover;
+  background-position: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+}
+
+.hero__overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: radial-gradient(
+    ellipse at top,
+    transparent 0%,
+    rgba(0, 0, 0, 0.3) 100%
+  );
+}
+
+.hero__contenido {
+  text-align: center;
+  padding: 0 2rem;
+  position: relative;
+  z-index: 2;
+}
+
+.hero__badge {
+  display: inline-block;
+  background: linear-gradient(135deg, #c9a869 0%, #b8975d 100%);
+  color: #fff;
+  padding: 0.7rem 2rem;
+  border-radius: 30px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  margin-bottom: 1.8rem;
+  box-shadow: 0 4px 20px rgba(201, 168, 105, 0.4);
+}
+
+.hero__titulo {
+  font-size: 4.2rem;
+  font-weight: 300;
+  color: #fff;
+  margin: 0 0 1.5rem 0;
+  line-height: 1.15;
+  font-family: "Playfair Display", "Georgia", serif;
+  text-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+}
+
+.hero__descripcion {
+  font-size: 1.25rem;
+  color: rgba(255, 255, 255, 0.95);
+  margin: 0 0 3.5rem 0;
+  line-height: 1.7;
+  max-width: 800px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+
+/* SECCIÓN: Confort */
+.seccion__confort {
+  width: 100%;
+  padding: 6rem 3rem;
+  background: #fff;
+}
+
+.confort__container.to_last{
+    margin-bottom: 0;
+}
+.confort__container {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 5rem;
+  margin-bottom: 5rem;
+  align-items: center;
+  background: #f5f5f0;
+  padding: 4rem;
+  border-radius: 15px;
+}
+
+.confort__content {
+  padding-right: 2rem;
+}
+
+.confort__titulo {
+  font-size: 2.8rem;
+  font-weight: 400;
+  color: #2d2d2d;
+  margin: 0 0 1.5rem 0;
+  line-height: 1.3;
+  font-family: "Playfair Display", "Georgia", serif;
+}
+
+.confort__descripcion {
+  font-size: 1.05rem;
+  line-height: 1.8;
+  color: #555;
+  margin: 0;
+}
+
+.confort__imagen {
+  width: 100%;
+  height: 450px;
+  border-radius: 15px;
+  overflow: hidden;
+  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.15);
+}
+
+.confort__imagen img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.5s ease;
+}
+
+.confort__imagen:hover img {
+  transform: scale(1.05);
+}
+
+/* SECCIÓN: Todo Incluido */
+.seccion__incluido {
+  width: 100%;
+  padding: 6rem 3rem;
+  background: #fafaf8;
+}
+
+.incluido__container {
+  max-width: 1300px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 350px 1fr;
+  gap: 4rem;
+  align-items: start;
+}
+
+.incluido__header {
+  position: sticky;
+  top: 100px;
+}
+
+.incluido__titulo {
+  font-size: 3.5rem;
+  font-weight: 700;
+  color: #2d2d2d;
+  margin: 0 0 2rem 0;
+  line-height: 1.1;
+  font-family: "Playfair Display", "Georgia", serif;
+}
+
+.incluido__descripcion {
+  font-size: 1rem;
+  line-height: 1.7;
+  color: #888;
+  margin: 0;
+}
+
+.incluido__card {
+  background: #fff;
+  border-radius: 20px;
+  padding: 3rem;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.06);
+}
+
+.incluido__grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 2.5rem 3rem;
+}
+
+.incluido__item {
+  display: flex;
+  gap: 1.2rem;
+  align-items: flex-start;
+}
+
+.item__icono {
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.item__icono i {
+  font-size: 1.8rem;
+  color: #e8c547;
+}
+
+.item__content h3 {
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: #2d2d2d;
+  margin: 0 0 0.4rem 0;
+  font-family: "Playfair Display", "Georgia", serif;
+}
+
+.item__content p {
+  font-size: 0.9rem;
+  color: #999;
+  margin: 0;
+  line-height: 1.5;
+}
+
+/* SECCIÓN: Instalaciones */
+.seccion__instalaciones {
+  width: 100%;
+  padding: 6rem 3rem;
+  background: #fff;
+}
+
+.instalaciones__container {
+  max-width: 1300px;
+  margin: 0 auto;
+}
+
+.instalaciones__header {
+  text-align: center;
+  max-width: 700px;
+  margin: 0 auto 4rem auto;
+}
+
+.instalaciones__badge {
+  display: inline-block;
+  color: #c9a869;
+  font-size: 0.8rem;
+  font-weight: 700;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  margin-bottom: 1rem;
+}
+
+.instalaciones__titulo {
+  font-size: 3rem;
+  font-weight: 400;
+  color: #2d2d2d;
+  margin: 0 0 1.5rem 0;
+  line-height: 1.2;
+  font-family: "Playfair Display", "Georgia", serif;
+}
+
+.instalaciones__descripcion {
+  font-size: 1.05rem;
+  line-height: 1.7;
+  color: #666;
+  margin: 0;
+}
+
+.instalaciones__grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  grid-template-rows: repeat(3, 200px);
+  gap: 1rem;
+}
+
+.instalaciones__imagen {
+  border-radius: 12px;
+  overflow: hidden;
+  position: relative;
+}
+
+.instalaciones__imagen--1 {
+  grid-column: 1 / 3;
+  grid-row: 1 / 3;
+}
+
+.instalaciones__imagen--2 {
+  grid-column: 3 / 4;
+  grid-row: 1 / 2;
+}
+
+.instalaciones__imagen--3 {
+  grid-column: 4 / 5;
+  grid-row: 1 / 2;
+}
+
+.instalaciones__imagen--4 {
+  grid-column: 3 / 5;
+  grid-row: 2 / 3;
+}
+
+.instalaciones__imagen--5 {
+  grid-column: 1 / 2;
+  grid-row: 3 / 4;
+}
+
+.instalaciones__imagen--6 {
+  grid-column: 2 / 3;
+  grid-row: 3 / 4;
+}
+
+.instalaciones__imagen--7 {
+  grid-column: 3 / 4;
+  grid-row: 3 / 4;
+}
+
+.instalaciones__imagen--8 {
+  grid-column: 4 / 5;
+  grid-row: 3 / 4;
+}
+
+.instalaciones__imagen img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.5s ease;
+}
+
+.instalaciones__imagen:hover img {
+  transform: scale(1.05);
+}
+
+/* SECCIÓN: Procedimiento de Ingreso */
+.seccion__ingreso {
+  width: 100%;
+  padding: 6rem 3rem;
+  background: linear-gradient(135deg, #003e5c 0%, #1a4d6d 100%);
+  position: relative;
+  overflow: hidden;
+}
+
+.seccion__ingreso::before {
+  content: "";
+  position: absolute;
+  top: -20%;
+  right: -10%;
+  width: 30rem;
+  height: 30rem;
+  background: radial-gradient(
+    circle,
+    rgba(255, 255, 255, 0.08) 0%,
+    transparent 70%
+  );
+  border-radius: 50%;
+}
+
+.ingreso__contenedor {
+  max-width: 1400px;
+  margin: 0 auto;
+  position: relative;
+  z-index: 1;
+}
+
+.ingreso__header {
+  text-align: center;
+  margin-bottom: 4rem;
+}
+
+.ingreso__subtitulo {
+  color: #d9b756;
+  font-size: 0.9rem;
+  font-weight: 600;
+  letter-spacing: 0.15rem;
+  text-transform: uppercase;
+  margin: 0 0 1rem 0;
+}
+
+.ingreso__titulo {
+  color: #fff;
+  font-size: 2.8rem;
+  font-weight: 400;
+  line-height: 1.3;
+  margin: 0 0 1rem 0;
+}
+
+.ingreso__descripcion {
+  color: rgba(255, 255, 255, 0.9);
+  font-size: 1.1rem;
+  line-height: 1.7;
+  max-width: 750px;
+  margin: 0 auto;
+}
+
+.ingreso__pasos {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 2.5rem;
+  margin-bottom: 3rem;
+}
+
+.paso__card {
+  background: rgba(255, 255, 255, 0.08);
+  backdrop-filter: blur(10px);
+  border: 2px solid rgba(217, 183, 86, 0.2);
+  border-radius: 1.5rem;
+  padding: 2.5rem 2rem;
+  text-align: center;
+  transition: all 0.4s ease;
+  position: relative;
+}
+
+.paso__card:hover {
+  transform: translateY(-10px);
+  background: rgba(255, 255, 255, 0.12);
+  border-color: rgba(217, 183, 86, 0.5);
+  box-shadow: 0 1rem 3rem rgba(0, 0, 0, 0.3);
+}
+
+.paso__numero {
+  width: 5rem;
+  height: 5rem;
+  background: linear-gradient(135deg, #d9b756 0%, #c9a746 100%);
+  color: #fff;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 2rem;
+  margin: 0 auto 1.5rem;
+  box-shadow: 0 0.5rem 1.5rem rgba(217, 183, 86, 0.4);
+  transition: all 0.3s ease;
+}
+
+.paso__card:hover .paso__numero {
+  transform: scale(1.1) rotate(5deg);
+  box-shadow: 0 0.8rem 2rem rgba(217, 183, 86, 0.6);
+}
+
+.paso__contenido h3 {
+  color: #fff;
+  font-size: 1.3rem;
+  font-weight: 600;
+  margin: 0 0 1rem 0;
+}
+
+.paso__contenido p {
+  color: rgba(255, 255, 255, 0.85);
+  font-size: 0.95rem;
+  line-height: 1.6;
+  margin: 0;
+}
+
+/* SECCIÓN: Testimonios */
+.seccion__testimonios {
+  width: 100%;
+  padding: 6rem 3rem;
+  background: #fff;
+}
+
+.testimonios__contenedor {
+  max-width: 1400px;
+  margin: 0 auto;
+}
+
+.testimonios__header {
+  text-align: center;
+  margin-bottom: 4rem;
+}
+
+.testimonios__subtitulo {
+  color: #aed3da;
+  font-size: 0.9rem;
+  font-weight: 600;
+  letter-spacing: 0.1rem;
+  text-transform: uppercase;
+  margin: 0 0 1rem 0;
+}
+
+.testimonios__titulo {
+  color: #003e5c;
+  font-size: 2.5rem;
+  font-weight: 400;
+  line-height: 1.3;
+  margin: 0 0 1rem 0;
+}
+
+.testimonios__descripcion {
+  color: #666;
+  font-size: 1.1rem;
+  line-height: 1.7;
+  margin: 0;
+}
+
+.testimonios__grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 2rem;
+}
+
+.testimonio__card {
+  background: linear-gradient(135deg, #f8f9fa 0%, #ffffff 100%);
+  padding: 2.5rem;
+  border-radius: 1.5rem;
+  position: relative;
+  box-shadow: 0 0.25rem 1rem rgba(0, 62, 92, 0.08);
+  transition: all 0.4s ease;
+  border: 2px solid transparent;
+}
+
+.testimonio__card:hover {
+  transform: translateY(-0.5rem);
+  box-shadow: 0 0.75rem 2rem rgba(0, 62, 92, 0.15);
+  border-color: rgba(217, 183, 86, 0.3);
+  background: #fff;
+}
+
+.testimonio__comillas {
+  position: absolute;
+  top: 1.5rem;
+  right: 1.5rem;
+  font-size: 3rem;
+  color: rgba(217, 183, 86, 0.2);
+}
+
+.testimonio__texto {
+  color: #666;
+  font-size: 1rem;
+  line-height: 1.7;
+  font-style: italic;
+  margin: 0 0 2rem 0;
+}
+
+.testimonio__autor {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 1rem;
+}
+
+.testimonio__autor img {
+  width: 3.5rem;
+  height: 3.5rem;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 3px solid #d9b756;
+}
+
+.testimonio__autor h4 {
+  color: #003e5c;
+  font-size: 1rem;
+  font-weight: 600;
+  margin: 0 0 0.2rem 0;
+}
+
+.testimonio__autor span {
+  color: #999;
+  font-size: 0.85rem;
+}
+
+.testimonio__estrellas {
+  display: flex;
+  gap: 0.3rem;
+}
+
+.testimonio__estrellas i {
+  color: #d9b756;
+  font-size: 1.1rem;
+}
