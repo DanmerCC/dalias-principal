@@ -56,7 +56,6 @@
   color: #fff;
   margin: 0 0 1.2rem 0;
   line-height: 1.2;
-  font-family: "Playfair Display", "Georgia", serif;
 }
 
 .hero__descripcion {
@@ -142,7 +141,6 @@
   color: #2d2d2d;
   margin: 0;
   line-height: 1.2;
-  font-family: "Playfair Display", "Georgia", serif;
   position: relative;
   padding-bottom: 1.5rem;
 }
@@ -244,7 +242,6 @@
   font-weight: 400;
   color: #2d2d2d;
   margin: 0 0 1rem 0;
-  font-family: "Playfair Display", "Georgia", serif;
 }
 
 .horario__subtitulo {
@@ -428,7 +425,6 @@
   font-weight: 400;
   color: #2d2d2d;
   margin: 0 0 2rem 0;
-  font-family: "Playfair Display", "Georgia", serif;
 }
 
 .inversion__precio {

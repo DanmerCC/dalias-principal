@@ -1435,7 +1435,7 @@
 /* Columna derecha - formulario */
 .contacto__derecha {
   flex: 1;
-  background: #1a1d23;
+  background: #062a47;
   padding: 5rem 4rem;
   display: flex;
   align-items: center;
@@ -1461,7 +1461,7 @@
 }
 
 .form__label {
-  color: #999;
+  color: #fff;
   font-size: 0.7rem;
   font-weight: 500;
   margin: 0;
@@ -1475,7 +1475,7 @@
   width: 100%;
   padding: 1rem 0;
   border: none;
-  border-bottom: 1px solid #2d3139;
+  border-bottom: 1px solid #fff;
   font-size: 1rem;
   font-family: inherit;
   background: transparent;

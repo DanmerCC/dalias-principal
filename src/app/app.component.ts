@@ -23,7 +23,8 @@ export class AppComponent implements OnInit, OnDestroy {
   private whatsappLinks: { [key: string]: string } = {
     '/': 'https://wa.link/58djkj',
     '/inicio': 'https://wa.link/58djkj',
-    '/servicios': 'https://wa.link/thafd4'
+    '/servicios': 'https://wa.link/thafd4',
+    '/servicios/planes-de-estadia': 'https://wa.link/3odmgg'
     // Aquí puedes agregar más rutas en el futuro
     // '/contacto': 'https://wa.link/otro_enlace',
     // '/productos': 'https://wa.link/otro_enlace',

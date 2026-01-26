@@ -93,7 +93,7 @@ export class PlanesDeEstadiaComponent {
         'Habitaciones cómodas y seguras',
       ],
       color: '#758f94',
-      imagen: '/nosotros1.jpg',
+      imagen: '/permanente1.jpg',
       ruta: '/servicios/planes-de-estadia/residencia-permanente',
     },
     {
@@ -108,7 +108,7 @@ export class PlanesDeEstadiaComponent {
         'Adaptación progresiva',
       ],
       color: '#D9B756',
-      imagen: '/nosotros2.jpg',
+      imagen: 'permanente2.jpg',
       ruta: '/servicios/residencia-temporal',
     },
     {
@@ -123,7 +123,7 @@ export class PlanesDeEstadiaComponent {
         'Alimentación incluida',
       ],
       color: '#758f94',
-      imagen: '/servicios1.png',
+      imagen: '/permanente3.jpg',
       ruta: '/servicios/planes-de-estadia/centro-de-dia',
     },
     {
@@ -134,57 +134,51 @@ export class PlanesDeEstadiaComponent {
       detalles: [
         'Seguimiento médico personalizado',
         'Enfermería especializada',
-        'Terapia física y rehabilitación',
+        'Terapia física y rehabilitación', 
         'Control de medicación',
       ],
       color: '#D9B756',
-      imagen: '/servicios2.png',
+      imagen: '/permanente4.jpg',
       ruta: '/servicios/residencia-post-operatoria',
     },
   ];
 
-  preguntasFrecuentes: PreguntaFrecuente[] = [
-    {
-      id: 1,
-      pregunta:
-        '¿Cuándo debería considerar una residencia geriátrica para mi familiar?',
-      respuesta:
-        'Es recomendable considerar una residencia geriátrica para adultos mayores cuando el familiar comienza a necesitar mayor acompañamiento, supervisión, apoyo en actividades diarias o cuando la familia busca mejorar su calidad de vida, previniendo riesgos como caídas o aislamiento. <br><br>👉 Revise nuestra guía para elegir la residencia adecuada: <a href="https://goo.su/Lis06yx" target="_blank" rel="noopener noreferrer">https://goo.su/Lis06yx</a>',
-      activo: false,
-    },
-    {
-      id: 2,
-      pregunta:
-        '¿Qué tipo de adultos mayores pueden vivir la experiencia Las Dalias?',
-      respuesta:
-        'Residencia Las Dalias está orientada principalmente a adultos mayores independientes o semi dependientes que desean vivir en un entorno cómodo, seguro y acompañado, manteniendo su autonomía y recibiendo apoyo profesional cuando lo necesiten.',
-      activo: false,
-    },
-    {
-      id: 3,
-      pregunta:
-        '¿Cuáles son los servicios de cuidado para un adulto mayor y en qué se diferencian?',
-      respuesta:
-        'Ofrecemos residencia permanente, residencia temporal, centro de día, residencia post operatoria y consultas geriátricas, adaptándonos a distintas necesidades.<br><br>Cada servicio se diferencia por el nivel de acompañamiento, duración de la estadía y tipo de cuidado requerido, siempre con un enfoque personalizado.',
-      activo: false,
-    },
-    {
-      id: 4,
-      pregunta:
-        '¿Cómo se garantiza la seguridad y el bienestar de los residentes?',
-      respuesta:
-        'La seguridad del adulto mayor es prioritaria. Contamos con personal de enfermería las 24 horas, monitoreo permanente, protocolos de salud, sistema de emergencias médicas, instalaciones adaptadas y seguimiento geriátrico continuo para actuar de forma rápida y segura ante cualquier situación.',
-      activo: false,
-    },
-    {
-      id: 5,
-      pregunta:
-        '¿Cómo pueden los familiares participar en la vida del residente y cómo es la comunicación con el personal?',
-      respuesta:
-        'En Residencia Las Dalias, la familia participa activamente mediante visitas, actividades compartidas y una comunicación constante y transparente con el equipo, fortaleciendo la confianza y el bienestar del residente.',
-      activo: false,
-    },
-  ];
+  // Solo la parte modificada del componente TypeScript
+
+preguntasFrecuentes: PreguntaFrecuente[] = [
+  {
+    id: 1,
+    pregunta:
+      '¿Cual es la diferencia entre Residencia Permanente y Temporal?',
+    respuesta:
+      'La Residencia Permanente está diseñada como un nuevo hogar a largo plazo con asistencia total. La Residencia Temporal ofrece los mismos beneficios de cuidado y alimentación, pero está enfocada en periodos específicos, como vacaciones familiares o descansos del cuidador principal.',
+    activo: false,
+  },
+  {
+    id: 2,
+    pregunta:
+      '¿Puedo cambiar de plan de estadía si las necesidades del adulto mayor evolucionan con el tiempo?',
+    respuesta:
+      'Sí. Los planes de estadía están pensados para ser flexibles. Si las necesidades del adulto mayor cambian, es posible reevaluar su situación y ajustar el plan (por ejemplo, pasar de un centro de día a una residencia temporal o permanente), siempre con una evaluación geriátrica previa que garantice continuidad y bienestar en el cuidado.',
+    activo: false,
+  },
+  {
+    id: 3,
+    pregunta:
+      '¿Qué sucede si el adulto mayor requiere cuidados adicionales durante su estadía?',
+    respuesta:
+      'Ante cualquier cambio en el estado de salud, se realiza una evaluación profesional para definir ajustes en el plan de atención, terapias o acompañamiento. El objetivo es brindar un cuidado oportuno y personalizado, manteniendo una comunicación clara con la familia en todo momento.',
+    activo: false,
+  },
+  {
+    id: 4,
+    pregunta:
+      '¿Cómo se decide qué plan es el más seguro para el nivel de movilidad de mi familiar?',
+    respuesta:
+      'Antes de la contratación, nuestra geriatra realiza una valoración de independencia física. Esta evaluación profesional nos permite recomendarle si el adulto mayor es apto para el Centro de Día o si requiere el soporte de una Residencia Permanente o Temporal con monitoreo de enfermería las 24 horas.',
+    activo: false,
+  },
+];
 
   get preguntasColumna1(): PreguntaFrecuente[] {
     return this.preguntasFrecuentes.filter((_, index) => index % 2 === 0);
