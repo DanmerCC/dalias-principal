@@ -11,7 +11,7 @@
   height: 100%;
   background-image:
     linear-gradient(rgba(245, 242, 235, 0.88), rgba(245, 242, 235, 0.85)),
-    url("/slider1.png");
+    url("/banner-estadia.jpg");
   background-size: cover;
   background-position: center;
   display: flex;
