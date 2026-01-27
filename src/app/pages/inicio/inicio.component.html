@@ -454,6 +454,22 @@
             </span>
           </div>
 
+          <!-- Teléfono (NUEVO) -->
+          <div class="form__grupo__modal">
+            <label class="form__label--modal">Teléfono / Móvil *</label>
+            <input
+              type="tel"
+              class="form__input--modal"
+              placeholder="+51 987 654 321"
+              [(ngModel)]="formularioVisita.telefono"
+              (blur)="validarTelefono()"
+              (input)="validarTelefono()"
+            />
+            <span class="error__mensaje" *ngIf="erroresVisita.telefono">
+              {{ erroresVisita.telefono }}
+            </span>
+          </div>
+
           <div class="form__seccion-titulo">
             <i class="fa-solid fa-person-cane"></i>
             <span>Información del adulto mayor</span>
@@ -539,6 +555,7 @@
               <span class="checkbox__texto">
                 <strong>Evaluación Inicial del Adulto Mayor</strong> Ayúdenos a
                 conocer mejor a su familiar para brindarle una atención adecuada
+                <br />
                 <b>⏱️Duración 1 minuto - (Opcional)</b>
               </span>
             </label>
@@ -640,9 +657,14 @@
           </div>
 
           <!-- Botón enviar -->
-          <button class="btn__enviar-visita" (click)="enviarSolicitudVisita()">
-            <span>Confirmar visita</span>
-            <i class="bx bx-check-circle"></i>
+          <button
+            class="btn__enviar-visita"
+            (click)="enviarSolicitudVisita()"
+            [disabled]="enviandoFormulario"
+          >
+            <span *ngIf="!enviandoFormulario">Confirmar visita</span>
+            <div class="spinner" *ngIf="enviandoFormulario"></div>
+            <i class="bx bx-check-circle" *ngIf="!enviandoFormulario"></i>
           </button>
         </div>
       </div>
@@ -1373,9 +1395,18 @@
           </div>
 
           <!-- Botón -->
-          <button type="submit" class="btn__enviar">
-            <span>ENVIAR MENSAJE</span>
-            <i class="bx bx-right-arrow-alt"></i>
+          <!-- Botón -->
+          <button
+            type="submit"
+            class="btn__enviar"
+            [disabled]="enviandoFormularioContacto"
+          >
+            <span *ngIf="!enviandoFormularioContacto">ENVIAR MENSAJE</span>
+            <div class="spinner" *ngIf="enviandoFormularioContacto"></div>
+            <i
+              class="bx bx-right-arrow-alt"
+              *ngIf="!enviandoFormularioContacto"
+            ></i>
           </button>
 
           <p class="form__privacidad">

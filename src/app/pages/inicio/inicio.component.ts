@@ -70,6 +70,7 @@ interface PreguntaFrecuente {
 interface FormularioVisita {
   nombreApellido: string;
   correoElectronico: string;
+  telefono: string;
   edadAdultoMayor: string;
   nivelDependencia: string;
   observacionesSalud: string;
@@ -80,6 +81,7 @@ interface FormularioVisita {
 interface ErroresFormulario {
   nombreApellido: string;
   correoElectronico: string;
+  telefono: string;
   edadAdultoMayor: string;
   nivelDependencia: string;
   fechaSeleccionada: string;
@@ -142,6 +144,8 @@ export class InicioComponent implements OnInit, OnDestroy {
   noticiasVisibles: Noticia[] = [];
   paginasNoticias: number[] = [];
   slideActualActividades = 0;
+  enviandoFormulario = false;
+  enviandoFormularioContacto = false;
 
   // Carrusel de imágenes nosotros
   imagenActualNosotros = 0;
@@ -191,6 +195,7 @@ export class InicioComponent implements OnInit, OnDestroy {
   formularioVisita: FormularioVisita = {
     nombreApellido: '',
     correoElectronico: '',
+    telefono: '',
     edadAdultoMayor: '',
     nivelDependencia: '',
     observacionesSalud: '',
@@ -201,6 +206,7 @@ export class InicioComponent implements OnInit, OnDestroy {
   erroresVisita: ErroresFormulario = {
     nombreApellido: '',
     correoElectronico: '',
+    telefono: '',
     edadAdultoMayor: '',
     nivelDependencia: '',
     fechaSeleccionada: '',
@@ -680,6 +686,9 @@ export class InicioComponent implements OnInit, OnDestroy {
       return;
     }
 
+    // Activar estado de carga
+    this.enviandoFormularioContacto = true;
+
     // Preparar el payload según el formato de la API
     const payload = {
       tipoConsulta: this.formularioContacto.tipoConsulta,
@@ -699,11 +708,13 @@ export class InicioComponent implements OnInit, OnDestroy {
       .subscribe({
         next: (response: any) => {
           console.log('Respuesta exitosa:', response);
+          this.enviandoFormularioContacto = false;
           // Mostrar modal de confirmación
           this.mostrarModalConfirmacionContacto = true;
         },
         error: (error) => {
           console.error('Error al enviar formulario:', error);
+          this.enviandoFormularioContacto = false;
 
           if (error.status === 400) {
             alert(
@@ -726,6 +737,25 @@ export class InicioComponent implements OnInit, OnDestroy {
       this.erroresContacto.tipoConsulta = 'Selecciona un tipo de consulta';
     } else {
       this.erroresContacto.tipoConsulta = '';
+    }
+  }
+
+  validarTelefono(): void {
+    const valor = this.formularioVisita.telefono.trim();
+    const telRegex = /^[0-9]{9,15}$/;
+
+    if (!valor) {
+      this.erroresVisita.telefono = 'El teléfono es obligatorio';
+    } else if (!/^[0-9+\s-]+$/.test(valor)) {
+      this.erroresVisita.telefono =
+        'Solo se permiten números, +, espacios y guiones';
+    } else {
+      const soloNumeros = valor.replace(/[^0-9]/g, '');
+      if (!telRegex.test(soloNumeros)) {
+        this.erroresVisita.telefono = 'Ingresa un número válido (9-15 dígitos)';
+      } else {
+        this.erroresVisita.telefono = '';
+      }
     }
   }
 
@@ -1106,6 +1136,7 @@ export class InicioComponent implements OnInit, OnDestroy {
     // Validar todos los campos
     this.validarNombreApellido();
     this.validarCorreoElectronico();
+    this.validarTelefono();
     this.validarEdadAdultoMayor();
     this.validarNivelDependencia();
     this.validarFechaSeleccionada();
@@ -1120,10 +1151,14 @@ export class InicioComponent implements OnInit, OnDestroy {
       return;
     }
 
+    // Activar estado de carga
+    this.enviandoFormulario = true;
+
     // Preparar el payload según el formato de la API
     const payload: any = {
       nombreApellido: this.formularioVisita.nombreApellido,
       correoElectronico: this.formularioVisita.correoElectronico,
+      telefono: this.formularioVisita.telefono,
       edadAdultoMayor: parseInt(this.formularioVisita.edadAdultoMayor),
       nivelDependencia: this.formularioVisita.nivelDependencia,
       observacionesSalud: this.formularioVisita.observacionesSalud || undefined,
@@ -1154,11 +1189,13 @@ export class InicioComponent implements OnInit, OnDestroy {
       .subscribe({
         next: (response: any) => {
           console.log('Respuesta exitosa:', response);
+          this.enviandoFormulario = false;
           // Mostrar modal de confirmación
           this.mostrarModalConfirmacion = true;
         },
         error: (error) => {
           console.error('Error al enviar solicitud:', error);
+          this.enviandoFormulario = false;
 
           // Manejar error de fecha/hora ocupada (409)
           if (error.status === 409) {
@@ -1208,6 +1245,7 @@ export class InicioComponent implements OnInit, OnDestroy {
     this.formularioVisita = {
       nombreApellido: '',
       correoElectronico: '',
+      telefono: '',
       edadAdultoMayor: '',
       nivelDependencia: '',
       observacionesSalud: '',
@@ -1218,6 +1256,7 @@ export class InicioComponent implements OnInit, OnDestroy {
     this.erroresVisita = {
       nombreApellido: '',
       correoElectronico: '',
+      telefono: '',
       edadAdultoMayor: '',
       nivelDependencia: '',
       fechaSeleccionada: '',
