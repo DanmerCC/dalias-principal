@@ -228,7 +228,6 @@
   font-weight: 500;
   cursor: pointer;
   transition: all 0.3s ease;
-  border-bottom: 1px solid #2d2d2d;
   padding-bottom: 0.2rem;
 }
 
