@@ -1,7 +1,7 @@
 import { Component, HostListener, OnInit, OnDestroy } from '@angular/core';
 import { Router, RouterOutlet, NavigationEnd } from '@angular/router';
-import { HeaderComponent } from "./pages/header/header.component";
-import { FooterComponent } from "./pages/footer/footer.component";
+import { HeaderComponent } from './pages/header/header.component';
+import { FooterComponent } from './pages/footer/footer.component';
 import { CommonModule } from '@angular/common';
 import { Subscription } from 'rxjs';
 import { filter } from 'rxjs/operators';
@@ -10,13 +10,13 @@ import { filter } from 'rxjs/operators';
   selector: 'app-root',
   imports: [RouterOutlet, HeaderComponent, FooterComponent, CommonModule],
   templateUrl: './app.component.html',
-  styleUrl: './app.component.css'
+  styleUrl: './app.component.css',
 })
 export class AppComponent implements OnInit, OnDestroy {
   title = 'dalias';
   showScrollButton = false;
   whatsappLink = 'https://wa.link/58djkj'; // Enlace por defecto
-  
+
   private routerSubscription?: Subscription;
 
   // Mapa de enlaces de WhatsApp por ruta
@@ -24,7 +24,9 @@ export class AppComponent implements OnInit, OnDestroy {
     '/': 'https://wa.link/58djkj',
     '/inicio': 'https://wa.link/58djkj',
     '/servicios': 'https://wa.link/thafd4',
-    '/servicios/planes-de-estadia': 'https://wa.link/3odmgg'
+    '/servicios/planes-de-estadia': 'https://wa.link/3odmgg',
+    '/servicios/planes-de-estadia/residencia-permanente':
+      'https://wa.link/db4jzd',
     // Aquí puedes agregar más rutas en el futuro
     // '/contacto': 'https://wa.link/otro_enlace',
     // '/productos': 'https://wa.link/otro_enlace',
@@ -38,7 +40,7 @@ export class AppComponent implements OnInit, OnDestroy {
 
     // Suscribirse a los cambios de ruta
     this.routerSubscription = this.router.events
-      .pipe(filter(event => event instanceof NavigationEnd))
+      .pipe(filter((event) => event instanceof NavigationEnd))
       .subscribe((event: any) => {
         this.updateWhatsappLink(event.urlAfterRedirects);
       });
@@ -55,7 +57,7 @@ export class AppComponent implements OnInit, OnDestroy {
   private updateWhatsappLink(url: string) {
     // Limpiar la URL de parámetros query y fragmentos
     const cleanUrl = url.split('?')[0].split('#')[0];
-    
+
     // Buscar el enlace correspondiente o usar el por defecto
     this.whatsappLink = this.whatsappLinks[cleanUrl] || this.whatsappLinks['/'];
   }

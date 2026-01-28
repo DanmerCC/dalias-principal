@@ -88,7 +88,7 @@ export class PlanesDeEstadiaComponent {
         'Hogar integral con atención continua, calidez y profesionalismo',
       detalles: [
         'Atención médica y de enfermería 24/7',
-        'Alimentación balanceada personalizada',
+        'Alimentación balanceada con superalimentos',
         'Actividades recreativas y terapéuticas',
         'Habitaciones cómodas y seguras',
       ],
@@ -102,8 +102,8 @@ export class PlanesDeEstadiaComponent {
       icono: 'fa-solid fa-calendar-days',
       descripcion: 'Estadías cortas con atención profesional completa',
       detalles: [
-        'Flexibilidad en días de estadía',
-        'Mismo nivel de atención que residencia permanente',
+        'Flexibilidad según tiempo de estadía',
+        'Dinámicas diarias de estimulación',
         'Ideal para descanso del cuidador',
         'Adaptación progresiva',
       ],
@@ -117,10 +117,10 @@ export class PlanesDeEstadiaComponent {
       icono: 'fa-solid fa-sun',
       descripcion: 'Acompañamiento diurno con actividades y terapias',
       detalles: [
-        'Atención de 8:00 am a 5:00 pm',
+        'Jornada diurna estructurada',
         'Terapias ocupacionales y físicas',
         'Estimulación cognitiva',
-        'Alimentación incluida',
+        'Alimentación supervisada',
       ],
       color: '#758f94',
       imagen: '/permanente3.jpg',
@@ -132,10 +132,10 @@ export class PlanesDeEstadiaComponent {
       icono: 'fa-solid fa-heart-pulse',
       descripcion: 'Recuperación supervisada con atención médica especializada',
       detalles: [
-        'Seguimiento médico personalizado',
+        'Observación médica constante',
         'Enfermería especializada',
-        'Terapia física y rehabilitación', 
-        'Control de medicación',
+        'Rutinas de rehabilitación guiadas',
+        'Administración segura de tratamientos',
       ],
       color: '#D9B756',
       imagen: '/permanente4.jpg',
@@ -145,40 +145,40 @@ export class PlanesDeEstadiaComponent {
 
   // Solo la parte modificada del componente TypeScript
 
-preguntasFrecuentes: PreguntaFrecuente[] = [
-  {
-    id: 1,
-    pregunta:
-      '¿Cual es la diferencia entre Residencia Permanente y Temporal?',
-    respuesta:
-      'La Residencia Permanente está diseñada como un nuevo hogar a largo plazo con asistencia total. La Residencia Temporal ofrece los mismos beneficios de cuidado y alimentación, pero está enfocada en periodos específicos, como vacaciones familiares o descansos del cuidador principal.',
-    activo: false,
-  },
-  {
-    id: 2,
-    pregunta:
-      '¿Puedo cambiar de plan de estadía si las necesidades del adulto mayor evolucionan con el tiempo?',
-    respuesta:
-      'Sí. Los planes de estadía están pensados para ser flexibles. Si las necesidades del adulto mayor cambian, es posible reevaluar su situación y ajustar el plan (por ejemplo, pasar de un centro de día a una residencia temporal o permanente), siempre con una evaluación geriátrica previa que garantice continuidad y bienestar en el cuidado.',
-    activo: false,
-  },
-  {
-    id: 3,
-    pregunta:
-      '¿Qué sucede si el adulto mayor requiere cuidados adicionales durante su estadía?',
-    respuesta:
-      'Ante cualquier cambio en el estado de salud, se realiza una evaluación profesional para definir ajustes en el plan de atención, terapias o acompañamiento. El objetivo es brindar un cuidado oportuno y personalizado, manteniendo una comunicación clara con la familia en todo momento.',
-    activo: false,
-  },
-  {
-    id: 4,
-    pregunta:
-      '¿Cómo se decide qué plan es el más seguro para el nivel de movilidad de mi familiar?',
-    respuesta:
-      'Antes de la contratación, nuestra geriatra realiza una valoración de independencia física. Esta evaluación profesional nos permite recomendarle si el adulto mayor es apto para el Centro de Día o si requiere el soporte de una Residencia Permanente o Temporal con monitoreo de enfermería las 24 horas.',
-    activo: false,
-  },
-];
+  preguntasFrecuentes: PreguntaFrecuente[] = [
+    {
+      id: 1,
+      pregunta:
+        '¿Cual es la diferencia entre Residencia Permanente y Temporal?',
+      respuesta:
+        'La Residencia Permanente está diseñada como un nuevo hogar a largo plazo con asistencia total. La Residencia Temporal ofrece los mismos beneficios de cuidado y alimentación, pero está enfocada en periodos específicos, como vacaciones familiares o descansos del cuidador principal.',
+      activo: false,
+    },
+    {
+      id: 2,
+      pregunta:
+        '¿Puedo cambiar de plan de estadía si las necesidades del adulto mayor evolucionan con el tiempo?',
+      respuesta:
+        'Sí. Los planes de estadía están pensados para ser flexibles. Si las necesidades del adulto mayor cambian, es posible reevaluar su situación y ajustar el plan (por ejemplo, pasar de un centro de día a una residencia temporal o permanente), siempre con una evaluación geriátrica previa que garantice continuidad y bienestar en el cuidado.',
+      activo: false,
+    },
+    {
+      id: 3,
+      pregunta:
+        '¿Qué sucede si el adulto mayor requiere cuidados adicionales durante su estadía?',
+      respuesta:
+        'Ante cualquier cambio en el estado de salud, se realiza una evaluación profesional para definir ajustes en el plan de atención, terapias o acompañamiento. El objetivo es brindar un cuidado oportuno y personalizado, manteniendo una comunicación clara con la familia en todo momento.',
+      activo: false,
+    },
+    {
+      id: 4,
+      pregunta:
+        '¿Cómo se decide qué plan es el más seguro para el nivel de movilidad de mi familiar?',
+      respuesta:
+        'Antes de la contratación, nuestra geriatra realiza una valoración de independencia física. Esta evaluación profesional nos permite recomendarle si el adulto mayor es apto para el Centro de Día o si requiere el soporte de una Residencia Permanente o Temporal con monitoreo de enfermería las 24 horas.',
+      activo: false,
+    },
+  ];
 
   get preguntasColumna1(): PreguntaFrecuente[] {
     return this.preguntasFrecuentes.filter((_, index) => index % 2 === 0);
@@ -304,7 +304,9 @@ preguntasFrecuentes: PreguntaFrecuente[] = [
     const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
 
     this.http
-      .post('https://backend-dalias.onrender.com/contacto', payload, { headers })
+      .post('https://backend-dalias.onrender.com/contacto', payload, {
+        headers,
+      })
       .subscribe({
         next: (response: any) => {
           console.log('Respuesta exitosa:', response);

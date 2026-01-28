@@ -745,7 +745,7 @@ export class InicioComponent implements OnInit, OnDestroy {
     const telRegex = /^[0-9]{9,15}$/;
 
     if (!valor) {
-      this.erroresVisita.telefono = 'El teléfono es obligatorio';
+      this.erroresVisita.telefono = 'El móvil es obligatorio';
     } else if (!/^[0-9+\s-]+$/.test(valor)) {
       this.erroresVisita.telefono =
         'Solo se permiten números, +, espacios y guiones';

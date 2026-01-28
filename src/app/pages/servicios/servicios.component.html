@@ -2,12 +2,21 @@
 <div class="contenedor__slider">
   <div class="slider__img">
     <div class="content__slider">
-      <h1 class="slider__titulo">Nuestros Servicios</h1>
-      <div class="linea__decorativa"></div>
+      <!-- <p class="slider__label">ATENCIÓN INTEGRAL ESPECIALIZADA</p> -->
+      <h1 class="slider__titulo">
+        Servicios Creados para <br />
+        <span class="slider__titulo--dorado">un Envejecimiento Pleno </span>
+      </h1>
       <p class="slider__subtitulo">
         Modelo integral y personalizado de cuidado para adultos mayores,
-        acompañando envejecimiento con seguridad y bienestar pleno continuo.
+        acompañando envejecimiento con seguridad y bienestar pleno continuo
       </p>
+      <div class="slider__botones">
+        <button class="btn__primario" (click)="scrollToServicios()">
+          <span>Explorar Servicios</span>
+          <i class="fa-solid fa-chevron-down"></i>
+        </button>
+      </div>
     </div>
   </div>
 </div>
@@ -193,10 +202,7 @@
       </div>
 
       <div class="servicio__imagen">
-        <img
-          src="https://cdn.pixabay.com/photo/2017/03/23/19/57/asparagus-2169305_1280.jpg"
-          alt="Nutrición"
-        />
+        <img src="/platos.jpg" alt="Nutrición" />
       </div>
     </div>
   </div>

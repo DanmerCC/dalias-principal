@@ -2,52 +2,104 @@
 <div class="hero__residencia">
   <div class="hero__overlay"></div>
   <div class="hero__contenido">
-    <span class="hero__badge">Residencia Permanente</span>
+    <!-- <p class="hero__label">RESIDENCIA PERMANENTE</p> -->
     <h1 class="hero__titulo">
       Residencia Permanente
       <br />
-      para Adultos Mayores
+      <span class="hero__titulo--dorado"
+        >Trato y calidez como en el hogar
+      </span>
     </h1>
     <p class="hero__descripcion">
-      Un hogar seguro y acogedor donde tu familiar vive acompañado, cuidado y
-      atendido las 24 horas, con un enfoque humano, profesional y familiar.
+      Más que un lugar de cuidado, ofrecemos una comunidad donde el residente se
+      siente valorado y atendido, asegurando su bienestar físico y emocional con
+      un apoyo humano constante.
     </p>
+    <div class="hero__botones">
+      <button class="btn__primario" (click)="scrollToContenido()">
+        <span>Agendar visita</span>
+        <i class="fa-solid fa-chevron-down"></i>
+      </button>
+    </div>
   </div>
 </div>
 
-<!-- SECCIÓN: Diseñados para el Confort -->
-<section class="seccion__confort">
-  <div class="confort__container">
-    <div class="confort__content">
-      <h2 class="confort__titulo">
-        Un Nuevo Capítulo Lleno de Vida y Bienestar
+<!-- SECCIÓN: Experiencia Integral -->
+<section class="seccion__experiencia">
+  <div class="experiencia__container">
+    <div class="experiencia__content">
+      <span class="experiencia__badge">EXPERIENCIA INTEGRAL</span>
+      <h2 class="experiencia__titulo">
+        Más que un Hogar, una Comunidad para Trascender
       </h2>
-      <p class="confort__descripcion">
-        En Residencia Las Dalias, somos una Casa Club que redefine la vida del
-        adulto mayor. Ofrecemos un estilo de vida activo con monitoreo
-        profesional 24/7, programas de estimulación física y mental, y nutrición
-        completa. Aquí, fomentamos la independencia y salud integral en un
-        entorno seguro y de calidez familiar.
+      <p class="experiencia__descripcion">
+        Creemos que la vida social es el corazón del bienestar. Ofrecemos
+        espacios de convivencia diseñados para crear vínculos significativos
+        entre residentes, rodeados de jardines terapéuticos y áreas comunes
+        seguras.
       </p>
+
+      <div class="experiencia__lista">
+        <div class="experiencia__item">
+          <i class="fa-regular fa-circle-check"></i>
+          <span>Programas de estimulación física y cognitiva diaria.</span>
+        </div>
+        <div class="experiencia__item">
+          <i class="fa-regular fa-circle-check"></i>
+          <span>Nutrición personalizada por expertos en geriatría.</span>
+        </div>
+      </div>
+
+      <button class="experiencia__btn">
+        Conocer nuestras actividades
+        <i class="fa-solid fa-arrow-right"></i>
+      </button>
     </div>
-    <div class="confort__imagen">
-      <img src="/permanente1.jpeg" alt="Habitación confortable" />
+
+    <div class="experiencia__imagen">
+      <img src="/permanente1.jpeg" alt="Adulto mayor sonriente" />
     </div>
   </div>
-  <div class="confort__container to_last">
-    <div class="confort__imagen">
-      <img src="/permanente2.jpeg" alt="Habitación confortable" />
+</section>
+
+<!-- SECCIÓN: Atención de Lujo -->
+<section class="seccion__atencion">
+  <div class="atencion__container">
+    <div class="atencion__imagen">
+      <img src="/permanente2.jpeg" alt="Instalaciones modernas" />
     </div>
-    <div class="confort__content">
-      <h2 class="confort__titulo">
-        Más que un Hogar, una Comunidad para Trascender
 
-      </h2>
-      <p class="confort__descripcion">
-        Creemos que la vida social es el corazón del bienestar. Ofrecemos espacios de convivencia diseñados para crear vínculos significativos entre residentes, rodeados de jardines terapéuticos y áreas comunes seguras. Cada día es una oportunidad para descubrir nuevos pasatiempos, compartir experiencias con el respaldo de un equipo humano que se convierte en la segunda familia.
-
+    <div class="atencion__content">
+      <span class="atencion__badge">ATENCIÓN DE LUJO</span>
+      <h2 class="atencion__titulo">Cuidado Especializado con Calidez Humana</h2>
+      <p class="atencion__descripcion">
+        En Las Dalias, cada residente recibe atención personalizada bajo un
+        modelo biopsicosocial. Contamos con monitoreo 24/7 y un equipo
+        interdisciplinario que garantiza seguridad y tranquilidad total.
       </p>
+
+      <div class="atencion__stats">
+        <div class="atencion__stat">
+          <div class="stat__numero">24/7</div>
+          <div class="stat__label">Enfermería especializada</div>
+        </div>
+        <div class="atencion__stat">
+          <div class="stat__numero">365</div>
+          <div class="stat__label">Días de actividades</div>
+        </div>
+      </div>
     </div>
+  </div>
+</section>
+
+<!-- SECCIÓN: Frase Destacada -->
+<section class="seccion__frase">
+  <div class="frase__overlay"></div>
+  <div class="frase__contenido">
+    <h2 class="frase__texto">
+      En Las Dalias, no solo añadimos años a la vida,
+      <span class="frase__texto--dorado">sino vida a los años.</span>
+    </h2>
   </div>
 </section>
 
@@ -55,78 +107,83 @@
 <section class="seccion__incluido">
   <div class="incluido__container">
     <div class="incluido__header">
-      <h2 class="incluido__titulo">
-        Todo Incluido<br />
-        para su<br />
-        Tranquilidad
-      </h2>
+      <h2 class="incluido__titulo">Todo Incluido para su Tranquilidad</h2>
       <p class="incluido__descripcion">
         Nuestra propuesta de valor se basa en eliminar cualquier preocupación
-        administrativa o logística de la vida diaria.
+        administrativa o logística de
+        <span class="texto__verde">la vida diaria.</span>
       </p>
     </div>
 
-    <div class="incluido__card">
-      <div class="incluido__grid">
-        <div class="incluido__item">
-          <div class="item__icono">
-            <i class="fa-solid fa-shield-heart"></i>
-          </div>
-          <div class="item__content">
-            <h3>Enfermería 24-7</h3>
-            <p>Cuidado especializado profesional en todo momento.</p>
-          </div>
+    <div class="incluido__grid">
+      <div class="incluido__card">
+        <div class="card__icono">
+          <i class="fa-solid fa-heart"></i>
         </div>
+        <h3 class="card__titulo">Trato Humano y Cercano</h3>
+        <p class="card__descripcion">
+          Contamos con un equipo apasionado y profesional que brinda atención
+          personalizada, priorizando siempre la sensibilidad y el respeto hacia
+          cada residente.
+        </p>
+      </div>
 
-        <div class="incluido__item">
-          <div class="item__icono">
-            <i class="fa-solid fa-cut"></i>
-          </div>
-          <div class="item__content">
-            <h3>Peluquería y Podología</h3>
-            <p>Servicios de belleza y cuidado personal in-house.</p>
-          </div>
+      <div class="incluido__card">
+        <div class="card__icono">
+          <i class="fa-solid fa-shield-heart"></i>
         </div>
+        <h3 class="card__titulo">Monitoreo y Seguridad 24/7</h3>
+        <p class="card__descripcion">
+          Su familiar contará con supervisión de enfermería constante y un
+          pulsador de emergencia móvil para asistencia inmediata en cualquier
+          momento.
+        </p>
+      </div>
 
-        <div class="incluido__item">
-          <div class="item__icono">
-            <i class="fa-solid fa-hands-bubbles"></i>
-          </div>
-          <div class="item__content">
-            <h3>Higiene Completa</h3>
-            <p>Asistencia integral en el aseo y cuidado diario.</p>
-          </div>
+      <div class="incluido__card">
+        <div class="card__icono">
+          <i class="fa-solid fa-file-medical"></i>
         </div>
+        <h3 class="card__titulo">Transparencia Médica Total</h3>
+        <p class="card__descripcion">
+          Control de salud permanente con visitas semanales de geriatras, cuyos
+          informes y diagnósticos serán entregados a sus familiares para su
+          conocimiento.
+        </p>
+      </div>
 
-        <div class="incluido__item">
-          <div class="item__icono">
-            <i class="fa-solid fa-person-walking"></i>
-          </div>
-          <div class="item__content">
-            <h3>Accesibilidad Total</h3>
-            <p>Ascensores y rampas en todas las áreas comunes.</p>
-          </div>
+      <div class="incluido__card">
+        <div class="card__icono">
+          <i class="fa-solid fa-users"></i>
         </div>
+        <h3 class="card__titulo">Vida Activa y Conexión Social</h3>
+        <p class="card__descripcion">
+          Programamos talleres de terapia cognitiva, celebraciones de cumpleaños
+          y festividades para que su ser querido se mantenga vital y acompañado.
+        </p>
+      </div>
 
-        <div class="incluido__item">
-          <div class="item__icono">
-            <i class="fa-solid fa-jug-detergent"></i>
-          </div>
-          <div class="item__content">
-            <h3>Lavandería Ecológica</h3>
-            <p>Limpieza de prendas con procesos sustentables.</p>
-          </div>
+      <div class="incluido__card">
+        <div class="card__icono">
+          <i class="fa-solid fa-utensils"></i>
         </div>
+        <h3 class="card__titulo">Nutrición de Calidad con Sabor de Casa</h3>
+        <p class="card__descripcion">
+          Plan alimenticio completo supervisado, que integra "superalimentos" y
+          respeta los antojos especiales del fin de semana.
+        </p>
+      </div>
 
-        <div class="incluido__item">
-          <div class="item__icono">
-            <i class="fa-solid fa-snowflake"></i>
-          </div>
-          <div class="item__content">
-            <h3>Climatización</h3>
-            <p>Aire acondicionado individual en cada habitación.</p>
-          </div>
+      <div class="incluido__card">
+        <div class="card__icono">
+          <i class="fa-solid fa-people-group"></i>
         </div>
+        <h3 class="card__titulo">Vínculo Familiar Inquebrantable</h3>
+        <p class="card__descripcion">
+          Fomentamos la integración total de la familia con horarios de visita
+          amplios y acceso a zonas de piscina y parrilla para compartir momentos
+          inolvidables.
+        </p>
       </div>
     </div>
   </div>
@@ -137,7 +194,7 @@
   <div class="instalaciones__container">
     <div class="instalaciones__header">
       <span class="instalaciones__badge">NUESTRAS INSTALACIONES</span>
-      <h2 class="instalaciones__titulo">Un recorrido por tu nuevo hogar</h2>
+      <h2 class="instalaciones__titulo">Un recorrido por un nuevo capítulo</h2>
       <p class="instalaciones__descripcion">
         Diseñamos cada espacio pensando en la comodidad, la accesibilidad y la
         belleza natural de nuestro entorno.
@@ -146,52 +203,33 @@
 
     <div class="instalaciones__grid">
       <div class="instalaciones__imagen instalaciones__imagen--1">
-        <img
-          src="https://images.unsplash.com/photo-1505691938895-1758d7feb511?q=80&w=1500"
-          alt="Instalaciones"
-        />
+        <img src="/gallery1.png" alt="Suites Privadas" />
+        <div class="instalaciones__overlay">
+          <h3>Suites Privadas</h3>
+          <p>Privacidad absoluta con vistas a los jardines principales.</p>
+        </div>
       </div>
+
       <div class="instalaciones__imagen instalaciones__imagen--2">
-        <img
-          src="https://images.unsplash.com/photo-1556909114-f6e7ad7d3136?q=80&w=1500"
-          alt="Comedor"
-        />
+        <img src="/gallery2.png" alt="Jardines" />
+        <div class="instalaciones__overlay">
+          <h3>Jardines</h3>
+        </div>
       </div>
+
       <div class="instalaciones__imagen instalaciones__imagen--3">
-        <img
-          src="https://images.unsplash.com/photo-1616486338812-3dadae4b4ace?q=80&w=1500"
-          alt="Sala común"
-        />
+        <img src="/gallery3.jpeg" alt="La Biblioteca" />
+        <div class="instalaciones__overlay">
+          <h3>La Biblioteca</h3>
+        </div>
       </div>
+
       <div class="instalaciones__imagen instalaciones__imagen--4">
-        <img
-          src="https://images.unsplash.com/photo-1598928506311-c55ded91a20c?q=80&w=1500"
-          alt="Jardín"
-        />
-      </div>
-      <div class="instalaciones__imagen instalaciones__imagen--5">
-        <img
-          src="https://images.unsplash.com/photo-1584622650111-993a426fbf0a?q=80&w=1500"
-          alt="Habitación"
-        />
-      </div>
-      <div class="instalaciones__imagen instalaciones__imagen--6">
-        <img
-          src="https://images.unsplash.com/photo-1631679706909-1844bbd07221?q=80&w=1500"
-          alt="Áreas verdes"
-        />
-      </div>
-      <div class="instalaciones__imagen instalaciones__imagen--7">
-        <img
-          src="https://images.unsplash.com/photo-1600566753086-00f18fb6b3ea?q=80&w=1500"
-          alt="Sala de estar"
-        />
-      </div>
-      <div class="instalaciones__imagen instalaciones__imagen--8">
-        <img
-          src="https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?q=80&w=1500"
-          alt="Terraza"
-        />
+        <img src="/gallery4.png" alt="Salones de Estar" />
+        <div class="instalaciones__overlay">
+          <h3>Salones de Estar</h3>
+          <p>Espacios de encuentro diseñados para fomentar la comunidad.</p>
+        </div>
       </div>
     </div>
   </div>
@@ -201,8 +239,8 @@
 <section class="seccion__ingreso">
   <div class="ingreso__contenedor">
     <div class="ingreso__header">
-      <p class="ingreso__subtitulo">PROCESO DE ADMISIÓN</p>
-      <h2 class="ingreso__titulo">Comienza tu proceso en 3 simples pasos</h2>
+      <p class="ingreso__subtitulo">PROCESO DE ADMISIÓN A DALIAS</p>
+      <h2 class="ingreso__titulo">Comienza el proceso</h2>
       <p class="ingreso__descripcion">
         Un proceso transparente y personalizado, diseñado para que tanto el
         adulto mayor como su familia se sientan acompañados desde el primer
@@ -231,8 +269,8 @@
         <div class="paso__contenido">
           <h3>Evaluación Personalizada</h3>
           <p>
-            Realizamos una valoración completa del estado de salud y necesidades
-            del adulto mayor para diseñar el mejor plan de atención.
+            Realizamos una valoración geriátrica del estado de salud y
+            necesidades del adulto mayor para diseñar el mejor plan de atención.
           </p>
         </div>
       </div>
@@ -257,10 +295,10 @@
 <section class="seccion__testimonios">
   <div class="testimonios__contenedor">
     <div class="testimonios__header">
-      <p class="testimonios__subtitulo">EXPERIENCIAS</p>
-      <h2 class="testimonios__titulo">Lo que dicen las familias</h2>
+      <p class="testimonios__subtitulo">EXPERIENCIAS DALIAS</p>
+      <h2 class="testimonios__titulo">Historias que inspiran confianza</h2>
       <p class="testimonios__descripcion">
-        La satisfacción de nuestras familias es nuestro mayor logro
+        La satisfacción de nuestra comunidad es nuestro logro
       </p>
     </div>
 
@@ -271,18 +309,18 @@
         </div>
 
         <p class="testimonio__texto">
-          Mi madre está feliz aquí. El personal es muy atento y profesional. Las
-          instalaciones son excelentes y siempre está participando en
-          actividades.
+          Desde que mi abuelo está en Las Dalias lo vemos más tranquilo y mejor
+          cuidado. Nos dio mucha confianza saber que está acompañado por un
+          equipo atento y cariñoso. Para nosotros fue importante sentir que
+          estaba en buenas manos.
         </p>
 
         <div class="testimonio__autor">
-          <img
-            src="https://images.unsplash.com/photo-1438761681033-6461ffad8d80?q=80&w=200"
-            alt="María González"
-          />
+          <div class="autor__icono">
+            <i class="fa-solid fa-user"></i>
+          </div>
           <div>
-            <h4>María González</h4>
+            <h4>Nieta de residente</h4>
             <span>Residencia Permanente</span>
           </div>
         </div>
@@ -302,19 +340,18 @@
         </div>
 
         <p class="testimonio__texto">
-          El centro de día ha sido una gran solución para nuestra familia. Mi
-          padre disfruta mucho las terapias y ha mejorado notablemente su
-          movilidad.
+          Al inicio tenía miedo de perder mi independencia. Aquí encontré un
+          lugar donde me respetan, puedo participar en actividades y sentirme
+          acompañado sin dejar de ser yo. Me siento cómodo, cuidado y en casa.
         </p>
 
         <div class="testimonio__autor">
-          <img
-            src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?q=80&w=200"
-            alt="Carlos Mendoza"
-          />
+          <div class="autor__icono">
+            <i class="fa-solid fa-user"></i>
+          </div>
           <div>
-            <h4>Carlos Mendoza</h4>
-            <span>Centro de Día</span>
+            <h4>Residente de Las Dalias</h4>
+            <span>Residencia Permanente</span>
           </div>
         </div>
 
@@ -333,18 +370,19 @@
         </div>
 
         <p class="testimonio__texto">
-          Después de la cirugía de mi abuela, encontramos en Las Dalias el lugar
-          perfecto para su recuperación. El seguimiento médico fue impecable.
+          Vivimos fuera de Lima y nos preocupaba no poder estar presentes todo
+          el tiempo. En Las Dalias encontramos un lugar donde nos mantienen
+          informados y sabemos que mi mamá está bien atendida. Esa confianza no
+          tiene precio.
         </p>
 
         <div class="testimonio__autor">
-          <img
-            src="https://images.unsplash.com/photo-1544005313-94ddf0286df2?q=80&w=200"
-            alt="Ana Pérez"
-          />
+          <div class="autor__icono">
+            <i class="fa-solid fa-user"></i>
+          </div>
           <div>
-            <h4>Ana Pérez</h4>
-            <span>Residencia Post Operatoria</span>
+            <h4>Hijo de residente</h4>
+            <span>Residencia Permanente</span>
           </div>
         </div>
 
@@ -354,6 +392,64 @@
           <i class="fa-solid fa-star"></i>
           <i class="fa-solid fa-star"></i>
           <i class="fa-solid fa-star"></i>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Sección Preguntas Frecuentes -->
+<section class="seccion__faq" id="preguntas-frecuentes">
+  <div class="faq__contenedor">
+    <div class="faq__header">
+      <p class="faq__subtitulo">¿Algo no quedó claro?</p>
+      <h2 class="faq__titulo">Preguntas Frecuentes</h2>
+      <p class="faq__descripcion">
+        Encuentra respuestas a las preguntas más comunes sobre nuestros
+        servicios y atención
+      </p>
+    </div>
+
+    <div class="faq__grid">
+      <div class="faq__columna">
+        <div
+          class="faq__item"
+          *ngFor="let pregunta of preguntasColumna1"
+          [class.activo]="pregunta.activo"
+          (click)="togglePregunta(pregunta.id)"
+        >
+          <div class="faq__pregunta">
+            <h3>{{ pregunta.pregunta }}</h3>
+            <i
+              class="bx"
+              [class.bx-plus]="!pregunta.activo"
+              [class.bx-minus]="pregunta.activo"
+            ></i>
+          </div>
+          <div class="faq__respuesta" *ngIf="pregunta.activo">
+            <p [innerHTML]="pregunta.respuesta"></p>
+          </div>
+        </div>
+      </div>
+
+      <div class="faq__columna">
+        <div
+          class="faq__item"
+          *ngFor="let pregunta of preguntasColumna2"
+          [class.activo]="pregunta.activo"
+          (click)="togglePregunta(pregunta.id)"
+        >
+          <div class="faq__pregunta">
+            <h3>{{ pregunta.pregunta }}</h3>
+            <i
+              class="bx"
+              [class.bx-plus]="!pregunta.activo"
+              [class.bx-minus]="pregunta.activo"
+            ></i>
+          </div>
+          <div class="faq__respuesta" *ngIf="pregunta.activo">
+            <p [innerHTML]="pregunta.respuesta"></p>
+          </div>
         </div>
       </div>
     </div>

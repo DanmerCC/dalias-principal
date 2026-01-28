@@ -1344,7 +1344,43 @@
   /* min-height: 700px; */
   border-radius: 2rem;
   overflow: hidden;
+  position: relative;
   box-shadow: 0 20px 60px rgba(0, 0, 0, 0.15);
+}
+.figure1_contacto{
+  position: absolute;
+  top: -3rem;
+  right: -3rem;
+  width: 10rem;
+  z-index: 20;
+}
+.figure2_contacto{
+  position: absolute;
+  bottom: -4rem;
+  right: 16rem;
+  width: 10rem;
+  z-index: 20;
+}
+.figure3_contacto{
+  position: absolute;
+  top: 21rem;
+  left: 34rem;
+  width: 16rem;
+  z-index: 1;
+}
+.figure4_contacto{
+  position: absolute;
+  top: -6rem;
+  left: -4rem;
+  width: 10rem;
+  z-index: 20;
+}
+.figure5_contacto{
+  position: absolute;
+  bottom: -7rem;
+  left: -6rem;
+  width: 12rem;
+  z-index: 20;
 }
 
 /* Columna izquierda */
@@ -1370,7 +1406,8 @@
   font-size: 3.5rem;
   font-weight: 400;
   line-height: 1.2;
-  color: #2d2d2d;
+  color: #003e5c;
+  font-weight: 700;
   margin: 0 0 1.5rem 0;
   /* font-family: "Playfair Display", "Georgia", serif; */
 }
@@ -1440,6 +1477,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
+  z-index: 10;
 }
 
 .formulario__card {
@@ -1946,6 +1984,17 @@ select.form__input {
   transition: all 0.3s ease;
   outline: none;
   background: #fff;
+}
+
+/* Contenedor para campos en línea (Correo y Móvil) */
+.form__grupo__modal--inline {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+}
+
+.form__grupo__modal--inline .form__grupo__modal {
+  gap: 0.4rem;
 }
 
 .form__input--modal:focus,

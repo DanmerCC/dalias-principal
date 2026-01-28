@@ -315,7 +315,7 @@
 .servicio__imagen-container {
   position: relative;
   width: 100%;
-  height: 12rem;
+  height: 15rem;
   overflow: hidden;
 }
 
@@ -431,29 +431,21 @@
   padding: 6rem 5rem;
   background: #f5f2eb;
   position: relative;
+  overflow: hidden;
 }
 
 .dalias1_figure{
   position: absolute;
-  top: 3rem;
-  left: 1.5rem;
+  top: 25rem;
+  width: 10rem;
+  right: -5rem;
 }
 .dalias2_figure{
   position: absolute;
-  top: 3rem;
-  right: 1.5rem;
+  top: 25rem;
+  width: 10rem;
+  left: -5rem;
 }
-.dalias3_figure{
-  position: absolute;
-  bottom: 3rem;
-  right: 1.5rem;
-}
-.dalias4_figure{
-  position: absolute;
-  bottom: 3rem;
-  left: 1.5rem;
-}
-
 .plan-ideal__contenedor {
   max-width: 1400px;
   margin: 0 auto;
@@ -755,7 +747,7 @@
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  background: linear-gradient(135deg, #3d8a95 0%, #2d6a73 100%);
+  background: #062a47;
   color: #fff;
   position: relative;
   overflow: hidden;
@@ -941,7 +933,7 @@
 
 .form__input:focus,
 .form__textarea:focus {
-  border-color: #3d8a95;
+  border-color: #062a47;
   background: #fff;
   box-shadow: 0 0 0 3px rgba(61, 138, 149, 0.1);
 }
@@ -990,7 +982,7 @@ select.form__input {
 
 /* Botón enviar */
 .btn__enviar {
-  background: linear-gradient(135deg, #3d8a95 0%, #2d6a73 100%);
+  background: #062a47;
   color: #fff;
   border: none;
   padding: 0.9rem 2rem;
@@ -1012,15 +1004,11 @@ select.form__input {
 .btn__enviar:hover {
   transform: translateY(-2px);
   box-shadow: 0 6px 20px rgba(61, 138, 149, 0.4);
-  background: linear-gradient(135deg, #4a9aa6 0%, #3d8a95 100%);
+  background: #062a47;
 }
 
 .btn__enviar:active {
   transform: translateY(0);
-}
-
-.btn__enviar i {
-  font-size: 1.3rem;
 }
 
 .form__privacidad {

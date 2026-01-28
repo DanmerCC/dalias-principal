@@ -19,17 +19,14 @@
         </div>
 
         <div class="select__slider">
-          <select #planSelector>
+          <select #planSelector (change)="navegarAPlan(planSelector.value)">
             <option value="" disabled selected>Selecciona un plan</option>
             <option value="residencia-permanente">Residencia Permanente</option>
             <option value="temporal">Residencia Temporal</option>
             <option value="centro-de-dia">Centro de Día</option>
             <option value="post-operatoria">Residencia Post Operatoria</option>
           </select>
-          <i
-            class="bx bx-search"
-            (click)="navegarAPlan(planSelector.value)"
-          ></i>
+          <i class="bx bx-search"></i>
         </div>
       </div>
     </div>
@@ -435,39 +432,42 @@
             </span>
           </div>
 
-          <!-- Correo Electrónico -->
-          <div class="form__grupo__modal">
-            <label class="form__label--modal">Correo Electrónico *</label>
-            <input
-              type="email"
-              class="form__input--modal"
-              placeholder="ejemplo@correo.com"
-              [(ngModel)]="formularioVisita.correoElectronico"
-              (blur)="validarCorreoElectronico()"
-              (input)="validarCorreoElectronico()"
-            />
-            <span
-              class="error__mensaje"
-              *ngIf="erroresVisita.correoElectronico"
-            >
-              {{ erroresVisita.correoElectronico }}
-            </span>
-          </div>
+          <!-- Correo Electrónico y Teléfono en la misma línea -->
+          <div class="form__grupo__modal--inline">
+            <!-- Correo Electrónico -->
+            <div class="form__grupo__modal">
+              <label class="form__label--modal">Correo Electrónico *</label>
+              <input
+                type="email"
+                class="form__input--modal"
+                placeholder="ejemplo@correo.com"
+                [(ngModel)]="formularioVisita.correoElectronico"
+                (blur)="validarCorreoElectronico()"
+                (input)="validarCorreoElectronico()"
+              />
+              <span
+                class="error__mensaje"
+                *ngIf="erroresVisita.correoElectronico"
+              >
+                {{ erroresVisita.correoElectronico }}
+              </span>
+            </div>
 
-          <!-- Teléfono (NUEVO) -->
-          <div class="form__grupo__modal">
-            <label class="form__label--modal">Teléfono / Móvil *</label>
-            <input
-              type="tel"
-              class="form__input--modal"
-              placeholder="+51 987 654 321"
-              [(ngModel)]="formularioVisita.telefono"
-              (blur)="validarTelefono()"
-              (input)="validarTelefono()"
-            />
-            <span class="error__mensaje" *ngIf="erroresVisita.telefono">
-              {{ erroresVisita.telefono }}
-            </span>
+            <!-- Teléfono -->
+            <div class="form__grupo__modal">
+              <label class="form__label--modal">Móvil *</label>
+              <input
+                type="tel"
+                class="form__input--modal"
+                placeholder="+51 987 654 321"
+                [(ngModel)]="formularioVisita.telefono"
+                (blur)="validarTelefono()"
+                (input)="validarTelefono()"
+              />
+              <span class="error__mensaje" *ngIf="erroresVisita.telefono">
+                {{ erroresVisita.telefono }}
+              </span>
+            </div>
           </div>
 
           <div class="form__seccion-titulo">
@@ -1259,6 +1259,11 @@
 <!-- Sección Contacto -->
 <section class="seccion__contacto">
   <div class="contacto__contenedor">
+    <img src="/figure_contacto.png" class="figure1_contacto" />
+    <img src="/figure_contacto.png" class="figure2_contacto" />
+    <img src="/figure3_contacto.png" class="figure3_contacto" />
+    <img src="/figure2_contacto.png" class="figure4_contacto" />
+    <img src="/figure4_contacto.png" class="figure5_contacto" />
     <!-- Columna izquierda - Información -->
     <div class="contacto__izquierda">
       <p class="contacto__etiqueta">CONTACTO EN LÍNEA</p>
@@ -1325,6 +1330,23 @@
             </span>
           </div>
 
+          <!-- Teléfono -->
+          <div class="form__grupo">
+            <label class="form__label">TELÉFONO DE CONTACTO</label>
+            <input
+              type="tel"
+              class="form__input"
+              [(ngModel)]="formularioContacto.numeroMovil"
+              (blur)="validarNumeroMovil()"
+              (input)="validarNumeroMovil()"
+              name="numeroMovil"
+              required
+            />
+            <span class="error__mensaje" *ngIf="erroresContacto.numeroMovil">
+              {{ erroresContacto.numeroMovil }}
+            </span>
+          </div>
+
           <!-- Correo -->
           <div class="form__grupo">
             <label class="form__label">CORREO ELECTRÓNICO</label>
@@ -1363,23 +1385,6 @@
             </select>
             <span class="error__mensaje" *ngIf="erroresContacto.tipoConsulta">
               {{ erroresContacto.tipoConsulta }}
-            </span>
-          </div>
-
-          <!-- Teléfono -->
-          <div class="form__grupo">
-            <label class="form__label">TELÉFONO DE CONTACTO</label>
-            <input
-              type="tel"
-              class="form__input"
-              [(ngModel)]="formularioContacto.numeroMovil"
-              (blur)="validarNumeroMovil()"
-              (input)="validarNumeroMovil()"
-              name="numeroMovil"
-              required
-            />
-            <span class="error__mensaje" *ngIf="erroresContacto.numeroMovil">
-              {{ erroresContacto.numeroMovil }}
             </span>
           </div>
 
