@@ -343,12 +343,19 @@ export class PlanesDeEstadiaComponent {
     };
   }
 
-  scrollToServicios(): void {
-    const element = document.getElementById('seccion-servicios');
-    if (element) {
-      element.scrollIntoView({
+    scrollToServicios() {
+    const seccionServicios = document.getElementById('seccion-servicios');
+
+    if (seccionServicios) {
+      const offset = -250;
+      const top =
+        seccionServicios.getBoundingClientRect().top +
+        window.pageYOffset -
+        offset;
+
+      window.scrollTo({
+        top,
         behavior: 'smooth',
-        block: 'start',
       });
     }
   }

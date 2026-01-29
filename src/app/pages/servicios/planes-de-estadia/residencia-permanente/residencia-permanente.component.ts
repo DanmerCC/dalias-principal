@@ -1,5 +1,6 @@
-import { Component } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { AgendarVisitaModalComponent } from '../../../../components/agendar-visita-modal/agendar-visita-modal.component';
 
 interface PreguntaFrecuente {
   id: number;
@@ -11,11 +12,13 @@ interface PreguntaFrecuente {
 @Component({
   selector: 'app-residencia-permanente',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, AgendarVisitaModalComponent],
   templateUrl: './residencia-permanente.component.html',
   styleUrl: './residencia-permanente.component.css',
 })
 export class ResidenciaPermanenteComponent {
+  @ViewChild('modalVisita') modalVisita!: AgendarVisitaModalComponent;
+
   preguntasFrecuentes: PreguntaFrecuente[] = [
     {
       id: 1,

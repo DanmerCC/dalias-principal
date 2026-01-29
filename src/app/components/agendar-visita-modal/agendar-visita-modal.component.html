@@ -1,0 +1,802 @@
+<!-- Modal Agendar Visita -->
+<div
+  class="modal__overlay"
+  *ngIf="mostrarModalVisita"
+  (click)="cerrarModalVisita()"
+>
+  <div class="modal__container" (click)="$event.stopPropagation()">
+    <button class="modal__cerrar" (click)="cerrarModalVisita()">
+      <i class="bx bx-x"></i>
+    </button>
+
+    <div class="modal__contenido">
+      <!-- Columna izquierda - Formulario -->
+      <div class="modal__izquierda">
+        <div class="modal__header">
+          <i class="bx bx-calendar-heart"></i>
+          <h2>Agendar visita</h2>
+          <p><img src="/logo_small.png" alt="" /> Residencia Las Dalias</p>
+        </div>
+
+        <div class="modal__formulario">
+          <div class="form__seccion-titulo">
+            <i class="fa-solid fa-user-check"></i>
+            <span>Información del solicitante</span>
+          </div>
+
+          <!-- Nombre y Apellido -->
+          <div class="form__grupo__modal">
+            <label class="form__label--modal"
+              >Nombre y Apellido del Solicitante *</label
+            >
+            <input
+              type="text"
+              class="form__input--modal"
+              placeholder="Ingresa tu nombre completo"
+              [(ngModel)]="formularioVisita.nombreApellido"
+              (blur)="validarNombreApellido()"
+              (input)="validarNombreApellido()"
+            />
+            <span class="error__mensaje" *ngIf="erroresVisita.nombreApellido">
+              {{ erroresVisita.nombreApellido }}
+            </span>
+          </div>
+
+          <!-- Correo Electrónico y Teléfono en la misma línea -->
+          <div class="form__grupo__modal--inline">
+            <!-- Correo Electrónico -->
+            <div class="form__grupo__modal">
+              <label class="form__label--modal">Correo Electrónico *</label>
+              <input
+                type="email"
+                class="form__input--modal"
+                placeholder="ejemplo@correo.com"
+                [(ngModel)]="formularioVisita.correoElectronico"
+                (blur)="validarCorreoElectronico()"
+                (input)="validarCorreoElectronico()"
+              />
+              <span
+                class="error__mensaje"
+                *ngIf="erroresVisita.correoElectronico"
+              >
+                {{ erroresVisita.correoElectronico }}
+              </span>
+            </div>
+
+            <!-- Teléfono -->
+            <div class="form__grupo__modal">
+              <label class="form__label--modal">Móvil *</label>
+              <input
+                type="tel"
+                class="form__input--modal"
+                placeholder="+51 987 654 321"
+                [(ngModel)]="formularioVisita.telefono"
+                (blur)="validarTelefono()"
+                (input)="validarTelefono()"
+              />
+              <span class="error__mensaje" *ngIf="erroresVisita.telefono">
+                {{ erroresVisita.telefono }}
+              </span>
+            </div>
+          </div>
+
+          <div class="form__seccion-titulo">
+            <i class="fa-solid fa-person-cane"></i>
+            <span>Información del adulto mayor</span>
+          </div>
+
+          <!-- Edad -->
+          <div class="form__grupo__modal">
+            <label class="form__label--modal">Edad del adulto mayor *</label>
+            <input
+              type="number"
+              class="form__input--modal"
+              placeholder="Ej: 75"
+              [(ngModel)]="formularioVisita.edadAdultoMayor"
+              (blur)="validarEdadAdultoMayor()"
+              (input)="validarEdadAdultoMayor()"
+            />
+            <span class="error__mensaje" *ngIf="erroresVisita.edadAdultoMayor">
+              {{ erroresVisita.edadAdultoMayor }}
+            </span>
+          </div>
+
+          <!-- Nivel de dependencia -->
+          <div class="form__grupo__modal">
+            <label class="form__label--modal">Nivel de dependencia *</label>
+            <div class="nivel__dependencia">
+              <label class="radio__option">
+                <input
+                  type="radio"
+                  name="dependencia"
+                  value="independiente"
+                  [(ngModel)]="formularioVisita.nivelDependencia"
+                  (change)="validarNivelDependencia()"
+                />
+                <span>Independiente</span>
+              </label>
+              <label class="radio__option">
+                <input
+                  type="radio"
+                  name="dependencia"
+                  value="semi-dependiente"
+                  [(ngModel)]="formularioVisita.nivelDependencia"
+                  (change)="validarNivelDependencia()"
+                />
+                <span>Semi dependiente</span>
+              </label>
+              <label class="radio__option">
+                <input
+                  type="radio"
+                  name="dependencia"
+                  value="dependiente"
+                  [(ngModel)]="formularioVisita.nivelDependencia"
+                  (change)="validarNivelDependencia()"
+                />
+                <span>Dependiente</span>
+              </label>
+            </div>
+            <span class="error__mensaje" *ngIf="erroresVisita.nivelDependencia">
+              {{ erroresVisita.nivelDependencia }}
+            </span>
+          </div>
+
+          <!-- Observaciones salud -->
+          <div class="form__grupo__modal">
+            <label class="form__label--modal"
+              >Observaciones sobre su salud</label
+            >
+            <textarea
+              class="form__textarea--modal"
+              placeholder="Ej: Diabético, Parkinson, Hipertenso..."
+              rows="2"
+              [(ngModel)]="formularioVisita.observacionesSalud"
+            ></textarea>
+          </div>
+
+          <!-- Checkbox para evaluación inicial -->
+          <div class="form__grupo__modal">
+            <label class="checkbox__evaluacion">
+              <input
+                type="checkbox"
+                [(ngModel)]="mostrarEvaluacion"
+                (change)="toggleEvaluacion()"
+              />
+              <span class="checkbox__texto">
+                <strong>Evaluación Inicial del Adulto Mayor</strong> Ayúdenos a
+                conocer mejor a su familiar para brindarle una atención adecuada
+                <br />
+                <b>⏱️Duración 1 minuto - (Opcional)</b>
+              </span>
+            </label>
+          </div>
+
+          <div class="form__seccion-titulo">
+            <i class="bx bx-calendar-check"></i>
+            <span>Coordinar fecha de visita</span>
+          </div>
+
+          <!-- Contenedor que agrupa calendario y horas -->
+          <div class="fecha-hora__contenedor">
+            <!-- Calendario -->
+            <div class="calendario__container">
+              <div class="calendario__header">
+                <button class="calendario__btn" (click)="mesAnterior()">
+                  <i class="bx bx-chevron-left"></i>
+                </button>
+                <span class="calendario__mes"
+                  >{{ nombreMes }} {{ anioActual }}</span
+                >
+                <button class="calendario__btn" (click)="mesSiguiente()">
+                  <i class="bx bx-chevron-right"></i>
+                </button>
+              </div>
+
+              <div class="calendario__dias-semana">
+                <span>D</span>
+                <span>L</span>
+                <span>M</span>
+                <span>M</span>
+                <span>J</span>
+                <span>V</span>
+                <span>S</span>
+              </div>
+
+              <div class="calendario__grid">
+                <button
+                  *ngFor="let diaInfo of diasDelMes"
+                  class="calendario__dia"
+                  [class.vacio]="diaInfo.dia === 0"
+                  [class.hoy]="diaInfo.esHoy"
+                  [class.seleccionado]="
+                    formularioVisita.fechaSeleccionada ===
+                    diaInfo.dia + '/' + (mesActual + 1) + '/' + anioActual
+                  "
+                  [class.no-disponible]="!diaInfo.disponible"
+                  [disabled]="diaInfo.dia === 0 || !diaInfo.disponible"
+                  (click)="
+                    seleccionarFecha(diaInfo.dia); validarFechaSeleccionada()
+                  "
+                >
+                  {{ diaInfo.dia || "" }}
+                </button>
+              </div>
+            </div>
+
+            <!-- Horas disponibles -->
+            <div
+              class="horas__container"
+              *ngIf="formularioVisita.fechaSeleccionada"
+            >
+              <p class="horas__titulo">Selecciona un horario *</p>
+              <div class="horas__grid">
+                <button
+                  *ngFor="let hora of horasDisponibles"
+                  class="hora__btn"
+                  [class.seleccionado]="
+                    formularioVisita.horaSeleccionada === hora
+                  "
+                  (click)="seleccionarHora(hora); validarHoraSeleccionada()"
+                >
+                  {{ hora }}
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Mensajes de error para fecha y hora -->
+          <div
+            class="form__grupo__modal"
+            *ngIf="erroresVisita.fechaSeleccionada"
+          >
+            <span class="error__mensaje">
+              {{ erroresVisita.fechaSeleccionada }}
+            </span>
+          </div>
+
+          <div
+            class="form__grupo__modal"
+            *ngIf="
+              erroresVisita.horaSeleccionada &&
+              formularioVisita.fechaSeleccionada
+            "
+          >
+            <span class="error__mensaje">
+              {{ erroresVisita.horaSeleccionada }}
+            </span>
+          </div>
+
+          <!-- Botón enviar -->
+          <button
+            class="btn__enviar-visita"
+            (click)="enviarSolicitudVisita()"
+            [disabled]="enviandoFormulario"
+          >
+            <span *ngIf="!enviandoFormulario">Confirmar visita</span>
+            <div class="spinner" *ngIf="enviandoFormulario"></div>
+            <i class="bx bx-check-circle" *ngIf="!enviandoFormulario"></i>
+          </button>
+        </div>
+      </div>
+
+      <!-- Columna derecha - Imagen -->
+      <div class="modal__derecha">
+        <img
+          src="https://res.cloudinary.com/dd5mnpde5/image/upload/f_auto,q_60,w_1200,c_limit/v1768924122/cita_r2bn1f.jpg"
+          alt="Adultos mayores felices"
+        />
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Modal Evaluación Inicial -->
+<div
+  class="modal__overlay modal__evaluacion-overlay"
+  *ngIf="mostrarModalEvaluacion"
+  (click)="cerrarModalEvaluacion()"
+>
+  <div
+    class="modal__container modal__evaluacion-container"
+    (click)="$event.stopPropagation()"
+  >
+    <button class="modal__cerrar" (click)="cerrarModalEvaluacion()">
+      <i class="bx bx-x"></i>
+    </button>
+
+    <div class="evaluacion__contenido">
+      <div class="evaluacion__header">
+        <button class="btn__volver" (click)="volverAAgendarVisita()">
+          <i class="bx bx-arrow-back"></i>
+          Volver
+        </button>
+        <div class="evaluacion__titulo-principal">
+          <i class="bx bx-clipboard-check"></i>
+          <h2>Evaluación Inicial del Adulto Mayor</h2>
+          <p>
+            Ayúdenos a conocer mejor a su familiar para brindarle una atención
+            adecuada
+          </p>
+        </div>
+      </div>
+
+      <form class="evaluacion__formulario">
+        <!-- Pregunta 1 -->
+        <div
+          class="evaluacion__pregunta"
+          [class.evaluacion__pregunta--error]="erroresEvaluacion.movilidad"
+        >
+          <label class="pregunta__titulo">1. Autonomía y movilidad *</label>
+          <p class="pregunta__subtitulo">
+            ¿Su familiar puede movilizarse de manera independiente?
+          </p>
+          <div class="opciones__radio">
+            <label class="opcion__radio">
+              <input
+                type="radio"
+                name="movilidad"
+                value="solo"
+                [(ngModel)]="evaluacionForm.movilidad"
+                (change)="verificarEvaluacionIniciada()"
+              />
+              <span>Se moviliza solo</span>
+            </label>
+            <label class="opcion__radio">
+              <input
+                type="radio"
+                name="movilidad"
+                value="apoyo-parcial"
+                [(ngModel)]="evaluacionForm.movilidad"
+                (change)="verificarEvaluacionIniciada()"
+              />
+              <span>Necesita apoyo parcial</span>
+            </label>
+            <label class="opcion__radio">
+              <input
+                type="radio"
+                name="movilidad"
+                value="ayuda-constante"
+                [(ngModel)]="evaluacionForm.movilidad"
+                (change)="verificarEvaluacionIniciada()"
+              />
+              <span>Requiere ayuda constante</span>
+            </label>
+            <label class="opcion__radio">
+              <input
+                type="radio"
+                name="movilidad"
+                value="en-cama"
+                [(ngModel)]="evaluacionForm.movilidad"
+                (change)="verificarEvaluacionIniciada()"
+              />
+              <span>Permanece mayormente en cama</span>
+            </label>
+          </div>
+          <span
+            class="error__mensaje-evaluacion"
+            *ngIf="erroresEvaluacion.movilidad"
+          >
+            Por favor selecciona una opción
+          </span>
+        </div>
+
+        <!-- Pregunta 2 -->
+        <div
+          class="evaluacion__pregunta"
+          [class.evaluacion__pregunta--error]="erroresEvaluacion.avd"
+        >
+          <label class="pregunta__titulo"
+            >2. Actividades de la vida diaria (AVD) *</label
+          >
+          <p class="pregunta__subtitulo">
+            ¿Puede realizar actividades básicas como vestirse, alimentarse o
+            asearse?
+          </p>
+          <div class="opciones__radio">
+            <label class="opcion__radio">
+              <input
+                type="radio"
+                name="avd"
+                value="independiente"
+                [(ngModel)]="evaluacionForm.avd"
+                (change)="verificarEvaluacionIniciada()"
+              />
+              <span>De forma independiente</span>
+            </label>
+            <label class="opcion__radio">
+              <input
+                type="radio"
+                name="avd"
+                value="supervision"
+                [(ngModel)]="evaluacionForm.avd"
+                (change)="verificarEvaluacionIniciada()"
+              />
+              <span>Con supervisión</span>
+            </label>
+            <label class="opcion__radio">
+              <input
+                type="radio"
+                name="avd"
+                value="ayuda-constante"
+                [(ngModel)]="evaluacionForm.avd"
+                (change)="verificarEvaluacionIniciada()"
+              />
+              <span>Con ayuda constante</span>
+            </label>
+            <label class="opcion__radio">
+              <input
+                type="radio"
+                name="avd"
+                value="no-puede"
+                [(ngModel)]="evaluacionForm.avd"
+                (change)="verificarEvaluacionIniciada()"
+              />
+              <span>No puede realizarlas solo</span>
+            </label>
+          </div>
+          <span class="error__mensaje-evaluacion" *ngIf="erroresEvaluacion.avd">
+            Por favor selecciona una opción
+          </span>
+        </div>
+
+        <!-- Pregunta 3 -->
+        <div
+          class="evaluacion__pregunta"
+          [class.evaluacion__pregunta--error]="erroresEvaluacion.cognitivo"
+        >
+          <label class="pregunta__titulo"
+            >3. Estado cognitivo (orientativo) *</label
+          >
+          <p class="pregunta__subtitulo">
+            ¿Ha notado dificultades recientes en la memoria u orientación?
+          </p>
+          <div class="opciones__radio">
+            <label class="opcion__radio">
+              <input
+                type="radio"
+                name="cognitivo"
+                value="sin-dificultades"
+                [(ngModel)]="evaluacionForm.cognitivo"
+                (change)="verificarEvaluacionIniciada()"
+              />
+              <span>No presenta dificultades</span>
+            </label>
+            <label class="opcion__radio">
+              <input
+                type="radio"
+                name="cognitivo"
+                value="olvidos-ocasionales"
+                [(ngModel)]="evaluacionForm.cognitivo"
+                (change)="verificarEvaluacionIniciada()"
+              />
+              <span>Olvidos ocasionales</span>
+            </label>
+            <label class="opcion__radio">
+              <input
+                type="radio"
+                name="cognitivo"
+                value="confusion-frecuente"
+                [(ngModel)]="evaluacionForm.cognitivo"
+                (change)="verificarEvaluacionIniciada()"
+              />
+              <span>Confusión frecuente</span>
+            </label>
+            <label class="opcion__radio">
+              <input
+                type="radio"
+                name="cognitivo"
+                value="diagnostico-deterioro"
+                [(ngModel)]="evaluacionForm.cognitivo"
+                (change)="verificarEvaluacionIniciada()"
+              />
+              <span>Diagnóstico de deterioro cognitivo o demencia</span>
+            </label>
+          </div>
+          <span
+            class="error__mensaje-evaluacion"
+            *ngIf="erroresEvaluacion.cognitivo"
+          >
+            Por favor selecciona una opción
+          </span>
+        </div>
+
+        <!-- Pregunta 4 -->
+        <div
+          class="evaluacion__pregunta"
+          [class.evaluacion__pregunta--error]="erroresEvaluacion.emocional"
+        >
+          <label class="pregunta__titulo"
+            >4. Estado emocional y conducta *</label
+          >
+          <p class="pregunta__subtitulo">En general, su estado de ánimo es:</p>
+          <div class="opciones__radio">
+            <label class="opcion__radio">
+              <input
+                type="radio"
+                name="emocional"
+                value="estable"
+                [(ngModel)]="evaluacionForm.emocional"
+                (change)="verificarEvaluacionIniciada()"
+              />
+              <span>Estable y tranquilo</span>
+            </label>
+            <label class="opcion__radio">
+              <input
+                type="radio"
+                name="emocional"
+                value="a-veces-triste"
+                [(ngModel)]="evaluacionForm.emocional"
+                (change)="verificarEvaluacionIniciada()"
+              />
+              <span>A veces triste o ansioso</span>
+            </label>
+            <label class="opcion__radio">
+              <input
+                type="radio"
+                name="emocional"
+                value="irritable"
+                [(ngModel)]="evaluacionForm.emocional"
+                (change)="verificarEvaluacionIniciada()"
+              />
+              <span>Frecuentemente irritable o deprimido</span>
+            </label>
+            <label class="opcion__radio">
+              <input
+                type="radio"
+                name="emocional"
+                value="cambios-conducta"
+                [(ngModel)]="evaluacionForm.emocional"
+                (change)="verificarEvaluacionIniciada()"
+              />
+              <span>Presenta cambios de conducta importantes</span>
+            </label>
+          </div>
+          <span
+            class="error__mensaje-evaluacion"
+            *ngIf="erroresEvaluacion.emocional"
+          >
+            Por favor selecciona una opción
+          </span>
+        </div>
+
+        <!-- Pregunta 5 -->
+        <div
+          class="evaluacion__pregunta"
+          [class.evaluacion__pregunta--error]="erroresEvaluacion.condiciones"
+        >
+          <label class="pregunta__titulo"
+            >5. Condiciones médicas relevantes *</label
+          >
+          <p class="pregunta__subtitulo">
+            ¿Su familiar presenta alguna de estas condiciones? (marque las que
+            correspondan)
+          </p>
+          <div class="opciones__checkbox">
+            <label class="opcion__checkbox">
+              <input
+                type="checkbox"
+                [(ngModel)]="evaluacionForm.condiciones.hipertension"
+                [ngModelOptions]="{ standalone: true }"
+                (change)="verificarEvaluacionIniciada()"
+              />
+              <span>Hipertensión</span>
+            </label>
+            <label class="opcion__checkbox">
+              <input
+                type="checkbox"
+                [(ngModel)]="evaluacionForm.condiciones.diabetes"
+                [ngModelOptions]="{ standalone: true }"
+                (change)="verificarEvaluacionIniciada()"
+              />
+              <span>Diabetes</span>
+            </label>
+            <label class="opcion__checkbox">
+              <input
+                type="checkbox"
+                [(ngModel)]="evaluacionForm.condiciones.dificultadesCaminar"
+                [ngModelOptions]="{ standalone: true }"
+                (change)="verificarEvaluacionIniciada()"
+              />
+              <span>Dificultades para caminar</span>
+            </label>
+            <label class="opcion__checkbox">
+              <input
+                type="checkbox"
+                [(ngModel)]="evaluacionForm.condiciones.incontinencia"
+                [ngModelOptions]="{ standalone: true }"
+                (change)="verificarEvaluacionIniciada()"
+              />
+              <span>Incontinencia</span>
+            </label>
+            <label class="opcion__checkbox">
+              <input
+                type="checkbox"
+                [(ngModel)]="evaluacionForm.condiciones.problemasAudicionVision"
+                [ngModelOptions]="{ standalone: true }"
+                (change)="verificarEvaluacionIniciada()"
+              />
+              <span>Problemas de audición o visión</span>
+            </label>
+            <label class="opcion__checkbox">
+              <input
+                type="checkbox"
+                [(ngModel)]="evaluacionForm.condiciones.postOperatoria"
+                [ngModelOptions]="{ standalone: true }"
+                (change)="verificarEvaluacionIniciada()"
+              />
+              <span>Recuperación post operatoria</span>
+            </label>
+            <label class="opcion__checkbox">
+              <input
+                type="checkbox"
+                [(ngModel)]="evaluacionForm.condiciones.otra"
+                [ngModelOptions]="{ standalone: true }"
+                (change)="verificarEvaluacionIniciada()"
+              />
+              <span>Otra</span>
+            </label>
+          </div>
+          <span
+            class="error__mensaje-evaluacion"
+            *ngIf="erroresEvaluacion.condiciones"
+          >
+            Por favor selecciona al menos una condición
+          </span>
+        </div>
+
+        <!-- Pregunta 6 -->
+        <div
+          class="evaluacion__pregunta"
+          [class.evaluacion__pregunta--error]="erroresEvaluacion.medicacion"
+        >
+          <label class="pregunta__titulo"
+            >6. Medicación y cuidados especiales *</label
+          >
+          <p class="pregunta__subtitulo">
+            ¿Requiere supervisión o ayuda con la medicación?
+          </p>
+          <div class="opciones__radio">
+            <label class="opcion__radio">
+              <input
+                type="radio"
+                name="medicacion"
+                value="no"
+                [(ngModel)]="evaluacionForm.medicacion"
+                (change)="verificarEvaluacionIniciada()"
+              />
+              <span>No</span>
+            </label>
+            <label class="opcion__radio">
+              <input
+                type="radio"
+                name="medicacion"
+                value="recordatorio"
+                [(ngModel)]="evaluacionForm.medicacion"
+                (change)="verificarEvaluacionIniciada()"
+              />
+              <span>Sí, recordatorio</span>
+            </label>
+            <label class="opcion__radio">
+              <input
+                type="radio"
+                name="medicacion"
+                value="administracion-completa"
+                [(ngModel)]="evaluacionForm.medicacion"
+                (change)="verificarEvaluacionIniciada()"
+              />
+              <span>Sí, administración completa</span>
+            </label>
+          </div>
+          <span
+            class="error__mensaje-evaluacion"
+            *ngIf="erroresEvaluacion.medicacion"
+          >
+            Por favor selecciona una opción
+          </span>
+        </div>
+
+        <!-- Pregunta 7 -->
+        <div
+          class="evaluacion__pregunta"
+          [class.evaluacion__pregunta--error]="erroresEvaluacion.motivo"
+        >
+          <label class="pregunta__titulo"
+            >7. Motivo principal de la consulta *</label
+          >
+          <p class="pregunta__subtitulo">
+            ¿Por qué está buscando una residencia para su familiar?
+          </p>
+          <div class="opciones__radio">
+            <label class="opcion__radio">
+              <input
+                type="radio"
+                name="motivo"
+                value="cuidado-permanente"
+                [(ngModel)]="evaluacionForm.motivo"
+                (change)="verificarEvaluacionIniciada()"
+              />
+              <span>Cuidado permanente</span>
+            </label>
+            <label class="opcion__radio">
+              <input
+                type="radio"
+                name="motivo"
+                value="recuperacion-temporal"
+                [(ngModel)]="evaluacionForm.motivo"
+                (change)="verificarEvaluacionIniciada()"
+              />
+              <span>Recuperación temporal / post operatoria</span>
+            </label>
+            <label class="opcion__radio">
+              <input
+                type="radio"
+                name="motivo"
+                value="centro-dia"
+                [(ngModel)]="evaluacionForm.motivo"
+                (change)="verificarEvaluacionIniciada()"
+              />
+              <span>Centro de día</span>
+            </label>
+            <label class="opcion__radio">
+              <input
+                type="radio"
+                name="motivo"
+                value="descanso-cuidador"
+                [(ngModel)]="evaluacionForm.motivo"
+                (change)="verificarEvaluacionIniciada()"
+              />
+              <span>Descanso del cuidador</span>
+            </label>
+            <label class="opcion__radio">
+              <input
+                type="radio"
+                name="motivo"
+                value="otro"
+                [(ngModel)]="evaluacionForm.motivo"
+                (change)="verificarEvaluacionIniciada()"
+              />
+              <span>Otro</span>
+            </label>
+          </div>
+          <span
+            class="error__mensaje-evaluacion"
+            *ngIf="erroresEvaluacion.motivo"
+          >
+            Por favor selecciona una opción
+          </span>
+        </div>
+
+        <!-- Botón continuar -->
+        <button
+          type="button"
+          class="btn__continuar-evaluacion"
+          (click)="guardarEvaluacionYContinuar()"
+        >
+          <span>Continuar a coordinar fecha</span>
+          <i class="bx bx-right-arrow-alt"></i>
+        </button>
+      </form>
+    </div>
+  </div>
+</div>
+
+<!-- Modal de Confirmación -->
+<div
+  class="modal__overlay"
+  *ngIf="mostrarModalConfirmacion"
+  (click)="cerrarModalConfirmacion()"
+>
+  <div class="modal__confirmacion" (click)="$event.stopPropagation()">
+    <div class="confirmacion__icono">
+      <img src="/logo_header.png" alt="" />
+    </div>
+    <h2>¡Visita Agendada!</h2>
+    <p>En breve te llegará un correo de confirmación</p>
+    <button
+      class="btn__cerrar-confirmacion"
+      (click)="cerrarModalConfirmacion()"
+    >
+      Entendido
+    </button>
+  </div>
+</div>

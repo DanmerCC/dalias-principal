@@ -13,10 +13,10 @@
     <p class="hero__descripcion">
       Más que un lugar de cuidado, ofrecemos una comunidad donde el residente se
       siente valorado y atendido, asegurando su bienestar físico y emocional con
-      un apoyo humano constante.
+      un apoyo humano constante
     </p>
     <div class="hero__botones">
-      <button class="btn__primario" (click)="scrollToContenido()">
+      <button class="btn__primario" (click)="modalVisita.abrir()">
         <span>Agendar visita</span>
         <i class="fa-solid fa-chevron-down"></i>
       </button>
@@ -24,69 +24,91 @@
   </div>
 </div>
 
+<!-- Modal Agendar visita -->
+<app-agendar-visita-modal #modalVisita></app-agendar-visita-modal>
+
 <!-- SECCIÓN: Experiencia Integral -->
 <section class="seccion__experiencia">
-  <div class="experiencia__container">
-    <div class="experiencia__content">
-      <span class="experiencia__badge">EXPERIENCIA INTEGRAL</span>
-      <h2 class="experiencia__titulo">
-        Más que un Hogar, una Comunidad para Trascender
-      </h2>
-      <p class="experiencia__descripcion">
-        Creemos que la vida social es el corazón del bienestar. Ofrecemos
-        espacios de convivencia diseñados para crear vínculos significativos
-        entre residentes, rodeados de jardines terapéuticos y áreas comunes
-        seguras.
-      </p>
-
-      <div class="experiencia__lista">
-        <div class="experiencia__item">
-          <i class="fa-regular fa-circle-check"></i>
-          <span>Programas de estimulación física y cognitiva diaria.</span>
-        </div>
-        <div class="experiencia__item">
-          <i class="fa-regular fa-circle-check"></i>
-          <span>Nutrición personalizada por expertos en geriatría.</span>
-        </div>
+  <div class="experiencia__contenedor">
+    <div class="experiencia__contenido">
+      <!-- Imagen destacada -->
+      <div class="experiencia__imagen">
+        <img src="/permanente1.jpeg" alt="Experiencia integral Las Dalias" />
       </div>
 
-      <button class="experiencia__btn">
-        Conocer nuestras actividades
-        <i class="fa-solid fa-arrow-right"></i>
-      </button>
-    </div>
+      <!-- Texto descriptivo -->
+      <div class="experiencia__texto">
+        <p class="experiencia__subtitulo">EXPERIENCIA INTEGRAL</p>
+        <h2 class="experiencia__titulo">
+          Más que un Hogar, una Comunidad para Trascender
+        </h2>
+        <p class="experiencia__descripcion">
+          Creemos que la vida social es el corazón del bienestar. Ofrecemos
+          espacios de convivencia diseñados para crear vínculos significativos
+          entre residentes, rodeados de jardines terapéuticos y áreas comunes
+          seguras.
+        </p>
 
-    <div class="experiencia__imagen">
-      <img src="/permanente1.jpeg" alt="Adulto mayor sonriente" />
+        <!-- Características destacadas -->
+        <div class="experiencia__caracteristicas">
+          <div class="caracteristica__item">
+            <i class="fa-regular fa-circle-check"></i>
+            <div>
+              <strong>Estimulación Diaria</strong>
+              <span>Programas de estimulación física y cognitiva diaria</span>
+            </div>
+          </div>
+          <div class="caracteristica__item">
+            <i class="fa-regular fa-circle-check"></i>
+            <div>
+              <strong>Nutrición Especializada</strong>
+              <span>Nutrición personalizada por expertos en geriatría</span>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 </section>
 
 <!-- SECCIÓN: Atención de Lujo -->
 <section class="seccion__atencion">
-  <div class="atencion__container">
-    <div class="atencion__imagen">
-      <img src="/permanente2.jpeg" alt="Instalaciones modernas" />
-    </div>
+  <div class="atencion__contenedor">
+    <div class="atencion__contenido">
+      <!-- Texto descriptivo -->
+      <div class="atencion__texto">
+        <p class="atencion__subtitulo">ATENCIÓN DE LUJO</p>
+        <h2 class="atencion__titulo">
+          Cuidado Especializado con Calidez Humana
+        </h2>
+        <p class="atencion__descripcion">
+          En Las Dalias, cada residente recibe atención personalizada bajo un
+          modelo biopsicosocial. Contamos con monitoreo 24/7 y un equipo
+          interdisciplinario que garantiza seguridad y tranquilidad total.
+        </p>
 
-    <div class="atencion__content">
-      <span class="atencion__badge">ATENCIÓN DE LUJO</span>
-      <h2 class="atencion__titulo">Cuidado Especializado con Calidez Humana</h2>
-      <p class="atencion__descripcion">
-        En Las Dalias, cada residente recibe atención personalizada bajo un
-        modelo biopsicosocial. Contamos con monitoreo 24/7 y un equipo
-        interdisciplinario que garantiza seguridad y tranquilidad total.
-      </p>
+        <!-- Características destacadas -->
+        <div class="atencion__caracteristicas">
+          <div class="caracteristica__item">
+            <i class="fa-solid fa-user-nurse"></i>
+            <div>
+              <strong>Enfermería 24/7</strong>
+              <span>Monitoreo y atención especializada permanente</span>
+            </div>
+          </div>
+          <div class="caracteristica__item">
+            <i class="fa-solid fa-calendar-days"></i>
+            <div>
+              <strong>Actividades Continuas</strong>
+              <span>365 días de programas y actividades recreativas</span>
+            </div>
+          </div>
+        </div>
+      </div>
 
-      <div class="atencion__stats">
-        <div class="atencion__stat">
-          <div class="stat__numero">24/7</div>
-          <div class="stat__label">Enfermería especializada</div>
-        </div>
-        <div class="atencion__stat">
-          <div class="stat__numero">365</div>
-          <div class="stat__label">Días de actividades</div>
-        </div>
+      <!-- Imagen destacada -->
+      <div class="atencion__imagen">
+        <img src="/permanente2.jpeg" alt="Atención de lujo Las Dalias" />
       </div>
     </div>
   </div>
@@ -105,13 +127,15 @@
 
 <!-- SECCIÓN: Todo Incluido -->
 <section class="seccion__incluido">
-  <div class="incluido__container">
+  <div class="incluido__contenedor">
     <div class="incluido__header">
+      <p class="incluido__subtitulo">
+        ¿Por qué elegir el Plan de Residencia Permanente?
+      </p>
       <h2 class="incluido__titulo">Todo Incluido para su Tranquilidad</h2>
       <p class="incluido__descripcion">
         Nuestra propuesta de valor se basa en eliminar cualquier preocupación
-        administrativa o logística de
-        <span class="texto__verde">la vida diaria.</span>
+        administrativa o logística de la vida diaria.
       </p>
     </div>
 
@@ -120,8 +144,8 @@
         <div class="card__icono">
           <i class="fa-solid fa-heart"></i>
         </div>
-        <h3 class="card__titulo">Trato Humano y Cercano</h3>
-        <p class="card__descripcion">
+        <h3>Trato Humano y Cercano</h3>
+        <p>
           Contamos con un equipo apasionado y profesional que brinda atención
           personalizada, priorizando siempre la sensibilidad y el respeto hacia
           cada residente.
@@ -132,8 +156,8 @@
         <div class="card__icono">
           <i class="fa-solid fa-shield-heart"></i>
         </div>
-        <h3 class="card__titulo">Monitoreo y Seguridad 24/7</h3>
-        <p class="card__descripcion">
+        <h3>Monitoreo y Seguridad 24/7</h3>
+        <p>
           Su familiar contará con supervisión de enfermería constante y un
           pulsador de emergencia móvil para asistencia inmediata en cualquier
           momento.
@@ -144,8 +168,8 @@
         <div class="card__icono">
           <i class="fa-solid fa-file-medical"></i>
         </div>
-        <h3 class="card__titulo">Transparencia Médica Total</h3>
-        <p class="card__descripcion">
+        <h3>Transparencia Médica Total</h3>
+        <p>
           Control de salud permanente con visitas semanales de geriatras, cuyos
           informes y diagnósticos serán entregados a sus familiares para su
           conocimiento.
@@ -156,8 +180,8 @@
         <div class="card__icono">
           <i class="fa-solid fa-users"></i>
         </div>
-        <h3 class="card__titulo">Vida Activa y Conexión Social</h3>
-        <p class="card__descripcion">
+        <h3>Vida Activa y Conexión Social</h3>
+        <p>
           Programamos talleres de terapia cognitiva, celebraciones de cumpleaños
           y festividades para que su ser querido se mantenga vital y acompañado.
         </p>
@@ -167,8 +191,8 @@
         <div class="card__icono">
           <i class="fa-solid fa-utensils"></i>
         </div>
-        <h3 class="card__titulo">Nutrición de Calidad con Sabor de Casa</h3>
-        <p class="card__descripcion">
+        <h3>Nutrición de Calidad con Sabor de Casa</h3>
+        <p>
           Plan alimenticio completo supervisado, que integra "superalimentos" y
           respeta los antojos especiales del fin de semana.
         </p>
@@ -178,8 +202,8 @@
         <div class="card__icono">
           <i class="fa-solid fa-people-group"></i>
         </div>
-        <h3 class="card__titulo">Vínculo Familiar Inquebrantable</h3>
-        <p class="card__descripcion">
+        <h3>Vínculo Familiar Inquebrantable</h3>
+        <p>
           Fomentamos la integración total de la familia con horarios de visita
           amplios y acceso a zonas de piscina y parrilla para compartir momentos
           inolvidables.
@@ -188,7 +212,6 @@
     </div>
   </div>
 </section>
-
 <!-- SECCIÓN: Nuestras Instalaciones -->
 <section class="seccion__instalaciones">
   <div class="instalaciones__container">
@@ -205,30 +228,41 @@
       <div class="instalaciones__imagen instalaciones__imagen--1">
         <img src="/gallery1.png" alt="Suites Privadas" />
         <div class="instalaciones__overlay">
-          <h3>Suites Privadas</h3>
-          <p>Privacidad absoluta con vistas a los jardines principales.</p>
+          <h3>Habitaciones Dalias</h3>
+          <p>
+            Diseñadas para el descanso, donde cada detalle está pensado para la
+            tranquilidad y seguridad diaria.
+          </p>
         </div>
       </div>
 
       <div class="instalaciones__imagen instalaciones__imagen--2">
         <img src="/gallery2.png" alt="Jardines" />
         <div class="instalaciones__overlay">
-          <h3>Jardines</h3>
+          <h3>Espacios Comunes Dalias</h3>
+          <p>
+            Rincones llenos de luz para compartir una charla, disfrutar de un
+            libro o simplemente sentirse como en casa.
+          </p>
         </div>
       </div>
 
       <div class="instalaciones__imagen instalaciones__imagen--3">
-        <img src="/gallery3.jpeg" alt="La Biblioteca" />
+        <img src="/gallery3.jpg" alt="La Biblioteca" />
         <div class="instalaciones__overlay">
-          <h3>La Biblioteca</h3>
+          <h3>Terapias y Rehabilitación Dalias</h3>
+          <p>Brindamos el apoyo necesario para estar activo y con vitalidad.</p>
         </div>
       </div>
 
       <div class="instalaciones__imagen instalaciones__imagen--4">
-        <img src="/gallery4.png" alt="Salones de Estar" />
+        <img src="/gallery4.jpg" alt="Salones de Estar" />
         <div class="instalaciones__overlay">
-          <h3>Salones de Estar</h3>
-          <p>Espacios de encuentro diseñados para fomentar la comunidad.</p>
+          <h3>Celebraciones Dalias</h3>
+          <p>
+            Festejamos la alegría de estar juntos y crear nuevos recuerdos en
+            familia.
+          </p>
         </div>
       </div>
     </div>

@@ -236,7 +236,7 @@
 ============================================ */
 .seccion__servicio {
   width: 100%;
-  padding: 3rem 10rem;
+  padding: 4rem 10rem;
   background: #fff;
   position: relative;
   overflow: hidden;
@@ -413,6 +413,20 @@
   background: #f5f5ef;
   position: relative;
   overflow: hidden;
+}
+.figure_why {
+  position: absolute;
+  top: 5rem;
+  left: -6.5rem;
+  width: 12rem;
+  z-index: 0;
+}
+.figure_why2 {
+  position: absolute;
+  bottom: 8rem;
+  right: -6.5rem;
+  width: 12rem;
+  z-index: 0;
 }
 
 .porque__elegirnos__contenedor {
