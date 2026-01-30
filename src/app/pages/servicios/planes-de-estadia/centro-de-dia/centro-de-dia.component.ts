@@ -94,4 +94,21 @@ export class CentroDeDiaComponent {
       destacado: false,
     },
   ];
+
+  scrollToServicios() {
+    const seccionServicios = document.getElementById('servicio__estadia');
+
+    if (seccionServicios) {
+      const offset = 60;
+      const top =
+        seccionServicios.getBoundingClientRect().top +
+        window.pageYOffset -
+        offset;
+
+      window.scrollTo({
+        top,
+        behavior: 'smooth',
+      });
+    }
+  }
 }

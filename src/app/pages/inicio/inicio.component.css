@@ -1412,7 +1412,7 @@
 }
 
 .contacto__titulo--dorado {
-  color: #c9a869;
+  color: #d9b756;
   font-style: italic;
   display: block;
 }
@@ -1441,7 +1441,7 @@
 .info__label {
   font-size: 0.7rem;
   letter-spacing: 0.12em;
-  color: #c9a869;
+  color: #d9b756;
   margin: 0;
   text-transform: uppercase;
   font-weight: 600;
@@ -1523,7 +1523,7 @@
 
 .form__input:focus,
 .form__textarea:focus {
-  border-bottom-color: #c9a869;
+  border-bottom-color: #d9b756;
 }
 
 .form__textarea {
@@ -1561,7 +1561,7 @@ select.form__input {
 }
 /* Botón enviar */
 .btn__enviar {
-  background: linear-gradient(135deg, #c9a869 0%, #b89654 100%);
+  background: linear-gradient(135deg, #d9b756 0%, #b89654 100%);
   color: #1a1d23;
   border: none;
   padding: 1.2rem 2.5rem;
@@ -1583,7 +1583,7 @@ select.form__input {
 .btn__enviar:hover {
   transform: translateY(-2px);
   box-shadow: 0 6px 20px rgba(201, 168, 105, 0.4);
-  background: linear-gradient(135deg, #d4b577 0%, #c9a869 100%);
+  background: linear-gradient(135deg, #d4b577 0%, #d9b756 100%);
 }
 
 .btn__enviar:active {
@@ -1600,7 +1600,7 @@ select.form__input {
 .btn__enviar:disabled:hover {
   transform: translateY(0);
   box-shadow: 0 4px 15px rgba(201, 168, 105, 0.2);
-  background: linear-gradient(135deg, #c9a869 0%, #b89654 100%);
+  background: linear-gradient(135deg, #d9b756 0%, #b89654 100%);
 }
 
 .btn__enviar i {

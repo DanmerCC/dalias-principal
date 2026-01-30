@@ -1,13 +1,13 @@
 import { Component } from '@angular/core';
 
 @Component({
-  selector: 'app-contactanos',
+  selector: 'app-residencia-post-operatoria',
   imports: [],
-  templateUrl: './contactanos.component.html',
-  styleUrl: './contactanos.component.css'
+  templateUrl: './residencia-post-operatoria.component.html',
+  styleUrl: './residencia-post-operatoria.component.css',
 })
-export class ContactanosComponent {
-scrollToServicios() {
+export class ResidenciaPostOperatoriaComponent {
+  scrollToServicios() {
     const seccionServicios = document.getElementById('servicio__estadia');
 
     if (seccionServicios) {

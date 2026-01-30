@@ -29,6 +29,7 @@
 
 <!-- SECCIÓN: Experiencia Integral -->
 <section class="seccion__experiencia">
+  <img src="/figure7.png" class="figure_exp" alt="">
   <div class="experiencia__contenedor">
     <div class="experiencia__contenido">
       <!-- Imagen destacada -->
@@ -61,8 +62,8 @@
           <div class="caracteristica__item">
             <i class="fa-regular fa-circle-check"></i>
             <div>
-              <strong>Nutrición Especializada</strong>
-              <span>Nutrición personalizada por expertos en geriatría</span>
+              <strong>Habitaciones con Iluminación Natural</strong>
+              <span>Espacios con luz externa para bienestar biológico</span>
             </div>
           </div>
         </div>
@@ -73,13 +74,14 @@
 
 <!-- SECCIÓN: Atención de Lujo -->
 <section class="seccion__atencion">
+  <img src="/figure3.png" class="figure_atc" alt="">
   <div class="atencion__contenedor">
     <div class="atencion__contenido">
       <!-- Texto descriptivo -->
       <div class="atencion__texto">
         <p class="atencion__subtitulo">ATENCIÓN DE LUJO</p>
         <h2 class="atencion__titulo">
-          Cuidado Especializado con Calidez Humana
+         Acompañamiento Profesional Continuo
         </h2>
         <p class="atencion__descripcion">
           En Las Dalias, cada residente recibe atención personalizada bajo un
@@ -127,6 +129,8 @@
 
 <!-- SECCIÓN: Todo Incluido -->
 <section class="seccion__incluido">
+  <img src="/figure8.png" class="fiure_inc1" alt="">
+  <img src="/figure10.png" class="figure_inc2">
   <div class="incluido__contenedor">
     <div class="incluido__header">
       <p class="incluido__subtitulo">
@@ -212,69 +216,227 @@
     </div>
   </div>
 </section>
+
 <!-- SECCIÓN: Nuestras Instalaciones -->
 <section class="seccion__instalaciones">
   <div class="instalaciones__container">
     <div class="instalaciones__header">
       <span class="instalaciones__badge">NUESTRAS INSTALACIONES</span>
-      <h2 class="instalaciones__titulo">Un recorrido por un nuevo capítulo</h2>
+      <h2 class="instalaciones__titulo">
+        Un recorrido por un <br />
+        <span class="titulo__dorado">Nuevo Capítulo</span>
+      </h2>
       <p class="instalaciones__descripcion">
         Diseñamos cada espacio pensando en la comodidad, la accesibilidad y la
         belleza natural de nuestro entorno.
       </p>
     </div>
 
-    <div class="instalaciones__grid">
-      <div class="instalaciones__imagen instalaciones__imagen--1">
-        <img src="/gallery1.png" alt="Suites Privadas" />
-        <div class="instalaciones__overlay">
-          <h3>Habitaciones Dalias</h3>
-          <p>
-            Diseñadas para el descanso, donde cada detalle está pensado para la
-            tranquilidad y seguridad diaria.
-          </p>
+    <!-- Carrusel de instalaciones -->
+    <div class="instalaciones__carrusel" #instalacionesCarrusel>
+      <!-- Slide 1 -->
+      <article class="instalacion__slide" [class.first-item]="true">
+        <div class="instalaciones__grid">
+          <div
+            class="instalaciones__imagen instalaciones__imagen--1"
+            (click)="abrirModalImagen(0, 0)"
+          >
+            <img src="/gallery1.png" alt="Habitación Principal" />
+          </div>
+
+          <div
+            class="instalaciones__imagen instalaciones__imagen--2"
+            (click)="abrirModalImagen(0, 1)"
+          >
+            <img src="/gallery2.png" alt="Habitación con Sala" />
+          </div>
+
+          <div
+            class="instalaciones__imagen instalaciones__imagen--3"
+            (click)="abrirModalImagen(0, 2)"
+          >
+            <img src="/gallery3.jpeg" alt="Baño 1" />
+          </div>
+
+          <div
+            class="instalaciones__imagen instalaciones__imagen--4"
+            (click)="abrirModalImagen(0, 3)"
+          >
+            <img src="/gallery4.jpeg" alt="Baño 2" />
+          </div>
         </div>
+      </article>
+
+      <!-- Slide 2 -->
+      <article class="instalacion__slide">
+        <div class="instalaciones__grid">
+          <div
+            class="instalaciones__imagen instalaciones__imagen--1"
+            (click)="abrirModalImagen(1, 0)"
+          >
+            <img src="/gallery5.png" alt="Comedor" />
+          </div>
+
+          <div
+            class="instalaciones__imagen instalaciones__imagen--2"
+            (click)="abrirModalImagen(1, 1)"
+          >
+            <img src="/gallery6.jpg" alt="Sala de Terapias" />
+          </div>
+
+          <div
+            class="instalaciones__imagen instalaciones__imagen--3"
+            (click)="abrirModalImagen(1, 2)"
+          >
+            <img src="/gallery7.png" alt="Cocina" />
+          </div>
+
+          <div
+            class="instalaciones__imagen instalaciones__imagen--4"
+            (click)="abrirModalImagen(1, 3)"
+          >
+            <img src="/gallery8.jpg" alt="Recepción" />
+          </div>
+        </div>
+      </article>
+
+      <!-- Slide 3 -->
+      <article class="instalacion__slide">
+        <div class="instalaciones__grid">
+          <div
+            class="instalaciones__imagen instalaciones__imagen--1"
+            (click)="abrirModalImagen(2, 0)"
+          >
+            <img src="/gallery9.jpg" alt="Piscina" />
+          </div>
+
+          <div
+            class="instalaciones__imagen instalaciones__imagen--2"
+            (click)="abrirModalImagen(2, 1)"
+          >
+            <img src="/gallery10.jpg" alt="Área de Lectura" />
+          </div>
+
+          <div
+            class="instalaciones__imagen instalaciones__imagen--3"
+            (click)="abrirModalImagen(2, 2)"
+          >
+            <img src="/gallery11.jpeg" alt="Habitación Suite" />
+          </div>
+
+          <div
+            class="instalaciones__imagen instalaciones__imagen--4"
+            (click)="abrirModalImagen(2, 3)"
+          >
+            <img src="/gallery12.jpeg" alt="Terraza" />
+          </div>
+        </div>
+      </article>
+
+      <!-- Slide 4 -->
+      <article class="instalacion__slide">
+        <div class="instalaciones__grid">
+          <div
+            class="instalaciones__imagen instalaciones__imagen--1"
+            (click)="abrirModalImagen(3, 0)"
+          >
+            <img src="/gallery13.jpg" alt="Gimnasio" />
+          </div>
+
+          <div
+            class="instalaciones__imagen instalaciones__imagen--2"
+            (click)="abrirModalImagen(3, 1)"
+          >
+            <img src="/gallery14.jpeg" alt="Sala de Actividades" />
+          </div>
+
+          <div
+            class="instalaciones__imagen instalaciones__imagen--3"
+            (click)="abrirModalImagen(3, 2)"
+          >
+            <img src="/gallery15.jpeg" alt="Capilla" />
+          </div>
+
+          <div
+            class="instalaciones__imagen instalaciones__imagen--4"
+            (click)="abrirModalImagen(3, 3)"
+          >
+            <img src="/gallery16.jpg" alt="Enfermería" />
+          </div>
+        </div>
+      </article>
+    </div>
+
+    <!-- Navegación -->
+    <div class="instalaciones__navegacion">
+      <button
+        class="instalaciones__btn"
+        (click)="anteriorInstalacion()"
+        [disabled]="indiceInstalacion === 0"
+      >
+        <i class="bx bx-chevron-left"></i>
+      </button>
+
+      <div class="instalaciones__indicadores">
+        <span
+          class="indicador__punto"
+          *ngFor="let item of instalacionesItems; let i = index"
+          [class.activo]="i === indiceInstalacion"
+          (click)="irAInstalacion(i)"
+        >
+        </span>
       </div>
 
-      <div class="instalaciones__imagen instalaciones__imagen--2">
-        <img src="/gallery2.png" alt="Jardines" />
-        <div class="instalaciones__overlay">
-          <h3>Espacios Comunes Dalias</h3>
-          <p>
-            Rincones llenos de luz para compartir una charla, disfrutar de un
-            libro o simplemente sentirse como en casa.
-          </p>
-        </div>
-      </div>
-
-      <div class="instalaciones__imagen instalaciones__imagen--3">
-        <img src="/gallery3.jpg" alt="La Biblioteca" />
-        <div class="instalaciones__overlay">
-          <h3>Terapias y Rehabilitación Dalias</h3>
-          <p>Brindamos el apoyo necesario para estar activo y con vitalidad.</p>
-        </div>
-      </div>
-
-      <div class="instalaciones__imagen instalaciones__imagen--4">
-        <img src="/gallery4.jpg" alt="Salones de Estar" />
-        <div class="instalaciones__overlay">
-          <h3>Celebraciones Dalias</h3>
-          <p>
-            Festejamos la alegría de estar juntos y crear nuevos recuerdos en
-            familia.
-          </p>
-        </div>
-      </div>
+      <button
+        class="instalaciones__btn"
+        (click)="siguienteInstalacion()"
+        [disabled]="indiceInstalacion === instalacionesItems.length - 1"
+      >
+        <i class="bx bx-chevron-right"></i>
+      </button>
     </div>
   </div>
 </section>
+
+<!-- Modal de Imagen -->
+<div class="modal__imagen" *ngIf="modalImagenAbierto" (click)="cerrarModal()">
+  <div class="modal__contenido" (click)="$event.stopPropagation()">
+    <img class="modal__logo" src="/dalias.png" alt="Las Dalias" />
+    <button class="modal__cerrar" (click)="cerrarModal()">
+      <i class="bx bx-x"></i>
+    </button>
+
+    <img
+      [src]="imagenActual.src"
+      [alt]="imagenActual.alt"
+      class="modal__imagen-grande"
+    />
+
+    <div class="modal__navegacion">
+      <button
+        class="modal__btn-nav"
+        (click)="imagenAnterior()"
+        [disabled]="indiceImagenActual === 0"
+      >
+        <i class="bx bx-chevron-left"></i>
+      </button>
+      <button
+        class="modal__btn-nav"
+        (click)="imagenSiguiente()"
+        [disabled]="indiceImagenActual === imagenesSlideActual.length - 1"
+      >
+        <i class="bx bx-chevron-right"></i>
+      </button>
+    </div>
+  </div>
+</div>
 
 <!-- SECCIÓN: Procedimiento de Ingreso -->
 <section class="seccion__ingreso">
   <div class="ingreso__contenedor">
     <div class="ingreso__header">
       <p class="ingreso__subtitulo">PROCESO DE ADMISIÓN A DALIAS</p>
-      <h2 class="ingreso__titulo">Comienza el proceso</h2>
+      <h2 class="ingreso__titulo">Comienza el proceso en 3 simples pasos</h2>
       <p class="ingreso__descripcion">
         Un proceso transparente y personalizado, diseñado para que tanto el
         adulto mayor como su familia se sientan acompañados desde el primer
@@ -434,6 +596,8 @@
 
 <!-- Sección Preguntas Frecuentes -->
 <section class="seccion__faq" id="preguntas-frecuentes">
+  <img src="/figure3_contacto.png" class="figure_faq1" alt="">
+  <img src="/figure4_contacto.png" class="figure_faq2" alt="">
   <div class="faq__contenedor">
     <div class="faq__header">
       <p class="faq__subtitulo">¿Algo no quedó claro?</p>

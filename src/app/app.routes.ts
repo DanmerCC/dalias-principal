@@ -10,6 +10,8 @@ import { ActividadesComponent } from './pages/actividades/actividades.component'
 import { PlanesDeEstadiaComponent } from './pages/servicios/planes-de-estadia/planes-de-estadia.component';
 import { CentroDeDiaComponent } from './pages/servicios/planes-de-estadia/centro-de-dia/centro-de-dia.component';
 import { ResidenciaPermanenteComponent } from './pages/servicios/planes-de-estadia/residencia-permanente/residencia-permanente.component';
+import { ResidenciaTemporalComponent } from './pages/servicios/planes-de-estadia/residencia-temporal/residencia-temporal.component';
+import { ResidenciaPostOperatoriaComponent } from './pages/servicios/planes-de-estadia/residencia-post-operatoria/residencia-post-operatoria.component';
 
 export const routes: Routes = [
   {
@@ -41,9 +43,18 @@ export const routes: Routes = [
             component: ResidenciaPermanenteComponent
           },
           {
+            path: 'residencia-temporal',
+            component: ResidenciaTemporalComponent
+          },
+          {
             path: 'centro-de-dia',
             component: CentroDeDiaComponent
           },
+          {
+            path: 'residencia-post-operatoria',
+            component: ResidenciaPostOperatoriaComponent
+          },
+          
         ]
       }
     ]

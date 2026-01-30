@@ -109,7 +109,7 @@ export class PlanesDeEstadiaComponent {
       ],
       color: '#D9B756',
       imagen: 'permanente2.jpg',
-      ruta: '/servicios/residencia-temporal',
+      ruta: '/servicios/planes-de-estadia/residencia-temporal',
     },
     {
       id: 'centro-dia',
@@ -139,7 +139,7 @@ export class PlanesDeEstadiaComponent {
       ],
       color: '#D9B756',
       imagen: '/permanente4.jpg',
-      ruta: '/servicios/residencia-post-operatoria',
+      ruta: '/servicios/planes-de-estadia/residencia-post-operatoria',
     },
   ];
 

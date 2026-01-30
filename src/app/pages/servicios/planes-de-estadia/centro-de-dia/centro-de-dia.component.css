@@ -1,13 +1,11 @@
 /* Hero Banner */
-.hero__centro-dia {
+.hero__residencia {
   width: 100%;
-  height: 105vh;
-  background: linear-gradient(
-      135deg,
-      rgba(117, 143, 148, 0.92) 0%,
-      rgba(117, 143, 148, 0.85) 100%
-    ),
-    url("https://images.unsplash.com/photo-1516733968668-dbdce39c4651?q=80&w=2070");
+  height: 100vh;
+  min-height: 600px;
+  background:
+    linear-gradient(rgba(0, 0, 0, 0.45), rgba(0, 0, 0, 0.45)),
+    url("/banner-permanente.png");
   background-size: cover;
   background-position: center;
   display: flex;
@@ -22,73 +20,118 @@
   left: 0;
   width: 100%;
   height: 100%;
-  background: linear-gradient(
-    to bottom,
-    transparent 0%,
-    rgba(0, 0, 0, 0.2) 100%
+  background: radial-gradient(
+    ellipse at center,
+    rgba(0, 0, 0, 0) 0%,
+    rgba(0, 0, 0, 0.35) 100%
   );
+  pointer-events: none;
 }
 
 .hero__contenido {
-  max-width: 900px;
-  text-align: center;
+  width: 90%;
+  max-width: 1000px;
   padding: 0 2rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 1.5rem;
+  text-align: center;
   position: relative;
   z-index: 2;
+  animation: fadeInUp 1s ease-out;
 }
 
-.hero__badge {
-  display: inline-block;
-  background: rgba(201, 168, 105, 0.95);
-  color: #fff;
-  padding: 0.6rem 1.8rem;
-  border-radius: 50px;
+.hero__label {
+  color: #d9b756;
   font-size: 0.85rem;
   font-weight: 600;
-  letter-spacing: 0.1em;
+  letter-spacing: 0.2rem;
   text-transform: uppercase;
-  margin-bottom: 1.5rem;
+  margin: 0;
+  animation: fadeInUp 1s ease-out 0.2s backwards;
 }
 
 .hero__titulo {
-  font-size: 4rem;
-  font-weight: 300;
-  color: #fff;
-  margin: 0 0 1.2rem 0;
+  font-size: 3.5rem;
+  font-weight: 400;
   line-height: 1.2;
+  color: #ffffff;
+  margin: 0;
+  animation: fadeInUp 1s ease-out 0.3s backwards;
+  text-shadow: 0 2px 10px rgba(0, 0, 0, 0.6);
+}
+
+.hero__titulo--dorado {
+  color: #d9b756;
+  font-style: italic;
+  display: block;
+  margin-top: 0.3rem;
 }
 
 .hero__descripcion {
-  font-size: 1.2rem;
-  color: rgba(255, 255, 255, 0.95);
-  margin: 0 0 3rem 0;
+  color: #f1f1f1;
+  font-size: 1.1rem;
+  font-weight: 400;
   line-height: 1.7;
-  max-width: 650px;
-  margin-left: auto;
-  margin-right: auto;
+  margin: 0;
+  max-width: 700px;
+  animation: fadeInUp 1s ease-out 0.4s backwards;
+  text-shadow: 0 1px 6px rgba(0, 0, 0, 0.5);
 }
 
-.hero__info-rapida {
+.hero__botones {
   display: flex;
-  justify-content: center;
-  gap: 3rem;
+  gap: 1.2rem;
+  margin-top: 1rem;
   flex-wrap: wrap;
+  justify-content: center;
+  animation: fadeInUp 1s ease-out 0.5s backwards;
 }
 
-.hero__info-rapida .info__item {
-  display: flex;
-  align-items: center;
-  gap: 0.8rem;
-  color: #fff;
+.btn__primario {
+  padding: 1rem 2.5rem;
+  border: none;
+  border-radius: 3rem;
   font-size: 1rem;
-  font-weight: 500;
+  font-weight: 600;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  transition: all 0.3s ease;
+  box-shadow: 0 0.3rem 1rem rgba(0, 0, 0, 0.3);
+  background: #d9b756;
+  color: #1a1a1a;
 }
 
-.hero__info-rapida .info__item i {
-  font-size: 1.5rem;
-  color: #c9a869;
+.btn__primario:hover {
+  background: #c9a846;
+  transform: translateY(-3px);
+  box-shadow: 0 0.5rem 1.5rem rgba(217, 183, 86, 0.45);
 }
 
+.btn__primario i {
+  font-size: 0.9rem;
+  transition: transform 0.3s ease;
+}
+
+.btn__primario:hover i {
+  transform: translateY(3px);
+}
+
+/* Animación */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(40px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
 /* SECCIÓN: Introducción Mejorada */
 .seccion__intro {
   width: 100%;

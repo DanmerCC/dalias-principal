@@ -1,12 +1,12 @@
 import { Component } from '@angular/core';
 
 @Component({
-  selector: 'app-contactanos',
+  selector: 'app-residencia-temporal',
   imports: [],
-  templateUrl: './contactanos.component.html',
-  styleUrl: './contactanos.component.css'
+  templateUrl: './residencia-temporal.component.html',
+  styleUrl: './residencia-temporal.component.css'
 })
-export class ContactanosComponent {
+export class ResidenciaTemporalComponent {
 scrollToServicios() {
     const seccionServicios = document.getElementById('servicio__estadia');
 
