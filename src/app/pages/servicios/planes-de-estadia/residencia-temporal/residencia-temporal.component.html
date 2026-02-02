@@ -7,19 +7,644 @@
       Residencia Temporal
       <br />
       <span class="hero__titulo--dorado"
-        >Trato y calidez como en el hogar
+        >Un respiro de cuidado y bienestar
       </span>
     </h1>
     <p class="hero__descripcion">
-      Más que un lugar de cuidado, ofrecemos una comunidad donde el residente se
-      siente valorado y atendido, asegurando su bienestar físico y emocional con
-      un apoyo humano constante
+      Brindamos un entorno de convivencia y servicios personalizados, donde cada
+      detalle está pensado para ofrecer una experiencia grata, integrando
+      atención
     </p>
     <div class="hero__botones">
       <button class="btn__primario" (click)="scrollToServicios()">
-          <span>Explorar Servicios</span>
-          <i class="fa-solid fa-chevron-down"></i>
-        </button>
+        <span>Explorar más</span>
+        <i class="fa-solid fa-chevron-down"></i>
+      </button>
     </div>
   </div>
 </div>
+
+<!-- Sección 1: Planes de Estadía -->
+<section class="seccion__servicio" id="servicio__estadia">
+  <div class="servicio__contenedor">
+    <div class="servicio__contenido">
+      <div class="servicio__imagen">
+        <img src="/servicios1-page2.jpg" alt="Planes de Estadía" />
+      </div>
+
+      <div class="servicio__texto">
+        <p class="servicio__subtitulo">¿Qué es la residencia temporal?</p>
+        <h2 class="servicio__titulo">Flexibilidad</h2>
+        <p class="servicio__descripcion">
+          Nuestro plan de residencia temporal está diseñado para ofrecer a las
+          familias una solución flexible y confiable cuando necesitan un
+          respaldo profesional en el cuidado de sus seres queridos.
+        </p>
+
+        <div class="planes__grid">
+          <div class="plan__card">
+            <i class="fa-solid fa-house-medical"></i>
+            <h3>Residencia Permanente</h3>
+            <p>Atención integral 24/7</p>
+          </div>
+
+          <div class="plan__card">
+            <i class="fa-solid fa-calendar-check"></i>
+            <h3>Residencia Temporal</h3>
+            <p>Estadías cortas personalizadas</p>
+          </div>
+
+          <div class="plan__card">
+            <i class="fa-solid fa-sun"></i>
+            <h3>Centro de Día</h3>
+            <p>Bienestar y actividades diarias</p>
+          </div>
+
+          <div class="plan__card">
+            <i class="fa-solid fa-bed-pulse"></i>
+            <h3>Residencia Post Operatoria</h3>
+            <p>Cuidado durante recuperación</p>
+          </div>
+        </div>
+
+        <a routerLink="/servicios/planes-de-estadia" class="btn__servicio">
+          Conocer más
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SECCIÓN: Experiencia Integral -->
+<section class="seccion__experiencia">
+  <img src="/figure7.png" class="figure_exp" alt="" />
+  <div class="experiencia__contenedor">
+    <div class="experiencia__contenido">
+      <!-- Texto descriptivo -->
+      <div class="experiencia__texto">
+        <p class="experiencia__subtitulo">Plan Temporal</p>
+        <h2 class="experiencia__titulo">¿Qué incluye la estadía?</h2>
+
+        <!-- Características destacadas -->
+        <div class="experiencia__caracteristicas">
+          <div class="caracteristica__item">
+            <i class="fa-regular fa-circle-check"></i>
+            <div>
+              <strong>Cuidado Integral Continuo</strong>
+              <span
+                >Control de signos vitales y administración de medicamentos
+                24/7.</span
+              >
+            </div>
+          </div>
+
+          <div class="caracteristica__item">
+            <i class="fa-regular fa-circle-check"></i>
+            <div>
+              <strong>Habitaciones Totalmente Equipadas</strong>
+              <span
+                >Cuentan con internet inalámbrico y mobiliario para una estancia
+                cómoda.</span
+              >
+            </div>
+          </div>
+
+          <div class="caracteristica__item">
+            <i class="fa-regular fa-circle-check"></i>
+            <div>
+              <strong>Alimentación y Bienestar Nutricional</strong>
+              <span>Plan alimenticio completo con superalimentos.</span>
+            </div>
+          </div>
+
+          <div class="caracteristica__item">
+            <i class="fa-regular fa-circle-check"></i>
+            <div>
+              <strong>Terapia y Estimulación Diaria</strong>
+              <span
+                >Talleres ocupacionales de terapia cognitiva y funcional
+                incluidos.</span
+              >
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- Imagen destacada -->
+      <div class="experiencia__imagen">
+        <img src="/permanente1.jpeg" alt="Experiencia integral Las Dalias" />
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SECCIÓN: Nuestras Instalaciones -->
+<section class="seccion__instalaciones">
+  <div class="instalaciones__container">
+    <div class="instalaciones__header">
+      <span class="instalaciones__badge">Residencia Las Dalias</span>
+      <h2 class="instalaciones__titulo">
+        Un recorrido por <br />
+        <span class="titulo__dorado"> Nuestras Instalaciones</span>
+      </h2>
+      <p class="instalaciones__descripcion">
+        Diseñamos cada espacio pensando en la comodidad, la accesibilidad y la
+        belleza natural de nuestro entorno.
+      </p>
+    </div>
+
+    <!-- Carrusel de instalaciones -->
+    <div class="instalaciones__carrusel" #instalacionesCarrusel>
+      <!-- Slide 1 -->
+      <article class="instalacion__slide" [class.first-item]="true">
+        <div class="instalaciones__grid">
+          <div
+            class="instalaciones__imagen instalaciones__imagen--1"
+            (click)="abrirModalImagen(0, 0)"
+          >
+            <img src="/gallery1.png" alt="Habitación Principal" />
+          </div>
+
+          <div
+            class="instalaciones__imagen instalaciones__imagen--2"
+            (click)="abrirModalImagen(0, 1)"
+          >
+            <img src="/gallery2.png" alt="Habitación con Sala" />
+          </div>
+
+          <div
+            class="instalaciones__imagen instalaciones__imagen--3"
+            (click)="abrirModalImagen(0, 2)"
+          >
+            <img src="/gallery3.jpeg" alt="Baño 1" />
+          </div>
+
+          <div
+            class="instalaciones__imagen instalaciones__imagen--4"
+            (click)="abrirModalImagen(0, 3)"
+          >
+            <img src="/gallery4.jpeg" alt="Baño 2" />
+          </div>
+        </div>
+      </article>
+
+      <!-- Slide 2 -->
+      <article class="instalacion__slide">
+        <div class="instalaciones__grid">
+          <div
+            class="instalaciones__imagen instalaciones__imagen--1"
+            (click)="abrirModalImagen(1, 0)"
+          >
+            <img src="/gallery5.png" alt="Comedor" />
+          </div>
+
+          <div
+            class="instalaciones__imagen instalaciones__imagen--2"
+            (click)="abrirModalImagen(1, 1)"
+          >
+            <img src="/gallery6.jpg" alt="Sala de Terapias" />
+          </div>
+
+          <div
+            class="instalaciones__imagen instalaciones__imagen--3"
+            (click)="abrirModalImagen(1, 2)"
+          >
+            <img src="/gallery7.png" alt="Cocina" />
+          </div>
+
+          <div
+            class="instalaciones__imagen instalaciones__imagen--4"
+            (click)="abrirModalImagen(1, 3)"
+          >
+            <img src="/gallery8.jpg" alt="Recepción" />
+          </div>
+        </div>
+      </article>
+
+      <!-- Slide 3 -->
+      <article class="instalacion__slide">
+        <div class="instalaciones__grid">
+          <div
+            class="instalaciones__imagen instalaciones__imagen--1"
+            (click)="abrirModalImagen(2, 0)"
+          >
+            <img src="/gallery9.jpg" alt="Piscina" />
+          </div>
+
+          <div
+            class="instalaciones__imagen instalaciones__imagen--2"
+            (click)="abrirModalImagen(2, 1)"
+          >
+            <img src="/gallery10.jpg" alt="Área de Lectura" />
+          </div>
+
+          <div
+            class="instalaciones__imagen instalaciones__imagen--3"
+            (click)="abrirModalImagen(2, 2)"
+          >
+            <img src="/gallery11.jpeg" alt="Habitación Suite" />
+          </div>
+
+          <div
+            class="instalaciones__imagen instalaciones__imagen--4"
+            (click)="abrirModalImagen(2, 3)"
+          >
+            <img src="/gallery12.jpeg" alt="Terraza" />
+          </div>
+        </div>
+      </article>
+
+      <!-- Slide 4 -->
+      <article class="instalacion__slide">
+        <div class="instalaciones__grid">
+          <div
+            class="instalaciones__imagen instalaciones__imagen--1"
+            (click)="abrirModalImagen(3, 0)"
+          >
+            <img src="/gallery13.jpg" alt="Gimnasio" />
+          </div>
+
+          <div
+            class="instalaciones__imagen instalaciones__imagen--2"
+            (click)="abrirModalImagen(3, 1)"
+          >
+            <img src="/gallery14.jpeg" alt="Sala de Actividades" />
+          </div>
+
+          <div
+            class="instalaciones__imagen instalaciones__imagen--3"
+            (click)="abrirModalImagen(3, 2)"
+          >
+            <img src="/gallery15.jpeg" alt="Capilla" />
+          </div>
+
+          <div
+            class="instalaciones__imagen instalaciones__imagen--4"
+            (click)="abrirModalImagen(3, 3)"
+          >
+            <img src="/gallery16.jpg" alt="Enfermería" />
+          </div>
+        </div>
+      </article>
+    </div>
+
+    <!-- Navegación -->
+    <div class="instalaciones__navegacion">
+      <button
+        class="instalaciones__btn"
+        (click)="anteriorInstalacion()"
+        [disabled]="indiceInstalacion === 0"
+      >
+        <i class="bx bx-chevron-left"></i>
+      </button>
+
+      <div class="instalaciones__indicadores">
+        <span
+          class="indicador__punto"
+          *ngFor="let item of instalacionesItems; let i = index"
+          [class.activo]="i === indiceInstalacion"
+          (click)="irAInstalacion(i)"
+        >
+        </span>
+      </div>
+
+      <button
+        class="instalaciones__btn"
+        (click)="siguienteInstalacion()"
+        [disabled]="indiceInstalacion === instalacionesItems.length - 1"
+      >
+        <i class="bx bx-chevron-right"></i>
+      </button>
+    </div>
+  </div>
+</section>
+
+<!-- Modal de Imagen -->
+<div class="modal__imagen" *ngIf="modalImagenAbierto" (click)="cerrarModal()">
+  <div class="modal__contenido" (click)="$event.stopPropagation()">
+    <img class="modal__logo" src="/dalias.png" alt="Las Dalias" />
+    <button class="modal__cerrar" (click)="cerrarModal()">
+      <i class="bx bx-x"></i>
+    </button>
+
+    <img
+      [src]="imagenActual.src"
+      [alt]="imagenActual.alt"
+      class="modal__imagen-grande"
+    />
+
+    <div class="modal__navegacion">
+      <button
+        class="modal__btn-nav"
+        (click)="imagenAnterior()"
+        [disabled]="indiceImagenActual === 0"
+      >
+        <i class="bx bx-chevron-left"></i>
+      </button>
+      <button
+        class="modal__btn-nav"
+        (click)="imagenSiguiente()"
+        [disabled]="indiceImagenActual === imagenesSlideActual.length - 1"
+      >
+        <i class="bx bx-chevron-right"></i>
+      </button>
+    </div>
+  </div>
+</div>
+
+<!-- SECCIÓN: ¿Por qué elegir Residencia Temporal? -->
+<section class="seccion__incluido">
+  <img src="/figure8.png" class="fiure_inc1" alt="" />
+  <img src="/figure10.png" class="figure_inc2" />
+  <div class="incluido__contenedor">
+    <div class="incluido__header">
+      <p class="incluido__subtitulo">
+        ¿Por qué elegir el Plan de Residencia Temporal?
+      </p>
+      <h2 class="incluido__titulo">Soluciones flexibles para cada necesidad</h2>
+      <p class="incluido__descripcion">
+        Nuestra propuesta de valor se basa en ofrecer apoyo personalizado y
+        temporal para familias que necesitan respaldo profesional en el cuidado
+        de sus seres queridos.
+      </p>
+    </div>
+
+    <div class="incluido__grid">
+      <div class="incluido__card">
+        <div class="card__icono">
+          <i class="fa-solid fa-hands-holding-circle"></i>
+        </div>
+        <h3>Respiro del Cuidador</h3>
+        <p>
+          Apoyo para el responsable el cual requiere un descanso temporal en las
+          labores del cuidado.
+        </p>
+      </div>
+
+      <div class="incluido__card">
+        <div class="card__icono">
+          <i class="fa-solid fa-heart-circle-check"></i>
+        </div>
+        <h3>Experiencia de Convivencia</h3>
+        <p>
+          Una buena forma de experimentar la vivencia Las Dalias, mediante la
+          socialización y exploración de nuestros ambientes antes de decidir una
+          estancia permanente.
+        </p>
+      </div>
+
+      <div class="incluido__card">
+        <div class="card__icono">
+          <i class="fa-solid fa-plane-departure"></i>
+        </div>
+        <h3>Ausencia Familiar</h3>
+        <p>
+          Cobertura cuando el familiar principal debe viajar o atender
+          compromisos laborales imprevistos.
+        </p>
+      </div>
+
+      <div class="incluido__card">
+        <div class="card__icono">
+          <i class="fa-solid fa-hand-holding-heart"></i>
+        </div>
+        <h3>Soporte en Crisis</h3>
+        <p>
+          Solución inmediata ante imprevistos domésticos o falta repentina de
+          ayuda en el domicilio particular.
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Sección Contacto -->
+<section class="seccion__contacto">
+  <div class="contacto__contenedor">
+    <img src="/figure3.png" class="figure_contacto2" alt="" />
+    <img src="/figure_contacto2.png" class="figure_contacto3" alt="" />
+    <img src="/figure_contacto2.png" class="figure_contacto4" alt="" />
+
+    <!-- Columna izquierda - Información -->
+    <div class="contacto__izquierda">
+      <div class="contacto__contenido-superior">
+        <h2 class="contacto__titulo">
+          Cuidamos con amor a<br />
+          <span class="contacto__titulo--personalizado"
+            >quienes nos cuidaron</span
+          >
+        </h2>
+
+        <p class="contacto__descripcion">
+          Entendemos la importancia de este paso y estamos aquí para
+          acompañarlos, asegurando bienestar, protección y calidez humana para
+          sus seres queridos.
+        </p>
+
+        <div class="contacto__info">
+          <div class="info__item">
+            <div class="info__icono">
+              <i class="fa-solid fa-phone"></i>
+            </div>
+            <div class="info__contenido">
+              <p class="info__valor">+51 981 776 156</p>
+            </div>
+          </div>
+
+          <div class="info__item">
+            <div class="info__icono">
+              <i class="fa-solid fa-envelope"></i>
+            </div>
+            <div class="info__contenido">
+              <p class="info__valor">residencialasdalias156&#64;gmail.com</p>
+            </div>
+          </div>
+
+          <div class="info__item">
+            <div class="info__icono">
+              <i class="fa-solid fa-location-dot"></i>
+            </div>
+            <div class="info__contenido">
+              <p class="info__valor">
+                Las Dalias 156, La Molina 15024, Lima, Perú
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Icono decorativo calendario -->
+      <div class="contacto__icono-decorativo">
+        <div class="icono-calendario">
+          <i class="fa-regular fa-calendar"></i>
+        </div>
+      </div>
+    </div>
+
+    <!-- Columna derecha - Formulario -->
+    <div class="contacto__derecha">
+      <div class="formulario__card">
+        <form
+          class="formulario__contacto"
+          (ngSubmit)="enviarFormularioContacto()"
+        >
+          <!-- Nombre y Teléfono en la misma fila -->
+          <div class="form__fila">
+            <div class="form__grupo">
+              <label class="form__label">Nombre Completo</label>
+              <input
+                type="text"
+                class="form__input"
+                placeholder="Ej. Juan Pérez"
+                [(ngModel)]="formularioContacto.nombre"
+                (blur)="validarNombreContacto()"
+                (input)="validarNombreContacto()"
+                name="nombre"
+                required
+              />
+              <span class="error__mensaje" *ngIf="erroresContacto.nombre">
+                {{ erroresContacto.nombre }}
+              </span>
+            </div>
+
+            <div class="form__grupo">
+              <label class="form__label">Teléfono</label>
+              <input
+                type="tel"
+                class="form__input"
+                placeholder="+51 987 654 321"
+                [(ngModel)]="formularioContacto.numeroMovil"
+                (blur)="validarNumeroMovil()"
+                (input)="validarNumeroMovil()"
+                name="numeroMovil"
+                required
+              />
+              <span class="error__mensaje" *ngIf="erroresContacto.numeroMovil">
+                {{ erroresContacto.numeroMovil }}
+              </span>
+            </div>
+          </div>
+
+          <!-- Correo Electrónico -->
+          <div class="form__grupo">
+            <label class="form__label">Correo Electrónico</label>
+            <input
+              type="email"
+              class="form__input"
+              placeholder="ejemplo@correo.com"
+              [(ngModel)]="formularioContacto.correo"
+              (blur)="validarCorreoContacto()"
+              (input)="validarCorreoContacto()"
+              name="correo"
+              required
+            />
+            <span class="error__mensaje" *ngIf="erroresContacto.correo">
+              {{ erroresContacto.correo }}
+            </span>
+          </div>
+
+          <!-- Mensaje -->
+          <div class="form__grupo">
+            <label class="form__label">Mensaje Adicional</label>
+            <textarea
+              class="form__textarea"
+              placeholder="Cuéntenos sus necesidades específicas..."
+              [(ngModel)]="formularioContacto.mensaje"
+              name="mensaje"
+            ></textarea>
+          </div>
+
+          <!-- Botón -->
+          <button type="submit" class="btn__enviar">
+            <span>Enviar mensaje</span>
+          </button>
+
+          <p class="form__privacidad">
+            Su información está protegida por nuestra política de privacidad
+          </p>
+        </form>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Modal de Confirmación Contacto -->
+<div
+  class="modal__overlay"
+  *ngIf="mostrarModalConfirmacionContacto"
+  (click)="cerrarModalConfirmacionContacto()"
+>
+  <div class="modal__confirmacion" (click)="$event.stopPropagation()">
+    <div class="confirmacion__icono">
+      <img src="/logo_header.png" alt="" />
+    </div>
+    <h2>¡Solicitud enviada!</h2>
+    <p>Nos contactaremos contigo pronto.</p>
+    <button
+      class="btn__cerrar-confirmacion"
+      (click)="cerrarModalConfirmacionContacto()"
+    >
+      Entendido
+    </button>
+  </div>
+</div>
+
+<!-- Sección Preguntas Frecuentes -->
+<section class="seccion__faq" id="preguntas-frecuentes">
+  <img src="/figure3_contacto.png" class="figure_faq1" alt="" />
+  <img src="/figure4_contacto.png" class="figure_faq2" alt="" />
+  <img src="/figure8.png" class="figure_faq3" alt="" />
+  <div class="faq__contenedor">
+    <div class="faq__header">
+      <p class="faq__subtitulo">¿Algo no quedó claro?</p>
+      <h2 class="faq__titulo">Preguntas Frecuentes</h2>
+      <p class="faq__descripcion">
+        Encuentra respuestas a las preguntas más comunes sobre nuestros
+        servicios y atención
+      </p>
+    </div>
+
+    <div class="faq__grid">
+      <div class="faq__columna">
+        <div
+          class="faq__item"
+          *ngFor="let pregunta of preguntasColumna1"
+          [class.activo]="pregunta.activo"
+          (click)="togglePregunta(pregunta.id)"
+        >
+          <div class="faq__pregunta">
+            <h3>{{ pregunta.pregunta }}</h3>
+            <i
+              class="bx"
+              [class.bx-plus]="!pregunta.activo"
+              [class.bx-minus]="pregunta.activo"
+            ></i>
+          </div>
+          <div class="faq__respuesta" *ngIf="pregunta.activo">
+            <p [innerHTML]="pregunta.respuesta"></p>
+          </div>
+        </div>
+      </div>
+
+      <div class="faq__columna">
+        <div
+          class="faq__item"
+          *ngFor="let pregunta of preguntasColumna2"
+          [class.activo]="pregunta.activo"
+          (click)="togglePregunta(pregunta.id)"
+        >
+          <div class="faq__pregunta">
+            <h3>{{ pregunta.pregunta }}</h3>
+            <i
+              class="bx"
+              [class.bx-plus]="!pregunta.activo"
+              [class.bx-minus]="pregunta.activo"
+            ></i>
+          </div>
+          <div class="faq__respuesta" *ngIf="pregunta.activo">
+            <p [innerHTML]="pregunta.respuesta"></p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

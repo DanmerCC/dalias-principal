@@ -1020,7 +1020,7 @@ select.form__input {
 /* Sección preguntas frecuentes */
 .seccion__faq {
   width: 100%;
-  padding: 6rem 10rem;
+  padding: 6rem 5rem;
   overflow: hidden;
   position: relative;
   background: linear-gradient(135deg, #f8f9fa 0%, #ffffff 100%);

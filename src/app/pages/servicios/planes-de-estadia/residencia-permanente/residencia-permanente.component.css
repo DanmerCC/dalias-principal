@@ -654,7 +654,7 @@
 .instalaciones__carrusel {
   width: 100%;
   max-width: 1300px;
-  margin: 0 auto 2.5rem auto;
+  margin: 0 auto 1rem auto;
   display: flex;
   align-items: center;
   justify-content: flex-start;
@@ -672,7 +672,7 @@
   display: grid;
   grid-template-columns: 1.6fr 1fr 1fr;
   grid-template-rows: 280px 250px;
-  gap: 1.5rem;
+  gap: 0.6rem;
 }
 
 .instalaciones__imagen {
@@ -1225,27 +1225,37 @@
 /* Sección Preguntas Frecuentes */
 .seccion__faq {
   width: 100%;
-  padding: 6rem 3rem;
+  padding: 6rem 5rem;
   overflow: hidden;
   position: relative;
   background: linear-gradient(135deg, #f8f9fa 0%, #ffffff 100%);
 }
 
-.figure_faq1{
+.figure_faq1 {
   position: absolute;
-  width: 5rem;
-  top: 2rem;
-  left: 0;
+  width: 16rem;
+  top: -2rem;
+  left: -8rem;
+  z-index: 1;
 }
 .figure_faq2 {
   position: absolute;
-  width: 5rem;
-  bottom: 3rem;
+  width: 16rem;
+  top: 2rem;
+  right: -8rem;
+  z-index: 1;
+}
+
+.figure_faq3 {
+  position: absolute;
+  width: 3rem;
+  bottom: 2rem;
   right: 0;
+  z-index: 1;
 }
 
 .faq__contenedor {
-  max-width: 1400px;
+    max-width: 1400px;
   margin: 0 auto;
 }
 

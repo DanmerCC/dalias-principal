@@ -27,9 +27,8 @@ export class AppComponent implements OnInit, OnDestroy {
     '/servicios/planes-de-estadia': 'https://wa.link/3odmgg',
     '/servicios/planes-de-estadia/residencia-permanente':
       'https://wa.link/db4jzd',
-    // Aquí puedes agregar más rutas en el futuro
-    // '/contacto': 'https://wa.link/otro_enlace',
-    // '/productos': 'https://wa.link/otro_enlace',
+    '/servicios/planes-de-estadia/residencia-temporal':
+      'https://wa.link/k3fj0r',
   };
 
   constructor(private router: Router) {}
