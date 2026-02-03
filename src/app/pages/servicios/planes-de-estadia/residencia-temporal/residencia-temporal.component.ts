@@ -51,30 +51,30 @@ export class ResidenciaTemporalComponent {
   imagenesGaleria: ImagenGaleria[][] = [
     // Slide 1
     [
-      { src: '/gallery1.png', alt: 'Habitación Principal' },
-      { src: '/gallery2.png', alt: 'Habitación con Sala' },
-      { src: '/gallery3.jpeg', alt: 'Baño 1' },
-      { src: '/gallery4.jpeg', alt: 'Baño 2' },
+      { src: '/gallery1.jpeg', alt: 'Habitación Principal' },
+      { src: '/gallery2.jpg', alt: 'Habitación con Sala' },
+      { src: '/gallery3.jpg', alt: 'Baño 1' },
+      { src: '/gallery4.jpg', alt: 'Baño 2' },
     ],
     // Slide 2
     [
-      { src: '/gallery5.png', alt: 'Comedor' },
-      { src: '/gallery6.jpg', alt: 'Sala de Terapias' },
-      { src: '/gallery7.png', alt: 'Cocina' },
-      { src: '/gallery8.jpg', alt: 'Recepción' },
+      { src: '/gallery5.jpeg', alt: 'Comedor' },
+      { src: '/gallery6.jpeg', alt: 'Sala de Terapias' },
+      { src: '/gallery7.jpeg', alt: 'Cocina' },
+      { src: '/gallery8.png', alt: 'Recepción' },
     ],
     // Slide 3
     [
       { src: '/gallery9.jpg', alt: 'Piscina' },
       { src: '/gallery10.jpg', alt: 'Área de Lectura' },
-      { src: '/gallery11.jpeg', alt: 'Habitación Suite' },
-      { src: '/gallery12.jpeg', alt: 'Terraza' },
+      { src: '/gallery11.jpg', alt: 'Habitación Suite' },
+      { src: '/gallery12.jpg', alt: 'Terraza' },
     ],
     // Slide 4
     [
-      { src: '/gallery13.jpg', alt: 'Gimnasio' },
+      { src: '/gallery13.jpeg', alt: 'Gimnasio' },
       { src: '/gallery14.jpeg', alt: 'Sala de Actividades' },
-      { src: '/gallery15.jpeg', alt: 'Capilla' },
+      { src: '/gallery15.jpg', alt: 'Capilla' },
       { src: '/gallery16.jpg', alt: 'Enfermería' },
     ],
   ];

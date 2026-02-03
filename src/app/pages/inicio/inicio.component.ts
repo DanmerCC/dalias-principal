@@ -156,7 +156,7 @@ export class InicioComponent implements OnInit, OnDestroy {
       'residencia-permanente':
         '/servicios/planes-de-estadia/residencia-permanente',
       'centro-de-dia': '/servicios/planes-de-estadia/centro-de-dia',
-      temporal: '/servicios/planes-de-estadia/temporal',
+      'temporal': '/servicios/planes-de-estadia/residencia-temporal',
       'post-operatoria': '/servicios/planes-de-estadia/post-operatoria',
     };
 

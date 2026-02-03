@@ -590,158 +590,239 @@
   transform: translateX(0.3rem);
 }
 
-/* Media Queries */
+
+/* ===============================
+   MEDIA QUERIES - SERVICIOS
+================================ */
+
 @media (max-width: 768px) {
+
+  /* ── Figuras ── */
+  .figure1      { width: 8rem; left: -5rem; }
+  .figure2      { width: 2.5rem; }
+  .figure4      { width: 7rem; right: 20rem; }
+  .figure44     { width: 2.5rem; }
+  .figure55     { width: 2.5rem; }
+  .figure5      { width: 7rem; }
+  .figure6      { width: 7rem; top: 22rem; left: -4rem; }
+  .figure66     { width: 2rem; }
+  .figure_why   { width: 6rem; left: -4rem; }
+  .figure_why2  { width: 6rem; right: -4rem; }
+
+  /* ── Hero Slider ── */
+  .contenedor__slider {
+    min-height: unset;
+    height: 75vh;
+  }
   .contenedor__slider .slider__img {
-    height: 80vh;
+    height: 100%;
   }
-
+  .content__slider {
+    width: 92%;
+    max-width: 100%;
+    padding: 0 1.5rem;
+  }
   .slider__titulo {
-    font-size: 2.5rem;
+    font-size: 2.4rem;
   }
-
   .slider__subtitulo {
     font-size: 1rem;
   }
 
-  .content__slider {
-    max-width: 90%;
-  }
-
+  /* ── Secciones servicios ── */
   .seccion__servicio {
-    padding: 4rem 2rem;
+    padding: 3.5rem 2rem;
   }
-
   .servicio__contenido {
     flex-direction: column;
     gap: 2rem;
   }
-
+  .servicio__imagen {
+    width: 100%;
+    flex: none;
+  }
+  .servicio__imagen img {
+    height: 22rem;
+  }
+  .servicio__texto {
+    width: 100%;
+    flex: none;
+  }
   .servicio__titulo {
     font-size: 2rem;
   }
 
-  .servicio__imagen img {
-    height: 20rem;
-  }
-
+  /* planes__grid se mantiene en 2 columnas */
   .planes__grid {
-    grid-template-columns: 1fr;
+    grid-template-columns: repeat(2, 1fr);
     gap: 0.8rem;
   }
-
   .plan__card {
     padding: 1rem;
   }
-
   .plan__card i {
     font-size: 1.5rem;
+    margin-bottom: 0.6rem;
   }
-
   .plan__card h3 {
     font-size: 0.95rem;
   }
-
   .plan__card p {
-    font-size: 0.8rem;
+    font-size: 0.82rem;
   }
 
+  /* ── Por qué elegirnos ── */
   .seccion__porque__elegirnos {
-    padding: 4rem 2rem;
+    padding: 3.5rem 2rem;
   }
-
   .porque__elegirnos__contenido {
     flex-direction: column;
-    gap: 3rem;
+    gap: 2.5rem;
   }
-
   .porque__elegirnos__imagen {
-    flex: 1;
     width: 100%;
   }
-
   .porque__elegirnos__imagen img {
-    height: 28rem;
+    height: 26rem;
   }
-
   .porque__elegirnos__titulo {
     font-size: 2rem;
+    margin-bottom: 2rem;
   }
-
   .razones__lista {
-    gap: 1rem;
+    gap: 1.2rem;
+  }
+  .razon__item h3 {
+    font-size: 1rem;
   }
 
-  .razon__item h3 {
-    font-size: 0.95rem;
+  /* ── FAQ CTA ── */
+  .seccion__faq {
+    padding: 3rem 2rem;
+  }
+  .faq__cta {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1.8rem;
+    padding: 2rem;
+  }
+  .btn__faq-contacto {
+    width: 100%;
+    justify-content: center;
   }
 }
 
+/* ─── 680px ─── */
 @media (max-width: 680px) {
-  .contenedor__slider .slider__img {
-    height: 60vh;
-  }
 
+  /* ── Figuras ── */
+  .figure1      { width: 5rem; left: -3rem; }
+  .figure2      { width: 1.8rem; }
+  .figure4      { width: 4.5rem; right: 12rem; }
+  .figure44     { width: 1.8rem; }
+  .figure55     { width: 1.8rem; }
+  .figure5      { width: 4.5rem; }
+  .figure6      { width: 4.5rem; top: 16rem; left: -2.5rem; }
+  .figure66     { width: 1.5rem; }
+  .figure_why   { width: 4rem; left: -2.5rem; }
+  .figure_why2  { width: 4rem; right: -2.5rem; }
+
+  /* ── Hero Slider ── */
+  .contenedor__slider {
+    height: 70vh;
+  }
+  .content__slider {
+    width: 96%;
+    padding: 0 1rem;
+    gap: 1rem;
+  }
   .slider__titulo {
-    font-size: 2rem;
+    font-size: 1.9rem;
   }
-
   .slider__subtitulo {
     font-size: 0.9rem;
   }
+  .btn__primario {
+    padding: 0.85rem 2rem;
+    font-size: 0.92rem;
+  }
 
+  /* ── Secciones servicios ── */
   .seccion__servicio {
-    padding: 3rem 1rem;
+    padding: 2.5rem 1rem;
   }
-
-  .servicio__titulo {
-    font-size: 1.5rem;
-  }
-
-  .servicio__descripcion {
-    font-size: 0.95rem;
-  }
-
   .servicio__imagen img {
-    height: 15rem;
+    height: 17rem;
+  }
+  .servicio__titulo {
+    font-size: 1.6rem;
+  }
+  .servicio__descripcion {
+    font-size: 0.92rem;
   }
 
+  /* planes__grid: 2 columnas más compactas */
+  .planes__grid {
+    gap: 0.7rem;
+  }
   .plan__card {
-    padding: 0.9rem;
+    padding: 0.85rem;
   }
-
   .plan__card i {
-    font-size: 1.4rem;
+    font-size: 1.3rem;
+    margin-bottom: 0.5rem;
   }
-
   .plan__card h3 {
-    font-size: 0.9rem;
+    font-size: 0.88rem;
   }
-
   .plan__card p {
-    font-size: 0.75rem;
+    font-size: 0.78rem;
   }
 
+  /* ── Por qué elegirnos ── */
   .seccion__porque__elegirnos {
-    padding: 3rem 1rem;
+    padding: 2.5rem 1rem;
   }
-
   .porque__elegirnos__imagen img {
-    height: 22rem;
+    height: 20rem;
   }
-
   .porque__elegirnos__titulo {
     font-size: 1.7rem;
-    margin-bottom: 2rem;
+    margin-bottom: 1.5rem;
   }
-
+  .razones__lista {
+    gap: 1rem;
+    padding-left: 0.8rem;
+  }
   .razon__numero {
     font-size: 1.3rem;
     min-width: 2rem;
   }
-
+  .razon__item {
+    gap: 1rem;
+  }
   .razon__item h3 {
+    font-size: 0.92rem;
+  }
+
+  /* ── FAQ CTA ── */
+  .seccion__faq {
+    padding: 2rem 1rem;
+  }
+  .faq__cta {
+    padding: 1.8rem 1.2rem;
+    gap: 1.5rem;
+  }
+  .faq__cta-contenido {
+    gap: 1rem;
+  }
+  .faq__cta-contenido i {
+    font-size: 2.8rem;
+  }
+  .faq__cta-contenido h3 {
+    font-size: 1.2rem;
+  }
+  .faq__cta-contenido p {
     font-size: 0.9rem;
-    line-height: 1.4;
   }
 }

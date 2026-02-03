@@ -13,7 +13,7 @@
     <p class="hero__descripcion">
       Brindamos un entorno de convivencia y servicios personalizados, donde cada
       detalle está pensado para ofrecer una experiencia grata, integrando
-      atención
+      atención continua y espacios acogedores durante toda su estadía
     </p>
     <div class="hero__botones">
       <button class="btn__primario" (click)="scrollToServicios()">
@@ -29,47 +29,42 @@
   <div class="servicio__contenedor">
     <div class="servicio__contenido">
       <div class="servicio__imagen">
-        <img src="/servicios1-page2.jpg" alt="Planes de Estadía" />
+        <img src="/servicios_temporal.jpeg" alt="Planes de Estadía" />
       </div>
 
       <div class="servicio__texto">
         <p class="servicio__subtitulo">¿Qué es la residencia temporal?</p>
-        <h2 class="servicio__titulo">Flexibilidad</h2>
+        <h2 class="servicio__titulo">Flexibilidad Total para su Bienestar</h2>
         <p class="servicio__descripcion">
-          Nuestro plan de residencia temporal está diseñado para ofrecer a las
-          familias una solución flexible y confiable cuando necesitan un
-          respaldo profesional en el cuidado de sus seres queridos.
+          Entendemos que hay momentos en los que se requiere un apoyo
+          profesional especializado por un tiempo determinado. Ya sea por un
+          viaje familiar o la necesidad de una recuperación asistida, en Las
+          Dalías ofrecemos estancias que van desde unos pocos días hasta el
+          periodo que requiera.
         </p>
 
-        <div class="planes__grid">
-          <div class="plan__card">
-            <i class="fa-solid fa-house-medical"></i>
-            <h3>Residencia Permanente</h3>
-            <p>Atención integral 24/7</p>
+        <div class="experiencia__caracteristicas">
+          <div class="caracteristica__item center_div">
+            <i class="fa-regular fa-circle-check"></i>
+            <div>
+              <span>Estancias desde 2 días hasta periodos prolongados.</span>
+            </div>
           </div>
 
-          <div class="plan__card">
-            <i class="fa-solid fa-calendar-check"></i>
-            <h3>Residencia Temporal</h3>
-            <p>Estadías cortas personalizadas</p>
+          <div class="caracteristica__item center_div">
+            <i class="fa-regular fa-circle-check"></i>
+            <div>
+              <span>Acceso a todos los servicios de la residencia.</span>
+            </div>
           </div>
 
-          <div class="plan__card">
-            <i class="fa-solid fa-sun"></i>
-            <h3>Centro de Día</h3>
-            <p>Bienestar y actividades diarias</p>
-          </div>
-
-          <div class="plan__card">
-            <i class="fa-solid fa-bed-pulse"></i>
-            <h3>Residencia Post Operatoria</h3>
-            <p>Cuidado durante recuperación</p>
+          <div class="caracteristica__item center_div">
+            <i class="fa-regular fa-circle-check"></i>
+            <div>
+              <span>Integración inmediata a la comunidad.</span>
+            </div>
           </div>
         </div>
-
-        <a routerLink="/servicios/planes-de-estadia" class="btn__servicio">
-          Conocer más
-        </a>
       </div>
     </div>
   </div>
@@ -85,53 +80,50 @@
         <p class="experiencia__subtitulo">Plan Temporal</p>
         <h2 class="experiencia__titulo">¿Qué incluye la estadía?</h2>
 
-        <!-- Características destacadas -->
-        <div class="experiencia__caracteristicas">
-          <div class="caracteristica__item">
-            <i class="fa-regular fa-circle-check"></i>
-            <div>
-              <strong>Cuidado Integral Continuo</strong>
-              <span
-                >Control de signos vitales y administración de medicamentos
-                24/7.</span
-              >
-            </div>
+        <p class="servicio__descripcion">
+          Atención profesional y confort absoluto para garantizar el bienestar
+          integral de cada uno de nuestros residentes.
+        </p>
+
+        <div class="planes__grid">
+          <div class="plan__card">
+            <i class="fa-solid fa-heart-pulse"></i>
+            <h3>Cuidado Integral Continuo</h3>
+            <p>
+              Control de signos vitales y administración de medicamentos 24/7
+            </p>
           </div>
 
-          <div class="caracteristica__item">
-            <i class="fa-regular fa-circle-check"></i>
-            <div>
-              <strong>Habitaciones Totalmente Equipadas</strong>
-              <span
-                >Cuentan con internet inalámbrico y mobiliario para una estancia
-                cómoda.</span
-              >
-            </div>
+          <div class="plan__card">
+            <i class="fa-solid fa-bed"></i>
+            <h3>Habitaciones Totalmente Equipadas</h3>
+            <p>
+              Cuentan con internet inalámbrico y mobiliario para una estancia
+              cómoda.
+            </p>
           </div>
 
-          <div class="caracteristica__item">
-            <i class="fa-regular fa-circle-check"></i>
-            <div>
-              <strong>Alimentación y Bienestar Nutricional</strong>
-              <span>Plan alimenticio completo con superalimentos.</span>
-            </div>
+          <div class="plan__card">
+            <i class="fa-solid fa-utensils"></i>
+            <h3>Alimentación y Bienestar Nutricional</h3>
+            <p>Plan alimenticio completo con superalimentos</p>
           </div>
 
-          <div class="caracteristica__item">
-            <i class="fa-regular fa-circle-check"></i>
-            <div>
-              <strong>Terapia y Estimulación Diaria</strong>
-              <span
-                >Talleres ocupacionales de terapia cognitiva y funcional
-                incluidos.</span
-              >
-            </div>
+          <div class="plan__card">
+            <i class="fa-solid fa-brain"></i>
+            <h3>Terapia y Estimulación Diaria</h3>
+            <p>
+              Talleres ocupacionales de terapia cognitiva y funcional incluidos
+            </p>
           </div>
         </div>
       </div>
       <!-- Imagen destacada -->
       <div class="experiencia__imagen">
-        <img src="/permanente1.jpeg" alt="Experiencia integral Las Dalias" />
+        <img
+          src="/servicios_temporal2.png"
+          alt="Experiencia integral Las Dalias"
+        />
       </div>
     </div>
   </div>
@@ -161,28 +153,28 @@
             class="instalaciones__imagen instalaciones__imagen--1"
             (click)="abrirModalImagen(0, 0)"
           >
-            <img src="/gallery1.png" alt="Habitación Principal" />
+            <img src="/gallery1.jpeg" alt="Habitación Principal" />
           </div>
 
           <div
             class="instalaciones__imagen instalaciones__imagen--2"
             (click)="abrirModalImagen(0, 1)"
           >
-            <img src="/gallery2.png" alt="Habitación con Sala" />
+            <img src="/gallery2.jpg" alt="Habitación con Sala" />
           </div>
 
           <div
             class="instalaciones__imagen instalaciones__imagen--3"
             (click)="abrirModalImagen(0, 2)"
           >
-            <img src="/gallery3.jpeg" alt="Baño 1" />
+            <img src="/gallery3.jpg" alt="Baño 1" />
           </div>
 
           <div
             class="instalaciones__imagen instalaciones__imagen--4"
             (click)="abrirModalImagen(0, 3)"
           >
-            <img src="/gallery4.jpeg" alt="Baño 2" />
+            <img src="/gallery4.jpg" alt="Baño 2" />
           </div>
         </div>
       </article>
@@ -194,28 +186,28 @@
             class="instalaciones__imagen instalaciones__imagen--1"
             (click)="abrirModalImagen(1, 0)"
           >
-            <img src="/gallery5.png" alt="Comedor" />
+            <img src="/gallery5.jpeg" alt="Comedor" />
           </div>
 
           <div
             class="instalaciones__imagen instalaciones__imagen--2"
             (click)="abrirModalImagen(1, 1)"
           >
-            <img src="/gallery6.jpg" alt="Sala de Terapias" />
+            <img src="/gallery6.jpeg" alt="Sala de Terapias" />
           </div>
 
           <div
             class="instalaciones__imagen instalaciones__imagen--3"
             (click)="abrirModalImagen(1, 2)"
           >
-            <img src="/gallery7.png" alt="Cocina" />
+            <img src="/gallery7.jpeg" alt="Cocina" />
           </div>
 
           <div
             class="instalaciones__imagen instalaciones__imagen--4"
             (click)="abrirModalImagen(1, 3)"
           >
-            <img src="/gallery8.jpg" alt="Recepción" />
+            <img src="/gallery8.png" alt="Recepción" />
           </div>
         </div>
       </article>
@@ -241,14 +233,14 @@
             class="instalaciones__imagen instalaciones__imagen--3"
             (click)="abrirModalImagen(2, 2)"
           >
-            <img src="/gallery11.jpeg" alt="Habitación Suite" />
+            <img src="/gallery11.jpg" alt="Habitación Suite" />
           </div>
 
           <div
             class="instalaciones__imagen instalaciones__imagen--4"
             (click)="abrirModalImagen(2, 3)"
           >
-            <img src="/gallery12.jpeg" alt="Terraza" />
+            <img src="/gallery12.jpg" alt="Terraza" />
           </div>
         </div>
       </article>
@@ -260,7 +252,7 @@
             class="instalaciones__imagen instalaciones__imagen--1"
             (click)="abrirModalImagen(3, 0)"
           >
-            <img src="/gallery13.jpg" alt="Gimnasio" />
+            <img src="/gallery13.jpeg" alt="Gimnasio" />
           </div>
 
           <div
@@ -274,14 +266,14 @@
             class="instalaciones__imagen instalaciones__imagen--3"
             (click)="abrirModalImagen(3, 2)"
           >
-            <img src="/gallery15.jpeg" alt="Capilla" />
+            <img src="/gallery15.jpg" alt="Capilla" />
           </div>
 
           <div
             class="instalaciones__imagen instalaciones__imagen--4"
             (click)="abrirModalImagen(3, 3)"
           >
-            <img src="/gallery16.jpg" alt="Enfermería" />
+            <img src="/gallery16.jpeg" alt="Enfermería" />
           </div>
         </div>
       </article>
@@ -357,9 +349,7 @@
   <img src="/figure10.png" class="figure_inc2" />
   <div class="incluido__contenedor">
     <div class="incluido__header">
-      <p class="incluido__subtitulo">
-        Situaciones para estancia temporal
-      </p>
+      <p class="incluido__subtitulo">Situaciones para estancia temporal</p>
       <h2 class="incluido__titulo">Soluciones flexibles para cada necesidad</h2>
       <p class="incluido__descripcion">
         Nuestra propuesta de valor se basa en ofrecer apoyo personalizado y
@@ -386,9 +376,7 @@
         </div>
         <h3>Experiencia de Convivencia</h3>
         <p>
-          Una buena forma de experimentar la vivencia Las Dalias, mediante la
-          socialización y exploración de nuestros ambientes antes de decidir una
-          estancia permanente.
+           Una forma ideal de conocer Las Dalias, socializar y explorar antes de una estancia permanente.
         </p>
       </div>
 

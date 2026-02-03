@@ -11,7 +11,7 @@
       </span>
     </h1>
     <p class="hero__descripcion">
-       Brindamos a nuestros residentes un entorno de bienestar, estimulo y compañía en la Molina. Una experiencia de "Casa Club" diseñada para la plenitud
+      Brindamos a nuestros residentes un entorno de bienestar, estimulo y compañía en la Molina. Una experiencia de "Casa Club" diseñada para la plenitud
     </p>
     <div class="hero__botones">
       <button class="btn__primario" (click)="scrollToServicios()">
@@ -21,3 +21,65 @@
     </div>
   </div>
 </div>
+
+
+<!-- Sección Preguntas Frecuentes -->
+<section class="seccion__faq" id="preguntas-frecuentes">
+  <img src="/figure3_contacto.png" class="figure_faq1" alt="" />
+  <img src="/figure4_contacto.png" class="figure_faq2" alt="" />
+  <img src="/figure8.png" class="figure_faq3" alt="" />
+  <div class="faq__contenedor">
+    <div class="faq__header">
+      <p class="faq__subtitulo">¿Algo no quedó claro?</p>
+      <h2 class="faq__titulo">Preguntas Frecuentes</h2>
+      <p class="faq__descripcion">
+        Encuentra respuestas a las preguntas más comunes sobre nuestros
+        servicios y atención
+      </p>
+    </div>
+
+    <div class="faq__grid">
+      <div class="faq__columna">
+        <div
+          class="faq__item"
+          *ngFor="let pregunta of preguntasColumna1"
+          [class.activo]="pregunta.activo"
+          (click)="togglePregunta(pregunta.id)"
+        >
+          <div class="faq__pregunta">
+            <h3>{{ pregunta.pregunta }}</h3>
+            <i
+              class="bx"
+              [class.bx-plus]="!pregunta.activo"
+              [class.bx-minus]="pregunta.activo"
+            ></i>
+          </div>
+          <div class="faq__respuesta" *ngIf="pregunta.activo">
+            <p [innerHTML]="pregunta.respuesta"></p>
+          </div>
+        </div>
+      </div>
+
+      <div class="faq__columna">
+        <div
+          class="faq__item"
+          *ngFor="let pregunta of preguntasColumna2"
+          [class.activo]="pregunta.activo"
+          (click)="togglePregunta(pregunta.id)"
+        >
+          <div class="faq__pregunta">
+            <h3>{{ pregunta.pregunta }}</h3>
+            <i
+              class="bx"
+              [class.bx-plus]="!pregunta.activo"
+              [class.bx-minus]="pregunta.activo"
+            ></i>
+          </div>
+          <div class="faq__respuesta" *ngIf="pregunta.activo">
+            <p [innerHTML]="pregunta.respuesta"></p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

@@ -14,6 +14,7 @@ export class HeaderComponent {
 
   isFixed = false;
   showInicio = true;
+  menuAbierto = false;
 
   constructor(private router: Router) {
     this.router.events
@@ -21,11 +22,20 @@ export class HeaderComponent {
       .subscribe((event: NavigationEnd) => {
         const currentRoute = event.urlAfterRedirects;
         this.showInicio = !(currentRoute === '/' || currentRoute === '/inicio');
+        this.cerrarMenu();
       });
   }
 
   @HostListener('window:scroll')
   onWindowScroll(): void {
     this.isFixed = window.scrollY > 10;
+  }
+
+  toggleMenu(): void {
+    this.menuAbierto = !this.menuAbierto;
+  }
+
+  cerrarMenu(): void {
+    this.menuAbierto = false;
   }
 }
