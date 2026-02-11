@@ -29,10 +29,6 @@ html {
   }
 }
 @media (min-width: 1500px) {
-  .contain_s {
-    max-width: 1500px;
-    margin: auto;
-  }
   html {
     font-size: 17px;
   }

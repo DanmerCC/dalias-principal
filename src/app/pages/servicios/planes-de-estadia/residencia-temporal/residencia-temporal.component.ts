@@ -1,6 +1,16 @@
-import { Component, ViewChild, ElementRef, PLATFORM_ID, Inject } from '@angular/core';
+import {
+  Component,
+  ViewChild,
+  ElementRef,
+  PLATFORM_ID,
+  Inject,
+} from '@angular/core';
 import { CommonModule, isPlatformBrowser } from '@angular/common';
-import { HttpClient, HttpClientModule, HttpHeaders } from '@angular/common/http';
+import {
+  HttpClient,
+  HttpClientModule,
+  HttpHeaders,
+} from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
 
 interface ImagenGaleria {
@@ -33,7 +43,7 @@ interface ErroresContacto {
   standalone: true,
   imports: [CommonModule, FormsModule, HttpClientModule],
   templateUrl: './residencia-temporal.component.html',
-  styleUrl: './residencia-temporal.component.css'
+  styleUrl: './residencia-temporal.component.css',
 })
 export class ResidenciaTemporalComponent {
   @ViewChild('instalacionesCarrusel') instalacionesCarrusel!: ElementRef;
@@ -51,31 +61,79 @@ export class ResidenciaTemporalComponent {
   imagenesGaleria: ImagenGaleria[][] = [
     // Slide 1
     [
-      { src: '/gallery1.jpeg', alt: 'Habitación Principal' },
-      { src: '/gallery2.jpg', alt: 'Habitación con Sala' },
-      { src: '/gallery3.jpg', alt: 'Baño 1' },
-      { src: '/gallery4.jpg', alt: 'Baño 2' },
+      {
+        src: 'https://res.cloudinary.com/dd5mnpde5/image/upload/f_auto,q_60,w_1200,c_limit/v1770770414/gallery1_eewi4e.jpg',
+        alt: 'Habitación Principal',
+      },
+      {
+        src: 'https://res.cloudinary.com/dd5mnpde5/image/upload/f_auto,q_60,w_1200,c_limit/v1770770415/gallery2_tabp74.jpg',
+        alt: 'Habitación con Sala',
+      },
+      {
+        src: 'https://res.cloudinary.com/dd5mnpde5/image/upload/f_auto,q_60,w_1200,c_limit/v1770770414/gallery3_wnjuta.jpg',
+        alt: 'Baño 1',
+      },
+      {
+        src: 'https://res.cloudinary.com/dd5mnpde5/image/upload/f_auto,q_60,w_1200,c_limit/v1770770414/gallery4_ebhvti.jpg',
+        alt: 'Baño 2',
+      },
     ],
     // Slide 2
     [
-      { src: '/gallery5.jpeg', alt: 'Comedor' },
-      { src: '/gallery6.jpeg', alt: 'Sala de Terapias' },
-      { src: '/gallery7.jpeg', alt: 'Cocina' },
-      { src: '/gallery8.png', alt: 'Recepción' },
+      {
+        src: 'https://res.cloudinary.com/dd5mnpde5/image/upload/f_auto,q_60,w_1200,c_limit/v1770770513/gallery5_cdjjk7.jpg',
+        alt: 'Comedor',
+      },
+      {
+        src: 'https://res.cloudinary.com/dd5mnpde5/image/upload/f_auto,q_60,w_1200,c_limit/v1770770515/gallery6_srr3if.jpg',
+        alt: 'Sala de Terapias',
+      },
+      {
+        src: 'https://res.cloudinary.com/dd5mnpde5/image/upload/f_auto,q_60,w_1200,c_limit/v1770770514/gallery7_mmxso9.jpg',
+        alt: 'Cocina',
+      },
+      {
+        src: 'https://res.cloudinary.com/dd5mnpde5/image/upload/f_auto,q_60,w_1200,c_limit/v1770770514/gallery8_ekedtm.png',
+        alt: 'Recepción',
+      },
     ],
     // Slide 3
     [
-      { src: '/gallery9.jpg', alt: 'Piscina' },
-      { src: '/gallery10.jpg', alt: 'Área de Lectura' },
-      { src: '/gallery11.jpg', alt: 'Habitación Suite' },
-      { src: '/gallery12.jpg', alt: 'Terraza' },
+      {
+        src: 'https://res.cloudinary.com/dd5mnpde5/image/upload/f_auto,q_60,w_1200,c_limit/v1770770674/gallery9_ttjwjf.jpg',
+        alt: 'Piscina',
+      },
+      {
+        src: 'https://res.cloudinary.com/dd5mnpde5/image/upload/f_auto,q_60,w_1200,c_limit/v1770770689/gallery10_wr2j7z.jpg',
+        alt: 'Área de Lectura',
+      },
+      {
+        src: 'https://res.cloudinary.com/dd5mnpde5/image/upload/f_auto,q_60,w_1200,c_limit/v1770770677/gallery11_ztskys.jpg',
+        alt: 'Habitación Suite',
+      },
+      {
+        src: 'https://res.cloudinary.com/dd5mnpde5/image/upload/f_auto,q_60,w_1200,c_limit/v1770770677/gallery12_upywwv.jpg',
+        alt: 'Terraza',
+      },
     ],
     // Slide 4
     [
-      { src: '/gallery13.jpeg', alt: 'Gimnasio' },
-      { src: '/gallery14.jpeg', alt: 'Sala de Actividades' },
-      { src: '/gallery15.jpg', alt: 'Capilla' },
-      { src: '/gallery16.jpg', alt: 'Enfermería' },
+      {
+        src: 'https://res.cloudinary.com/dd5mnpde5/image/upload/f_auto,q_60,w_1200,c_limit/v1770770677/gallery13_wijvv4.jpg',
+        alt: 'Gimnasio',
+      },
+      {
+        src: 'https://res.cloudinary.com/dd5mnpde5/image/upload/f_auto,q_60,w_1200,c_limit/v1770770681/gallery14_sfgg98.jpg',
+        alt: 'Sala de Actividades',
+      },
+      {
+        src: 'https://res.cloudinary.com/dd5mnpde5/image/upload/f_auto,q_60,w_1200,c_limit/v1770770678/gallery15_zfve6c.jpg',
+        alt: 'Capilla',
+      },
+      {
+        src: 'https://res.cloudinary.com/dd5mnpde5/image/upload/f_auto,q_60,w_1200,c_limit/v1770770679/gallery16_zpvkev.jpg',
+        alt: 'Enfermería',
+      },
     ],
   ];
 
@@ -100,32 +158,36 @@ export class ResidenciaTemporalComponent {
     {
       id: 1,
       pregunta: '¿Qué sucede si hay una urgencia médica?',
-      respuesta: 'Contamos con afiliación a un sistema de ambulancias para primeros auxilios y traslado inmediato a centros de salud.',
+      respuesta:
+        'Contamos con afiliación a un sistema de ambulancias para primeros auxilios y traslado inmediato a centros de salud.',
       activo: false,
     },
     {
       id: 2,
       pregunta: '¿El personal de salud está disponible todo el tiempo?',
-      respuesta: 'Sí, se dispone del personal de enfermería calificado para asistir en actividades cotidianas y monitoreo durante las 24 horas.',
+      respuesta:
+        'Sí, se dispone del personal de enfermería calificado para asistir en actividades cotidianas y monitoreo durante las 24 horas.',
       activo: false,
     },
     {
       id: 3,
       pregunta: '¿Cómo se maneja el lavado de la ropa del residente?',
-      respuesta: 'Las Dalias ofrece servicio de lavandería (prendas ligeras) incluido para la comodidad de los residentes temporales.',
+      respuesta:
+        'Las Dalias ofrece servicio de lavandería (prendas ligeras) incluido para la comodidad de los residentes temporales.',
       activo: false,
     },
     {
       id: 4,
       pregunta: '¿Puedo ver a mi familiar de forma remota?',
-      respuesta: 'Sí, disponemos de un sistema de vigilancia con cámaras web accesible desde un celular o computadora para áreas comunes.',
+      respuesta:
+        'Sí, disponemos de un sistema de vigilancia con cámaras web accesible desde un celular o computadora para áreas comunes.',
       activo: false,
     },
   ];
 
   constructor(
     @Inject(PLATFORM_ID) private platformId: Object,
-    private http: HttpClient
+    private http: HttpClient,
   ) {}
 
   get imagenesSlideActual(): ImagenGaleria[] {
@@ -133,7 +195,9 @@ export class ResidenciaTemporalComponent {
   }
 
   get imagenActual(): ImagenGaleria {
-    return this.imagenesSlideActual[this.indiceImagenActual] || { src: '', alt: '' };
+    return (
+      this.imagenesSlideActual[this.indiceImagenActual] || { src: '', alt: '' }
+    );
   }
 
   get preguntasColumna1(): PreguntaFrecuente[] {
@@ -184,7 +248,8 @@ export class ResidenciaTemporalComponent {
   scrollToInstalacion(): void {
     if (isPlatformBrowser(this.platformId) && this.instalacionesCarrusel) {
       const container = this.instalacionesCarrusel.nativeElement;
-      const slideAncho = container.querySelector('.instalacion__slide')?.offsetWidth || 0;
+      const slideAncho =
+        container.querySelector('.instalacion__slide')?.offsetWidth || 0;
       const gap = 24;
       const scrollAmount = (slideAncho + gap) * this.indiceInstalacion;
 
@@ -200,7 +265,7 @@ export class ResidenciaTemporalComponent {
     this.indiceSlideActual = indiceSlide;
     this.indiceImagenActual = indiceImagen;
     this.modalImagenAbierto = true;
-    
+
     if (isPlatformBrowser(this.platformId)) {
       document.body.style.overflow = 'hidden';
     }
@@ -208,7 +273,7 @@ export class ResidenciaTemporalComponent {
 
   cerrarModal(): void {
     this.modalImagenAbierto = false;
-    
+
     if (isPlatformBrowser(this.platformId)) {
       document.body.style.overflow = 'auto';
     }
@@ -270,7 +335,8 @@ export class ResidenciaTemporalComponent {
     } else if (!/^[0-9]+$/.test(valor)) {
       this.erroresContacto.numeroMovil = 'Solo se permiten números';
     } else if (!telRegex.test(valor)) {
-      this.erroresContacto.numeroMovil = 'Ingresa un número válido (9-15 dígitos)';
+      this.erroresContacto.numeroMovil =
+        'Ingresa un número válido (9-15 dígitos)';
     } else {
       this.erroresContacto.numeroMovil = '';
     }
