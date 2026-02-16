@@ -33,6 +33,7 @@ export class AppComponent implements OnInit, OnDestroy {
       'https://wa.link/91v3xr',
     '/servicios/planes-de-estadia/post-operatoria':
       'https://wa.link/9g9f4u',
+    '/contacto': 'https://wa.link/gglgal',
   };
 
   constructor(private router: Router) {}

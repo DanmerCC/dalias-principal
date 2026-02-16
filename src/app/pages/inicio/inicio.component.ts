@@ -157,7 +157,7 @@ export class InicioComponent implements OnInit, OnDestroy {
         '/servicios/planes-de-estadia/residencia-permanente',
       'centro-de-dia': '/servicios/planes-de-estadia/centro-de-dia',
       'temporal': '/servicios/planes-de-estadia/residencia-temporal',
-      'post-operatoria': '/servicios/planes-de-estadia/post-operatoria',
+      'post-operatoria': '/servicios/planes-de-estadia/residencia-post-operatoria',
     };
 
     const ruta = rutasPlanes[plan];

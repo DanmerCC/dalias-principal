@@ -132,3 +132,540 @@
     transform: translateY(0);
   }
 }
+
+
+/* SECCIÓN: Información de Contacto */
+.seccion__info-contacto {
+  width: 100%;
+  padding: 6rem 3rem;
+  background: #fff;
+  position: relative;
+  overflow: hidden;
+}
+
+.info-contacto__contenedor {
+  max-width: 1400px;
+  margin: 0 auto;
+}
+
+.info-contacto__grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 2.5rem;
+}
+
+.info-contacto__card {
+  background: #fff;
+  border: 2px solid #e0e0e0;
+  border-radius: 1.5rem;
+  padding: 3rem 2.5rem;
+  text-align: center;
+  transition: all 0.4s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.info-contacto__card::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 4px;
+  background: linear-gradient(90deg, #d9b756 0%, #c9a746 100%);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.4s ease;
+}
+
+.info-contacto__card:hover::before {
+  transform: scaleX(1);
+}
+
+.info-contacto__card:hover {
+  transform: translateY(-0.75rem);
+  box-shadow: 0 1rem 2.5rem rgba(0, 62, 92, 0.15);
+  border-color: #d9b756;
+}
+
+.info-contacto__icono {
+  width: 5rem;
+  height: 5rem;
+  background: linear-gradient(135deg, #003e5c 0%, #1a4d6d 100%);
+  border-radius: 1.2rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 2rem;
+  transition: all 0.4s ease;
+  box-shadow: 0 0.5rem 1.5rem rgba(0, 62, 92, 0.2);
+}
+
+.info-contacto__card:hover .info-contacto__icono {
+  transform: scale(1.1) rotate(-5deg);
+  background: linear-gradient(135deg, #d9b756 0%, #c9a746 100%);
+  box-shadow: 0 0.8rem 2rem rgba(217, 183, 86, 0.4);
+}
+
+.info-contacto__icono i {
+  font-size: 2.5rem;
+  color: #fff;
+}
+
+.info-contacto__titulo {
+  color: #003e5c;
+  font-size: 1.4rem;
+  font-weight: 600;
+  margin: 0 0 1rem 0;
+  line-height: 1.3;
+}
+
+.info-contacto__descripcion {
+  color: #666;
+  font-size: 0.95rem;
+  line-height: 1.6;
+  margin: 0 0 1.5rem 0;
+}
+
+.info-contacto__dato {
+  color: #003e5c;
+  font-size: 1rem;
+  font-weight: 600;
+  line-height: 1.5;
+  margin: 0;
+  display: inline-block;
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+.info-contacto__card:hover .info-contacto__dato {
+  color: #d9b756;
+}
+
+.info-contacto__dato--enlace:hover {
+  text-decoration: underline;
+}
+
+
+/* SECCIÓN: Solicite una Visita */
+.seccion__solicitar-visita {
+  width: 100%;
+  padding: 0;
+  background: #fff;
+  overflow: hidden;
+}
+
+.solicitar-visita__contenedor {
+  max-width: 1600px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  min-height: 500px;
+}
+
+/* Lado izquierdo - Imagen */
+.solicitar-visita__imagen {
+  position: relative;
+  overflow: hidden;
+  height: 750px;
+}
+
+.solicitar-visita__imagen img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.solicitar-visita__overlay {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  padding: 1.5rem 2rem;
+  background: linear-gradient(to top, rgba(0, 0, 0, 0.85) 0%, transparent 100%);
+  color: #fff;
+}
+
+.solicitar-visita__frase {
+  font-size: 1.4rem;
+  font-weight: 300;
+  font-style: italic;
+  line-height: 1.4;
+  margin: 0 0 0.5rem 0;
+  color: #fff;
+}
+
+.solicitar-visita__firma {
+  color: #d9b756;
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.15rem;
+  text-transform: uppercase;
+  margin: 0;
+}
+
+/* Lado derecho - Formulario */
+.solicitar-visita__formulario {
+  background: linear-gradient(135deg, #1a2332 0%, #0d1419 100%);
+  padding: 2rem 2.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 750px;
+}
+
+.formulario-visita__contenido {
+  width: 100%;
+  max-width: 550px;
+}
+
+.formulario-visita__titulo {
+  color: #fff;
+  font-size: 1.8rem;
+  font-weight: 400;
+  margin: 0 0 0.4rem 0;
+  line-height: 1.2;
+}
+
+.formulario-visita__descripcion {
+  color: rgba(255, 255, 255, 0.7);
+  font-size: 0.85rem;
+  line-height: 1.4;
+  margin: 0 0 1.5rem 0;
+}
+
+.formulario-visita__form {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.formulario-visita__fila {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+}
+
+.formulario-visita__grupo {
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+}
+
+.formulario-visita__label {
+  color: rgba(255, 255, 255, 0.6);
+  font-size: 0.65rem;
+  font-weight: 600;
+  letter-spacing: 0.08rem;
+  text-transform: uppercase;
+  margin: 0;
+}
+
+.formulario-visita__input,
+.formulario-visita__select,
+.formulario-visita__textarea {
+  width: 100%;
+  padding: 0.7rem 0.9rem;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  border-radius: 0.4rem;
+  color: #fff;
+  font-size: 0.85rem;
+  font-family: inherit;
+  transition: all 0.3s ease;
+  outline: none;
+}
+
+.formulario-visita__input::placeholder,
+.formulario-visita__textarea::placeholder {
+  color: rgba(255, 255, 255, 0.4);
+}
+
+.formulario-visita__input:focus,
+.formulario-visita__select:focus,
+.formulario-visita__textarea:focus {
+  background: rgba(255, 255, 255, 0.08);
+  border-color: #d9b756;
+  box-shadow: 0 0 0 3px rgba(217, 183, 86, 0.15);
+}
+
+.formulario-visita__select {
+  cursor: pointer;
+  appearance: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%23fff' d='M6 9L1 4h10z'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 1rem center;
+  padding-right: 2.5rem;
+}
+
+.formulario-visita__select option {
+  background: #1a2332;
+  color: #fff;
+}
+
+.formulario-visita__textarea {
+  resize: vertical;
+  min-height: 70px;
+  font-family: inherit;
+}
+
+.formulario-visita__error {
+  color: #ff6b6b;
+  font-size: 0.7rem;
+  margin-top: 0.2rem;
+  display: flex;
+  align-items: center;
+  gap: 0.3rem;
+}
+
+.formulario-visita__error::before {
+  content: "⚠";
+  font-size: 0.8rem;
+}
+
+.formulario-visita__boton {
+  width: 100%;
+  padding: 0.9rem 1.8rem;
+  background: #d9b756;
+  color: #1a2332;
+  border: none;
+  border-radius: 0.4rem;
+  font-size: 0.8rem;
+  font-weight: 700;
+  letter-spacing: 0.08rem;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  margin-top: 0.2rem;
+  box-shadow: 0 4px 15px rgba(217, 183, 86, 0.3);
+}
+
+.formulario-visita__boton:hover {
+  background: #e5c66a;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(217, 183, 86, 0.4);
+}
+
+.formulario-visita__boton:active {
+  transform: translateY(0);
+}
+
+/* Modal de Confirmación Visita */
+.modal-visita__overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.7);
+  backdrop-filter: blur(5px);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 9999;
+  padding: 1.5rem;
+  animation: fadeIn 0.3s ease;
+}
+
+.modal-visita__confirmacion {
+  background: #fff;
+  border-radius: 1.5rem;
+  padding: 2.5rem 1.5rem;
+  width: 27rem;
+  text-align: center;
+  animation: slideUp 0.4s ease;
+  box-shadow: 0 1rem 3rem rgba(0, 0, 0, 0.3);
+}
+
+.modal-visita__icono img {
+  width: 10rem;
+  object-fit: contain;
+}
+
+.modal-visita__titulo {
+  color: #003e5c;
+  font-size: 1.8rem;
+  font-weight: 600;
+  margin: 0 0 0.8rem 0;
+}
+
+.modal-visita__texto {
+  color: #666;
+  font-size: 1.1rem;
+  margin: 0 0 2rem 0;
+}
+
+.modal-visita__boton-cerrar {
+  background: #d9b756;
+  color: #fff;
+  border: none;
+  padding: 1rem 2.5rem;
+  border-radius: 2rem;
+  font-size: 1.05rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.modal-visita__boton-cerrar:hover {
+  background: #c9a746;
+  transform: translateY(-3px);
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes slideUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* SECCIÓN: Mapa de Google Maps */
+.seccion__mapa {
+  padding: 5rem 0;
+  width: 100%;
+  height: 700px;
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+}
+
+.mapa__contenedor {
+  width:90%;
+  height: 100%;
+}
+
+.mapa__contenedor iframe {
+  width: 100%;
+  border-radius: 3rem;
+  height: 100%;
+  display: block;
+}
+
+/* SECCIÓN: Métricas */
+.seccion__metricas {
+  width: 100%;
+  padding: 5rem 3rem;
+  background: linear-gradient(135deg, #f8f9fa 0%, #ffffff 100%);
+  position: relative;
+  overflow: hidden;
+}
+
+.metricas__contenedor {
+  max-width: 1400px;
+  margin: 0 auto;
+}
+
+.metricas__grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 4rem;
+}
+
+.metrica__item {
+  text-align: center;
+  padding: 2rem 1.5rem;
+  background: #fff;
+  border-radius: 1.5rem;
+  box-shadow: 0 0.5rem 2rem rgba(0, 62, 92, 0.08);
+  transition: all 0.4s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.metrica__item::before {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 4px;
+  background: linear-gradient(90deg, #d9b756 0%, #c9a746 100%);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.6s ease;
+}
+
+.metrica__item:hover::before {
+  transform: scaleX(1);
+}
+
+.metrica__item:hover {
+  transform: translateY(-0.5rem);
+  box-shadow: 0 1rem 3rem rgba(0, 62, 92, 0.15);
+}
+
+.metrica__numero {
+  display: flex;
+  align-items: baseline;
+  justify-content: center;
+  gap: 0.3rem;
+  margin-bottom: 1rem;
+}
+
+.metrica__valor {
+  color: #003e5c;
+  font-size: 4rem;
+  font-weight: 700;
+  line-height: 1;
+  font-family: 'Arial', sans-serif;
+}
+
+.metrica__simbolo {
+  /* color: #d9b756; */
+  font-size: 2.5rem;
+  font-weight: 600;
+}
+
+.metrica__label {
+  color: #666;
+  font-size: 0.95rem;
+  font-weight: 500;
+  line-height: 1.4;
+  margin: 0;
+  text-transform: uppercase;
+  letter-spacing: 0.05rem;
+}
+
+/* Animación de aparición */
+@keyframes countUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.metrica__item {
+  animation: countUp 0.8s ease-out;
+}
+
+.metrica__item:nth-child(1) {
+  animation-delay: 0.1s;
+}
+
+.metrica__item:nth-child(2) {
+  animation-delay: 0.3s;
+}
+
+.metrica__item:nth-child(3) {
+  animation-delay: 0.5s;
+}

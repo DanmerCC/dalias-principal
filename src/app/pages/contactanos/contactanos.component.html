@@ -20,3 +20,241 @@
     </div>
   </div>
 </div>
+
+
+<!-- SECCIÓN: Información de Contacto -->
+<section class="seccion__info-contacto" id="servicio__estadia">
+  <div class="info-contacto__contenedor">
+    <div class="info-contacto__grid">
+      <!-- Card 1: Atención Directa -->
+      <div class="info-contacto__card">
+        <div class="info-contacto__icono">
+          <i class="fa-solid fa-phone"></i>
+        </div>
+        <h3 class="info-contacto__titulo">Atención Directa</h3>
+        <p class="info-contacto__descripcion">
+          Atención personalizada disponible para resolver tus dudas.
+        </p>
+        <a href="tel:+51981776156" class="info-contacto__dato info-contacto__dato--enlace">
+          +51 981 776 156
+        </a>
+      </div>
+
+      <!-- Card 2: Visítanos -->
+      <div class="info-contacto__card">
+        <div class="info-contacto__icono">
+          <i class="fa-solid fa-location-dot"></i>
+        </div>
+        <h3 class="info-contacto__titulo">Visítanos</h3>
+        <p class="info-contacto__descripcion">
+          Conoce nuestra residencia en el corazón de la Molina.
+        </p>
+        <p class="info-contacto__dato">
+          Las Dalias 156, La Molina
+        </p>
+      </div>
+
+      <!-- Card 3: Escríbenos -->
+      <div class="info-contacto__card">
+        <div class="info-contacto__icono">
+          <i class="fa-solid fa-envelope"></i>
+        </div>
+        <h3 class="info-contacto__titulo">Escríbenos</h3>
+        <p class="info-contacto__descripcion">
+          Envíenos sus consultas y te responderemos en menos de 24 horas.
+        </p>
+        <a href="mailto:residencialasdalias156@gmail.com" class="info-contacto__dato info-contacto__dato--enlace">
+          residencialasdalias156&#64;gmail.com
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SECCIÓN: Solicite una Visita -->
+<section class="seccion__solicitar-visita">
+  <div class="solicitar-visita__contenedor">
+    <!-- Lado izquierdo - Imagen con frase -->
+    <div class="solicitar-visita__imagen">
+      <img src="/img-contacto2.jpg" alt="Residencia Las Dalias" />
+      <div class="solicitar-visita__overlay">
+        <blockquote class="solicitar-visita__frase">
+          "El bienestar que su familia merece en un entorno diseñado para la vida."
+        </blockquote>
+        <p class="solicitar-visita__firma">RESIDENCIA LAS DALIAS</p>
+      </div>
+    </div>
+
+    <!-- Lado derecho - Formulario -->
+    <div class="solicitar-visita__formulario">
+      <div class="formulario-visita__contenido">
+        <h2 class="formulario-visita__titulo">Solicite una Visita</h2>
+        <p class="formulario-visita__descripcion">
+          Complete el formulario y una de nuestras asesoras de bienestar se pondrá en contacto con usted.
+        </p>
+
+        <form class="formulario-visita__form" (ngSubmit)="enviarFormularioVisita()">
+          <!-- Fila: Nombre y Teléfono -->
+          <div class="formulario-visita__fila">
+            <div class="formulario-visita__grupo">
+              <label class="formulario-visita__label">NOMBRE COMPLETO</label>
+              <input
+                type="text"
+                class="formulario-visita__input"
+                placeholder="Ingrese su nombre"
+                [(ngModel)]="formularioVisita.nombre"
+                (blur)="validarNombreVisita()"
+                (input)="validarNombreVisita()"
+                name="nombre"
+                required
+              />
+              <span class="formulario-visita__error" *ngIf="erroresVisita.nombre">
+                {{ erroresVisita.nombre }}
+              </span>
+            </div>
+
+            <div class="formulario-visita__grupo">
+              <label class="formulario-visita__label">TELÉFONO DE CONTACTO</label>
+              <input
+                type="tel"
+                class="formulario-visita__input"
+                placeholder="+51 987 654 321"
+                [(ngModel)]="formularioVisita.telefono"
+                (blur)="validarTelefonoVisita()"
+                (input)="validarTelefonoVisita()"
+                name="telefono"
+                required
+              />
+              <span class="formulario-visita__error" *ngIf="erroresVisita.telefono">
+                {{ erroresVisita.telefono }}
+              </span>
+            </div>
+          </div>
+
+          <!-- Correo Electrónico -->
+          <div class="formulario-visita__grupo">
+            <label class="formulario-visita__label">CORREO ELECTRÓNICO</label>
+            <input
+              type="email"
+              class="formulario-visita__input"
+              placeholder="ejemplo@correo.com"
+              [(ngModel)]="formularioVisita.correo"
+              (blur)="validarCorreoVisita()"
+              (input)="validarCorreoVisita()"
+              name="correo"
+              required
+            />
+            <span class="formulario-visita__error" *ngIf="erroresVisita.correo">
+              {{ erroresVisita.correo }}
+            </span>
+          </div>
+
+          <!-- Servicio de Interés -->
+          <div class="formulario-visita__grupo">
+            <label class="formulario-visita__label">SERVICIO DE INTERÉS</label>
+            <select
+              class="formulario-visita__select"
+              [(ngModel)]="formularioVisita.servicio"
+              name="servicio"
+              required
+            >
+              <option value="" disabled selected>Tipo de Servicio</option>
+              <option value="residencia-permanente">Residencia Permanente</option>
+              <option value="residencia-temporal">Residencia Temporal</option>
+              <option value="centro-dia">Centro de Día</option>
+              <option value="post-operatorio">Post Operatorio</option>
+            </select>
+          </div>
+
+          <!-- Mensaje o Consultas -->
+          <div class="formulario-visita__grupo">
+            <label class="formulario-visita__label">MENSAJE O CONSULTAS</label>
+            <textarea
+              class="formulario-visita__textarea"
+              placeholder="Escríbanos sus dudas o comentarios..."
+              [(ngModel)]="formularioVisita.mensaje"
+              name="mensaje"
+              rows="4"
+            ></textarea>
+          </div>
+
+          <!-- Botón Enviar -->
+          <button type="submit" class="formulario-visita__boton">
+            ENVIAR MENSAJE ➤
+          </button>
+        </form>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Modal de Confirmación Visita -->
+<div
+  class="modal-visita__overlay"
+  *ngIf="mostrarModalConfirmacionVisita"
+  (click)="cerrarModalConfirmacionVisita()"
+>
+  <div class="modal-visita__confirmacion" (click)="$event.stopPropagation()">
+    <div class="modal-visita__icono">
+      <img src="/logo_header.png" alt="Las Dalias" />
+    </div>
+    <h2 class="modal-visita__titulo">¡Solicitud enviada!</h2>
+    <p class="modal-visita__texto">Nos contactaremos contigo pronto.</p>
+    <button
+      class="modal-visita__boton-cerrar"
+      (click)="cerrarModalConfirmacionVisita()"
+    >
+      Entendido
+    </button>
+  </div>
+</div>
+
+
+<!-- SECCIÓN: Mapa de Google Maps -->
+<section class="seccion__mapa">
+  <div class="mapa__contenedor">
+    <iframe
+      src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3901.3347557887845!2d-76.94445092412653!3d-12.089566742599758!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x9105c71c4c0e3f8b%3A0x8f0b0b0b0b0b0b0b!2sLas%20Dalias%20156%2C%20La%20Molina%2015024!5e0!3m2!1ses!2spe!4v1234567890123!5m2!1ses!2spe"
+      width="100%"
+      height="100%"
+      style="border:0;"
+      allowfullscreen=""
+      loading="lazy"
+      referrerpolicy="no-referrer-when-downgrade"
+      title="Ubicación Residencia Las Dalias"
+    ></iframe>
+  </div>
+</section>
+
+<!-- SECCIÓN: Métricas -->
+<section class="seccion__metricas">
+  <div class="metricas__contenedor">
+    <div class="metricas__grid">
+      <!-- Métrica 1: Nivel de Satisfacción -->
+      <div class="metrica__item">
+        <div class="metrica__numero" #metrica1>
+          <span class="metrica__valor">{{ nivelSatisfaccion }}</span>
+          <span class="metrica__simbolo">%</span>
+        </div>
+        <p class="metrica__label">Nivel de Satisfacción</p>
+      </div>
+
+      <!-- Métrica 2: Cuidado Médico -->
+      <div class="metrica__item">
+        <div class="metrica__numero" #metrica2>
+          <span class="metrica__valor">{{ cuidadoMedico }}</span>
+        </div>
+        <p class="metrica__label">Cuidado Médico Especializado</p>
+      </div>
+
+      <!-- Métrica 3: Áreas Verdes -->
+      <div class="metrica__item">
+        <div class="metrica__numero" #metrica3>
+          <span class="metrica__valor">{{ areasVerdes }}</span>
+          <span class="metrica__simbolo">m²</span>
+        </div>
+        <p class="metrica__label">Áreas Verdes y Jardines</p>
+      </div>
+    </div>
+  </div>
+</section>
