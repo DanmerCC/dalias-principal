@@ -5,9 +5,9 @@
   min-height: 600px;
   background:
     linear-gradient(rgba(0, 0, 0, 0.45), rgba(0, 0, 0, 0.45)),
-    url("/banner-centrodia.jpg");
+    url("https://res.cloudinary.com/dd5mnpde5/image/upload/v1771363691/banner-centrodia_iwkel3.jpg");
   background-size: cover;
-  background-position: center;
+  background-position: center 25%;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -132,7 +132,6 @@
     transform: translateY(0);
   }
 }
-
 
 /* SECCIÓN: Nuestra Filosofía */
 .seccion__filosofia {
@@ -271,6 +270,14 @@
   background: #f8f9fa;
 }
 
+.figure_centro {
+  position: absolute;
+  top: 3rem;
+  width: 16rem;
+  right: -8rem;
+  z-index: 1;
+}
+
 .plan-centro__contenedor {
   max-width: 1400px;
   margin: 0 auto;
@@ -386,14 +393,33 @@
 .seccion__pilares {
   width: 100%;
   padding: 6rem 10rem;
-  background: #f8f9fa;
+  background: #f5f5ef;
   position: relative;
   overflow: hidden;
+}
+
+.figure_pilares1 {
+  position: absolute;
+  top: 8rem;
+  width: 13rem;
+  left: -7rem;
+  z-index: 1;
+}
+.figure_pilares2 {
+  position: absolute;
+  bottom: 8rem;
+  width: 13rem;
+  right: -7rem;
+  z-index: 1;
 }
 
 .pilares__contenedor {
   max-width: 1400px;
   margin: 0 auto;
+  padding: 1rem 3rem;
+  background-color: #fff;
+  border: 6px solid #d9b756;
+  border-radius: 2rem;
 }
 
 .pilares__header {
@@ -490,8 +516,6 @@
   color: #d9b756;
 }
 
-
-/* SECCIÓN: Cronograma del Día */
 .seccion__cronograma {
   width: 100%;
   padding: 6rem 3rem;
@@ -501,7 +525,7 @@
 }
 
 .cronograma__contenedor {
-  max-width: 1200px;
+  max-width: 1100px;
   margin: 0 auto;
 }
 
@@ -534,124 +558,119 @@
   margin: 0;
 }
 
-/* Línea de Tiempo */
 .cronograma__linea-tiempo {
   position: relative;
-  padding: 2rem 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0;
 }
 
-/* Línea vertical central */
 .cronograma__linea-tiempo::before {
   content: "";
   position: absolute;
   left: 50%;
   top: 0;
   bottom: 0;
-  width: 4px;
-  background: linear-gradient(180deg, #d9b756 0%, #aed3da 100%);
+  width: 3px;
+  background: linear-gradient(180deg, #d9b756 0%, #c9a746 100%);
   transform: translateX(-50%);
+  z-index: 0;
 }
 
 .timeline__item {
-  display: flex;
+  display: grid;
+  grid-template-columns: 1fr 120px 1fr;
   align-items: center;
-  margin-bottom: 4rem;
+  min-height: 220px;
   position: relative;
 }
 
-/* Items a la izquierda */
-.timeline__item--izquierda {
-  justify-content: flex-end;
-}
-
-.timeline__item--izquierda .timeline__contenido {
-  flex-direction: row;
-  margin-right: 3rem;
-}
-
-/* Items a la derecha */
-.timeline__item--derecha {
-  justify-content: flex-start;
-}
-
-.timeline__item--derecha .timeline__contenido {
-  flex-direction: row-reverse;
-  margin-left: 3rem;
-}
-
-.timeline__contenido {
+.timeline__lado--izquierda {
   display: flex;
-  gap: 1.5rem;
+  justify-content: flex-end;
+  padding-right: 2rem;
+}
+
+.timeline__lado--derecha {
+  display: flex;
+  justify-content: flex-start;
+  padding-left: 2rem;
+}
+
+.timeline__centro {
+  display: flex;
+  justify-content: center;
   align-items: center;
-  max-width: 45%;
-  background: #fff;
-  border-radius: 1.5rem;
-  padding: 1.5rem;
-  box-shadow: 0 0.25rem 1.25rem rgba(0, 62, 92, 0.08);
-  transition: all 0.3s ease;
+  position: relative;
+  z-index: 2;
 }
 
-.timeline__contenido:hover {
-  transform: translateY(-0.5rem);
-  box-shadow: 0 0.75rem 2rem rgba(0, 62, 92, 0.15);
-}
-
-.timeline__imagen {
-  flex-shrink: 0;
-  width: 120px;
-  height: 120px;
-  border-radius: 1rem;
-  overflow: hidden;
-  box-shadow: 0 0.25rem 1rem rgba(0, 62, 92, 0.1);
-}
-
-.timeline__imagen img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  transition: transform 0.4s ease;
-}
-
-.timeline__contenido:hover .timeline__imagen img {
-  transform: scale(1.1);
-}
-
-.timeline__texto {
-  flex: 1;
-}
-
-.timeline__texto h3 {
-  color: #003e5c;
-  font-size: 1.2rem;
-  font-weight: 600;
-  margin: 0 0 0.5rem 0;
-}
-
-.timeline__texto p {
-  color: #666;
-  font-size: 0.9rem;
-  line-height: 1.6;
-  margin: 0;
-}
-
-/* Hora/Indicador */
 .timeline__hora {
-  position: absolute;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 100px;
-  height: 100px;
+  width: 90px;
+  height: 90px;
   background: linear-gradient(135deg, #d9b756 0%, #c9a746 100%);
   border-radius: 50%;
   display: flex;
   align-items: center;
   justify-content: center;
   color: #fff;
-  font-size: 1rem;
+  font-size: 0.85rem;
   font-weight: 700;
-  box-shadow: 0 0.5rem 1.5rem rgba(217, 183, 86, 0.4);
+  box-shadow: 0 0.5rem 1.5rem rgba(217, 183, 86, 0.45);
+  border: 5px solid #fff;
+  text-align: center;
+  line-height: 1.2;
   z-index: 2;
-  border: 6px solid #f8f9fa;
+}
+
+.timeline__imagen {
+  width: 200px;
+  height: 160px;
+  border-radius: 1rem;
+  overflow: hidden;
+  box-shadow: 0 0.4rem 1.5rem rgba(0, 62, 92, 0.12);
+  flex-shrink: 0;
+  transition: transform 0.4s ease;
+}
+
+.timeline__imagen:hover {
+  transform: scale(1.03);
+}
+
+.timeline__imagen img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.timeline__texto {
+  max-width: 340px;
+}
+
+.timeline__texto--derecha {
+  text-align: right;
+}
+
+.timeline__texto h3 {
+  color: #003e5c;
+  font-size: 1.2rem;
+  font-weight: 700;
+  margin: 0 0 0.6rem 0;
+}
+
+.timeline__texto p {
+  color: #666;
+  font-size: 0.95rem;
+  line-height: 1.6;
+  margin: 0;
+}
+
+.cronograma__nota {
+  text-align: center;
+  color: #999;
+  font-size: 0.82rem;
+  font-style: italic;
+  margin-top: 2rem;
 }
 
 /* SECCIÓN: Por qué elegir nuestro Centro de Día */
@@ -1208,7 +1227,7 @@
 }
 
 .faq__contenedor {
-    max-width: 1400px;
+  max-width: 1400px;
   margin: 0 auto;
 }
 

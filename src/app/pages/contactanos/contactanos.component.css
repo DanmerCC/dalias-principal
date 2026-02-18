@@ -133,7 +133,6 @@
   }
 }
 
-
 /* SECCIÓN: Información de Contacto */
 .seccion__info-contacto {
   width: 100%;
@@ -141,6 +140,20 @@
   background: #fff;
   position: relative;
   overflow: hidden;
+}
+
+.figure_info1 {
+  position: absolute;
+  top: -5rem;
+  width: 15rem;
+  left: -8rem;
+}
+
+.figure_info2 {
+  position: absolute;
+  bottom: -5rem;
+  width: 15rem;
+  right: -8rem;
 }
 
 .info-contacto__contenedor {
@@ -246,7 +259,6 @@
   text-decoration: underline;
 }
 
-
 /* SECCIÓN: Solicite una Visita */
 .seccion__solicitar-visita {
   width: 100%;
@@ -307,7 +319,7 @@
 
 /* Lado derecho - Formulario */
 .solicitar-visita__formulario {
-  background: linear-gradient(135deg, #1a2332 0%, #0d1419 100%);
+  background: #062a47;
   padding: 2rem 2.5rem;
   display: flex;
   align-items: center;
@@ -532,22 +544,43 @@
     transform: translateY(0);
   }
 }
-
 /* SECCIÓN: Mapa de Google Maps */
 .seccion__mapa {
   padding: 5rem 0;
   width: 100%;
-  height: 700px;
   position: relative;
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
+  gap: 2rem;
   overflow: hidden;
 }
 
+.mapa__header {
+  text-align: center;
+}
+
+.mapa__subtitulo {
+  color: #aed3da;
+  font-size: 0.9rem;
+  font-weight: 600;
+  letter-spacing: 0.1rem;
+  text-transform: uppercase;
+  margin: 0 0 0.8rem 0;
+}
+
+.mapa__titulo {
+  color: #003e5c;
+  font-size: 2.8rem;
+  font-weight: 400;
+  line-height: 1.3;
+  margin: 0;
+}
+
 .mapa__contenedor {
-  width:90%;
-  height: 100%;
+  width: 90%;
+  height: 30rem;
 }
 
 .mapa__contenedor iframe {
@@ -623,11 +656,11 @@
   font-size: 4rem;
   font-weight: 700;
   line-height: 1;
-  font-family: 'Arial', sans-serif;
+  font-family: "Arial", sans-serif;
 }
 
 .metrica__simbolo {
-  /* color: #d9b756; */
+  color: #003e5c;
   font-size: 2.5rem;
   font-weight: 600;
 }

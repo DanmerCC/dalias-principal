@@ -5,7 +5,7 @@
   min-height: 600px;
   background:
     linear-gradient(rgba(0, 0, 0, 0.45), rgba(0, 0, 0, 0.45)),
-    url("/banner-contacto.jpeg");
+    url("/banner-post.jpeg");
   background-size: cover;
   background-position: center;
   display: flex;
@@ -607,7 +607,7 @@
 /* SECCIÓN: Servicios Especializados */
 .seccion__servicios-especializados {
   width: 100%;
-  padding: 5rem 10rem;
+  padding: 6rem 2rem;
   background: linear-gradient(135deg, #ffffff 0%, #f8f9fa 100%);
   position: relative;
   overflow: hidden;
@@ -682,7 +682,7 @@
 
 .servicios-especializados__grid {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: repeat(4, 1fr);
   gap: 2rem;
 }
 

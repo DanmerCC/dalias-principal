@@ -15,6 +15,7 @@ interface ErroresVisita {
   nombre: string;
   telefono: string;
   correo: string;
+  servicio: string;
 }
 
 @Component({
@@ -25,19 +26,16 @@ interface ErroresVisita {
   styleUrl: './contactanos.component.css'
 })
 export class ContactanosComponent implements AfterViewInit {
-  // ViewChild para observar las métricas
   @ViewChild('metrica1') metrica1!: ElementRef;
   @ViewChild('metrica2') metrica2!: ElementRef;
   @ViewChild('metrica3') metrica3!: ElementRef;
 
-  // Valores de las métricas
   nivelSatisfaccion = 0;
   cuidadoMedico = '0';
   areasVerdes = 0;
 
   private animacionIniciada = false;
 
-  // Formulario de visita
   formularioVisita: FormularioVisita = {
     nombre: '',
     telefono: '',
@@ -50,9 +48,11 @@ export class ContactanosComponent implements AfterViewInit {
     nombre: '',
     telefono: '',
     correo: '',
+    servicio: '',
   };
 
   mostrarModalConfirmacionVisita = false;
+  enviandoFormularioVisita = false;
 
   constructor(
     private http: HttpClient,
@@ -67,22 +67,13 @@ export class ContactanosComponent implements AfterViewInit {
 
   scrollToServicios() {
     const seccionServicios = document.getElementById('servicio__estadia');
-
     if (seccionServicios) {
       const offset = 60;
-      const top =
-        seccionServicios.getBoundingClientRect().top +
-        window.pageYOffset -
-        offset;
-
-      window.scrollTo({
-        top,
-        behavior: 'smooth',
-      });
+      const top = seccionServicios.getBoundingClientRect().top + window.pageYOffset - offset;
+      window.scrollTo({ top, behavior: 'smooth' });
     }
   }
 
-  // Métodos para las métricas animadas
   observarMetricas(): void {
     const observer = new IntersectionObserver(
       (entries) => {
@@ -102,22 +93,17 @@ export class ContactanosComponent implements AfterViewInit {
   }
 
   animarMetricas(): void {
-    // Animar Nivel de Satisfacción (99%)
     this.animarNumero(0, 99, 2000, (val) => {
       this.nivelSatisfaccion = val;
     });
 
-    // Animar Cuidado Médico (24/7)
     let horas = 0;
     const intervalHoras = setInterval(() => {
       horas++;
       this.cuidadoMedico = `${horas}/7`;
-      if (horas >= 24) {
-        clearInterval(intervalHoras);
-      }
+      if (horas >= 24) clearInterval(intervalHoras);
     }, 60);
 
-    // Animar Áreas Verdes (5000m²)
     this.animarNumero(0, 5000, 2000, (val) => {
       this.areasVerdes = val;
     });
@@ -138,7 +124,7 @@ export class ContactanosComponent implements AfterViewInit {
     }, 16);
   }
 
-  // Métodos de validación del formulario
+  // Validaciones
   validarNombreVisita(): void {
     const valor = this.formularioVisita.nombre.trim();
     if (!valor) {
@@ -155,7 +141,6 @@ export class ContactanosComponent implements AfterViewInit {
   validarTelefonoVisita(): void {
     const valor = this.formularioVisita.telefono.trim();
     const telRegex = /^[0-9]{9,15}$/;
-
     if (!valor) {
       this.erroresVisita.telefono = 'El teléfono es obligatorio';
     } else if (!/^[0-9]+$/.test(valor)) {
@@ -170,7 +155,6 @@ export class ContactanosComponent implements AfterViewInit {
   validarCorreoVisita(): void {
     const valor = this.formularioVisita.correo.trim();
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-
     if (!valor) {
       this.erroresVisita.correo = 'El correo es obligatorio';
     } else if (!emailRegex.test(valor)) {
@@ -180,24 +164,30 @@ export class ContactanosComponent implements AfterViewInit {
     }
   }
 
+  validarServicioVisita(): void {
+    if (!this.formularioVisita.servicio) {
+      this.erroresVisita.servicio = 'Selecciona un servicio de interés';
+    } else {
+      this.erroresVisita.servicio = '';
+    }
+  }
+
   enviarFormularioVisita(): void {
     this.validarNombreVisita();
     this.validarTelefonoVisita();
     this.validarCorreoVisita();
+    this.validarServicioVisita();
 
-    const hayErrores = Object.values(this.erroresVisita).some(
-      (error) => error !== '',
-    );
+    const hayErrores = Object.values(this.erroresVisita).some((error) => error !== '');
+    if (hayErrores) return;
 
-    if (hayErrores || !this.formularioVisita.servicio) {
-      return;
-    }
+    this.enviandoFormularioVisita = true;
 
     const payload = {
+      tipoConsulta: this.formularioVisita.servicio,
       nombre: this.formularioVisita.nombre,
-      telefono: this.formularioVisita.telefono,
       correo: this.formularioVisita.correo,
-      servicio: this.formularioVisita.servicio,
+      numeroMovil: this.formularioVisita.telefono,
       mensaje: this.formularioVisita.mensaje || '',
     };
 
@@ -208,12 +198,19 @@ export class ContactanosComponent implements AfterViewInit {
       .subscribe({
         next: (response: any) => {
           console.log('Respuesta exitosa:', response);
+          this.enviandoFormularioVisita = false;
           this.mostrarModalConfirmacionVisita = true;
           this.limpiarFormularioVisita();
         },
         error: (error) => {
           console.error('Error al enviar formulario:', error);
-          alert('Error al enviar. Por favor intenta nuevamente.');
+          this.enviandoFormularioVisita = false;
+
+          if (error.status === 400) {
+            alert('Error en los datos enviados. Por favor verifica el formulario.');
+          } else {
+            alert('Ocurrió un error al enviar el mensaje. Por favor intenta nuevamente.');
+          }
         },
       });
   }
@@ -235,6 +232,7 @@ export class ContactanosComponent implements AfterViewInit {
       nombre: '',
       telefono: '',
       correo: '',
+      servicio: '',
     };
   }
 }

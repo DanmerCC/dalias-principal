@@ -6,7 +6,9 @@
     <h1 class="hero__titulo">
       Contacto
       <br />
-      <span class="hero__titulo--dorado">Estamos Aquí para Acompañarte </span>
+      <span class="hero__titulo--dorado"
+        >Cuidado experto con calidez humana
+      </span>
     </h1>
     <p class="hero__descripcion">
       Brindamos un entorno de paz, seguridad y cuidado profesional para sus
@@ -21,9 +23,10 @@
   </div>
 </div>
 
-
 <!-- SECCIÓN: Información de Contacto -->
 <section class="seccion__info-contacto" id="servicio__estadia">
+  <img src="/figure1.png" class="figure_info1" alt="" />
+  <img src="/figure2.png" class="figure_info2" alt="" />
   <div class="info-contacto__contenedor">
     <div class="info-contacto__grid">
       <!-- Card 1: Atención Directa -->
@@ -35,7 +38,11 @@
         <p class="info-contacto__descripcion">
           Atención personalizada disponible para resolver tus dudas.
         </p>
-        <a href="tel:+51981776156" class="info-contacto__dato info-contacto__dato--enlace">
+        <a
+          href="https://wa.link/gglgal"
+          target="_blank"
+          class="info-contacto__dato info-contacto__dato--enlace"
+        >
           +51 981 776 156
         </a>
       </div>
@@ -49,9 +56,15 @@
         <p class="info-contacto__descripcion">
           Conoce nuestra residencia en el corazón de la Molina.
         </p>
-        <p class="info-contacto__dato">
+        <!-- <p class="info-contacto__dato">
           Las Dalias 156, La Molina
-        </p>
+        </p> -->
+        <a
+          href="/contactanos#mapa"
+          class="info-contacto__dato info-contacto__dato--enlace"
+        >
+          Las Dalias 156, La Molina
+        </a>
       </div>
 
       <!-- Card 3: Escríbenos -->
@@ -63,7 +76,10 @@
         <p class="info-contacto__descripcion">
           Envíenos sus consultas y te responderemos en menos de 24 horas.
         </p>
-        <a href="mailto:residencialasdalias156@gmail.com" class="info-contacto__dato info-contacto__dato--enlace">
+        <a
+          href="mailto:residencialasdalias156@gmail.com"
+          class="info-contacto__dato info-contacto__dato--enlace"
+        >
           residencialasdalias156&#64;gmail.com
         </a>
       </div>
@@ -79,7 +95,8 @@
       <img src="/img-contacto2.jpg" alt="Residencia Las Dalias" />
       <div class="solicitar-visita__overlay">
         <blockquote class="solicitar-visita__frase">
-          "El bienestar que su familia merece en un entorno diseñado para la vida."
+          "El bienestar que su familia merece en un entorno diseñado para la
+          vida."
         </blockquote>
         <p class="solicitar-visita__firma">RESIDENCIA LAS DALIAS</p>
       </div>
@@ -88,12 +105,16 @@
     <!-- Lado derecho - Formulario -->
     <div class="solicitar-visita__formulario">
       <div class="formulario-visita__contenido">
-        <h2 class="formulario-visita__titulo">Solicite una Visita</h2>
+        <h2 class="formulario-visita__titulo">Solicite Mayor Información</h2>
         <p class="formulario-visita__descripcion">
-          Complete el formulario y una de nuestras asesoras de bienestar se pondrá en contacto con usted.
+          Complete el formulario y una de nuestras asesoras de bienestar se
+          pondrá en contacto con usted.
         </p>
 
-        <form class="formulario-visita__form" (ngSubmit)="enviarFormularioVisita()">
+        <form
+          class="formulario-visita__form"
+          (ngSubmit)="enviarFormularioVisita()"
+        >
           <!-- Fila: Nombre y Teléfono -->
           <div class="formulario-visita__fila">
             <div class="formulario-visita__grupo">
@@ -108,13 +129,18 @@
                 name="nombre"
                 required
               />
-              <span class="formulario-visita__error" *ngIf="erroresVisita.nombre">
+              <span
+                class="formulario-visita__error"
+                *ngIf="erroresVisita.nombre"
+              >
                 {{ erroresVisita.nombre }}
               </span>
             </div>
 
             <div class="formulario-visita__grupo">
-              <label class="formulario-visita__label">TELÉFONO DE CONTACTO</label>
+              <label class="formulario-visita__label"
+                >TELÉFONO DE CONTACTO</label
+              >
               <input
                 type="tel"
                 class="formulario-visita__input"
@@ -125,7 +151,10 @@
                 name="telefono"
                 required
               />
-              <span class="formulario-visita__error" *ngIf="erroresVisita.telefono">
+              <span
+                class="formulario-visita__error"
+                *ngIf="erroresVisita.telefono"
+              >
                 {{ erroresVisita.telefono }}
               </span>
             </div>
@@ -158,11 +187,13 @@
               name="servicio"
               required
             >
-              <option value="" disabled selected>Tipo de Servicio</option>
-              <option value="residencia-permanente">Residencia Permanente</option>
-              <option value="residencia-temporal">Residencia Temporal</option>
-              <option value="centro-dia">Centro de Día</option>
-              <option value="post-operatorio">Post Operatorio</option>
+              <option value="" disabled selected>Selecciona una opción</option>
+              <option value="informacion-general">Información General</option>
+              <option value="planes-estadia">Planes de Estadía</option>
+              <option value="consulta-geriatrica">Consulta Geriátrica</option>
+              <option value="terapia-rehabilitacion">
+                Terapia y Rehabilitación
+              </option>
             </select>
           </div>
 
@@ -209,15 +240,18 @@
   </div>
 </div>
 
-
 <!-- SECCIÓN: Mapa de Google Maps -->
-<section class="seccion__mapa">
+<section class="seccion__mapa" id="mapa">
+  <div class="mapa__header">
+    <p class="mapa__subtitulo">¿Dónde queda?</p>
+    <h2 class="mapa__titulo">Nuestra Ubicación</h2>
+  </div>
   <div class="mapa__contenedor">
     <iframe
       src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3901.3347557887845!2d-76.94445092412653!3d-12.089566742599758!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x9105c71c4c0e3f8b%3A0x8f0b0b0b0b0b0b0b!2sLas%20Dalias%20156%2C%20La%20Molina%2015024!5e0!3m2!1ses!2spe!4v1234567890123!5m2!1ses!2spe"
       width="100%"
       height="100%"
-      style="border:0;"
+      style="border: 0"
       allowfullscreen=""
       loading="lazy"
       referrerpolicy="no-referrer-when-downgrade"

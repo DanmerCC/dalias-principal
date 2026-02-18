@@ -29,11 +29,10 @@ export class AppComponent implements OnInit, OnDestroy {
       'https://wa.link/db4jzd',
     '/servicios/planes-de-estadia/residencia-temporal':
       'https://wa.link/k3fj0r',
-    '/servicios/planes-de-estadia/centro-de-dia':
-      'https://wa.link/91v3xr',
-    '/servicios/planes-de-estadia/post-operatoria':
-      'https://wa.link/9g9f4u',
-    '/contacto': 'https://wa.link/gglgal',
+    '/servicios/planes-de-estadia/centro-de-dia': 'https://wa.link/91v3xr',
+    '/servicios/planes-de-estadia/residencia-post-operatoria':
+      'https://wa.link/smm7ny',
+    '/contactanos': 'https://wa.link/gglgal',
   };
 
   constructor(private router: Router) {}
