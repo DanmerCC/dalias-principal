@@ -1182,367 +1182,434 @@ select.form__input {
   text-decoration: underline;
 }
 
-
-/* ===============================
-   MEDIA QUERIES - PLANES DE ESTADÍA
-================================ */
-
+/* ========================================
+   MEDIA QUERY 768px
+   ======================================== */
 @media (max-width: 768px) {
-
-  /* ── Figuras ── */
-  .dalias1_figure  { width: 8rem; left: -5rem; top: -3rem; }
-  .dalias2_figure  { width: 7rem; left: -4rem; bottom: -5rem; }
-  .dalias3_figure  { width: 14rem; right: -10rem; top: 12rem; }
-  .figure_contacto2 { width: 6rem; left: -3rem; bottom: -4rem; }
-  .figure_contacto3 { width: 3.5rem; right: -1.5rem; }
-  .figure_contacto4 { width: 3.5rem; right: 8rem; }
-  .figure9  { width: 8rem; left: -5rem; }
-  .figure10 { width: 3rem; }
-
-  /* ── Hero Slider ── */
+  /* SLIDER */
   .contenedor__slider {
-    min-height: unset;
-    height: 75vh;
+    height: 80vh;
+    min-height: 500px;
   }
-  .contenedor__slider .slider__img {
-    height: 100%;
-  }
+
   .content__slider {
-    width: 92%;
-    max-width: 100%;
+    width: 95%;
     padding: 0 1.5rem;
     gap: 1.2rem;
   }
+
   .slider__titulo {
-    font-size: 2.4rem;
+    font-size: 2.5rem;
   }
+
   .slider__subtitulo {
     font-size: 1rem;
   }
 
-  /* ── Servicios — 2 columnas (2x2) ── */
-  .seccion__servicios {
-    padding: 3.5rem 2rem;
+  .btn__primario {
+    padding: 0.9rem 2rem;
+    font-size: 0.95rem;
   }
+
+  /* FIGURAS DECORATIVAS */
+  .dalias1_figure { width: 8rem; left: -4rem; }
+  .dalias2_figure { width: 6rem; left: -3rem; }
+  .dalias3_figure { display: none; }
+  .figure_contacto2 { width: 5rem; left: -2rem; }
+  .figure_contacto3 { width: 3rem; }
+  .figure_contacto4 { width: 3rem; right: 8rem; }
+  .figure9 { width: 8rem; left: -5rem; }
+  .figure10 { width: 2.5rem; }
+
+  /* SECCIÓN SERVICIOS */
+  .seccion__servicios {
+    padding: 4rem 2rem;
+  }
+
   .servicios__titulo {
     font-size: 2rem;
+    font-weight: 500;
   }
+
   .servicios__descripcion {
     font-size: 1rem;
   }
+
   .servicios__grid {
-    grid-template-columns: 1fr;
-    gap: 1.2rem;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1.5rem;
   }
+
   .servicio__imagen-container {
     height: 13rem;
   }
+
+  .servicio__contenido {
+    padding: 1.3rem;
+  }
+
   .servicio__contenido h3 {
     font-size: 1rem;
   }
 
-  /* ── Plan Ideal — 1 columna ── */
+  /* SECCIÓN PLAN IDEAL */
   .seccion__plan-ideal {
-    padding: 3.5rem 2rem;
+    padding: 4rem 2rem;
   }
+
   .plan-ideal__titulo {
     font-size: 2rem;
+    font-weight: 500;
   }
+
   .plan-ideal__descripcion {
     font-size: 1rem;
   }
+
   .plan-ideal__grid {
     grid-template-columns: 1fr;
     gap: 1.5rem;
-    max-width: 520px;
-    margin: 0 auto;
   }
+
   .plan-ideal__card {
     padding: 2rem 1.8rem;
   }
 
-  /* ── Actividades — 2 columnas (2+1) ── */
+  /* SECCIÓN ACTIVIDADES */
   .seccion__actividades {
-    padding: 3.5rem 2rem;
+    padding: 4rem 2rem;
   }
+
   .actividades__titulo {
     font-size: 2rem;
+    font-weight: 500;
   }
+
   .actividades__header-flex {
     flex-direction: column;
     align-items: flex-start;
     gap: 1rem;
   }
+
   .actividades__grid {
-    grid-template-columns: repeat(2, 1fr);
+    grid-template-columns: 1fr;
     gap: 1.5rem;
   }
+
   .actividad__imagen {
-    height: 13rem;
-  }
-  .actividad__contenido {
-    padding: 1.4rem;
-  }
-  .actividad__titulo {
-    font-size: 1.1rem;
+    height: 14rem;
   }
 
-  /* ── Contacto ── */
+  /* SECCIÓN CONTACTO */
   .seccion__contacto {
     padding: 3rem 1.5rem;
   }
+
   .contacto__contenedor {
     flex-direction: column;
   }
+
   .contacto__izquierda,
   .contacto__derecha {
     flex: none;
     width: 100%;
-    padding: 2.5rem 2rem;
+    padding: 3rem 2rem;
   }
+
   .contacto__titulo {
     font-size: 1.9rem;
   }
-  .icono-calendario {
-    width: 5rem;
-    height: 5rem;
-  }
-  .icono-calendario i {
-    font-size: 2.5rem;
-  }
+
   .form__fila {
     grid-template-columns: 1fr;
     gap: 1.1rem;
   }
 
-  /* ── FAQ ── */
-  .seccion__faq {
-    padding: 3.5rem 2rem;
+  .contacto__icono-decorativo {
+    display: none;
   }
+
+  /* FAQ */
+  .seccion__faq {
+    padding: 4rem 2rem;
+  }
+
   .faq__titulo {
     font-size: 2rem;
+    font-weight: 500;
   }
+
   .faq__descripcion {
     font-size: 1rem;
   }
+
   .faq__grid {
     grid-template-columns: 1fr;
     gap: 1rem;
   }
+
   .faq__item {
-    padding: 1.4rem;
-  }
-  .faq__pregunta h3 {
-    font-size: 1rem;
+    padding: 1.5rem;
   }
 
-  /* ── Modal ── */
+  /* MODAL */
   .modal__confirmacion {
     width: 90%;
-    max-width: 27rem;
+    max-width: 25rem;
     padding: 2rem 1.2rem;
+  }
+
+  .confirmacion__icono img {
+    width: 8rem;
+  }
+
+  .modal__confirmacion h2 {
+    font-size: 1.6rem;
   }
 }
 
-/* ─── 680px ─── */
+/* ========================================
+   MEDIA QUERY 680px
+   ======================================== */
 @media (max-width: 680px) {
-
-  /* ── Figuras ── */
-  .dalias1_figure  { width: 5rem; left: -3rem; }
-  .dalias2_figure  { width: 4.5rem; left: -2.5rem; }
-  .dalias3_figure  { width: 8rem; right: -6rem; top: 10rem; }
-  .figure_contacto2 { width: 4rem; left: -2rem; }
-  .figure_contacto3 { width: 2.5rem; }
-  .figure_contacto4 { width: 2.5rem; right: 5rem; }
-  .figure9  { width: 5rem; left: -3rem; }
-  .figure10 { width: 2rem; }
-
-  /* ── Hero Slider ── */
+  /* SLIDER */
   .contenedor__slider {
-    height: 70vh;
+    height: 75vh;
+    min-height: 450px;
   }
+
   .content__slider {
-    width: 96%;
     padding: 0 1rem;
     gap: 1rem;
   }
+
   .slider__titulo {
-    font-size: 1.9rem;
-  }
-  .slider__subtitulo {
-    font-size: 0.9rem;
-  }
-  .btn__primario {
-    padding: 0.85rem 2rem;
-    font-size: 0.92rem;
-  }
-
-  /* ── Servicios — se mantiene 2 columnas, más compacto ── */
-  .seccion__servicios {
-    padding: 2.5rem 1rem;
-  }
-  .servicios__titulo {
-    font-size: 1.6rem;
-  }
-  .servicios__header {
-    margin-bottom: 2.5rem;
-  }
-  .servicios__grid {
-    gap: 1rem;
-  }
-  .servicio__imagen-container {
-    height: 11rem;
-  }
-  .servicio__contenido {
-    padding: 1.2rem;
-  }
-  .servicio__contenido h3 {
-    font-size: 0.95rem;
-  }
-  .servicio__descripcion {
-    font-size: 0.8rem;
-    margin-bottom: 0.7rem;
-  }
-  .servicio__detalles {
-    gap: 0.45rem;
-    margin-bottom: 0.9rem;
-  }
-  .servicio__detalles li {
-    font-size: 0.75rem;
-  }
-  .btn__ver-servicio {
-    padding: 0.7rem 1rem;
-    font-size: 0.82rem;
-  }
-
-  /* ── Plan Ideal ── */
-  .seccion__plan-ideal {
-    padding: 2.5rem 1rem;
-  }
-  .plan-ideal__titulo {
-    font-size: 1.6rem;
-  }
-  .plan-ideal__descripcion {
-    font-size: 0.92rem;
-  }
-  .plan-ideal__header {
-    margin-bottom: 2.5rem;
-  }
-  .plan-ideal__grid {
-    max-width: 100%;
-  }
-  .plan-ideal__card {
-    padding: 1.8rem 1.5rem;
-  }
-  .plan-ideal__icono {
-    width: 3.2rem;
-    height: 3.2rem;
-    margin-bottom: 1.2rem;
-  }
-  .plan-ideal__icono i {
-    font-size: 1.5rem;
-  }
-  .plan-ideal__card-titulo {
-    font-size: 1.1rem;
-  }
-  .plan-ideal__card-descripcion {
-    font-size: 0.88rem;
-  }
-  .recomendacion__servicio {
-    font-size: 0.95rem;
-  }
-
-  /* ── Actividades — 1 columna ── */
-  .seccion__actividades {
-    padding: 2.5rem 1rem;
-  }
-  .actividades__titulo {
-    font-size: 1.6rem;
-  }
-  .actividades__grid {
-    grid-template-columns: 1fr;
-    gap: 1.2rem;
-  }
-  .actividad__imagen {
-    height: 14rem;
-  }
-  .actividad__titulo {
-    font-size: 1rem;
-  }
-  .actividad__descripcion {
-    font-size: 0.88rem;
-  }
-
-  /* ── Contacto ── */
-  .seccion__contacto {
-    padding: 2rem 1rem;
-  }
-  .contacto__izquierda,
-  .contacto__derecha {
-    padding: 2rem 1.5rem;
-  }
-  .contacto__titulo {
-    font-size: 1.7rem;
-    margin-bottom: 1.2rem;
-  }
-  .contacto__descripcion {
-    font-size: 0.88rem;
-  }
-  .icono-calendario {
-    width: 4rem;
-    height: 4rem;
-  }
-  .icono-calendario i {
     font-size: 2rem;
   }
 
-  /* ── FAQ ── */
-  .seccion__faq {
+  .slider__subtitulo {
+    font-size: 0.9rem;
+    line-height: 1.6;
+  }
+
+  .btn__primario {
+    padding: 0.85rem 1.8rem;
+    font-size: 0.9rem;
+  }
+
+  /* FIGURAS */
+  .dalias1_figure { width: 6rem; left: -3rem; }
+  .dalias2_figure { width: 4rem; left: -2rem; }
+  .figure_contacto2 { width: 4rem; left: -1.5rem; }
+  .figure_contacto3 { width: 2.5rem; }
+  .figure_contacto4 { display: none; }
+  .figure9 { width: 5rem; left: -3rem; }
+  .figure10 { width: 2rem; }
+
+  /* SECCIÓN SERVICIOS */
+  .seccion__servicios {
+    padding: 3rem 1rem;
+  }
+
+  .servicios__subtitulo {
+    font-size: 0.8rem;
+  }
+
+  .servicios__titulo {
+    font-size: 1.8rem;
+  }
+
+  .servicios__descripcion {
+    font-size: 0.95rem;
+  }
+
+  .servicios__grid {
+    grid-template-columns: 1fr;
+    gap: 1.2rem;
+  }
+
+  .servicio__imagen-container {
+    height: 12rem;
+  }
+
+  .servicio__contenido {
+    padding: 1.2rem;
+  }
+
+  .servicio__contenido h3 {
+    font-size: 0.95rem;
+  }
+
+  .servicio__descripcion {
+    font-size: 0.8rem;
+  }
+
+  .servicio__detalles li {
+    font-size: 0.75rem;
+  }
+
+  .btn__ver-servicio {
+    padding: 0.75rem 1rem;
+    font-size: 0.85rem;
+  }
+
+  /* SECCIÓN PLAN IDEAL */
+  .seccion__plan-ideal {
+    padding: 3rem 1rem;
+  }
+
+  .plan-ideal__titulo {
+    font-size: 1.8rem;
+  }
+
+  .plan-ideal__descripcion {
+    font-size: 0.95rem;
+  }
+
+  .plan-ideal__card {
+    padding: 1.8rem 1.5rem;
+  }
+
+  .plan-ideal__icono {
+    width: 3.5rem;
+    height: 3.5rem;
+    margin-bottom: 1.2rem;
+  }
+
+  .plan-ideal__icono i {
+    font-size: 1.5rem;
+  }
+
+  .plan-ideal__card-titulo {
+    font-size: 1.1rem;
+  }
+
+  .plan-ideal__card-descripcion {
+    font-size: 0.9rem;
+  }
+
+  /* SECCIÓN ACTIVIDADES */
+  .seccion__actividades {
+    padding: 3rem 1rem;
+  }
+
+  .actividades__subtitulo {
+    font-size: 0.8rem;
+  }
+
+  .actividades__titulo {
+    font-size: 1.8rem;
+  }
+
+  .actividad__imagen {
+    height: 12rem;
+  }
+
+  .actividad__contenido {
+    padding: 1.5rem;
+  }
+
+  .actividad__titulo {
+    font-size: 1.1rem;
+  }
+
+  .actividad__descripcion {
+    font-size: 0.9rem;
+  }
+
+  /* SECCIÓN CONTACTO */
+  .seccion__contacto {
     padding: 2.5rem 1rem;
   }
+
+  .contacto__izquierda,
+  .contacto__derecha {
+    padding: 2.5rem 1.5rem;
+  }
+
+  .contacto__titulo {
+    font-size: 1.7rem;
+  }
+
+  .contacto__descripcion {
+    font-size: 0.9rem;
+  }
+
+  .info__valor {
+    font-size: 0.9rem;
+  }
+
+  .form__label {
+    font-size: 0.75rem;
+  }
+
+  .form__input,
+  .form__textarea {
+    padding: 0.7rem 0.9rem;
+    font-size: 0.8rem;
+  }
+
+  .btn__enviar {
+    padding: 0.85rem 1.8rem;
+    font-size: 0.85rem;
+  }
+
+  /* FAQ */
+  .seccion__faq {
+    padding: 3rem 1rem;
+  }
+
+  .faq__subtitulo {
+    font-size: 0.8rem;
+  }
+
   .faq__titulo {
-    font-size: 1.6rem;
+    font-size: 1.8rem;
   }
+
   .faq__descripcion {
-    font-size: 0.92rem;
+    font-size: 0.95rem;
   }
-  .faq__header {
-    margin-bottom: 2.5rem;
-  }
+
   .faq__item {
-    padding: 1.1rem;
+    padding: 1.2rem;
   }
+
   .faq__pregunta h3 {
-    font-size: 0.92rem;
+    font-size: 0.95rem;
   }
+
   .faq__pregunta i {
-    font-size: 1.4rem;
-    width: 1.7rem;
-    height: 1.7rem;
+    font-size: 1.5rem;
+    width: 1.6rem;
+    height: 1.6rem;
   }
+
   .faq__respuesta p {
     font-size: 0.88rem;
   }
 
-  /* ── Modal ── */
-  .modal__overlay {
-    padding: 0.5rem;
-  }
+  /* MODAL */
   .modal__confirmacion {
     width: 95%;
+    max-width: 24rem;
     padding: 1.8rem 1rem;
   }
-  .modal__confirmacion h2 {
-    font-size: 1.4rem;
-  }
-  .modal__confirmacion p {
-    font-size: 1rem;
-  }
+
   .confirmacion__icono img {
     width: 7rem;
   }
+
+  .modal__confirmacion h2 {
+    font-size: 1.4rem;
+  }
+
+  .modal__confirmacion p {
+    font-size: 0.95rem;
+  }
+
   .btn__cerrar-confirmacion {
-    padding: 0.8rem 2rem;
+    padding: 0.9rem 2rem;
     font-size: 0.95rem;
   }
 }

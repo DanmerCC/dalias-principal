@@ -382,11 +382,9 @@
 }
 
 
-/* ========================================================
-   MEDIA QUERY 768px — Tablets
-   ======================================================== */
-@media (max-width: 768px) {
+/* ===== RESPONSIVE ===== */
 
+@media (max-width: 768px) {
   .cont1_header {
     display: none;
   }
@@ -397,6 +395,7 @@
     border-radius: 0;
     box-shadow: 0 3px 14px rgba(0, 0, 0, 0.1);
   }
+
   .cont2_header.fixed {
     top: 0;
     width: 100%;
@@ -411,6 +410,7 @@
   .menu {
     display: none;
   }
+
   .header-actions {
     display: none;
   }
@@ -424,12 +424,7 @@
   }
 }
 
-
-/* ========================================================
-   MEDIA QUERY 680px — Móviles
-   ======================================================== */
 @media (max-width: 680px) {
-
   .cont2_header .nav2 {
     padding: 0.45rem 1rem;
   }
@@ -441,21 +436,24 @@
   .panel-mobile {
     width: 72vw;
     max-width: 260px;
+    height: 100dvh;
   }
 
   .panel-head {
     padding: 1.3rem 1.1rem 0.8rem;
   }
+
   .panel-logo {
-    width: 5.8rem;
+    width: 7.5rem;
   }
 
   .menu-mobile {
     padding: 0.4rem 1rem 0;
   }
+
   .menu-mobile a {
     padding: 0.7rem 0.4rem;
-    font-size: 0.82rem;
+    font-size: 1rem;
     gap: 0.7rem;
   }
 
@@ -463,16 +461,16 @@
     padding: 1rem 1rem 1.8rem;
     gap: 0.6rem;
   }
+
   .btn-panel {
     padding: 0.65rem 0.9rem;
   }
+
   .btn-panel-numero {
-    font-size: 0.84rem;
+    font-size: 1rem;
   }
+
   .btn-panel-sub {
-    font-size: 0.68rem;
-  }
-  .btn-panel-residente span {
     font-size: 0.8rem;
   }
 }

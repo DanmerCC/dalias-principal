@@ -1374,3 +1374,613 @@
     transform: translateY(0);
   }
 }
+
+/* ========================================
+   MEDIA QUERY 768px
+   ======================================== */
+@media (max-width: 768px) {
+  /* HERO */
+  .hero__residencia {
+    height: 80vh;
+    min-height: 500px;
+  }
+
+  .hero__contenido {
+    width: 95%;
+    padding: 0 1.5rem;
+    gap: 1.2rem;
+  }
+
+  .hero__titulo {
+    font-size: 2.5rem;
+  }
+
+  .hero__descripcion {
+    font-size: 1rem;
+  }
+
+  .btn__primario {
+    padding: 0.9rem 2rem;
+    font-size: 0.95rem;
+  }
+
+  /* FIGURAS */
+  .figure_fil { width: 7rem; left: -4rem; }
+  .figure_centro { width: 8rem; right: -4rem; }
+  .figure_pilares1 { width: 7rem; left: -4rem; }
+  .figure_pilares2 { width: 7rem; right: -4rem; }
+  .beneficios_figure1 { width: 8rem; left: -5rem; }
+  .beneficios_figure2 { width: 6rem; right: -3rem; }
+  .figure_faq1 { width: 8rem; left: -5rem; }
+  .figure_faq2 { width: 8rem; right: -5rem; }
+  .figure_faq3 { width: 2rem; }
+  .figure_contacto2 { width: 6rem; left: -3rem; }
+  .figure_contacto3 { width: 3rem; right: -1rem; }
+  .figure_contacto4 { width: 3rem; right: 8rem; }
+
+  /* FILOSOFÍA */
+  .seccion__filosofia {
+    padding: 4rem 2rem;
+  }
+
+  .filosofia__contenido {
+    flex-direction: column;
+    gap: 2rem;
+  }
+
+  .filosofia__imagen {
+    flex: none;
+    width: 100%;
+  }
+
+  .filosofia__imagen img {
+    width: 100%;
+    height: 22rem;
+  }
+
+  .filosofia__titulo {
+    font-size: 2rem;
+    font-weight: 500;
+  }
+
+  .filosofia__descripcion {
+    font-size: 0.95rem;
+  }
+
+  /* PLAN CENTRO */
+  .seccion__plan-centro {
+    padding: 4rem 2rem;
+  }
+
+  .plan-centro__contenido {
+    flex-direction: column-reverse;
+    gap: 2rem;
+  }
+
+  .plan-centro__imagen {
+    flex: none;
+    width: 100%;
+  }
+
+  .plan-centro__imagen img {
+    width: 100%;
+    height: 22rem;
+  }
+
+  .plan-centro__titulo {
+    font-size: 2rem;
+    font-weight: 500;
+  }
+
+  /* PILARES */
+  .seccion__pilares {
+    padding: 4rem 2rem;
+  }
+
+  .pilares__contenedor {
+    padding: 1rem 1.5rem;
+  }
+
+  .pilares__titulo {
+    font-size: 2rem;
+    font-weight: 500;
+  }
+
+  .pilares__grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1.5rem;
+  }
+
+  /* CRONOGRAMA */
+  .seccion__cronograma {
+    padding: 4rem 2rem;
+  }
+
+  .cronograma__titulo {
+    font-size: 2rem;
+    font-weight: 500;
+  }
+
+  .cronograma__header {
+    margin-bottom: 3rem;
+  }
+
+  /* Línea vertical centrada */
+  .cronograma__linea-tiempo::before {
+    left: 50%;
+    transform: translateX(-50%);
+  }
+
+  /* Cada item: columna única centrada */
+  .timeline__item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    grid-template-columns: unset;
+    min-height: auto;
+    padding-bottom: 2.5rem;
+    gap: 1rem;
+    position: relative;
+    z-index: 1;
+  }
+
+  /* Ocultar lado izquierdo en todos */
+  .timeline__lado--izquierda {
+    display: none;
+  }
+
+  /* Centro: hora visible centrada */
+  .timeline__centro {
+    order: 1;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+  }
+
+  .timeline__hora {
+    width: 75px;
+    height: 75px;
+    font-size: 0.78rem;
+  }
+
+  /* Lado derecho: imagen + texto apilados */
+  .timeline__lado--derecha {
+    order: 2;
+    width: 100%;
+    padding-left: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+  }
+
+  .timeline__imagen {
+    width: 100%;
+    max-width: 420px;
+    height: 14rem;
+  }
+
+  .timeline__texto {
+    max-width: 100%;
+    text-align: center;
+  }
+
+  .timeline__texto--derecha {
+    text-align: center;
+  }
+
+  .timeline__texto h3 {
+    font-size: 1.1rem;
+  }
+
+  .timeline__texto p {
+    font-size: 0.9rem;
+  }
+
+  /* BENEFICIOS CENTRO */
+  .seccion__beneficios-centro {
+    padding: 4rem 2rem;
+  }
+
+  .beneficios-centro__contenido {
+    flex-direction: column;
+    gap: 2rem;
+  }
+
+  .beneficios-centro__texto {
+    flex: none;
+    width: 100%;
+  }
+
+  .beneficios-centro__titulo {
+    font-size: 2rem;
+    font-weight: 500;
+  }
+
+  .beneficios-centro__grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1.2rem;
+  }
+
+  .beneficio-centro__card {
+    padding: 1.5rem 1.2rem;
+  }
+
+  /* CONTACTO */
+  .seccion__contacto {
+    padding: 3rem 1.5rem;
+  }
+
+  .contacto__contenedor {
+    flex-direction: column;
+  }
+
+  .contacto__izquierda,
+  .contacto__derecha {
+    flex: none;
+    width: 100%;
+    padding: 3rem 2rem;
+  }
+
+  .contacto__titulo {
+    font-size: 1.9rem;
+  }
+
+  .contacto__icono-decorativo {
+    display: none;
+  }
+
+  .form__fila {
+    grid-template-columns: 1fr;
+  }
+
+  /* FAQ */
+  .seccion__faq {
+    padding: 4rem 2rem;
+  }
+
+  .faq__titulo {
+    font-size: 2rem;
+    font-weight: 500;
+  }
+
+  .faq__grid {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+
+  .faq__item {
+    padding: 1.5rem;
+  }
+
+  /* MODAL CONFIRMACIÓN */
+  .modal__confirmacion {
+    width: 90%;
+    max-width: 27rem;
+    padding: 2rem 1.2rem;
+  }
+}
+
+/* ========================================
+   MEDIA QUERY 680px
+   ======================================== */
+@media (max-width: 680px) {
+  /* HERO */
+  .hero__residencia {
+    height: 75vh;
+    min-height: 450px;
+  }
+
+  .hero__contenido {
+    padding: 0 1rem;
+    gap: 1rem;
+  }
+
+  .hero__titulo {
+    font-size: 2rem;
+  }
+
+  .hero__descripcion {
+    font-size: 0.9rem;
+    line-height: 1.6;
+  }
+
+  .btn__primario {
+    padding: 0.85rem 1.8rem;
+    font-size: 0.9rem;
+  }
+
+  /* FIGURAS */
+  .figure_fil { width: 5rem; left: -3rem; }
+  .figure_centro { display: none; }
+  .figure_pilares1 { display: none; }
+  .figure_pilares2 { display: none; }
+  .beneficios_figure1 { display: none; }
+  .beneficios_figure2 { display: none; }
+  .figure_faq1 { width: 5rem; left: -3rem; }
+  .figure_faq2 { width: 5rem; right: -3rem; }
+  .figure_faq3 { display: none; }
+  .figure_contacto2 { display: none; }
+  .figure_contacto3 { display: none; }
+  .figure_contacto4 { display: none; }
+
+  /* FILOSOFÍA */
+  .seccion__filosofia {
+    padding: 3rem 1rem;
+  }
+
+  .filosofia__imagen img {
+    height: 18rem;
+  }
+
+  .filosofia__subtitulo {
+    font-size: 0.8rem;
+  }
+
+  .filosofia__titulo {
+    font-size: 1.8rem;
+  }
+
+  .filosofia__descripcion {
+    font-size: 0.9rem;
+  }
+
+  .caracteristica__item {
+    padding: 0.8rem;
+  }
+
+  .caracteristica__item i {
+    font-size: 1.6rem;
+  }
+
+  .caracteristica__item strong {
+    font-size: 0.9rem;
+  }
+
+  .caracteristica__item span {
+    font-size: 0.85rem;
+  }
+
+  /* PLAN CENTRO */
+  .seccion__plan-centro {
+    padding: 3rem 1rem;
+  }
+
+  .plan-centro__imagen img {
+    height: 18rem;
+  }
+
+  .plan-centro__subtitulo {
+    font-size: 0.8rem;
+  }
+
+  .plan-centro__titulo {
+    font-size: 1.8rem;
+  }
+
+  .plan-centro__descripcion {
+    font-size: 0.9rem;
+  }
+
+  .plan-item {
+    padding: 0.8rem;
+  }
+
+  .plan-item i {
+    font-size: 1.6rem;
+  }
+
+  .plan-item strong {
+    font-size: 0.9rem;
+  }
+
+  .plan-item span {
+    font-size: 0.85rem;
+  }
+
+  /* PILARES */
+  .seccion__pilares {
+    padding: 3rem 1rem;
+  }
+
+  .pilares__contenedor {
+    padding: 1rem;
+    border-width: 4px;
+  }
+
+  .pilares__titulo {
+    font-size: 1.8rem;
+  }
+
+  .pilares__grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1.2rem;
+  }
+
+  .pilar__nombre {
+    font-size: 0.85rem;
+  }
+
+  /* CRONOGRAMA */
+  .seccion__cronograma {
+    padding: 3rem 1rem;
+  }
+
+  .cronograma__subtitulo {
+    font-size: 0.8rem;
+  }
+
+  .cronograma__titulo {
+    font-size: 1.8rem;
+  }
+
+  .cronograma__descripcion {
+    font-size: 0.95rem;
+  }
+
+  .timeline__hora {
+    width: 65px;
+    height: 65px;
+    font-size: 0.72rem;
+  }
+
+  .timeline__imagen {
+    height: 12rem;
+  }
+
+  .timeline__texto h3 {
+    font-size: 1rem;
+  }
+
+  .timeline__texto p {
+    font-size: 0.85rem;
+  }
+
+  .cronograma__nota {
+    font-size: 0.78rem;
+  }
+
+  /* BENEFICIOS CENTRO */
+  .seccion__beneficios-centro {
+    padding: 3rem 1rem;
+  }
+
+  .beneficios-centro__subtitulo {
+    font-size: 0.8rem;
+  }
+
+  .beneficios-centro__titulo {
+    font-size: 1.8rem;
+  }
+
+  .beneficios-centro__descripcion {
+    font-size: 0.9rem;
+  }
+
+  .beneficios-centro__grid {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+
+  .beneficio-centro__card {
+    padding: 1.5rem 1.2rem;
+  }
+
+  .beneficio-centro__icono {
+    width: 3rem;
+    height: 3rem;
+    margin-bottom: 1rem;
+  }
+
+  .beneficio-centro__icono i {
+    font-size: 1.3rem;
+  }
+
+  .beneficio-centro__card-titulo {
+    font-size: 1rem;
+  }
+
+  .beneficio-centro__card-descripcion {
+    font-size: 0.85rem;
+  }
+
+  /* CONTACTO */
+  .seccion__contacto {
+    padding: 2.5rem 1rem;
+  }
+
+  .contacto__izquierda,
+  .contacto__derecha {
+    padding: 2.5rem 1.5rem;
+  }
+
+  .contacto__titulo {
+    font-size: 1.7rem;
+  }
+
+  .contacto__descripcion {
+    font-size: 0.9rem;
+  }
+
+  .info__valor {
+    font-size: 0.88rem;
+  }
+
+  .form__label {
+    font-size: 0.75rem;
+  }
+
+  .form__input,
+  .form__textarea {
+    padding: 0.7rem 0.9rem;
+    font-size: 0.8rem;
+  }
+
+  .btn__enviar {
+    padding: 0.85rem 1.8rem;
+    font-size: 0.85rem;
+  }
+
+  /* FAQ */
+  .seccion__faq {
+    padding: 3rem 1rem;
+  }
+
+  .faq__subtitulo {
+    font-size: 0.8rem;
+  }
+
+  .faq__titulo {
+    font-size: 1.8rem;
+  }
+
+  .faq__descripcion {
+    font-size: 0.95rem;
+  }
+
+  .faq__item {
+    padding: 1.2rem;
+  }
+
+  .faq__pregunta h3 {
+    font-size: 0.95rem;
+  }
+
+  .faq__pregunta i {
+    font-size: 1.5rem;
+    width: 1.6rem;
+    height: 1.6rem;
+  }
+
+  .faq__respuesta p {
+    font-size: 0.88rem;
+  }
+
+  /* MODAL CONFIRMACIÓN */
+  .modal__overlay {
+    padding: 0.5rem;
+  }
+
+  .modal__confirmacion {
+    width: 95%;
+    padding: 1.8rem 1rem;
+  }
+
+  .confirmacion__icono img {
+    width: 8rem;
+  }
+
+  .modal__confirmacion h2 {
+    font-size: 1.5rem;
+  }
+
+  .modal__confirmacion p {
+    font-size: 1rem;
+    margin-bottom: 1.8rem;
+  }
+
+  .btn__cerrar-confirmacion {
+    padding: 0.9rem 2.2rem;
+    font-size: 0.95rem;
+  }
+}

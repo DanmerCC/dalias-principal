@@ -2058,123 +2058,143 @@ select.form__input {
   text-decoration: underline;
 }
 
-/* ─── 768px: tablets portrait / móviles grandes ─── */
+
+/* ========================================
+   MEDIA QUERY 768px
+   ======================================== */
 @media (max-width: 768px) {
-  /* ── Figuras ── */
-  .figure1  { width: 9rem; left: -6rem; }
-  .figure2  { width: 2.5rem; }
-  .figure4  { width: 7rem; right: 12rem; }
+  /* SLIDER */
+  .contenedor__slider {
+    height: 80vh;
+  }
+
+  .contenedor__slider .slider__img {
+    padding: 0 2rem;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .content__slider {
+    margin-left: 0;
+    width: 100%;
+    margin-top: 0;
+    gap: 1.2rem;
+  }
+
+  .card__text {
+    padding: 1.3rem 1.5rem;
+  }
+
+  .card__input {
+    padding: 1.3rem 1.5rem;
+  }
+
+  /* FIGURAS */
+  .figure1 { width: 9rem; left: -6rem; }
+  .figure2 { width: 2.5rem; }
+  .figure3 { display: none; }
+  .figure4 { width: 7rem; right: 12rem; }
   .figure44 { width: 2.5rem; }
   .figure55 { width: 2.5rem; }
-  .figure5  { width: 7rem; }
-  .figure6  { width: 7rem; top: 22rem; left: -4rem; }
+  .figure5 { width: 7rem; }
+  .figure6 { width: 7rem; top: 22rem; left: -4rem; }
   .figure66 { width: 2rem; }
-  .figure7  { width: 8rem; }
-  .figure8  { width: 8rem; }
-  .figure9  { width: 8rem; left: -5rem; }
+  .figure7 { width: 8rem; }
+  .figure8 { width: 8rem; }
+  .figure9 { width: 8rem; left: -5rem; }
   .figure10 { width: 2.5rem; }
-
   .figure1_contacto { width: 6rem; }
   .figure2_contacto { width: 7rem; right: 10rem; }
+  .figure3_contacto { width: 8rem; left: 18rem; }
   .figure4_contacto { width: 5rem; }
   .figure5_contacto { width: 6rem; }
 
-  /* ── Paddings generales ── */
-  .seccion__innovacion,
-  .seccion__nosotros,
-  .seccion__noticias,
-  .seccion__contacto,
-  .seccion__cta,
-  .seccion__faq {
+  /* NOSOTROS */
+  .seccion__nosotros {
     padding: 3rem 2rem;
   }
-  .seccion__elegirnos {
-    padding: 4rem 2rem;
-  }
 
-  /* ── Slider ── */
-  .contenedor__slider {
-    height: 90vh;
-  }
-  .content__slider {
-    margin-left: 2rem;
-    width: calc(100% - 4rem);
-    max-width: 28rem;
-    margin-top: 3rem;
-  }
-
-  /* ── Innovación ── */
-  .innovacion__contenedor {
-    flex-direction: column;
-    gap: 2.5rem;
-  }
-  .innovacion__izquierda,
-  .innovacion__derecha {
-    width: 100%;
-  }
-  .innovacion__titulo,
-  .nosotros__titulo,
-  .noticias__titulo,
-  .cta__titulo,
-  .faq__titulo {
-    font-size: 2rem;
-  }
-  .elegirnos__titulo {
-    font-size: 2.2rem;
-  }
-  .servicio__card {
-    padding: 1.5rem;
-  }
-  .carrusel__imagen-container {
-    height: 12rem;
-  }
-
-  /* ── Nosotros — imagen ancho completo ── */
   .nosotros__contenido {
     flex-direction: column;
     gap: 2rem;
   }
+
   .nosotros__imagen {
     width: 100%;
     flex: none;
   }
+
   .nosotros__imagen img {
     height: 22rem;
   }
+
   .nosotros__texto {
     flex: none;
     width: 100%;
   }
 
-  /* ── Elegirnos ── */
+  .nosotros__titulo {
+    font-size: 2rem;
+    font-weight: 500;
+  }
+
+  /* INNOVACIÓN */
+  .seccion__innovacion {
+    padding: 3rem 2rem;
+  }
+
+  .innovacion__contenedor {
+    flex-direction: column;
+    gap: 2.5rem;
+  }
+
+  .innovacion__izquierda,
+  .innovacion__derecha {
+    width: 100%;
+  }
+
+  .innovacion__titulo {
+    font-size: 2rem;
+    font-weight: 500;
+  }
+
+  .carrusel__imagen-container {
+    height: 12rem;
+  }
+
+  /* ELEGIRNOS */
+  .seccion__elegirnos {
+    padding: 4rem 2rem;
+  }
+
+  .elegirnos__titulo {
+    font-size: 2rem;
+    font-weight: 500;
+  }
+
   .elegirnos__grid {
     grid-template-columns: repeat(2, 1fr);
     gap: 1.5rem;
   }
+
   .elegirnos__card {
     padding: 2rem;
   }
-  .card__icono {
-    width: 4rem;
-    height: 4rem;
-  }
-  .card__icono i {
-    font-size: 2rem;
-  }
-  .elegirnos__card h3 {
-    font-size: 1.2rem;
+
+  /* ACTIVIDADES */
+  .section__actividades {
+    padding: 4rem 2rem;
   }
 
-  /* ── Actividades ── */
-  .section__actividades{
-    padding: 5rem 2rem;
-  }
-  .art__atv:first-child {
-    margin-left: 2rem;
-  }
   .actividades__titulo {
     font-size: 2rem;
+    font-weight: 500;
   }
+
+  .actividades__header {
+    margin-bottom: 1rem;
+  }
+
   .art__atv {
     width: 85%;
     min-width: 85%;
@@ -2182,231 +2202,257 @@ select.form__input {
     flex-direction: column;
     padding: 2rem;
   }
+
   .art__atv img {
     width: 100%;
     height: 15rem;
   }
+
   .text__atv {
     width: 100%;
     padding: 1.5rem 0;
   }
+
   .text__atv h3 {
     font-size: 1.5rem;
   }
+
+  .art__atv--final {
+    width: 60%;
+    min-width: 60%;
+  }
+
   .arrows__content {
     width: 90%;
     margin-right: 2rem;
   }
 
-  /* ── Noticias ── */
-  .noticias__grid {
-    grid-template-columns: 1fr;
-    gap: 1.5rem;
-  }
-  .noticia__imagen {
-    height: 12.5rem;
-  }
-  .noticia__contenido {
-    padding: 1.5rem;
-  }
-  .noticias__btn {
-    width: 2.5rem;
-    height: 2.5rem;
-  }
-
-  /* ── Estadísticas ── */
+  /* ESTADÍSTICAS */
   .seccion__estadisticas {
     flex-direction: column;
     height: auto;
   }
+
   .estadisticas__imagen {
-    flex: none;
     height: 20rem;
-    background-size: cover;
-    background-position: center;
-  }
-  .estadisticas__grid {
-    grid-template-columns: repeat(2, 1fr);
-    gap: 30px 20px;
-    padding: 2rem 0;
+    flex: none;
+    width: 100%;
   }
 
-  /* ── CTA ── */
-  .cta__card {
-    padding: 3.5rem 2rem;
-    border-radius: 2rem;
+  .estadisticas__contenido {
+    flex: none;
+    width: 100%;
+    padding: 3rem 2rem;
   }
+
+  .estadisticas__grid {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2rem 1rem;
+  }
+
+  /* CTA */
+  .seccion__cta {
+    padding: 4rem 2rem;
+  }
+
+  .cta__card {
+    padding: 4rem 2.5rem;
+  }
+
   .cta__titulo {
     font-size: 2.2rem;
   }
+
   .cta__subtitulo {
-    font-size: 1.05rem;
-  }
-  .btn__cta {
-    padding: 1.1rem 2.8rem;
-    font-size: 1rem;
+    font-size: 1.1rem;
   }
 
-  /* ── Contacto ── */
+  /* NOTICIAS */
+  .seccion__noticias {
+    padding: 4rem 2rem;
+  }
+
+  .noticias__titulo {
+    font-size: 2rem;
+    font-weight: 500;
+  }
+
+  .noticias__grid {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+  }
+
+  /* CONTACTO */
+  .seccion__contacto {
+    padding: 3rem 0;
+  }
+
   .contacto__contenedor {
     flex-direction: column;
+    width: 95%;
   }
+
   .contacto__izquierda,
   .contacto__derecha {
     flex: none;
     width: 100%;
     padding: 3rem 2rem;
   }
+
   .contacto__titulo {
     font-size: 2.4rem;
   }
+
   .contacto__imagen {
     height: 14rem;
   }
-  .btn__enviar {
-    width: 100%;
+
+  /* FAQ */
+  .seccion__faq {
+    padding: 4rem 2rem;
   }
 
-  /* ── FAQ ── */
+  .faq__titulo {
+    font-size: 2rem;
+    font-weight: 500;
+  }
+
   .faq__grid {
     grid-template-columns: 1fr;
     gap: 1rem;
   }
+
   .faq__item {
     padding: 1.5rem;
   }
-  .faq__pregunta h3 {
-    font-size: 1rem;
-  }
 
-  /* ── Modal ── */
+  /* MODAL */
   .modal__confirmacion {
     width: 90%;
     max-width: 27rem;
-    padding: 2rem 1.2rem;
   }
 }
 
-/* ─── 680px: móviles medianos ─── */
+/* ========================================
+   MEDIA QUERY 680px
+   ======================================== */
 @media (max-width: 680px) {
-  /* ── Figuras ── */
-  .figure1  { width: 6rem; left: -4rem; bottom: -2rem; }
-  .figure2  { width: 2rem; }
-  .figure4  { width: 5rem; right: 8rem; }
-  .figure44 { width: 2rem; }
-  .figure55 { width: 2rem; }
-  .figure5  { width: 5rem; }
-  .figure6  { width: 5rem; top: 18rem; left: -3rem; }
-  .figure66 { width: 1.8rem; }
-  .figure7  { width: 5rem; }
-  .figure8  { width: 5rem; }
-  .figure9  { width: 5rem; left: -3rem; }
-  .figure10 { width: 2rem; }
+  /* SLIDER */
+  .contenedor__slider .slider__img {
+    padding: 0 1rem;
+  }
 
+  .content__slider {
+    gap: 1rem;
+  }
+
+  .card__text {
+    padding: 1.2rem;
+  }
+
+  .card__input {
+    padding: 1.2rem;
+  }
+
+  .card__input .text__input b {
+    font-size: 0.9rem;
+  }
+
+  /* FIGURAS */
+  .figure1 { width: 6rem; left: -4rem; bottom: -2rem; }
+  .figure2 { width: 2rem; }
+  .figure4 { display: none; }
+  .figure44 { width: 2rem; }
+  .figure55 { width: 2rem; top: 0; }
+  .figure5 { width: 5rem; }
+  .figure6 { width: 5rem; top: 18rem; left: -3rem; }
+  .figure66 { width: 1.8rem; }
+  .figure7 { width: 5rem; }
+  .figure8 { width: 5rem; }
+  .figure9 { width: 5rem; left: -3rem; }
+  .figure10 { width: 2rem; }
   .figure1_contacto { width: 4rem; }
   .figure2_contacto { width: 5rem; right: 6rem; }
+  .figure3_contacto { width: 8rem; left: auto; right: -3rem; top: 18rem; }
   .figure4_contacto { width: 3.5rem; }
   .figure5_contacto { width: 4rem; }
 
-  /* ── Paddings ── */
-  .seccion__innovacion,
-  .seccion__nosotros,
-  .seccion__noticias,
-  .seccion__contacto,
-  .seccion__cta,
-  .seccion__faq {
+  /* NOSOTROS */
+  .seccion__nosotros {
     padding: 2rem 1rem;
   }
+
+  .nosotros__imagen img {
+    height: 18rem;
+  }
+
+  .nosotros__titulo {
+    font-size: 1.8rem;
+  }
+
+  /* INNOVACIÓN */
+  .seccion__innovacion {
+    padding: 2rem 1rem;
+  }
+
+  .innovacion__titulo {
+    font-size: 1.8rem;
+  }
+
+  .servicio__card {
+    padding: 1.3rem;
+  }
+
+  .carrusel__imagen-container {
+    height: 11rem;
+  }
+
+  /* ELEGIRNOS */
   .seccion__elegirnos {
     padding: 3rem 1rem;
   }
 
-  /* ── Slider ── */
-  .contenedor__slider {
-    height: 85vh;
-  }
-  .content__slider {
-    margin-left: 1rem;
-    width: calc(100% - 2rem);
-    max-width: 100%;
-    margin-top: 2rem;
-  }
-  .card__text,
-  .card__input {
-    padding: 1.2rem 1.4rem;
-  }
-
-  /* ── Títulos ── */
-  .innovacion__titulo,
-  .nosotros__titulo,
-  .noticias__titulo,
-  .faq__titulo {
-    font-size: 1.6rem;
-  }
   .elegirnos__titulo {
     font-size: 1.8rem;
   }
-  .cta__titulo {
-    font-size: 1.8rem;
-  }
-  .actividades__titulo {
-    font-size: 1.6rem;
-  }
-  .contacto__titulo {
-    font-size: 2rem;
-  }
 
-  /* ── Subtítulos ── */
-  .innovacion__subtitulo,
-  .nosotros__subtitulo,
-  .noticias__subtitulo,
-  .elegirnos__subtitulo,
-  .faq__subtitulo,
-  .actividades__subtitulo {
-    font-size: 0.8rem;
-  }
-
-  /* ── Acordeón ── */
-  .acordeon__header {
-    padding: 1rem 0;
-  }
-  .acordeon__header span {
-    font-size: 1rem;
-  }
-
-  /* ── Nosotros — imagen sigue ancho completo ── */
-  .nosotros__imagen img {
-    height: 18rem;
-  }
-  .caracteristica__item {
-    padding: 0.8rem;
-    gap: 0.8rem;
-  }
-  .caracteristica__item i {
-    font-size: 1.5rem;
-  }
-
-  /* ── Elegirnos — una columna ── */
   .elegirnos__grid {
     grid-template-columns: 1fr;
     gap: 1.2rem;
   }
-  .elegirnos__descripcion {
-    font-size: 1rem;
+
+  .elegirnos__card {
+    padding: 1.8rem;
   }
 
-  /* ── Actividades ── */
-  .art__atv:first-child {
-    margin-left: 1rem;
+  /* ACTIVIDADES */
+  .section__actividades {
+    padding: 3rem 1rem;
   }
+
+  .actividades__titulo {
+    font-size: 1.8rem;
+  }
+
   .art__atv {
     width: 92%;
     min-width: 92%;
     padding: 1.5rem;
   }
+
   .art__atv img {
     height: 13rem;
   }
+
+  .text__atv h3 {
+    font-size: 1.3rem;
+  }
+
+  .art__atv--final {
+    width: 75%;
+    min-width: 75%;
+  }
+
   .arrows__content {
     width: 95%;
     margin-right: 1rem;
@@ -2414,84 +2460,110 @@ select.form__input {
     gap: 1rem;
     align-items: center;
   }
+
   .btns__actividades {
     width: 100%;
     justify-content: space-between;
+    margin-top: -2.7rem;
   }
 
-  /* ── Noticias ── */
-  .noticia__contenido {
-    padding: 1rem;
-  }
-  .noticia__titulo {
-    font-size: 1rem;
-  }
-  .noticia__descripcion {
-    font-size: 0.85rem;
-  }
+  .btn__atv.next__atv { margin-right: 2rem; }
+  .btn__atv.prev__atv { margin-left: 2rem; }
 
-  /* ── Estadísticas ── */
+  /* ESTADÍSTICAS */
   .estadisticas__imagen {
-    flex: none;
-    height: 18rem;
-    background-size: cover;
-    background-position: center;
+    height: 15rem;
   }
+
   .estadisticas__grid {
-    gap: 25px;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 2rem 1rem;
   }
-  .estadistica__item i {
+
+  /* CTA */
+  .seccion__cta {
+    padding: 3rem 1rem;
+  }
+
+  .cta__card {
+    padding: 3rem 2rem;
+    border-radius: 1.5rem;
+  }
+
+  .cta__titulo {
     font-size: 1.8rem;
   }
-  .estadistica__item strong {
-    font-size: 1.1rem;
+
+  .cta__subtitulo {
+    font-size: 1rem;
   }
 
-  /* ── CTA ── */
-  .cta__subtitulo {
-    font-size: 0.95rem;
-  }
   .btn__cta {
-    padding: 1rem 2.5rem;
+    padding: 1.1rem 2.5rem;
+    font-size: 1rem;
     width: 100%;
     justify-content: center;
   }
 
-  /* ── Contacto ── */
+  /* NOTICIAS */
+  .seccion__noticias {
+    padding: 3rem 1rem;
+  }
+
+  .noticias__titulo {
+    font-size: 1.8rem;
+  }
+
+  /* CONTACTO */
+  .seccion__contacto {
+    padding: 2.5rem 0;
+  }
+
+  .contacto__contenedor {
+    width: 98%;
+  }
+
   .contacto__izquierda,
   .contacto__derecha {
     padding: 2.5rem 1.5rem;
   }
+
+  .contacto__titulo {
+    font-size: 2rem;
+  }
+
   .contacto__imagen {
     height: 13rem;
   }
 
-  /* ── FAQ ── */
-  .faq__descripcion {
-    font-size: 0.95rem;
+  /* FAQ */
+  .seccion__faq {
+    padding: 3rem 1rem;
   }
+
+  .faq__titulo {
+    font-size: 1.8rem;
+  }
+
   .faq__item {
     padding: 1.2rem;
   }
+
   .faq__pregunta h3 {
     font-size: 0.95rem;
   }
-  .faq__respuesta p {
-    font-size: 0.9rem;
-  }
 
-  /* ── Modal ── */
+  /* MODAL */
   .modal__overlay {
     padding: 0.5rem;
   }
+
   .modal__confirmacion {
     width: 95%;
     padding: 1.8rem 1rem;
   }
+
   .modal__confirmacion h2 {
     font-size: 1.5rem;
-  }
-  .modal__confirmacion p {
-    font-size: 1rem;
   }
 }
