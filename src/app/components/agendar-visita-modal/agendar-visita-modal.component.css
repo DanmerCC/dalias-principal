@@ -869,7 +869,7 @@
     flex-direction: column-reverse;
     max-height: 95vh;
     overflow: auto;
-    /* justify-content: start; */
+    justify-content: end;
     align-items: end;
   }
 
