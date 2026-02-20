@@ -870,7 +870,7 @@
     max-height: 95vh;
     overflow: auto;
     /* justify-content: start; */
-    align-items: start;
+    align-items: end;
   }
 
   .modal__izquierda {
