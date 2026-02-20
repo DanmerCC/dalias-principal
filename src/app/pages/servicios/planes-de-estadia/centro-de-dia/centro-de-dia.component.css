@@ -1493,7 +1493,7 @@
 
   /* CRONOGRAMA */
   .seccion__cronograma {
-    padding: 4rem 2rem;
+    padding: 4rem 1rem;
   }
 
   .cronograma__titulo {
@@ -1505,76 +1505,55 @@
     margin-bottom: 3rem;
   }
 
-  /* Línea vertical centrada */
   .cronograma__linea-tiempo::before {
     left: 50%;
     transform: translateX(-50%);
   }
 
-  /* Cada item: columna única centrada */
   .timeline__item {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    grid-template-columns: unset;
-    min-height: auto;
-    padding-bottom: 2.5rem;
-    gap: 1rem;
-    position: relative;
-    z-index: 1;
-  }
-
-  /* Ocultar lado izquierdo en todos */
-  .timeline__lado--izquierda {
-    display: none;
-  }
-
-  /* Centro: hora visible centrada */
-  .timeline__centro {
-    order: 1;
-    width: 100%;
-    display: flex;
-    justify-content: center;
+    grid-template-columns: 1fr 70px 1fr;
+    min-height: 160px;
+    gap: 0;
   }
 
   .timeline__hora {
-    width: 75px;
-    height: 75px;
-    font-size: 0.78rem;
+    width: 60px;
+    height: 60px;
+    font-size: 0.72rem;
+    border-width: 3px;
   }
 
-  /* Lado derecho: imagen + texto apilados */
-  .timeline__lado--derecha {
-    order: 2;
-    width: 100%;
-    padding-left: 0;
+  .timeline__lado--izquierda {
+    padding-right: 0.8rem;
     display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 1rem;
+  }
+
+  .timeline__lado--derecha {
+    padding-left: 0.8rem;
   }
 
   .timeline__imagen {
     width: 100%;
-    max-width: 420px;
-    height: 14rem;
+    height: 110px;
+    border-radius: 0.7rem;
   }
 
   .timeline__texto {
     max-width: 100%;
-    text-align: center;
-  }
-
-  .timeline__texto--derecha {
-    text-align: center;
   }
 
   .timeline__texto h3 {
-    font-size: 1.1rem;
+    font-size: 0.9rem;
+    margin-bottom: 0.4rem;
   }
 
   .timeline__texto p {
-    font-size: 0.9rem;
+    font-size: 0.78rem;
+    line-height: 1.4;
+  }
+
+  .timeline__texto--derecha {
+    text-align: right;
   }
 
   /* BENEFICIOS CENTRO */
@@ -1803,7 +1782,7 @@
 
   /* CRONOGRAMA */
   .seccion__cronograma {
-    padding: 3rem 1rem;
+    padding: 3rem 0.5rem;
   }
 
   .cronograma__subtitulo {
@@ -1818,26 +1797,45 @@
     font-size: 0.95rem;
   }
 
+  .timeline__item {
+    grid-template-columns: 1fr 55px 1fr;
+    min-height: 140px;
+  }
+
   .timeline__hora {
-    width: 65px;
-    height: 65px;
-    font-size: 0.72rem;
+    width: 50px;
+    height: 50px;
+    font-size: 0.65rem;
+    border-width: 3px;
+    box-shadow: 0 0.3rem 1rem rgba(217, 183, 86, 0.4);
+  }
+
+  .timeline__lado--izquierda {
+    padding-right: 0.5rem;
+  }
+
+  .timeline__lado--derecha {
+    padding-left: 0.5rem;
   }
 
   .timeline__imagen {
-    height: 12rem;
+    height: 90px;
+    border-radius: 0.6rem;
   }
 
   .timeline__texto h3 {
-    font-size: 1rem;
+    font-size: 0.82rem;
+    margin-bottom: 0.3rem;
   }
 
   .timeline__texto p {
-    font-size: 0.85rem;
+    font-size: 0.72rem;
+    line-height: 1.35;
   }
 
   .cronograma__nota {
     font-size: 0.78rem;
+    padding: 0 1rem;
   }
 
   /* BENEFICIOS CENTRO */

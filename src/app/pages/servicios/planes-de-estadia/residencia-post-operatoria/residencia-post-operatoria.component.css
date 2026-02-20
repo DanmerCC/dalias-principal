@@ -1477,3 +1477,572 @@
     transform: translateY(0);
   }
 }
+
+/* ========================================
+   MEDIA QUERY 768px
+   ======================================== */
+@media (max-width: 768px) {
+  /* HERO */
+  .hero__residencia {
+    height: 80vh;
+    min-height: 500px;
+  }
+
+  .hero__contenido {
+    width: 95%;
+    padding: 0 1.5rem;
+    gap: 1.2rem;
+  }
+
+  .hero__titulo {
+    font-size: 2.5rem;
+  }
+
+  .hero__descripcion {
+    font-size: 1rem;
+  }
+
+  .btn__primario {
+    padding: 0.9rem 2rem;
+    font-size: 0.95rem;
+  }
+
+  /* FIGURAS */
+  .figure_cuidados { width: 7rem; left: -4rem; }
+  .figure_bienestar { width: 7rem; left: -4rem; }
+  .figure_serv1 { width: 2.5rem; }
+  .figure_serv2 { width: 2.5rem; }
+  .figure_faq1 { width: 8rem; left: -5rem; }
+  .figure_faq2 { width: 8rem; right: -5rem; }
+  .figure_faq3 { width: 2rem; }
+  .figure_contacto2 { width: 6rem; left: -3rem; }
+  .figure_contacto3 { width: 3rem; right: -1rem; }
+  .figure_contacto4 { width: 3rem; right: 8rem; }
+
+  /* CUIDADOS POST */
+  .seccion__cuidados-post {
+    padding: 4rem 2rem;
+  }
+
+  .cuidados-post__contenido {
+    flex-direction: column;
+    gap: 2rem;
+  }
+
+  .cuidados-post__imagen {
+    flex: none;
+    width: 100%;
+  }
+
+  .cuidados-post__imagen img {
+    width: 100%;
+    height: 22rem;
+  }
+
+  .cuidados-post__titulo {
+    font-size: 2rem;
+    font-weight: 500;
+  }
+
+  .cuidados-post__descripcion {
+    font-size: 0.95rem;
+  }
+
+  .caracteristica-post__item {
+    padding: 0.9rem;
+  }
+
+  /* BIENESTAR POST */
+  .seccion__bienestar-post {
+    padding: 4rem 2rem;
+  }
+
+  .bienestar-post__contenido {
+    flex-direction: column;
+    gap: 2rem;
+  }
+
+  .bienestar-post__imagen {
+    flex: none;
+    width: 100%;
+  }
+
+  .bienestar-post__imagen img {
+    width: 100%;
+    height: 22rem;
+  }
+
+  .bienestar-post__titulo {
+    font-size: 2rem;
+    font-weight: 500;
+  }
+
+  .bienestar-post__texto .planes__grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 0.8rem;
+  }
+
+  /* NIVELES CUIDADO */
+  .seccion__niveles-cuidado {
+    padding: 4rem 2rem;
+  }
+
+  .niveles-cuidado__titulo {
+    font-size: 2rem;
+    font-weight: 500;
+  }
+
+  .niveles-cuidado__grid {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+  }
+
+  .nivel__card--destacado {
+    transform: scale(1);
+  }
+
+  .nivel__card--destacado:hover {
+    transform: translateY(-0.5rem) scale(1);
+  }
+
+  .nivel__card {
+    padding: 2rem 1.5rem;
+  }
+
+  /* SERVICIOS ESPECIALIZADOS */
+  .seccion__servicios-especializados {
+    padding: 4rem 2rem;
+  }
+
+  .servicios-especializados__titulo {
+    font-size: 2rem;
+    font-weight: 500;
+  }
+
+  .servicios-especializados__grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1.5rem;
+  }
+
+  .servicio-especializado__card {
+    padding: 2rem 1.5rem;
+  }
+
+  /* INGRESO POST */
+  .seccion__ingreso-post {
+    padding: 4rem 2rem;
+  }
+
+  .ingreso-post__titulo {
+    font-size: 2rem;
+    font-weight: 500;
+  }
+
+  .ingreso-post__pasos {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+  }
+
+  .paso-post__card {
+    padding: 2rem 1.5rem;
+  }
+
+  /* CONTACTO */
+  .seccion__contacto {
+    padding: 3rem 1.5rem;
+  }
+
+  .contacto__contenedor {
+    flex-direction: column;
+  }
+
+  .contacto__izquierda,
+  .contacto__derecha {
+    flex: none;
+    width: 100%;
+    padding: 3rem 2rem;
+  }
+
+  .contacto__titulo {
+    font-size: 1.9rem;
+  }
+
+  .contacto__icono-decorativo {
+    display: none;
+  }
+
+  .form__fila {
+    grid-template-columns: 1fr;
+  }
+
+  /* FAQ */
+  .seccion__faq {
+    padding: 4rem 2rem;
+  }
+
+  .faq__titulo {
+    font-size: 2rem;
+    font-weight: 500;
+  }
+
+  .faq__grid {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+
+  .faq__item {
+    padding: 1.5rem;
+  }
+
+  /* MODAL CONFIRMACIÓN */
+  .modal__confirmacion {
+    width: 90%;
+    max-width: 27rem;
+    padding: 2rem 1.2rem;
+  }
+}
+
+/* ========================================
+   MEDIA QUERY 680px
+   ======================================== */
+@media (max-width: 680px) {
+  /* HERO */
+  .hero__residencia {
+    height: 75vh;
+    min-height: 450px;
+  }
+
+  .hero__contenido {
+    padding: 0 1rem;
+    gap: 1rem;
+  }
+
+  .hero__titulo {
+    font-size: 2rem;
+  }
+
+  .hero__descripcion {
+    font-size: 0.9rem;
+    line-height: 1.6;
+  }
+
+  .btn__primario {
+    padding: 0.85rem 1.8rem;
+    font-size: 0.9rem;
+  }
+
+  /* FIGURAS */
+  .figure_cuidados { width: 5rem; left: -3rem; }
+  .figure_bienestar { display: none; }
+  .figure_serv1 { display: none; }
+  .figure_serv2 { display: none; }
+  .figure_faq1 { width: 5rem; left: -3rem; }
+  .figure_faq2 { width: 5rem; right: -3rem; }
+  .figure_faq3 { display: none; }
+  .figure_contacto2 { display: none; }
+  .figure_contacto3 { display: none; }
+  .figure_contacto4 { display: none; }
+
+  /* CUIDADOS POST */
+  .seccion__cuidados-post {
+    padding: 3rem 1rem;
+  }
+
+  .cuidados-post__imagen img {
+    height: 18rem;
+  }
+
+  .cuidados-post__subtitulo {
+    font-size: 0.8rem;
+  }
+
+  .cuidados-post__titulo {
+    font-size: 1.8rem;
+  }
+
+  .cuidados-post__descripcion {
+    font-size: 0.9rem;
+  }
+
+  .caracteristica-post__item {
+    padding: 0.8rem;
+  }
+
+  .caracteristica-post__item i {
+    font-size: 1.6rem;
+  }
+
+  .caracteristica-post__item strong {
+    font-size: 0.9rem;
+  }
+
+  .caracteristica-post__item span {
+    font-size: 0.85rem;
+  }
+
+  /* BIENESTAR POST */
+  .seccion__bienestar-post {
+    padding: 3rem 1rem;
+  }
+
+  .bienestar-post__imagen img {
+    height: 18rem;
+  }
+
+  .bienestar-post__subtitulo {
+    font-size: 0.8rem;
+  }
+
+  .bienestar-post__titulo {
+    font-size: 1.8rem;
+  }
+
+  .bienestar-post__descripcion {
+    font-size: 0.9rem;
+  }
+
+  .bienestar-post__texto .planes__grid {
+    grid-template-columns: 1fr;
+    gap: 0.7rem;
+  }
+
+  .bienestar-post__texto .plan__card {
+    padding: 1rem;
+  }
+
+  .bienestar-post__texto .plan__card i {
+    font-size: 1.5rem;
+    margin-bottom: 0.6rem;
+  }
+
+  .bienestar-post__texto .plan__card h3 {
+    font-size: 0.95rem;
+  }
+
+  .bienestar-post__texto .plan__card p {
+    font-size: 0.82rem;
+  }
+
+  /* NIVELES CUIDADO */
+  .seccion__niveles-cuidado {
+    padding: 3rem 1rem;
+  }
+
+  .niveles-cuidado__subtitulo {
+    font-size: 0.8rem;
+  }
+
+  .niveles-cuidado__titulo {
+    font-size: 1.8rem;
+  }
+
+  .nivel__card {
+    padding: 1.8rem 1.3rem;
+  }
+
+  .nivel__icono {
+    width: 3.5rem;
+    height: 3.5rem;
+    margin-bottom: 1.2rem;
+  }
+
+  .nivel__icono i {
+    font-size: 1.7rem;
+  }
+
+  .nivel__titulo {
+    font-size: 1rem;
+  }
+
+  .nivel__descripcion {
+    font-size: 0.85rem;
+  }
+
+  .nivel__lista li {
+    font-size: 0.82rem;
+  }
+
+  .nivel__boton {
+    padding: 0.8rem 1.2rem;
+    font-size: 0.85rem;
+  }
+
+  /* SERVICIOS ESPECIALIZADOS */
+  .seccion__servicios-especializados {
+    padding: 3rem 1rem;
+  }
+
+  .servicios-especializados__subtitulo {
+    font-size: 0.8rem;
+  }
+
+  .servicios-especializados__titulo {
+    font-size: 1.8rem;
+  }
+
+  .servicios-especializados__descripcion {
+    font-size: 1rem;
+  }
+
+  .servicios-especializados__grid {
+    grid-template-columns: 1fr;
+    gap: 1.2rem;
+  }
+
+  .servicio-especializado__card {
+    padding: 1.8rem 1.5rem;
+  }
+
+  .card-servicio__icono {
+    width: 3.8rem;
+    height: 3.8rem;
+    margin-bottom: 1.2rem;
+  }
+
+  .card-servicio__icono i {
+    font-size: 2rem;
+  }
+
+  .servicio-especializado__card h3 {
+    font-size: 1.1rem;
+  }
+
+  .servicio-especializado__card p {
+    font-size: 0.9rem;
+  }
+
+  /* INGRESO POST */
+  .seccion__ingreso-post {
+    padding: 3rem 1rem;
+  }
+
+  .ingreso-post__subtitulo {
+    font-size: 0.8rem;
+  }
+
+  .ingreso-post__titulo {
+    font-size: 1.8rem;
+  }
+
+  .ingreso-post__descripcion {
+    font-size: 1rem;
+  }
+
+  .paso-post__card {
+    padding: 1.8rem 1.3rem;
+  }
+
+  .paso-post__numero {
+    width: 4rem;
+    height: 4rem;
+    font-size: 1.6rem;
+  }
+
+  .paso-post__contenido h3 {
+    font-size: 1.1rem;
+  }
+
+  .paso-post__contenido p {
+    font-size: 0.9rem;
+  }
+
+  /* CONTACTO */
+  .seccion__contacto {
+    padding: 2.5rem 1rem;
+  }
+
+  .contacto__izquierda,
+  .contacto__derecha {
+    padding: 2.5rem 1.5rem;
+  }
+
+  .contacto__titulo {
+    font-size: 1.7rem;
+  }
+
+  .contacto__descripcion {
+    font-size: 0.9rem;
+  }
+
+  .info__valor {
+    font-size: 0.88rem;
+  }
+
+  .form__label {
+    font-size: 0.75rem;
+  }
+
+  .form__input,
+  .form__textarea {
+    padding: 0.7rem 0.9rem;
+    font-size: 0.8rem;
+  }
+
+  .btn__enviar {
+    padding: 0.85rem 1.8rem;
+    font-size: 0.85rem;
+  }
+
+  /* FAQ */
+  .seccion__faq {
+    padding: 3rem 1rem;
+  }
+
+  .faq__subtitulo {
+    font-size: 0.8rem;
+  }
+
+  .faq__titulo {
+    font-size: 1.8rem;
+  }
+
+  .faq__descripcion {
+    font-size: 0.95rem;
+  }
+
+  .faq__item {
+    padding: 1.2rem;
+  }
+
+  .faq__pregunta h3 {
+    font-size: 0.95rem;
+  }
+
+  .faq__pregunta i {
+    font-size: 1.5rem;
+    width: 1.6rem;
+    height: 1.6rem;
+  }
+
+  .faq__respuesta p {
+    font-size: 0.88rem;
+  }
+
+  /* MODAL CONFIRMACIÓN */
+  .modal__overlay {
+    padding: 0.5rem;
+  }
+
+  .modal__confirmacion {
+    width: 95%;
+    padding: 1.8rem 1rem;
+  }
+
+  .confirmacion__icono img {
+    width: 8rem;
+  }
+
+  .modal__confirmacion h2 {
+    font-size: 1.5rem;
+  }
+
+  .modal__confirmacion p {
+    font-size: 1rem;
+    margin-bottom: 1.8rem;
+  }
+
+  .btn__cerrar-confirmacion {
+    padding: 0.9rem 2.2rem;
+    font-size: 0.95rem;
+  }
+}

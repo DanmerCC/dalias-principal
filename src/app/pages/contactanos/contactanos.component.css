@@ -702,3 +702,328 @@
 .metrica__item:nth-child(3) {
   animation-delay: 0.5s;
 }
+
+/* ========================================
+   MEDIA QUERY 768px
+   ======================================== */
+@media (max-width: 768px) {
+  /* HERO */
+  .hero__residencia {
+    height: 80vh;
+    min-height: 500px;
+  }
+
+  .hero__contenido {
+    width: 95%;
+    padding: 0 1.5rem;
+    gap: 1.2rem;
+  }
+
+  .hero__titulo {
+    font-size: 2.5rem;
+  }
+
+  .hero__descripcion {
+    font-size: 1rem;
+  }
+
+  .btn__primario {
+    padding: 0.9rem 2rem;
+    font-size: 0.95rem;
+  }
+
+  /* FIGURAS */
+  .figure_info1 { width: 8rem; left: -4rem; }
+  .figure_info2 { width: 8rem; right: -4rem; }
+
+  /* INFO CONTACTO */
+  .seccion__info-contacto {
+    padding: 4rem 2rem;
+  }
+
+  .info-contacto__grid {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+  }
+
+  .info-contacto__card {
+    padding: 2.5rem 2rem;
+  }
+
+  .info-contacto__icono {
+    width: 4.5rem;
+    height: 4.5rem;
+    margin-bottom: 1.5rem;
+  }
+
+  .info-contacto__icono i {
+    font-size: 2.2rem;
+  }
+
+  .info-contacto__titulo {
+    font-size: 1.3rem;
+  }
+
+  /* SOLICITAR VISITA */
+  .solicitar-visita__contenedor {
+    grid-template-columns: 1fr;
+  }
+
+  .solicitar-visita__imagen {
+    height: 350px;
+  }
+
+  .solicitar-visita__frase {
+    font-size: 1.2rem;
+  }
+
+  .solicitar-visita__formulario {
+    height: auto;
+    padding: 3rem 2rem;
+  }
+
+  .formulario-visita__titulo {
+    font-size: 1.6rem;
+  }
+
+  .formulario-visita__fila {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+
+  /* MODAL VISITA */
+  .modal-visita__confirmacion {
+    width: 90%;
+    max-width: 27rem;
+    padding: 2rem 1.2rem;
+  }
+
+  /* MAPA */
+  .seccion__mapa {
+    padding: 4rem 0;
+    gap: 1.5rem;
+  }
+
+  .mapa__titulo {
+    font-size: 2rem;
+    font-weight: 500;
+  }
+
+  .mapa__contenedor {
+    width: 95%;
+    height: 22rem;
+  }
+
+  .mapa__contenedor iframe {
+    border-radius: 1.5rem;
+  }
+
+  /* MÉTRICAS */
+  .seccion__metricas {
+    padding: 4rem 2rem;
+  }
+
+  .metricas__grid {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+  }
+
+  .metrica__item {
+    padding: 2rem 1.5rem;
+  }
+
+  .metrica__valor {
+    font-size: 3.5rem;
+  }
+
+  .metrica__simbolo {
+    font-size: 2.2rem;
+  }
+
+  .metrica__label {
+    font-size: 0.9rem;
+  }
+}
+
+/* ========================================
+   MEDIA QUERY 680px
+   ======================================== */
+@media (max-width: 680px) {
+  /* HERO */
+  .hero__residencia {
+    height: 75vh;
+    min-height: 450px;
+  }
+
+  .hero__contenido {
+    padding: 0 1rem;
+    gap: 1rem;
+  }
+
+  .hero__titulo {
+    font-size: 2rem;
+  }
+
+  .hero__descripcion {
+    font-size: 0.9rem;
+    line-height: 1.6;
+  }
+
+  .btn__primario {
+    padding: 0.85rem 1.8rem;
+    font-size: 0.9rem;
+  }
+
+  /* FIGURAS */
+  .figure_info1 { display: none; }
+  .figure_info2 { display: none; }
+
+  /* INFO CONTACTO */
+  .seccion__info-contacto {
+    padding: 3rem 1rem;
+  }
+
+  .info-contacto__card {
+    padding: 2rem 1.5rem;
+  }
+
+  .info-contacto__icono {
+    width: 4rem;
+    height: 4rem;
+    margin-bottom: 1.2rem;
+  }
+
+  .info-contacto__icono i {
+    font-size: 2rem;
+  }
+
+  .info-contacto__titulo {
+    font-size: 1.2rem;
+  }
+
+  .info-contacto__descripcion {
+    font-size: 0.9rem;
+  }
+
+  .info-contacto__dato {
+    font-size: 0.9rem;
+  }
+
+  /* SOLICITAR VISITA */
+  .solicitar-visita__imagen {
+    height: 280px;
+  }
+
+  .solicitar-visita__frase {
+    font-size: 1.05rem;
+    line-height: 1.4;
+  }
+
+  .solicitar-visita__firma {
+    font-size: 0.7rem;
+  }
+
+  .solicitar-visita__formulario {
+    padding: 2.5rem 1.2rem;
+  }
+
+  .formulario-visita__titulo {
+    font-size: 1.4rem;
+  }
+
+  .formulario-visita__descripcion {
+    font-size: 0.8rem;
+  }
+
+  .formulario-visita__label {
+    font-size: 0.6rem;
+  }
+
+  .formulario-visita__input,
+  .formulario-visita__select,
+  .formulario-visita__textarea {
+    padding: 0.65rem 0.8rem;
+    font-size: 0.82rem;
+  }
+
+  .formulario-visita__boton {
+    padding: 0.85rem 1.5rem;
+    font-size: 0.75rem;
+  }
+
+  /* MODAL VISITA */
+  .modal-visita__overlay {
+    padding: 0.5rem;
+  }
+
+  .modal-visita__confirmacion {
+    width: 95%;
+    padding: 1.8rem 1rem;
+  }
+
+  .modal-visita__icono img {
+    width: 8rem;
+  }
+
+  .modal-visita__titulo {
+    font-size: 1.5rem;
+  }
+
+  .modal-visita__texto {
+    font-size: 1rem;
+    margin-bottom: 1.8rem;
+  }
+
+  .modal-visita__boton-cerrar {
+    padding: 0.9rem 2.2rem;
+    font-size: 0.95rem;
+  }
+
+  /* MAPA */
+  .seccion__mapa {
+    padding: 3rem 0;
+    gap: 1.2rem;
+  }
+
+  .mapa__subtitulo {
+    font-size: 0.8rem;
+  }
+
+  .mapa__titulo {
+    font-size: 1.8rem;
+  }
+
+  .mapa__contenedor {
+    width: 95%;
+    height: 18rem;
+  }
+
+  .mapa__contenedor iframe {
+    border-radius: 1rem;
+  }
+
+  /* MÉTRICAS */
+  .seccion__metricas {
+    padding: 3rem 1rem;
+  }
+
+  .metricas__grid {
+    gap: 1.2rem;
+  }
+
+  .metrica__item {
+    padding: 1.8rem 1.2rem;
+  }
+
+  .metrica__valor {
+    font-size: 3rem;
+  }
+
+  .metrica__simbolo {
+    font-size: 2rem;
+  }
+
+  .metrica__label {
+    font-size: 0.85rem;
+  }
+}
