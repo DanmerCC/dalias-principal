@@ -343,7 +343,7 @@ export class PlanesDeEstadiaComponent {
     };
   }
 
-    scrollToServicios() {
+  scrollToServicios() {
     const seccionServicios = document.getElementById('seccion-servicios');
 
     if (seccionServicios) {

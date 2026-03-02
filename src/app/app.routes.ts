@@ -12,6 +12,7 @@ import { CentroDeDiaComponent } from './pages/servicios/planes-de-estadia/centro
 import { ResidenciaPermanenteComponent } from './pages/servicios/planes-de-estadia/residencia-permanente/residencia-permanente.component';
 import { ResidenciaTemporalComponent } from './pages/servicios/planes-de-estadia/residencia-temporal/residencia-temporal.component';
 import { ResidenciaPostOperatoriaComponent } from './pages/servicios/planes-de-estadia/residencia-post-operatoria/residencia-post-operatoria.component';
+import { TerapiasYRehabilitacionComponent } from './pages/servicios/terapias-y-rehabilitacion/terapias-y-rehabilitacion.component';
 
 export const routes: Routes = [
   {
@@ -30,34 +31,36 @@ export const routes: Routes = [
     path: 'servicios',
     children: [
       { path: '', component: ServiciosComponent },
-
       {
         path: 'planes-de-estadia',
         children: [
           {
             path: '',
-            component: PlanesDeEstadiaComponent
+            component: PlanesDeEstadiaComponent,
           },
           {
             path: 'residencia-permanente',
-            component: ResidenciaPermanenteComponent
+            component: ResidenciaPermanenteComponent,
           },
           {
             path: 'residencia-temporal',
-            component: ResidenciaTemporalComponent
+            component: ResidenciaTemporalComponent,
           },
           {
             path: 'centro-de-dia',
-            component: CentroDeDiaComponent
+            component: CentroDeDiaComponent,
           },
           {
             path: 'residencia-post-operatoria',
-            component: ResidenciaPostOperatoriaComponent
+            component: ResidenciaPostOperatoriaComponent,
           },
-          
-        ]
+        ],
+      },
+      {
+        path: 'terapias-y-rehabilitacion',
+        component: TerapiasYRehabilitacionComponent,
       }
-    ]
+    ],
   },
   {
     path: 'trabaja-con-nosotros',

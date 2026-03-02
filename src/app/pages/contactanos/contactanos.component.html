@@ -39,7 +39,7 @@
           Atención personalizada disponible para resolver tus dudas.
         </p>
         <a
-          href="https://wa.link/gglgal"
+          href="https://wa.link/dbfszi"
           target="_blank"
           class="info-contacto__dato info-contacto__dato--enlace"
         >
@@ -210,8 +210,13 @@
           </div>
 
           <!-- Botón Enviar -->
-          <button type="submit" class="formulario-visita__boton">
-            ENVIAR MENSAJE ➤
+          <button
+            type="submit"
+            class="formulario-visita__boton"
+            [disabled]="enviandoFormularioVisita"
+          >
+            <span *ngIf="!enviandoFormularioVisita">ENVIAR MENSAJE ➤</span>
+            <div class="spinner" *ngIf="enviandoFormularioVisita"></div>
           </button>
         </form>
       </div>
@@ -292,3 +297,4 @@
     </div>
   </div>
 </section>
+
