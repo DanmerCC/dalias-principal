@@ -1,1 +1,401 @@
-<p>actividades works!</p>
+<!-- Hero Banner -->
+<div class="hero__residencia">
+  <div class="hero__overlay"></div>
+  <div class="hero__contenido">
+    <!-- <p class="hero__label">CONTáCTANOS</p> -->
+    <h1 class="hero__titulo">
+      Actividades Dalias
+      <br />
+      <span class="hero__titulo--dorado"> Vida Activa y Plena </span>
+    </h1>
+    <p class="hero__descripcion">
+      En las Dalias, cada dia es una oportunidad para cultivar pasiones,
+      fortalecer el cuerpo y nutrir el espíritu en la mejor compañía
+    </p>
+    <div class="hero__botones">
+      <button class="btn__primario" (click)="scrollToServicios()">
+        <span>Explorar actividades</span>
+        <i class="fa-solid fa-chevron-down"></i>
+      </button>
+    </div>
+  </div>
+</div>
+
+<!-- Sección Filosofía -->
+<section class="seccion__filosofia" id="servicio__estadia">
+  <div class="filosofia__contenedor">
+    <div class="filosofia__imagen">
+      <img src="/section-acti.jpg" alt="Jardines Las Dalias" />
+    </div>
+
+    <div class="filosofia__contenido">
+      <p class="filosofia__subtitulo">NUESTRA FILOSOFÍA</p>
+      <h2 class="filosofia__titulo">
+        Envejecimiento<br />
+        <span class="filosofia__titulo--dorado">Activo y Consciente</span>
+      </h2>
+      <p class="filosofia__descripcion">
+        Nuestros 5,000m² de jardines privados no son solo un paisaje, son el
+        escenario de una vida en movimiento. Creemos que el cuidado reside en
+        fomentar la autonomía y la pasión por el descubrimiento diario.
+      </p>
+
+      <ul class="filosofia__lista">
+        <li>
+          <i class="fa-solid fa-circle"></i>
+          <span>Estimulación cognitiva personalizada</span>
+        </li>
+        <li>
+          <i class="fa-solid fa-circle"></i>
+          <span>Programas de movilidad funcional</span>
+        </li>
+        <li>
+          <i class="fa-solid fa-circle"></i>
+          <span>Integración social comunitaria</span>
+        </li>
+      </ul>
+
+      <button class="btn__filosofia">Ver Terapias y Rehabilitación</button>
+    </div>
+  </div>
+</section>
+
+<!-- Sección por qué elegirnos -->
+<section class="seccion__elegirnos">
+  <div class="elegirnos__contenedor">
+    <div class="elegirnos__header">
+      <p class="elegirnos__subtitulo">NUESTRO COMPROMISO</p>
+      <h2 class="elegirnos__titulo">¿Por qué elegirnos?</h2>
+      <p class="elegirnos__descripcion">
+        Nos diferenciamos por nuestra atención profesional con calidez humana,
+        donde cada residente es parte de nuestra familia.
+      </p>
+    </div>
+
+    <div class="elegirnos__grid">
+      <div class="elegirnos__card">
+        <div class="card__icono">
+          <i class="fa-solid fa-user-check"></i>
+        </div>
+        <h3>Estimulación Activa</h3>
+        <p
+          [innerHTML]="
+            'Actividades variadas y personalizadas para ejercitar las capacidades cognitivas y físicas de forma divertida. '
+          "
+        ></p>
+      </div>
+
+      <div class="elegirnos__card">
+        <div class="card__icono">
+          <i class="fa-solid fa-heart-pulse"></i>
+        </div>
+        <h3>Vínculos de Calidad</h3>
+        <p
+          [innerHTML]="
+            'Talleres grupales y eventos sociales diseñados para fomentar la amistad, el sentido de comunidad y el bienestar emocional.'
+          "
+        ></p>
+      </div>
+
+      <div class="elegirnos__card">
+        <div class="card__icono">
+          <i class="fa-solid fa-comments"></i>
+        </div>
+        <h3>Entorno Terapéutico</h3>
+        <p
+          [innerHTML]="
+            ' Espacios interiores y exteriores diseñados para la seguridad, la relajación y el disfrute diario en un ambiente hogareño.'
+          "
+        ></p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Sección Dimensiones del Bienestar -->
+<section class="seccion__dimensiones">
+  <div class="dimensiones__contenedor">
+    <div class="dimensiones__header">
+      <p class="dimensiones__subtitulo">Dimensiones del Bienestar</p>
+      <h2 class="dimensiones__titulo">Nuestras Actividades</h2>
+      <!-- <p class="dimensiones__descripcion">
+        Actividades diseñadas para estimular cuerpo, mente y espíritu,
+        promoviendo una vida activa y plena en cada residente.
+      </p> -->
+    </div>
+
+    <div class="dimensiones__grid">
+      <!-- Card 1: Club de Lectura -->
+      <div class="dimension__card">
+        <div class="dimension__imagen">
+          <img src="/act1-card.jpeg" alt="Club de Lectura" />
+        </div>
+        <div class="dimension__contenido">
+          <div class="dimension__icono">
+            <i class="fa-solid fa-book-open"></i>
+          </div>
+          <h3 class="dimension__nombre">Club de Lectura</h3>
+          <p class="dimension__descripcion">
+            Compartimos historias y debates enriquecedores que fomentan la
+            imaginación y la conexión entre nuestros residentes.
+          </p>
+        </div>
+      </div>
+
+      <!-- Card 2: Pintura y Dibujo -->
+      <div class="dimension__card">
+        <div class="dimension__imagen">
+          <img src="/act2-card.jpeg" alt="Pintura y Dibujo" />
+        </div>
+        <div class="dimension__contenido">
+          <div class="dimension__icono">
+            <i class="fa-solid fa-palette"></i>
+          </div>
+          <h3 class="dimension__nombre">Pintura y Dibujo</h3>
+          <p class="dimension__descripcion">
+            Expresión artística manual sobre diversos soportes para ejercitar la
+            precisión, el color y la creatividad personal.
+          </p>
+        </div>
+      </div>
+
+      <!-- Card 3: Musicoterapia -->
+      <div class="dimension__card">
+        <div class="dimension__imagen">
+          <img src="/act3-card.jpeg" alt="Musicoterapia" />
+        </div>
+        <div class="dimension__contenido">
+          <div class="dimension__icono">
+            <i class="fa-solid fa-music"></i>
+          </div>
+          <h3 class="dimension__nombre">Musicoterapia</h3>
+          <p class="dimension__descripcion">
+            Sesiones dinámicas de baile y ritmo en pareja que estimulan la
+            memoria musical y la alegría compartida.
+          </p>
+        </div>
+      </div>
+
+      <!-- Card 4: Bienestar Físico -->
+      <div class="dimension__card">
+        <div class="dimension__imagen">
+          <img src="/act4-card.jpeg" alt="Bienestar Físico" />
+        </div>
+        <div class="dimension__contenido">
+          <div class="dimension__icono">
+            <i class="fa-solid fa-dumbbell"></i>
+          </div>
+          <h3 class="dimension__nombre">Bienestar Físico</h3>
+          <p class="dimension__descripcion">
+            Ejercicios suaves y movilidad asistida para fortalecer el cuerpo,
+            mejorando la autonomía y la vitalidad diaria.
+          </p>
+        </div>
+      </div>
+
+      <!-- Card 5: Meditación / Yoga -->
+      <div class="dimension__card">
+        <div class="dimension__imagen">
+          <img src="/act5-card.png" alt="Meditación / Yoga" />
+        </div>
+        <div class="dimension__contenido">
+          <div class="dimension__icono">
+            <i class="fa-solid fa-spa"></i>
+          </div>
+          <h3 class="dimension__nombre">Meditación / Yoga</h3>
+          <p class="dimension__descripcion">
+            Conexión profunda con la naturaleza mediante estiramientos suaves y
+            respiración consciente en nuestros jardines exteriores.
+          </p>
+        </div>
+      </div>
+
+      <!-- Card 6: Estimulación Cognitiva -->
+      <div class="dimension__card">
+        <div class="dimension__imagen">
+          <img src="/act6-card.jpeg" alt="Estimulación Cognitiva" />
+        </div>
+        <div class="dimension__contenido">
+          <div class="dimension__icono">
+            <i class="fa-solid fa-brain"></i>
+          </div>
+          <h3 class="dimension__nombre">Estimulación Cognitiva</h3>
+          <p class="dimension__descripcion">
+            Desafíos mentales, juegos de estrategia y ejercicios de memoria para
+            mantener la mente ágil y activa.
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- Sección Momentos Inolvidables -->
+<section class="seccion__momentos">
+  <div class="momentos__contenedor">
+    <div class="momentos__header">
+      <i class="fa-solid fa-dove"></i>
+      <h2 class="momentos__titulo">Momentos Inolvidables</h2>
+    </div>
+
+    <div class="momentos__grid">
+      <!-- Card 1: Cumpleaños -->
+      <div class="momento__card">
+        <div class="momento__imagen">
+          <img src="/moment1.jpeg" alt="Cumpleaños" />
+        </div>
+        <div class="momento__contenido">
+          <h3 class="momento__titulo">Cumpleaños</h3>
+          <p class="momento__descripcion">
+            Nos reunimos para cantar juntos, disfrutar de bocaditos y sorpresas
+            musicales en un día lleno de alegría.
+          </p>
+        </div>
+      </div>
+
+      <!-- Card 2: Navidad -->
+      <div class="momento__card momento__card--destacado">
+        <div class="momento__imagen">
+          <img src="/moment2.jpeg" alt="Navidad" />
+        </div>
+        <div class="momento__contenido">
+          <h3 class="momento__titulo">Navidad</h3>
+          <p class="momento__descripcion">
+            Disfrutamos juntos una gran fiesta con shows, sorteos y premios,
+            uniendo a toda la comunidad RLD.
+          </p>
+        </div>
+      </div>
+
+      <!-- Card 3: Año Nuevo -->
+      <div class="momento__card">
+        <div class="momento__imagen">
+          <img src="/moment3.jpeg" alt="Año Nuevo" />
+        </div>
+        <div class="momento__contenido">
+          <h3 class="momento__titulo">Año Nuevo</h3>
+          <p class="momento__descripcion">
+            Damos la bienvenida al año con un almuerzo al aire libre,
+            presentaciones artísticas y mucha unión familiar.
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- Sección Misas y Visitas -->
+<section class="seccion__misas-visitas">
+  <div class="misas-visitas__contenedor">
+    <!-- Columna izquierda: Texto -->
+    <div class="misas-visitas__texto">
+      <!-- Item 1: Misas y Espiritualidad -->
+      <div class="misas-visitas__item">
+        <div class="item__icono">
+          <i class="fa-solid fa-church"></i>
+        </div>
+        <div class="item__contenido">
+          <h3 class="item__titulo">Misas & Espiritualidad</h3>
+          <p class="item__descripcion">
+            Brindamos acompañamiento espiritual a través de servicios religiosos
+            programados en nuestras instalaciones. Creamos una atmósfera de paz y
+            reflexión para que nuestros residentes vivan su fe con total
+            comodidad y serenidad.
+          </p>
+        </div>
+      </div>
+
+      <!-- Item 2: Visitas Familiares -->
+      <div class="misas-visitas__item">
+        <div class="item__icono">
+          <i class="fa-solid fa-people-group"></i>
+        </div>
+        <div class="item__contenido">
+          <h3 class="item__titulo">Visitas Familiares</h3>
+          <p class="item__descripcion">
+            Contamos con versátiles ambientes comunes, adaptados especialmente
+            para recibir a familiares y amigos en un entorno íntimo. Además,
+            facilitamos espacios exteriores para disfrutar de parrilladas,
+            fortaleciendo los vínculos en un ambiente cálido.
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Columna derecha: Imágenes -->
+    <div class="misas-visitas__imagenes">
+      <div class="imagen__card">
+        <img src="/img-rounded1.jpeg" alt="Capilla Las Dalias" />
+      </div>
+      <div class="imagen__card">
+        <img src="/img-rounded2.jpeg" alt="Visitas Familiares" />
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Sección Noticias/Blogs -->
+<section class="seccion__noticias">
+  <div class="noticias__contenedor">
+    <div class="noticias__header">
+      <div>
+        <p class="noticias__subtitulo">BLOG</p>
+        <h2 class="noticias__titulo">Nuestros Artículos</h2>
+      </div>
+    </div>
+
+    <div class="noticias__carrusel">
+      <div class="noticias__grid">
+        <article
+          class="noticia__card"
+          *ngFor="let noticia of noticiasVisibles"
+          [style.animation-delay.ms]="noticiasVisibles.indexOf(noticia) * 100"
+        >
+          <div class="noticia__imagen">
+            <img [src]="noticia.imagen" [alt]="noticia.titulo" />
+          </div>
+
+          <div class="noticia__contenido">
+            <span class="noticia__fecha">{{ noticia.fecha }}</span>
+            <h3 class="noticia__titulo">{{ noticia.titulo }}</h3>
+            <p class="noticia__descripcion">{{ noticia.descripcion }}</p>
+            <a class="noticia__link" [href]="noticia.link">
+              Leer más
+              <i class="bx bx-right-arrow-alt"></i>
+            </a>
+          </div>
+        </article>
+      </div>
+
+      <div class="noticias__navegacion">
+        <button
+          class="noticias__btn"
+          (click)="anteriorNoticia()"
+          [disabled]="indicePaginaNoticias === 0"
+        >
+          <i class="bx bx-chevron-left"></i>
+        </button>
+
+        <div class="noticias__indicadores">
+          <span
+            class="indicador__punto"
+            *ngFor="let pagina of paginasNoticias; let i = index"
+            [class.activo]="i === indicePaginaNoticias"
+            (click)="irAPaginaNoticia(i)"
+          >
+          </span>
+        </div>
+
+        <button
+          class="noticias__btn"
+          (click)="siguienteNoticia()"
+          [disabled]="indicePaginaNoticias === paginasNoticias.length - 1"
+        >
+          <i class="bx bx-chevron-right"></i>
+        </button>
+      </div>
+    </div>
+  </div>
+</section>

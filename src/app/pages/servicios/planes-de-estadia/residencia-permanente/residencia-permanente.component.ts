@@ -1,6 +1,7 @@
 import { Component, ViewChild, ElementRef, PLATFORM_ID, Inject } from '@angular/core';
 import { CommonModule, isPlatformBrowser } from '@angular/common';
 import { AgendarVisitaModalComponent } from '../../../../components/agendar-visita-modal/agendar-visita-modal.component';
+import { RouterLink } from '@angular/router';
 
 interface PreguntaFrecuente {
   id: number;
@@ -17,7 +18,7 @@ interface ImagenGaleria {
 @Component({
   selector: 'app-residencia-permanente',
   standalone: true,
-  imports: [CommonModule, AgendarVisitaModalComponent],
+  imports: [CommonModule, AgendarVisitaModalComponent, RouterLink],
   templateUrl: './residencia-permanente.component.html',
   styleUrl: './residencia-permanente.component.css',
 })

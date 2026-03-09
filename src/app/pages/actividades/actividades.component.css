@@ -1,0 +1,1102 @@
+/* Hero Banner */
+.hero__residencia {
+  width: 100%;
+  height: 100vh;
+  min-height: 600px;
+  background:
+    linear-gradient(rgba(0, 0, 0, 0.45), rgba(0, 0, 0, 0.45)),
+    url("/banner-actividades.jpeg");
+  background-size: cover;
+  background-position: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+}
+
+.hero__overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: radial-gradient(
+    ellipse at center,
+    rgba(0, 0, 0, 0) 0%,
+    rgba(0, 0, 0, 0.35) 100%
+  );
+  pointer-events: none;
+}
+
+.hero__contenido {
+  width: 90%;
+  max-width: 1000px;
+  padding: 0 2rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 1.5rem;
+  text-align: center;
+  position: relative;
+  z-index: 2;
+  animation: fadeInUp 1s ease-out;
+}
+
+.hero__label {
+  color: #d9b756;
+  font-size: 0.85rem;
+  font-weight: 600;
+  letter-spacing: 0.2rem;
+  text-transform: uppercase;
+  margin: 0;
+  animation: fadeInUp 1s ease-out 0.2s backwards;
+}
+
+.hero__titulo {
+  font-size: 3.5rem;
+  font-weight: 400;
+  line-height: 1.2;
+  color: #ffffff;
+  margin: 0;
+  animation: fadeInUp 1s ease-out 0.3s backwards;
+  text-shadow: 0 2px 10px rgba(0, 0, 0, 0.6);
+}
+
+.hero__titulo--dorado {
+  color: #d9b756;
+  font-style: italic;
+  display: block;
+  margin-top: 0.3rem;
+}
+
+.hero__descripcion {
+  color: #f1f1f1;
+  font-size: 1.1rem;
+  font-weight: 400;
+  line-height: 1.7;
+  margin: 0;
+  width: 70%;
+  animation: fadeInUp 1s ease-out 0.4s backwards;
+  text-shadow: 0 1px 6px rgba(0, 0, 0, 0.5);
+}
+
+.hero__botones {
+  display: flex;
+  gap: 1.2rem;
+  margin-top: 1rem;
+  flex-wrap: wrap;
+  justify-content: center;
+  animation: fadeInUp 1s ease-out 0.5s backwards;
+}
+
+.btn__primario {
+  padding: 1rem 2.5rem;
+  border: none;
+  border-radius: 3rem;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  transition: all 0.3s ease;
+  box-shadow: 0 0.3rem 1rem rgba(0, 0, 0, 0.3);
+  background: #d9b756;
+  color: #1a1a1a;
+}
+
+.btn__primario:hover {
+  background: #c9a846;
+  transform: translateY(-3px);
+  box-shadow: 0 0.5rem 1.5rem rgba(217, 183, 86, 0.45);
+}
+
+.btn__primario i {
+  font-size: 0.9rem;
+  transition: transform 0.3s ease;
+}
+
+.btn__primario:hover i {
+  transform: translateY(3px);
+}
+
+/* Animación */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(40px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+
+/* Sección Filosofía */
+.seccion__filosofia {
+  width: 100%;
+  padding: 0;
+  background: #fff;
+}
+
+.filosofia__contenedor {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  min-height: 600px;
+}
+
+.filosofia__imagen {
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+}
+
+.filosofia__imagen img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.filosofia__contenido {
+  background: linear-gradient(135deg, #1a2838 0%, #0f1823 100%);
+  padding: 5rem 6rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 1.5rem;
+}
+
+.filosofia__subtitulo {
+  color: #d9b756;
+  font-size: 0.85rem;
+  font-weight: 600;
+  letter-spacing: 0.15rem;
+  text-transform: uppercase;
+  margin: 0;
+}
+
+.filosofia__titulo {
+  color: #fff;
+  font-size: 2.8rem;
+  font-weight: 400;
+  line-height: 1.2;
+  margin: 0;
+}
+
+.filosofia__titulo--dorado {
+  color: #d9b756;
+  font-style: italic;
+  font-weight: 600;
+}
+
+.filosofia__descripcion {
+  color: rgba(255, 255, 255, 0.85);
+  font-size: 1rem;
+  line-height: 1.7;
+  margin: 0;
+}
+
+.filosofia__lista {
+  list-style: none;
+  padding: 0;
+  margin: 1rem 0 0 0;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.filosofia__lista li {
+  color: #d9b756;
+  font-size: 0.95rem;
+  font-weight: 500;
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+}
+
+.filosofia__lista li i {
+  font-size: 0.5rem;
+  flex-shrink: 0;
+}
+
+.filosofia__lista li span {
+  color: rgba(255, 255, 255, 0.9);
+}
+
+.btn__filosofia {
+  background: transparent;
+  border: 2px solid #d9b756;
+  color: #d9b756;
+  padding: 0.9rem 2.5rem;
+  border-radius: 3rem;
+  font-size: 0.95rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  margin-top: 1rem;
+  width: fit-content;
+}
+
+.btn__filosofia:hover {
+  background: #d9b756;
+  color: #1a2838;
+  transform: translateY(-3px);
+  box-shadow: 0 0.5rem 1.5rem rgba(217, 183, 86, 0.3);
+}
+
+
+/* Sección Por qué elegirnos */
+.seccion__elegirnos {
+  width: 100%;
+  padding: 6rem 10rem;
+  background: linear-gradient(135deg, #ffffff 0%, #f8f9fa 100%);
+  position: relative;
+  overflow: hidden;
+}
+
+.seccion__elegirnos::before {
+  content: "";
+  position: absolute;
+  top: -10%;
+  right: -5%;
+  width: 25rem;
+  height: 25rem;
+  background: radial-gradient(
+    circle,
+    rgba(174, 211, 218, 0.15) 0%,
+    transparent 70%
+  );
+  border-radius: 50%;
+}
+
+.elegirnos__contenedor {
+  max-width: 1400px;
+  margin: 0 auto;
+  position: relative;
+  z-index: 1;
+}
+
+.elegirnos__header {
+  text-align: center;
+  margin-bottom: 4rem;
+  animation: fadeInUp 0.8s ease-out;
+}
+
+.elegirnos__subtitulo {
+  color: #aed3da;
+  font-size: 0.9rem;
+  font-weight: 600;
+  letter-spacing: 0.1rem;
+  text-transform: uppercase;
+  margin: 0 0 1rem 0;
+}
+
+.elegirnos__titulo {
+  color: #003e5c;
+  font-size: 2.8rem;
+  font-weight: 400;
+  line-height: 1.3;
+  margin: 0 0 1rem 0;
+}
+
+.elegirnos__descripcion {
+  color: #666;
+  font-size: 1.1rem;
+  line-height: 1.7;
+  margin: 0 auto;
+  max-width: 650px;
+}
+
+.elegirnos__grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 2rem;
+}
+
+.elegirnos__card {
+  background: #fff;
+  border-radius: 1.5rem;
+  padding: 2.5rem;
+  box-shadow: 0 0.25rem 1.25rem rgba(0, 62, 92, 0.08);
+  transition: all 0.4s cubic-bezier(0.35, 0, 0.25, 1);
+  border: 2px solid transparent;
+  position: relative;
+  overflow: hidden;
+  animation: fadeInUp 0.6s ease-out;
+}
+
+.elegirnos__card::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 0.25rem;
+  background: linear-gradient(90deg, #d9b756 0%, #c9a746 100%);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.4s ease;
+}
+
+.elegirnos__card:hover::before {
+  transform: scaleX(1);
+}
+
+.elegirnos__card:hover {
+  transform: translateY(-0.5rem);
+  box-shadow: 0 0.75rem 2rem rgba(0, 62, 92, 0.15);
+  border-color: rgba(217, 183, 86, 0.3);
+}
+
+.card__icono {
+  width: 4.5rem;
+  height: 4.5rem;
+  background: linear-gradient(
+    135deg,
+    rgba(174, 211, 218, 0.2) 0%,
+    rgba(217, 183, 86, 0.15) 100%
+  );
+  border-radius: 1.2rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 1.5rem;
+  transition: all 0.4s ease;
+}
+
+.elegirnos__card:hover .card__icono {
+  transform: scale(1.1) rotate(-5deg);
+  background: linear-gradient(135deg, #d9b756 0%, #c9a746 100%);
+}
+
+.card__icono i {
+  font-size: 2.5rem;
+  color: #003e5c;
+  transition: color 0.4s ease;
+}
+
+.elegirnos__card:hover .card__icono i {
+  color: #fff;
+}
+
+.elegirnos__card h3 {
+  color: #003e5c;
+  font-size: 1.3rem;
+  font-weight: 600;
+  line-height: 1.4;
+  margin: 0 0 1rem 0;
+}
+
+.elegirnos__card p {
+  color: #666;
+  font-size: 0.95rem;
+  line-height: 1.7;
+  margin: 0;
+}
+
+/* Animación de aparición escalonada */
+.elegirnos__card:nth-child(1) {
+  animation-delay: 0.1s;
+}
+.elegirnos__card:nth-child(2) {
+  animation-delay: 0.2s;
+}
+.elegirnos__card:nth-child(3) {
+  animation-delay: 0.3s;
+}
+.elegirnos__card:nth-child(4) {
+  animation-delay: 0.4s;
+}
+.elegirnos__card:nth-child(5) {
+  animation-delay: 0.5s;
+}
+
+
+/* Sección Dimensiones del Bienestar */
+.seccion__dimensiones {
+  width: 100%;
+  padding: 6rem 3rem;
+  background: #fff;
+}
+
+.dimensiones__contenedor {
+  max-width: 1400px;
+  margin: 0 auto;
+}
+
+.dimensiones__header {
+  text-align: center;
+  margin-bottom: 4rem;
+  max-width: 750px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.dimensiones__subtitulo {
+  color: #aed3da;
+  font-size: 0.9rem;
+  font-weight: 600;
+  letter-spacing: 0.1rem;
+  text-transform: uppercase;
+  margin: 0 0 1rem 0;
+}
+
+.dimensiones__titulo {
+  color: #003e5c;
+  font-size: 2.5rem;
+  font-weight: 400;
+  margin: 0 0 1rem 0;
+  line-height: 1.2;
+}
+
+.dimensiones__descripcion {
+  color: #666;
+  font-size: 1.05rem;
+  line-height: 1.7;
+  margin: 0;
+}
+
+.dimensiones__grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 2rem;
+}
+
+.dimension__card {
+  background: #fff;
+  border-radius: 1.5rem;
+  overflow: hidden;
+  box-shadow: 0 0.25rem 1.25rem rgba(0, 62, 92, 0.08);
+  transition: all 0.4s ease;
+  display: flex;
+  flex-direction: column;
+}
+
+.dimension__card:hover {
+  transform: translateY(-0.75rem);
+  box-shadow: 0 0.75rem 2rem rgba(0, 62, 92, 0.15);
+}
+
+.dimension__imagen {
+  width: 100%;
+  height: 14rem;
+  overflow: hidden;
+  position: relative;
+}
+
+.dimension__imagen img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.5s ease;
+}
+
+.dimension__card:hover .dimension__imagen img {
+  transform: scale(1.1);
+}
+
+.dimension__contenido {
+  padding: 2rem 1.8rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 0.8rem;
+  flex: 1;
+  margin-top: -4rem;
+  z-index: 10;
+}
+
+.dimension__icono {
+  width: 3.5rem;
+  height: 3.5rem;
+  background:#003e5c;
+  border-radius: 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s ease;
+}
+
+.dimension__card:hover .dimension__icono {
+  background: #d9b756;
+  transform: scale(1.1) rotate(-5deg);
+}
+
+.dimension__icono i {
+  font-size: 1.6rem;
+  color: #fff;
+}
+
+.dimension__nombre {
+  color: #003e5c;
+  font-size: 1.2rem;
+  font-weight: 600;
+  margin: 0;
+  line-height: 1.3;
+}
+
+.dimension__descripcion {
+  color: #666;
+  font-size: 0.95rem;
+  line-height: 1.6;
+  margin: 0;
+}
+
+/* Animación de entrada */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(40px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.dimension__card {
+  animation: fadeInUp 0.6s ease-out;
+}
+
+.dimension__card:nth-child(1) {
+  animation-delay: 0s;
+}
+.dimension__card:nth-child(2) {
+  animation-delay: 0.1s;
+}
+.dimension__card:nth-child(3) {
+  animation-delay: 0.2s;
+}
+.dimension__card:nth-child(4) {
+  animation-delay: 0.3s;
+}
+.dimension__card:nth-child(5) {
+  animation-delay: 0.4s;
+}
+.dimension__card:nth-child(6) {
+  animation-delay: 0.5s;
+}
+
+/* Sección Momentos Inolvidables */
+.seccion__momentos {
+  width: 100%;
+  padding: 6rem 3rem;
+  background: linear-gradient(135deg, #003e5c 0%, #1a4d6d 100%);
+  position: relative;
+  overflow: hidden;
+}
+
+.seccion__momentos::before {
+  content: "";
+  position: absolute;
+  top: -20%;
+  right: -10%;
+  width: 30rem;
+  height: 30rem;
+  background: radial-gradient(
+    circle,
+    rgba(255, 255, 255, 0.08) 0%,
+    transparent 70%
+  );
+  border-radius: 50%;
+}
+
+.momentos__contenedor {
+  max-width: 1400px;
+  margin: 0 auto;
+  position: relative;
+  z-index: 1;
+}
+
+.momentos__header {
+  text-align: center;
+  margin-bottom: 4rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+}
+
+.momentos__header i {
+  font-size: 2.5rem;
+  color: #d9b756;
+}
+
+.momentos__titulo {
+  color: #fff;
+  font-size: 2.5rem;
+  font-weight: 400;
+  margin: 0;
+  line-height: 1.2;
+  position: relative;
+  padding-bottom: 1rem;
+}
+
+.momentos__titulo::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 5rem;
+  height: 0.2rem;
+  background: #d9b756;
+}
+
+.momentos__grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 2rem;
+}
+
+.momento__card {
+  background: rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(10px);
+  border: 2px solid rgba(217, 183, 86, 0.2);
+  border-radius: 1.5rem;
+  overflow: hidden;
+  transition: all 0.4s ease;
+  display: flex;
+  flex-direction: column;
+}
+
+.momento__card:hover {
+  transform: translateY(-1rem);
+  border-color: rgba(217, 183, 86, 0.6);
+  box-shadow: 0 1rem 3rem rgba(0, 0, 0, 0.3);
+  background: rgba(255, 255, 255, 0.08);
+}
+
+/* Card destacado (Navidad - centro) */
+.momento__card--destacado {
+  border-color: rgba(217, 183, 86, 0.5);
+  background: rgba(255, 255, 255, 0.08);
+}
+
+.momento__card--destacado:hover {
+  border-color: #d9b756;
+  background: rgba(255, 255, 255, 0.12);
+}
+
+.momento__imagen {
+  width: 100%;
+  height: 14rem;
+  overflow: hidden;
+  position: relative;
+}
+
+.momento__imagen img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.5s ease;
+}
+
+.momento__card:hover .momento__imagen img {
+  transform: scale(1.1);
+}
+
+.momento__contenido {
+  padding: 2rem 1.8rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.8rem;
+  text-align: center;
+  flex: 1;
+}
+
+.momento__titulo {
+  color: #d9b756;
+  font-size: 1.3rem;
+  font-weight: 600;
+  margin: 0;
+  line-height: 1.2;
+}
+
+.momento__descripcion {
+  color: rgba(255, 255, 255, 0.85);
+  font-size: 0.95rem;
+  line-height: 1.6;
+  margin: 0;
+}
+
+/* Animación de entrada */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(40px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.momento__card {
+  animation: fadeInUp 0.6s ease-out;
+}
+
+.momento__card:nth-child(1) {
+  animation-delay: 0s;
+}
+
+.momento__card:nth-child(2) {
+  animation-delay: 0.1s;
+}
+
+.momento__card:nth-child(3) {
+  animation-delay: 0.2s;
+}
+
+/* Sección Misas y Visitas */
+.seccion__misas-visitas {
+  width: 100%;
+  padding: 6rem 3rem;
+  background: #f5f5f0;
+}
+
+.misas-visitas__contenedor {
+  max-width: 1400px;
+  margin: 0 auto;
+  display: flex;
+  gap: 4rem;
+  align-items: center;
+}
+
+/* Columna izquierda - Texto */
+.misas-visitas__texto {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 3rem;
+}
+
+.misas-visitas__item {
+  display: flex;
+  gap: 1.5rem;
+  align-items: start;
+}
+
+.item__icono {
+  width: 4rem;
+  height: 4rem;
+  background: #d9b756;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  box-shadow: 0 0.25rem 1rem rgba(217, 183, 86, 0.3);
+  transition: all 0.3s ease;
+}
+
+.misas-visitas__item:hover .item__icono {
+  transform: scale(1.1) rotate(-5deg);
+  box-shadow: 0 0.5rem 1.5rem rgba(217, 183, 86, 0.4);
+}
+
+.item__icono i {
+  font-size: 1.8rem;
+  color: #fff;
+}
+
+.item__contenido {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 0.8rem;
+}
+
+.item__titulo {
+  color: #003e5c;
+  font-size: 1.5rem;
+  font-weight: 600;
+  margin: 0;
+  line-height: 1.2;
+}
+
+.item__descripcion {
+  color: #666;
+  font-size: 1rem;
+  line-height: 1.7;
+  margin: 0;
+}
+
+/* Columna derecha - Imágenes */
+.misas-visitas__imagenes {
+  flex: 1;
+  display: flex;
+  gap: 1.5rem;
+}
+
+.imagen__card:nth-child(1) {
+  margin-top: -1rem;
+}
+.imagen__card:nth-child(2) {
+  margin-bottom: -1rem;
+}
+.imagen__card {
+  flex: 1;
+  border-radius: 2rem;
+  overflow: hidden;
+  box-shadow: 0 0.625rem 2.5rem rgba(0, 62, 92, 0.15);
+  transition: transform 0.5s ease;
+}
+
+.imagen__card:hover {
+  transform: scale(1.03);
+}
+
+.imagen__card img {
+  width: 100%;
+  height: 24rem;
+  object-fit: cover;
+  display: block;
+}
+
+/* Animación de entrada */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(40px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.misas-visitas__item {
+  animation: fadeInUp 0.6s ease-out;
+}
+
+.misas-visitas__item:nth-child(1) {
+  animation-delay: 0s;
+}
+
+.misas-visitas__item:nth-child(2) {
+  animation-delay: 0.2s;
+}
+
+/* Sección noticias */
+.seccion__noticias {
+  width: 100%;
+  padding: 5rem 10rem;
+  background: #f8f9fa;
+}
+
+.noticias__contenedor {
+  max-width: 1400px;
+  margin: 0 auto;
+}
+
+.noticias__header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 3rem;
+}
+
+.noticias__subtitulo {
+  color: #aed3da;
+  font-size: 0.9rem;
+  font-weight: 600;
+  letter-spacing: 0.0625rem;
+  text-transform: uppercase;
+  margin: 0 0 0.5rem 0;
+}
+
+.noticias__titulo {
+  color: #003e5c;
+  font-size: 2.5rem;
+  font-weight: 400;
+  line-height: 1.2;
+  margin: 0;
+}
+
+.noticias__carrusel {
+  position: relative;
+}
+
+.noticias__grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 2rem;
+  margin-bottom: 2.5rem;
+}
+
+.noticia__card {
+  background: #fff;
+  border-radius: 1.5rem;
+  overflow: hidden;
+  box-shadow: 0 0.25rem 1.25rem rgba(0, 62, 92, 0.08);
+  transition: all 0.3s ease;
+  cursor: pointer;
+  animation: fadeInUp 0.5s ease-out;
+}
+
+.noticia__card:hover {
+  transform: translateY(-0.5rem);
+  box-shadow: 0 0.5rem 1.875rem rgba(0, 62, 92, 0.15);
+}
+
+.noticia__imagen {
+  width: 100%;
+  height: 13.75rem;
+  overflow: hidden;
+  position: relative;
+}
+
+.noticia__imagen img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.5s ease;
+}
+
+.noticia__card:hover .noticia__imagen img {
+  transform: scale(1.1);
+}
+
+.noticia__contenido {
+  padding: 1.8rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.8rem;
+}
+
+.noticia__fecha {
+  color: #999;
+  font-size: 0.85rem;
+  font-weight: 500;
+}
+
+.noticia__titulo {
+  color: #003e5c;
+  font-size: 1.2rem;
+  font-weight: 600;
+  line-height: 1.4;
+  margin: 0;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.noticia__descripcion {
+  color: #666;
+  font-size: 0.9rem;
+  line-height: 1.6;
+  margin: 0;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.noticia__link {
+  color: #d9b756;
+  font-size: 0.95rem;
+  font-weight: 600;
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.3rem;
+  margin-top: 0.5rem;
+  transition: all 0.3s ease;
+  width: fit-content;
+}
+
+.noticia__link:hover {
+  gap: 0.6rem;
+  color: #c9a746;
+}
+
+.noticia__link i {
+  font-size: 1.2rem;
+  transition: transform 0.3s ease;
+}
+
+.noticia__link:hover i {
+  transform: translateX(0.1875rem);
+}
+
+/* Navegación */
+.noticias__navegacion {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1.5rem;
+}
+
+.noticias__btn {
+  background: #fff;
+  border: 0.125rem solid #d9b756;
+  width: 3rem;
+  height: 3rem;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  color: #d9b756;
+}
+
+.noticias__btn:hover:not(:disabled) {
+  background: #d9b756;
+  color: #fff;
+  transform: scale(1.1);
+}
+
+.noticias__btn:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+  border-color: #ccc;
+  color: #ccc;
+}
+
+.noticias__btn i {
+  font-size: 1.5rem;
+}
+
+.noticias__indicadores {
+  display: flex;
+  gap: 0.8rem;
+  align-items: center;
+}
+
+.indicador__punto {
+  width: 0.75rem;
+  height: 0.75rem;
+  border-radius: 50%;
+  background: #ddd;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.indicador__punto.activo {
+  background: #d9b756;
+  width: 2.1875rem;
+  border-radius: 0.375rem;
+}
+
+.indicador__punto:hover {
+  background: #d9b756;
+  opacity: 0.7;
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(40px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}

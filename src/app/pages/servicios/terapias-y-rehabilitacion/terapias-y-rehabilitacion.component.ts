@@ -79,21 +79,14 @@ export class TerapiasYRehabilitacionComponent implements OnInit {
   }
 
   scrollToServicios() {
-    const seccionServicios = document.getElementById('seccion-servicios');
-
+    const seccionServicios = document.getElementById('seccion-especialidades');
     if (seccionServicios) {
-      const offset = -250;
-      const top =
-        seccionServicios.getBoundingClientRect().top +
-        window.pageYOffset -
-        offset;
-
-      window.scrollTo({
-        top,
-        behavior: 'smooth',
-      });
+      const offset = 60;
+      const top = seccionServicios.getBoundingClientRect().top + window.pageYOffset - offset;
+      window.scrollTo({ top, behavior: 'smooth' });
     }
   }
+
 
   inicializarNoticias(): void {
     const totalPaginas = Math.ceil(this.noticias.length / this.noticiasPorPagina);

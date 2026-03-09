@@ -624,8 +624,8 @@
 }
 
 .timeline__imagen {
-  width: 280px;
-  height: 160px;
+  width: 20rem;
+  height: 12rem;
   border-radius: 1rem;
   overflow: hidden;
   box-shadow: 0 0.4rem 1.5rem rgba(0, 62, 92, 0.12);
@@ -652,7 +652,7 @@
 }
 
 .timeline__texto--derecha {
-  text-align: right;
+  text-align: left;
 }
 
 .timeline__texto h3 {
@@ -675,6 +675,210 @@
   font-size: 0.82rem;
   font-style: italic;
   margin-top: 2rem;
+}
+
+
+/* Sección Explorar Planes */
+.seccion__explorar-planes {
+  width: 100%;
+  padding: 5rem 3rem;
+  background: linear-gradient(135deg, #f5f5f5 0%, #fafafa 100%);
+  position: relative;
+  overflow: hidden;
+}
+
+.seccion__explorar-planes::before {
+  content: 'DALIAS';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 18rem;
+  font-weight: 900;
+  color: rgba(174, 211, 218, 0.06);
+  letter-spacing: 0.5rem;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.explorar-planes__contenedor {
+  max-width: 1400px;
+  margin: 0 auto;
+  position: relative;
+  z-index: 1;
+}
+
+.explorar-planes__header {
+  text-align: left;
+  margin-bottom: 3rem;
+}
+
+.explorar-planes__invitacion {
+  color: #aed3da;
+  font-size: 1rem;
+  font-weight: 400;
+  font-style: italic;
+  margin: 0 0 0.5rem 0;
+  letter-spacing: 0.03125rem;
+}
+
+.explorar-planes__titulo {
+  color: #003e5c;
+  font-size: 3rem;
+  font-weight: 400;
+  margin: 0;
+  line-height: 1.2;
+}
+
+.explorar-planes__titulo--dorado {
+  color: #d9b756;
+  font-weight: 600;
+}
+
+.explorar-planes__grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.2rem;
+}
+
+/* Tarjeta Pill */
+.plan__card-pill {
+  background: #fff;
+  border: 0.125rem solid #d9b756;
+  border-radius: 3.125rem;
+  padding: 1.5rem 2rem;
+  display: flex;
+  align-items: center;
+  gap: 1.2rem;
+  text-decoration: none;
+  transition: all 0.3s ease;
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+}
+
+.plan__card-pill::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, rgba(217, 183, 86, 0.08) 0%, transparent 100%);
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.plan__card-pill:hover::before {
+  opacity: 1;
+}
+
+.plan__card-pill:hover {
+  background: #fffbf5;
+  border-color: #d9b756;
+  transform: translateY(-0.3rem);
+  box-shadow: 0 0.5rem 1.5rem rgba(217, 183, 86, 0.2);
+}
+
+.plan__pill-icono {
+  width: 3rem;
+  height: 3rem;
+  background: linear-gradient(135deg, #d9b756 0%, #c9a746 100%);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  transition: all 0.3s ease;
+}
+
+.plan__card-pill:hover .plan__pill-icono {
+  transform: rotate(10deg) scale(1.05);
+}
+
+.plan__pill-icono i {
+  font-size: 1.5rem;
+  color: #fff;
+}
+
+.plan__pill-texto {
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+  flex: 1;
+}
+
+.plan__pill-nombre {
+  color: #003e5c;
+  font-size: 1rem;
+  font-weight: 600;
+  margin: 0;
+  line-height: 1.2;
+}
+
+.plan__pill-descripcion {
+  color: #999;
+  font-size: 0.8rem;
+  margin: 0;
+  line-height: 1.3;
+}
+
+.plan__pill-cta {
+  color: #d9b756;
+  font-size: 0.85rem;
+  font-weight: 600;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.3rem;
+  transition: all 0.3s ease;
+  margin-top: 0.2rem;
+  width: fit-content;
+}
+
+.plan__card-pill:hover .plan__pill-cta {
+  gap: 0.5rem;
+  color: #c9a746;
+}
+
+.plan__pill-cta i {
+  font-size: 0.9rem;
+  transition: transform 0.3s ease;
+}
+
+.plan__card-pill:hover .plan__pill-cta i {
+  transform: translateX(0.25rem);
+}
+
+/* Animación de entrada */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(40px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.plan__card-pill {
+  animation: fadeInUp 0.6s ease-out;
+}
+
+.plan__card-pill:nth-child(1) {
+  animation-delay: 0s;
+}
+
+.plan__card-pill:nth-child(2) {
+  animation-delay: 0.1s;
+}
+
+.plan__card-pill:nth-child(3) {
+  animation-delay: 0.2s;
+}
+
+.plan__card-pill:nth-child(4) {
+  animation-delay: 0.3s;
 }
 
 /* SECCIÓN: Por qué elegir nuestro Centro de Día */
@@ -1538,7 +1742,7 @@
 
   .timeline__imagen {
     width: 100%;
-    height: 110px;
+    height: 12rem;
     border-radius: 0.7rem;
   }
 
@@ -1823,7 +2027,7 @@
   }
 
   .timeline__imagen {
-    height: 90px;
+    height:8rem;
     border-radius: 0.6rem;
   }
 

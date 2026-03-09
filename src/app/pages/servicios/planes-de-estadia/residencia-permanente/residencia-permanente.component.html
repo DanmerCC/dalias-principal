@@ -142,140 +142,204 @@
       </p>
     </div>
 
-   <!-- Carrusel de instalaciones -->
-<div class="instalaciones__carrusel" #instalacionesCarrusel>
-  <!-- Slide 1 -->
-  <article class="instalacion__slide" [class.first-item]="true">
-    <div class="instalaciones__grid">
-      <div
-        class="instalaciones__imagen instalaciones__imagen--1"
-        (click)="abrirModalImagen(0, 0)"
-      >
-        <img src="https://res.cloudinary.com/dd5mnpde5/image/upload/f_auto,q_60,w_1200,c_limit/v1770050931/gallery1_lb5bfr.png" alt="Habitación Principal" loading="lazy" />
-      </div>
+    <!-- Carrusel de instalaciones -->
+    <div class="instalaciones__carrusel" #instalacionesCarrusel>
+      <!-- Slide 1 -->
+      <article class="instalacion__slide" [class.first-item]="true">
+        <div class="instalaciones__grid">
+          <div
+            class="instalaciones__imagen instalaciones__imagen--1"
+            (click)="abrirModalImagen(0, 0)"
+          >
+            <img
+              src="https://res.cloudinary.com/dd5mnpde5/image/upload/f_auto,q_60,w_1200,c_limit/v1770050931/gallery1_lb5bfr.png"
+              alt="Habitación Principal"
+              loading="lazy"
+            />
+          </div>
 
-      <div
-        class="instalaciones__imagen instalaciones__imagen--2"
-        (click)="abrirModalImagen(0, 1)"
-      >
-        <img src="https://res.cloudinary.com/dd5mnpde5/image/upload/f_auto,q_60,w_1200,c_limit/v1770050926/gallery2_qj7jgs.png" alt="Habitación con Sala" loading="lazy" />
-      </div>
+          <div
+            class="instalaciones__imagen instalaciones__imagen--2"
+            (click)="abrirModalImagen(0, 1)"
+          >
+            <img
+              src="https://res.cloudinary.com/dd5mnpde5/image/upload/f_auto,q_60,w_1200,c_limit/v1770050926/gallery2_qj7jgs.png"
+              alt="Habitación con Sala"
+              loading="lazy"
+            />
+          </div>
 
-      <div
-        class="instalaciones__imagen instalaciones__imagen--3"
-        (click)="abrirModalImagen(0, 2)"
-      >
-        <img src="https://res.cloudinary.com/dd5mnpde5/image/upload/f_auto,q_60,w_1200,c_limit/v1770050929/gallery3_cpal4y.jpg" alt="Baño 1" loading="lazy" />
-      </div>
+          <div
+            class="instalaciones__imagen instalaciones__imagen--3"
+            (click)="abrirModalImagen(0, 2)"
+          >
+            <img
+              src="https://res.cloudinary.com/dd5mnpde5/image/upload/f_auto,q_60,w_1200,c_limit/v1770050929/gallery3_cpal4y.jpg"
+              alt="Baño 1"
+              loading="lazy"
+            />
+          </div>
 
-      <div
-        class="instalaciones__imagen instalaciones__imagen--4"
-        (click)="abrirModalImagen(0, 3)"
-      >
-        <img src="https://res.cloudinary.com/dd5mnpde5/image/upload/f_auto,q_60,w_1200,c_limit/v1770049419/gallery4_pxur9t.jpg" alt="Baño 2" loading="lazy" />
-      </div>
+          <div
+            class="instalaciones__imagen instalaciones__imagen--4"
+            (click)="abrirModalImagen(0, 3)"
+          >
+            <img
+              src="https://res.cloudinary.com/dd5mnpde5/image/upload/f_auto,q_60,w_1200,c_limit/v1770049419/gallery4_pxur9t.jpg"
+              alt="Baño 2"
+              loading="lazy"
+            />
+          </div>
+        </div>
+      </article>
+
+      <!-- Slide 2 -->
+      <article class="instalacion__slide">
+        <div class="instalaciones__grid">
+          <div
+            class="instalaciones__imagen instalaciones__imagen--1"
+            (click)="abrirModalImagen(1, 0)"
+          >
+            <img
+              src="https://res.cloudinary.com/dd5mnpde5/image/upload/f_auto,q_60,w_1200,c_limit/v1770049640/gallery5_vztful.png"
+              alt="Comedor"
+              loading="lazy"
+            />
+          </div>
+
+          <div
+            class="instalaciones__imagen instalaciones__imagen--2"
+            (click)="abrirModalImagen(1, 1)"
+          >
+            <img
+              src="https://res.cloudinary.com/dd5mnpde5/image/upload/f_auto,q_60,w_1200,c_limit/v1770049640/gallery6_ge32y4.jpg"
+              alt="Sala de Terapias"
+              loading="lazy"
+            />
+          </div>
+
+          <div
+            class="instalaciones__imagen instalaciones__imagen--3"
+            (click)="abrirModalImagen(1, 2)"
+          >
+            <img
+              src="https://res.cloudinary.com/dd5mnpde5/image/upload/f_auto,q_60,w_1200,c_limit/v1770049640/gallery7_nnfes5.png"
+              alt="Cocina"
+              loading="lazy"
+            />
+          </div>
+
+          <div
+            class="instalaciones__imagen instalaciones__imagen--4"
+            (click)="abrirModalImagen(1, 3)"
+          >
+            <img
+              src="https://res.cloudinary.com/dd5mnpde5/image/upload/f_auto,q_60,w_1200,c_limit/v1770049642/gallery8_dtdr4s.jpg"
+              alt="Recepción"
+              loading="lazy"
+            />
+          </div>
+        </div>
+      </article>
+
+      <!-- Slide 3 -->
+      <article class="instalacion__slide">
+        <div class="instalaciones__grid">
+          <div
+            class="instalaciones__imagen instalaciones__imagen--1"
+            (click)="abrirModalImagen(2, 0)"
+          >
+            <img
+              src="https://res.cloudinary.com/dd5mnpde5/image/upload/f_auto,q_60,w_1200,c_limit/v1770049781/gallery9_qulhj4.jpg"
+              alt="Piscina"
+              loading="lazy"
+            />
+          </div>
+
+          <div
+            class="instalaciones__imagen instalaciones__imagen--2"
+            (click)="abrirModalImagen(2, 1)"
+          >
+            <img
+              src="https://res.cloudinary.com/dd5mnpde5/image/upload/f_auto,q_60,w_1200,c_limit/v1770049781/gallery10_pxtddx.jpg"
+              alt="Área de Lectura"
+              loading="lazy"
+            />
+          </div>
+
+          <div
+            class="instalaciones__imagen instalaciones__imagen--3"
+            (click)="abrirModalImagen(2, 2)"
+          >
+            <img
+              src="https://res.cloudinary.com/dd5mnpde5/image/upload/f_auto,q_60,w_1200,c_limit/v1770049781/gallery11_t7bpje.jpg"
+              alt="Habitación Suite"
+              loading="lazy"
+            />
+          </div>
+
+          <div
+            class="instalaciones__imagen instalaciones__imagen--4"
+            (click)="abrirModalImagen(2, 3)"
+          >
+            <img
+              src="https://res.cloudinary.com/dd5mnpde5/image/upload/f_auto,q_60,w_1200,c_limit/v1770049781/gallery12_rsw3ip.jpg"
+              alt="Terraza"
+              loading="lazy"
+            />
+          </div>
+        </div>
+      </article>
+
+      <!-- Slide 4 -->
+      <article class="instalacion__slide">
+        <div class="instalaciones__grid">
+          <div
+            class="instalaciones__imagen instalaciones__imagen--1"
+            (click)="abrirModalImagen(3, 0)"
+          >
+            <img
+              src="https://res.cloudinary.com/dd5mnpde5/image/upload/f_auto,q_60,w_1200,c_limit/v1770049947/gallery13_xide0z.jpg"
+              alt="Gimnasio"
+              loading="lazy"
+            />
+          </div>
+
+          <div
+            class="instalaciones__imagen instalaciones__imagen--2"
+            (click)="abrirModalImagen(3, 1)"
+          >
+            <img
+              src="https://res.cloudinary.com/dd5mnpde5/image/upload/f_auto,q_60,w_1200,c_limit/v1770049948/gallery14_yii0or.jpg"
+              alt="Sala de Actividades"
+              loading="lazy"
+            />
+          </div>
+
+          <div
+            class="instalaciones__imagen instalaciones__imagen--3"
+            (click)="abrirModalImagen(3, 2)"
+          >
+            <img
+              src="https://res.cloudinary.com/dd5mnpde5/image/upload/f_auto,q_60,w_1200,c_limit/v1770049949/gallery15_tleh0z.jpg"
+              alt="Capilla"
+              loading="lazy"
+            />
+          </div>
+
+          <div
+            class="instalaciones__imagen instalaciones__imagen--4"
+            (click)="abrirModalImagen(3, 3)"
+          >
+            <img
+              src="https://res.cloudinary.com/dd5mnpde5/image/upload/f_auto,q_60,w_1200,c_limit/v1770049948/gallery16_nxmmdr.jpg"
+              alt="Enfermería"
+              loading="lazy"
+            />
+          </div>
+        </div>
+      </article>
     </div>
-  </article>
-
-  <!-- Slide 2 -->
-  <article class="instalacion__slide">
-    <div class="instalaciones__grid">
-      <div
-        class="instalaciones__imagen instalaciones__imagen--1"
-        (click)="abrirModalImagen(1, 0)"
-      >
-        <img src="https://res.cloudinary.com/dd5mnpde5/image/upload/f_auto,q_60,w_1200,c_limit/v1770049640/gallery5_vztful.png" alt="Comedor" loading="lazy" />
-      </div>
-
-      <div
-        class="instalaciones__imagen instalaciones__imagen--2"
-        (click)="abrirModalImagen(1, 1)"
-      >
-        <img src="https://res.cloudinary.com/dd5mnpde5/image/upload/f_auto,q_60,w_1200,c_limit/v1770049640/gallery6_ge32y4.jpg" alt="Sala de Terapias" loading="lazy" />
-      </div>
-
-      <div
-        class="instalaciones__imagen instalaciones__imagen--3"
-        (click)="abrirModalImagen(1, 2)"
-      >
-        <img src="https://res.cloudinary.com/dd5mnpde5/image/upload/f_auto,q_60,w_1200,c_limit/v1770049640/gallery7_nnfes5.png" alt="Cocina" loading="lazy" />
-      </div>
-
-      <div
-        class="instalaciones__imagen instalaciones__imagen--4"
-        (click)="abrirModalImagen(1, 3)"
-      >
-        <img src="https://res.cloudinary.com/dd5mnpde5/image/upload/f_auto,q_60,w_1200,c_limit/v1770049642/gallery8_dtdr4s.jpg" alt="Recepción" loading="lazy" />
-      </div>
-    </div>
-  </article>
-
-  <!-- Slide 3 -->
-  <article class="instalacion__slide">
-    <div class="instalaciones__grid">
-      <div
-        class="instalaciones__imagen instalaciones__imagen--1"
-        (click)="abrirModalImagen(2, 0)"
-      >
-        <img src="https://res.cloudinary.com/dd5mnpde5/image/upload/f_auto,q_60,w_1200,c_limit/v1770049781/gallery9_qulhj4.jpg" alt="Piscina" loading="lazy" />
-      </div>
-
-      <div
-        class="instalaciones__imagen instalaciones__imagen--2"
-        (click)="abrirModalImagen(2, 1)"
-      >
-        <img src="https://res.cloudinary.com/dd5mnpde5/image/upload/f_auto,q_60,w_1200,c_limit/v1770049781/gallery10_pxtddx.jpg" alt="Área de Lectura" loading="lazy" />
-      </div>
-
-      <div
-        class="instalaciones__imagen instalaciones__imagen--3"
-        (click)="abrirModalImagen(2, 2)"
-      >
-        <img src="https://res.cloudinary.com/dd5mnpde5/image/upload/f_auto,q_60,w_1200,c_limit/v1770049781/gallery11_t7bpje.jpg" alt="Habitación Suite" loading="lazy" />
-      </div>
-
-      <div
-        class="instalaciones__imagen instalaciones__imagen--4"
-        (click)="abrirModalImagen(2, 3)"
-      >
-        <img src="https://res.cloudinary.com/dd5mnpde5/image/upload/f_auto,q_60,w_1200,c_limit/v1770049781/gallery12_rsw3ip.jpg" alt="Terraza" loading="lazy" />
-      </div>
-    </div>
-  </article>
-
-  <!-- Slide 4 -->
-  <article class="instalacion__slide">
-    <div class="instalaciones__grid">
-      <div
-        class="instalaciones__imagen instalaciones__imagen--1"
-        (click)="abrirModalImagen(3, 0)"
-      >
-        <img src="https://res.cloudinary.com/dd5mnpde5/image/upload/f_auto,q_60,w_1200,c_limit/v1770049947/gallery13_xide0z.jpg" alt="Gimnasio" loading="lazy" />
-      </div>
-
-      <div
-        class="instalaciones__imagen instalaciones__imagen--2"
-        (click)="abrirModalImagen(3, 1)"
-      >
-        <img src="https://res.cloudinary.com/dd5mnpde5/image/upload/f_auto,q_60,w_1200,c_limit/v1770049948/gallery14_yii0or.jpg" alt="Sala de Actividades" loading="lazy" />
-      </div>
-
-      <div
-        class="instalaciones__imagen instalaciones__imagen--3"
-        (click)="abrirModalImagen(3, 2)"
-      >
-        <img src="https://res.cloudinary.com/dd5mnpde5/image/upload/f_auto,q_60,w_1200,c_limit/v1770049949/gallery15_tleh0z.jpg" alt="Capilla" loading="lazy" />
-      </div>
-
-      <div
-        class="instalaciones__imagen instalaciones__imagen--4"
-        (click)="abrirModalImagen(3, 3)"
-      >
-        <img src="https://res.cloudinary.com/dd5mnpde5/image/upload/f_auto,q_60,w_1200,c_limit/v1770049948/gallery16_nxmmdr.jpg" alt="Enfermería" loading="lazy" />
-      </div>
-    </div>
-  </article>
-</div>
 
     <!-- Navegación -->
     <div class="instalaciones__navegacion">
@@ -651,6 +715,94 @@
           </div>
         </div>
       </div>
+    </div>
+  </div>
+</section>
+
+<!-- Sección Explorar Planes -->
+<section class="seccion__explorar-planes">
+  <div class="explorar-planes__contenedor">
+    <div class="explorar-planes__header">
+      <p class="explorar-planes__invitacion">Te invitamos a</p>
+      <h2 class="explorar-planes__titulo">
+        Explorar <span class="explorar-planes__titulo--dorado">Planes</span>
+      </h2>
+    </div>
+
+    <div class="explorar-planes__grid">
+      <!-- <a
+        routerLink="/servicios/planes-de-estadia/residencia-permanente"
+        class="plan__card-pill"
+      >
+        <div class="plan__pill-icono">
+          <i class="fa-solid fa-house"></i>
+        </div>
+        <div class="plan__pill-texto">
+          <h3 class="plan__pill-nombre">Residencia Permanente</h3>
+          <p class="plan__pill-descripcion">Hogar & Care de larga estadía</p>
+          <span class="plan__pill-cta">
+            Conocer más
+            <i class="fa-solid fa-arrow-right"></i>
+          </span>
+        </div>
+      </a> -->
+
+      <a
+        routerLink="/servicios/planes-de-estadia/residencia-temporal"
+        class="plan__card-pill"
+      >
+        <div class="plan__pill-icono">
+          <i class="fa-solid fa-calendar-check"></i>
+        </div>
+        <div class="plan__pill-texto">
+          <h3 class="plan__pill-nombre">Residencia Temporal</h3>
+          <p class="plan__pill-descripcion">
+            Recovery & Respite post-operatorio
+          </p>
+          <span class="plan__pill-cta">
+            Conocer más
+            <i class="fa-solid fa-arrow-right"></i>
+          </span>
+        </div>
+      </a>
+
+      <a
+        routerLink="/servicios/planes-de-estadia/centro-de-dia"
+        class="plan__card-pill"
+      >
+        <div class="plan__pill-icono">
+          <i class="fa-solid fa-sun"></i>
+        </div>
+        <div class="plan__pill-texto">
+          <h3 class="plan__pill-nombre">Centro de Día</h3>
+          <p class="plan__pill-descripcion">
+            Socialización & Club durante el día
+          </p>
+          <span class="plan__pill-cta">
+            Conocer más
+            <i class="fa-solid fa-arrow-right"></i>
+          </span>
+        </div>
+      </a>
+
+      <a
+        routerLink="/servicios/planes-de-estadia/residencia-post-operatoria"
+        class="plan__card-pill"
+      >
+        <div class="plan__pill-icono">
+          <i class="fa-solid fa-kit-medical"></i>
+        </div>
+        <div class="plan__pill-texto">
+          <h3 class="plan__pill-nombre">Post Operatoria</h3>
+          <p class="plan__pill-descripcion">
+            Recovery & Respite post-operatorio
+          </p>
+          <span class="plan__pill-cta">
+            Conocer más
+            <i class="fa-solid fa-arrow-right"></i>
+          </span>
+        </div>
+      </a>
     </div>
   </div>
 </section>
