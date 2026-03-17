@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { HttpClient, HttpClientModule, HttpHeaders } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
+import { RouterLink } from '@angular/router';
 
 interface PreguntaFrecuente {
   id: number;
@@ -26,7 +27,7 @@ interface ErroresContacto {
 @Component({
   selector: 'app-residencia-post-operatoria',
   standalone: true,
-  imports: [CommonModule, FormsModule, HttpClientModule],
+  imports: [CommonModule, FormsModule, HttpClientModule, RouterLink],
   templateUrl: './residencia-post-operatoria.component.html',
   styleUrl: './residencia-post-operatoria.component.css',
 })

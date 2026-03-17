@@ -1,6 +1,6 @@
 import { Component, PLATFORM_ID, Inject } from '@angular/core';
 import { CommonModule, isPlatformBrowser } from '@angular/common';
-import { Router } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 import {
   HttpClient,
   HttpClientModule,
@@ -38,7 +38,7 @@ interface ErroresContacto {
 @Component({
   selector: 'app-centro-de-dia',
   standalone: true,
-  imports: [CommonModule, FormsModule, HttpClientModule],
+  imports: [CommonModule, FormsModule, HttpClientModule, RouterLink],
   templateUrl: './centro-de-dia.component.html',
   styleUrl: './centro-de-dia.component.css',
 })

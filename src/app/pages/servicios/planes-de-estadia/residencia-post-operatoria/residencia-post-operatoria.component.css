@@ -1520,7 +1520,7 @@
 .figure_faq2 {
   position: absolute;
   width: 16rem;
-  top: 2rem;
+  bottom: -3rem;
   right: -8rem;
   z-index: 1;
 }

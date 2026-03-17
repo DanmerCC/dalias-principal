@@ -12,6 +12,7 @@ import {
   HttpHeaders,
 } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
+import { RouterLink } from '@angular/router';
 
 interface ImagenGaleria {
   src: string;
@@ -41,7 +42,7 @@ interface ErroresContacto {
 @Component({
   selector: 'app-residencia-temporal',
   standalone: true,
-  imports: [CommonModule, FormsModule, HttpClientModule],
+  imports: [CommonModule, FormsModule, HttpClientModule, RouterLink],
   templateUrl: './residencia-temporal.component.html',
   styleUrl: './residencia-temporal.component.css',
 })

@@ -1,1 +1,182 @@
-<p>blog works!</p>
+<!-- Hero Banner -->
+<div class="hero__blog">
+  <div class="hero__overlay"></div>
+  <div class="hero__contenido">
+    <h1 class="hero__titulo">
+      Artículos y Consejos
+      <br />
+      <span class="hero__titulo--dorado">para el Bienestar</span>
+    </h1>
+    <p class="hero__descripcion">
+      Recursos, experiencias y guías pensadas para acompañar a las familias
+      en el cuidado y bienestar de sus seres queridos.
+    </p>
+    <div class="hero__botones">
+      <button class="btn__primario" (click)="scrollAArticulos()">
+        <span>Explorar artículos</span>
+        <i class="fa-solid fa-chevron-down"></i>
+      </button>
+    </div>
+  </div>
+</div>
+
+<!-- Filtros + Grid -->
+<section class="seccion__grid-blog">
+  <div class="grid-blog__contenedor">
+
+    <div class="grid-blog__header">
+      <p class="grid-blog__subtitulo">NUESTROS ARTÍCULOS</p>
+      <h2 class="grid-blog__titulo">Explora el Blog</h2>
+    </div>
+
+    <!-- Filtros -->
+    <div class="blog__filtros">
+      <button
+        *ngFor="let cat of categorias"
+        class="filtro__btn"
+        [class.activo]="categoriaActiva === cat"
+        (click)="filtrarPor(cat)"
+      >
+        {{ cat }}
+      </button>
+    </div>
+
+    <!-- Grid de artículos -->
+    <div class="blog__grid" *ngIf="articulosFiltrados.length > 0">
+      <article
+        class="blog__card"
+        *ngFor="let articulo of articulosFiltrados"
+      >
+        <div class="blog__card-imagen">
+          <img [src]="articulo.imagen" [alt]="articulo.titulo" />
+          <span class="blog__categoria">{{ articulo.categoria }}</span>
+        </div>
+        <div class="blog__card-contenido">
+          <div class="blog__card-meta">
+            <span>
+              <i class="fa-regular fa-calendar"></i>
+              {{ articulo.fecha }}
+            </span>
+          </div>
+          <h3 class="blog__card-titulo">{{ articulo.titulo }}</h3>
+          <p class="blog__card-descripcion">{{ articulo.descripcion }}</p>
+          <a class="blog__card-link" href="#">
+            Leer más
+            <i class="fa-solid fa-arrow-right"></i>
+          </a>
+        </div>
+      </article>
+    </div>
+
+    <!-- Sin resultados -->
+    <div class="blog__sin-resultados" *ngIf="articulosFiltrados.length === 0">
+      <i class="fa-solid fa-magnifying-glass"></i>
+      <p>No hay artículos en esta categoría aún.</p>
+    </div>
+
+  </div>
+</section>
+
+<!-- Sección Lead Magnet / Guía -->
+<section class="seccion__guia">
+  <div class="guia__contenedor">
+
+    <!-- Columna izquierda: mockup guía -->
+    <div class="guia__izquierda">
+      <div class="guia__mockup">
+        <div class="mockup__portada">
+          <div class="mockup__header">
+            <img src="/dalias.png" alt="Las Dalias" />
+          </div>
+          <div class="mockup__body">
+            <p class="mockup__label">GUÍA EXCLUSIVA</p>
+            <h3>Cómo elegir la residencia ideal para tu familiar</h3>
+            <p>Todo lo que necesitas saber antes de tomar la decisión</p>
+          </div>
+          <div class="mockup__footer">
+            <i class="fa-solid fa-file-pdf"></i>
+            <span>Descarga gratuita en PDF</span>
+          </div>
+        </div>
+        <div class="mockup__sombra"></div>
+      </div>
+    </div>
+
+    <!-- Columna derecha: formulario -->
+    <div class="guia__derecha">
+      <p class="guia__subtitulo">MATERIAL EXCLUSIVO</p>
+      <h2 class="guia__titulo">
+        Recibe nuestra guía
+        <span>completamente gratis</span>
+      </h2>
+      <p class="guia__descripcion">
+        Sabemos que elegir una residencia es una decisión importante.
+        Por eso preparamos esta guía con los criterios clave, preguntas
+        esenciales y todo lo que debes evaluar antes de decidir.
+      </p>
+
+      <ul class="guia__beneficios">
+        <li>
+          <i class="fa-solid fa-circle-check"></i>
+          Checklist de criterios para evaluar una residencia
+        </li>
+        <li>
+          <i class="fa-solid fa-circle-check"></i>
+          Preguntas clave que debes hacerle al equipo
+        </li>
+        <li>
+          <i class="fa-solid fa-circle-check"></i>
+          Señales de alerta que no debes ignorar
+        </li>
+        <li>
+          <i class="fa-solid fa-circle-check"></i>
+          Consejos para acompañar a tu familiar en la transición
+        </li>
+      </ul>
+
+      <!-- Formulario normal -->
+      <form class="guia__form" (ngSubmit)="descargarGuia()" *ngIf="!guiaDescargada">
+        <div class="guia__form-grupo">
+          <label class="guia__label">Nombre completo</label>
+          <input
+            type="text"
+            class="guia__input"
+            placeholder="Ej. María García"
+            [(ngModel)]="formularioGuia.nombre"
+            name="nombre"
+            required
+          />
+        </div>
+        <div class="guia__form-grupo">
+          <label class="guia__label">Correo electrónico</label>
+          <input
+            type="email"
+            class="guia__input"
+            placeholder="ejemplo@correo.com"
+            [(ngModel)]="formularioGuia.email"
+            name="email"
+            required
+          />
+        </div>
+        <button type="submit" class="btn__descargar">
+          <i class="fa-solid fa-download"></i>
+          <span>Quiero mi guía gratuita</span>
+        </button>
+        <p class="guia__privacidad">
+          <i class="fa-solid fa-lock"></i>
+          Tu correo está seguro. No enviamos spam.
+        </p>
+      </form>
+
+      <!-- Mensaje de éxito -->
+      <div class="guia__exito" *ngIf="guiaDescargada">
+        <div class="exito__icono">
+          <i class="fa-solid fa-circle-check"></i>
+        </div>
+        <h3>¡Listo! Tu guía está en camino</h3>
+        <p>Revisa tu bandeja de entrada. En breve recibirás la guía en <strong>{{ formularioGuia.email }}</strong></p>
+      </div>
+
+    </div>
+  </div>
+</section>

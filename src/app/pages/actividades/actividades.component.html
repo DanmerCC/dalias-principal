@@ -22,40 +22,67 @@
 </div>
 
 <!-- Sección Filosofía -->
-<section class="seccion__filosofia" id="servicio__estadia">
-  <div class="filosofia__contenedor">
-    <div class="filosofia__imagen">
-      <img src="/section-acti.jpg" alt="Jardines Las Dalias" />
-    </div>
+<section class="seccion__servicio" id="servicio__filosofia">
+  <div class="servicio__contenedor">
+    <div class="servicio__contenido">
+      <div class="servicio__imagen">
+        <img src="/section-acti.jpg" alt="Nuestra Filosofía" />
+      </div>
 
-    <div class="filosofia__contenido">
-      <p class="filosofia__subtitulo">NUESTRA FILOSOFÍA</p>
-      <h2 class="filosofia__titulo">
-        Envejecimiento<br />
-        <span class="filosofia__titulo--dorado">Activo y Consciente</span>
-      </h2>
-      <p class="filosofia__descripcion">
-        Nuestros 5,000m² de jardines privados no son solo un paisaje, son el
-        escenario de una vida en movimiento. Creemos que el cuidado reside en
-        fomentar la autonomía y la pasión por el descubrimiento diario.
-      </p>
+      <div class="servicio__texto">
+        <p class="servicio__subtitulo">Nuestra Filosofía</p>
 
-      <ul class="filosofia__lista">
-        <li>
-          <i class="fa-solid fa-circle"></i>
-          <span>Estimulación cognitiva personalizada</span>
-        </li>
-        <li>
-          <i class="fa-solid fa-circle"></i>
-          <span>Programas de movilidad funcional</span>
-        </li>
-        <li>
-          <i class="fa-solid fa-circle"></i>
-          <span>Integración social comunitaria</span>
-        </li>
-      </ul>
+        <h2 class="servicio__titulo">
+          Envejecimiento <span>Activo y Consciente</span>
+        </h2>
 
-      <button class="btn__filosofia">Ver Terapias y Rehabilitación</button>
+        <p class="servicio__descripcion">
+          Nuestro enfoque de atención integral reconoce que cada etapa de la
+          vida merece vivirse con bienestar, dignidad y propósito. Promovemos un
+          envejecimiento activo a través de actividades que estimulan la mente,
+          fortalecen el cuerpo y fomentan la conexión social.
+        </p>
+
+        <div class="planes__grid">
+          <div class="plan__card">
+            <i class="fa-solid fa-brain"></i>
+            <h3>Estimulación cognitiva personalizada</h3>
+            <p>
+              Ejercicios y actividades diseñadas para mantener una mente activa
+              y ágil.
+            </p>
+          </div>
+
+          <div class="plan__card">
+            <i class="fa-solid fa-person-walking"></i>
+            <h3>Programas de movilidad funcional</h3>
+            <p>
+              Actividades que fortalecen el cuerpo y promueven vitalidad física.
+            </p>
+          </div>
+
+          <div class="plan__card">
+            <i class="fa-solid fa-people-group"></i>
+            <h3>Integración social comunitaria</h3>
+            <p>
+              Espacios para compartir, crear vínculos y disfrutar experiencias
+              significativas.
+            </p>
+          </div>
+
+          <div class="plan__card">
+            <i class="fa-solid fa-heart-pulse"></i>
+            <h3>Cuidados y estadía integral</h3>
+            <p>
+              Bienestar y atención en entornos seguros, cómodos y acompañados.
+            </p>
+          </div>
+        </div>
+
+        <a routerLink="/servicios/terapias-y-rehabilitacion" class="btn__servicio">
+          Ver Terapias y Rehabilitación
+        </a>
+      </div>
     </div>
   </div>
 </section>
@@ -113,7 +140,7 @@
 </section>
 
 <!-- Sección Dimensiones del Bienestar -->
-<section class="seccion__dimensiones">
+<section class="seccion__dimensiones" id="section-actividades">
   <div class="dimensiones__contenedor">
     <div class="dimensiones__header">
       <p class="dimensiones__subtitulo">Dimensiones del Bienestar</p>
@@ -230,13 +257,12 @@
   </div>
 </section>
 
-
 <!-- Sección Momentos Inolvidables -->
 <section class="seccion__momentos">
   <div class="momentos__contenedor">
     <div class="momentos__header">
-      <i class="fa-solid fa-dove"></i>
-      <h2 class="momentos__titulo">Momentos Inolvidables</h2>
+      <img src="/dalias.png" alt="">
+      <h2 class="momentos__titulo">Momentos Inolvidables RDL</h2>
     </div>
 
     <div class="momentos__grid">
@@ -285,7 +311,6 @@
   </div>
 </section>
 
-
 <!-- Sección Misas y Visitas -->
 <section class="seccion__misas-visitas">
   <div class="misas-visitas__contenedor">
@@ -300,8 +325,8 @@
           <h3 class="item__titulo">Misas & Espiritualidad</h3>
           <p class="item__descripcion">
             Brindamos acompañamiento espiritual a través de servicios religiosos
-            programados en nuestras instalaciones. Creamos una atmósfera de paz y
-            reflexión para que nuestros residentes vivan su fe con total
+            programados en nuestras instalaciones. Creamos una atmósfera de paz
+            y reflexión para que nuestros residentes vivan su fe con total
             comodidad y serenidad.
           </p>
         </div>
@@ -332,6 +357,26 @@
       <div class="imagen__card">
         <img src="/img-rounded2.jpeg" alt="Visitas Familiares" />
       </div>
+    </div>
+  </div>
+</section>
+
+<!-- Sección CTA Visita -->
+<section class="seccion__cta-visita">
+  <div class="cta-visita__contenedor">
+    <h2 class="cta-visita__titulo">¿Le gustaría conocer Las Dalias en persona?</h2>
+    <p class="cta-visita__descripcion">
+      Le invitamos a recorrer nuestras instalaciones y ser parte de nuestra comunidad.
+    </p>
+    <div class="cta-visita__botones">
+      <a
+        href="https://wa.me/51981776156"
+        target="_blank"
+        class="btn__whatsapp"
+      >
+        <i class="fa-brands fa-whatsapp"></i>
+        <span>WhatsApp Directo</span>
+      </a>
     </div>
   </div>
 </section>

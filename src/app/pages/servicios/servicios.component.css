@@ -312,7 +312,6 @@
   transform: translateY(-0.2rem);
 }
 
-/* Sección Planes */
 .planes__grid {
   display: grid;
   grid-template-columns: repeat(2, 1fr);

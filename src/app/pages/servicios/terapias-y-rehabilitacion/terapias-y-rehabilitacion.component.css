@@ -411,6 +411,7 @@
   height: 100%;
   object-fit: cover;
   transition: transform 0.5s ease;
+  object-position: center 25%;
 }
 
 .terapia-rehab__card:hover .terapia-rehab__imagen img {

@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { RouterLink } from '@angular/router';
 
 interface Noticia {
   id: number;
@@ -13,7 +14,7 @@ interface Noticia {
 @Component({
   selector: 'app-actividades',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, RouterLink],
   templateUrl: './actividades.component.html',
   styleUrl: './actividades.component.css',
 })
@@ -79,7 +80,7 @@ export class ActividadesComponent implements OnInit {
   }
 
   scrollToServicios() {
-    const seccionServicios = document.getElementById('servicio__estadia');
+    const seccionServicios = document.getElementById('section-actividades');
     if (seccionServicios) {
       const offset = 60;
       const top =
