@@ -1,1 +1,275 @@
-<p>trabaja-con-nosotros works!</p>
+<!-- Hero Banner -->
+<div class="hero__trabaja">
+  <div class="hero__overlay"></div>
+  <div class="hero__contenido">
+    <h1 class="hero__titulo">
+      Trabaja con
+      <br />
+      <span class="hero__titulo--dorado">Nosotros</span>
+    </h1>
+    <p class="hero__descripcion">
+      Únete a un equipo comprometido con el bienestar y la dignidad de los
+      adultos mayores. Aquí tu trabajo tiene un propósito real.
+    </p>
+    <div class="hero__botones">
+      <button class="btn__primario" (click)="scrollAPuestos()">
+        <span>Ver puestos disponibles</span>
+        <i class="fa-solid fa-chevron-down"></i>
+      </button>
+    </div>
+  </div>
+</div>
+
+<!-- Sección Por qué trabajar con nosotros -->
+<section class="seccion__valores">
+  <div class="valores__contenedor">
+    <div class="valores__header">
+      <p class="valores__subtitulo">NUESTRO EQUIPO</p>
+      <h2 class="valores__titulo">¿Por qué trabajar en Las Dalias?</h2>
+      <p class="valores__descripcion">
+        Somos más que una residencia, somos una comunidad donde cada
+        colaborador marca una diferencia real en la vida de nuestros residentes.
+      </p>
+    </div>
+
+    <div class="valores__grid">
+      <div class="valor__card" *ngFor="let valor of valores">
+        <div class="valor__icono">
+          <i [class]="valor.icono"></i>
+        </div>
+        <h3 class="valor__titulo">{{ valor.titulo }}</h3>
+        <p class="valor__descripcion">{{ valor.descripcion }}</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Sección Beneficios -->
+<section class="seccion__beneficios">
+  <div class="beneficios__contenedor">
+    <div class="beneficios__izquierda">
+      <p class="beneficios__subtitulo">LO QUE OFRECEMOS</p>
+      <h2 class="beneficios__titulo">
+        Beneficios para
+        <span>nuestro equipo</span>
+      </h2>
+      <p class="beneficios__descripcion">
+        Creemos que un equipo feliz brinda una mejor atención. Por eso
+        trabajamos constantemente para ofrecer condiciones laborales que
+        cuiden también a quienes cuidan a otros.
+      </p>
+      <a class="btn__servicio" (click)="scrollAPuestos()">
+        Ver puestos disponibles
+        <i class="fa-solid fa-arrow-right"></i>
+      </a>
+    </div>
+
+    <div class="beneficios__derecha">
+      <div class="beneficios__grid">
+        <div class="beneficio__item" *ngFor="let beneficio of beneficios">
+          <div class="beneficio__icono">
+            <i [class]="beneficio.icono"></i>
+          </div>
+          <span>{{ beneficio.texto }}</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Sección Puestos Disponibles -->
+<section class="seccion__puestos" id="puestos">
+  <div class="puestos__contenedor">
+    <div class="puestos__header">
+      <p class="puestos__subtitulo">ÚNETE AL EQUIPO</p>
+      <h2 class="puestos__titulo">Puestos Disponibles</h2>
+      <p class="puestos__descripcion">
+        Encuentra el puesto que se adapta a tu perfil y postula directamente
+        desde esta página.
+      </p>
+    </div>
+
+    <div class="puestos__grid">
+      <div
+        class="puesto__card"
+        *ngFor="let puesto of puestos"
+      >
+        <div class="puesto__header">
+          <div class="puesto__icono">
+            <i [class]="puesto.icono"></i>
+          </div>
+          <div class="puesto__badges">
+            <span class="badge__area">{{ puesto.area }}</span>
+            <span class="badge__tipo">{{ puesto.tipo }}</span>
+          </div>
+        </div>
+
+        <h3 class="puesto__titulo">{{ puesto.titulo }}</h3>
+        <p class="puesto__descripcion">{{ puesto.descripcion }}</p>
+
+        <ul class="puesto__requisitos">
+          <li *ngFor="let req of puesto.requisitos">
+            <i class="fa-solid fa-circle-check"></i>
+            {{ req }}
+          </li>
+        </ul>
+
+        <button class="btn__postular" (click)="seleccionarPuesto(puesto.titulo)">
+          Postular ahora
+          <i class="fa-solid fa-arrow-right"></i>
+        </button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Sección Formulario de Postulación -->
+<section class="seccion__formulario">
+  <div class="formulario__contenedor">
+
+    <div class="formulario__izquierda">
+      <p class="formulario__subtitulo">POSTÚLATE</p>
+      <h2 class="formulario__titulo">
+        Da el primer paso
+        <span>hacia tu nuevo trabajo</span>
+      </h2>
+      <p class="formulario__descripcion">
+        Completa el formulario y nos pondremos en contacto contigo a la brevedad
+        para coordinar una entrevista.
+      </p>
+
+      <div class="formulario__pasos">
+        <div class="paso__item">
+          <div class="paso__numero">1</div>
+          <div class="paso__texto">
+            <strong>Envía tu postulación</strong>
+            <span>Completa el formulario con tus datos</span>
+          </div>
+        </div>
+        <div class="paso__item">
+          <div class="paso__numero">2</div>
+          <div class="paso__texto">
+            <strong>Revisamos tu perfil</strong>
+            <span>Nuestro equipo evaluará tu candidatura</span>
+          </div>
+        </div>
+        <div class="paso__item">
+          <div class="paso__numero">3</div>
+          <div class="paso__texto">
+            <strong>Te contactamos</strong>
+            <span>Coordinamos una entrevista contigo</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="formulario__derecha">
+      <div class="form__card" *ngIf="!formularioEnviado">
+        <form (ngSubmit)="enviarFormulario()">
+
+          <div class="form__grupo">
+            <label class="form__label">Nombre completo</label>
+            <input
+              type="text"
+              class="form__input"
+              placeholder="Ej. Ana Rodríguez"
+              [(ngModel)]="formulario.nombre"
+              name="nombre"
+              required
+            />
+          </div>
+
+          <div class="form__fila">
+            <div class="form__grupo">
+              <label class="form__label">Correo electrónico</label>
+              <input
+                type="email"
+                class="form__input"
+                placeholder="ejemplo@correo.com"
+                [(ngModel)]="formulario.email"
+                name="email"
+                required
+              />
+            </div>
+            <div class="form__grupo">
+              <label class="form__label">Teléfono</label>
+              <input
+                type="tel"
+                class="form__input"
+                placeholder="+51 987 654 321"
+                [(ngModel)]="formulario.telefono"
+                name="telefono"
+                required
+              />
+            </div>
+          </div>
+
+          <div class="form__grupo">
+            <label class="form__label">Puesto de interés</label>
+            <select
+              class="form__input"
+              [(ngModel)]="formulario.puesto"
+              name="puesto"
+              required
+            >
+              <option value="">Selecciona un puesto</option>
+              <option *ngFor="let puesto of puestos" [value]="puesto.titulo">
+                {{ puesto.titulo }}
+              </option>
+              <option value="Otro">Otro / Espontánea</option>
+            </select>
+          </div>
+
+          <div class="form__grupo">
+            <label class="form__label">Cuéntanos sobre ti</label>
+            <textarea
+              class="form__textarea"
+              placeholder="Describe brevemente tu experiencia y por qué quieres trabajar con nosotros..."
+              [(ngModel)]="formulario.mensaje"
+              name="mensaje"
+              rows="4"
+            ></textarea>
+          </div>
+
+          <div class="form__grupo">
+            <label class="form__label">CV / Hoja de vida</label>
+            <label class="form__archivo">
+              <input
+                type="file"
+                accept=".pdf,.doc,.docx"
+                (change)="onArchivoSeleccionado($event)"
+              />
+              <div class="archivo__contenido">
+                <i class="fa-solid fa-cloud-arrow-up"></i>
+                <span *ngIf="!archivoNombre">Sube tu CV en PDF o Word</span>
+                <span *ngIf="archivoNombre" class="archivo__nombre">{{ archivoNombre }}</span>
+              </div>
+            </label>
+          </div>
+
+          <button type="submit" class="btn__enviar-postulacion">
+            <i class="fa-solid fa-paper-plane"></i>
+            <span>Enviar postulación</span>
+          </button>
+
+          <p class="form__privacidad">
+            <i class="fa-solid fa-lock"></i>
+            Tus datos están protegidos y serán usados solo para este proceso.
+          </p>
+
+        </form>
+      </div>
+
+      <!-- Mensaje éxito -->
+      <div class="postulacion__exito" *ngIf="formularioEnviado">
+        <div class="exito__icono">
+          <i class="fa-solid fa-circle-check"></i>
+        </div>
+        <h3>¡Postulación enviada!</h3>
+        <p>Gracias <strong>{{ formulario.nombre }}</strong>, hemos recibido tu postulación. Nos pondremos en contacto contigo a la brevedad.</p>
+        <p class="exito__email">Revisa también tu correo: <strong>{{ formulario.email }}</strong></p>
+      </div>
+    </div>
+
+  </div>
+</section>
