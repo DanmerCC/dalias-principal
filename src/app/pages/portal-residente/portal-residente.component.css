@@ -815,7 +815,7 @@
 
 .chat__contenedor {
   width: 100%;
-  max-width: 50rem;
+  /* max-width: 50rem; */
   margin: 0 auto;
   background: #fff;
   border-radius: 1rem;
