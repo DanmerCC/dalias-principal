@@ -1,1 +1,249 @@
-<p>nosotros works!</p>
+<!-- Hero Banner -->
+<div class="hero__nosotros">
+  <div class="hero__overlay"></div>
+  <div class="hero__contenido">
+    <h1 class="hero__titulo">
+      Conoce
+      <br />
+      <span class="hero__titulo--dorado">Las Dalias</span>
+    </h1>
+    <p class="hero__descripcion">
+      Más que una residencia, somos un hogar donde cada persona mayor
+      vive con dignidad, amor y plenitud en la mejor etapa de su vida.
+    </p>
+    <div class="hero__botones">
+      <button class="btn__primario" (click)="scrollANosotros()">
+        <span>Conocer más</span>
+        <i class="fa-solid fa-chevron-down"></i>
+      </button>
+    </div>
+  </div>
+</div>
+
+<!-- Sección Historia -->
+<section class="seccion__historia" id="nosotros">
+  <div class="historia__contenedor">
+    <div class="historia__imagen">
+      <img src="/nosotros1.jpg" alt="Residencia Las Dalias" />
+      <div class="historia__badge">
+        <i class="fa-solid fa-award"></i>
+        <div>
+          <strong>+15 años</strong>
+          <span>cuidando con amor</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="historia__texto">
+      <p class="historia__subtitulo">NUESTRA HISTORIA</p>
+      <h2 class="historia__titulo">
+        Un hogar nacido desde
+        <span>el corazón</span>
+      </h2>
+      <p class="historia__descripcion">
+        Residencia Las Dalias nació en 2008 con una convicción simple pero
+        poderosa: los adultos mayores merecen vivir sus últimos años con
+        la misma dignidad, alegría y amor con la que vivieron toda su vida.
+      </p>
+      <p class="historia__descripcion">
+        Fundada por una familia que experimentó de primera mano la necesidad
+        de un espacio cálido y profesional para sus propios seres queridos,
+        Las Dalias se construyó sobre valores sólidos: respeto, calidez humana
+        y excelencia en el cuidado geriátrico.
+      </p>
+      <p class="historia__descripcion">
+        Hoy, con más de 15 años de trayectoria y más de 200 familias
+        atendidas, seguimos siendo ese hogar donde cada residente es
+        reconocido, valorado y querido.
+      </p>
+    </div>
+  </div>
+</section>
+
+<!-- Sección Estadísticas -->
+<section class="seccion__estadisticas">
+  <div class="estadisticas__contenedor">
+    <div class="estadistica__item" *ngFor="let stat of estadisticas">
+      <span class="estadistica__numero">{{ stat.numero }}</span>
+      <span class="estadistica__label">{{ stat.label }}</span>
+    </div>
+  </div>
+</section>
+
+<!-- Sección Misión Visión -->
+<section class="seccion__mision">
+  <div class="mision__contenedor">
+    <div class="mision__card">
+      <div class="mision__icono">
+        <i class="fa-solid fa-bullseye"></i>
+      </div>
+      <h3 class="mision__titulo">Nuestra Misión</h3>
+      <p class="mision__descripcion">
+        Brindar atención integral, personalizada y de calidad a los adultos
+        mayores, promoviendo su bienestar físico, emocional y espiritual en
+        un ambiente seguro, cálido y familiar que honre su historia y dignidad.
+      </p>
+    </div>
+
+    <div class="mision__card mision__card--destacado">
+      <div class="mision__icono">
+        <i class="fa-solid fa-eye"></i>
+      </div>
+      <h3 class="mision__titulo">Nuestra Visión</h3>
+      <p class="mision__descripcion">
+        Ser la residencia geriátrica de referencia en Lima, reconocida por
+        la excelencia en el cuidado humano, la innovación en servicios
+        geriátricos y la construcción de una comunidad donde envejecer
+        sea sinónimo de plenitud.
+      </p>
+    </div>
+
+    <div class="mision__card">
+      <div class="mision__icono">
+        <i class="fa-solid fa-compass"></i>
+      </div>
+      <h3 class="mision__titulo">Nuestros Principios</h3>
+      <p class="mision__descripcion">
+        Actuamos guiados por el respeto a la autonomía de cada persona,
+        la comunicación transparente con las familias y el compromiso
+        permanente de mejorar la calidad de vida de quienes nos confían
+        su cuidado y el de sus seres queridos.
+      </p>
+    </div>
+  </div>
+</section>
+
+<!-- Sección Valores -->
+<section class="seccion__valores">
+  <div class="valores__contenedor">
+    <div class="valores__header">
+      <p class="valores__subtitulo">LO QUE NOS GUÍA</p>
+      <h2 class="valores__titulo">Nuestros Valores</h2>
+      <p class="valores__descripcion">
+        Cada decisión que tomamos en Las Dalias está guiada por principios
+        que colocamos al ser humano en el centro de todo.
+      </p>
+    </div>
+
+    <div class="valores__grid">
+      <div class="valor__card" *ngFor="let valor of valores">
+        <div class="valor__icono">
+          <i [class]="valor.icono"></i>
+        </div>
+        <h3 class="valor__titulo">{{ valor.titulo }}</h3>
+        <p class="valor__descripcion">{{ valor.descripcion }}</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Sección Línea de Tiempo -->
+<section class="seccion__timeline">
+  <div class="timeline__contenedor">
+    <div class="timeline__header">
+      <p class="timeline__subtitulo">NUESTRA TRAYECTORIA</p>
+      <h2 class="timeline__titulo">15 años de historia</h2>
+    </div>
+
+    <div class="timeline__linea">
+      <div class="timeline__item" *ngFor="let hito of hitos; let i = index" [class.timeline__item--derecha]="i % 2 !== 0">
+        <div class="timeline__punto"></div>
+        <div class="timeline__card">
+          <span class="timeline__anio">{{ hito.anio }}</span>
+          <h3 class="timeline__card-titulo">{{ hito.titulo }}</h3>
+          <p class="timeline__card-descripcion">{{ hito.descripcion }}</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Sección Equipo -->
+<section class="seccion__equipo">
+  <div class="equipo__contenedor">
+    <div class="equipo__header">
+      <p class="equipo__subtitulo">QUIÉNES NOS CUIDAN</p>
+      <h2 class="equipo__titulo">Nuestro Equipo</h2>
+      <p class="equipo__descripcion">
+        Profesionales comprometidos, capacitados y con vocación genuina
+        por el cuidado de los adultos mayores.
+      </p>
+    </div>
+
+    <div class="equipo__grid">
+      <div class="equipo__card" *ngFor="let miembro of equipo">
+        <div class="equipo__imagen">
+          <img [src]="miembro.imagen" [alt]="miembro.nombre" />
+          <div class="equipo__icono-overlay">
+            <i [class]="miembro.icono"></i>
+          </div>
+        </div>
+        <div class="equipo__info">
+          <h3 class="equipo__nombre">{{ miembro.nombre }}</h3>
+          <p class="equipo__cargo">{{ miembro.cargo }}</p>
+          <p class="equipo__especialidad">{{ miembro.especialidad }}</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Sección Preguntas Frecuentes -->
+<section class="seccion__faq">
+  <div class="faq__contenedor">
+    <div class="faq__izquierda">
+      <p class="faq__subtitulo">RESOLVEMOS TUS DUDAS</p>
+      <h2 class="faq__titulo">
+        Preguntas sobre
+        <span>Las Dalias</span>
+      </h2>
+      <p class="faq__descripcion">
+        Entendemos que elegir una residencia es una decisión importante.
+        Aquí respondemos las preguntas más frecuentes de las familias.
+      </p>
+      <a routerLink="/contacto" class="btn__contacto">
+        ¿Más dudas? Contáctanos
+        <i class="fa-solid fa-arrow-right"></i>
+      </a>
+    </div>
+
+    <div class="faq__derecha">
+      <div
+        class="faq__item"
+        *ngFor="let item of acordeonItems"
+        [class.activo]="item.activo"
+        (click)="toggleAcordeon(item.id)"
+      >
+        <div class="faq__pregunta">
+          <h3>{{ item.pregunta }}</h3>
+          <i class="fa-solid" [class.fa-plus]="!item.activo" [class.fa-minus]="item.activo"></i>
+        </div>
+        <div class="faq__respuesta" *ngIf="item.activo">
+          <p>{{ item.respuesta }}</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Sección CTA Final -->
+<section class="seccion__cta">
+  <div class="cta__contenedor">
+    <img src="/dalias.png" alt="" class="cta__logo" />
+    <h2 class="cta__titulo">¿Quieres conocernos en persona?</h2>
+    <p class="cta__descripcion">
+      Te invitamos a visitar nuestras instalaciones y conocer de cerca
+      el hogar que tenemos preparado para tu familiar.
+    </p>
+    <div class="cta__botones">
+      <a href="https://wa.me/51981776156" target="_blank" class="btn__whatsapp">
+        <i class="fa-brands fa-whatsapp"></i>
+        <span>WhatsApp Directo</span>
+      </a>
+      <a routerLink="/contacto" class="btn__visita">
+        <i class="fa-solid fa-calendar-check"></i>
+        <span>Agendar una visita</span>
+      </a>
+    </div>
+  </div>
+</section>

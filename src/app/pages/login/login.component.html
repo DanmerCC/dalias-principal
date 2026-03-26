@@ -1,0 +1,177 @@
+<div class="login__page">
+
+  <!-- Columna izquierda decorativa -->
+  <div class="login__izquierda">
+    <div class="login__izquierda-overlay"></div>
+    <div class="login__izquierda-contenido">
+      <img src="/logo_header.png" alt="Las Dalias" class="login__logo" />
+      <h2 class="login__izquierda-titulo">
+        Portal Interno
+        <span>Residencia Las Dalias</span>
+      </h2>
+      <p class="login__izquierda-descripcion">
+        Acceso exclusivo para residentes y personal de enfermería
+        de nuestra institución.
+      </p>
+
+      <div class="login__features">
+        <div class="feature__item">
+          <i class="fa-solid fa-shield-heart"></i>
+          <span>Acceso seguro y protegido</span>
+        </div>
+        <div class="feature__item">
+          <i class="fa-solid fa-lock"></i>
+          <span>Datos cifrados y privados</span>
+        </div>
+        <div class="feature__item">
+          <i class="fa-solid fa-clock"></i>
+          <span>Disponible las 24 horas</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Columna derecha: formulario -->
+  <div class="login__derecha">
+    <div class="login__card">
+
+      <!-- Logo mobile -->
+      <div class="login__logo-mobile">
+        <img src="/dalias.png" alt="Las Dalias" />
+      </div>
+
+      <!-- PASO 1: Selección de tipo -->
+      <div class="login__paso" *ngIf="!tipoSeleccionado">
+        <div class="login__header">
+          <h1 class="login__titulo">Bienvenido</h1>
+          <p class="login__subtitulo">¿Cómo deseas ingresar?</p>
+        </div>
+
+        <div class="tipo__grid">
+
+          <button class="tipo__card" (click)="seleccionarTipo('residente')">
+            <div class="tipo__icono tipo__icono--residente">
+              <i class="fa-solid fa-person-shelter"></i>
+            </div>
+            <h3>Soy Residente</h3>
+            <p>Accede a tu información personal, actividades y comunicados</p>
+            <span class="tipo__arrow">
+              <i class="fa-solid fa-arrow-right"></i>
+            </span>
+          </button>
+
+          <button class="tipo__card" (click)="seleccionarTipo('enfermeria')">
+            <div class="tipo__icono tipo__icono--enfermeria">
+              <i class="fa-solid fa-user-nurse"></i>
+            </div>
+            <h3>Área de Enfermería</h3>
+            <p>Accede al panel de gestión, registros y atención de residentes</p>
+            <span class="tipo__arrow">
+              <i class="fa-solid fa-arrow-right"></i>
+            </span>
+          </button>
+
+        </div>
+
+        <p class="login__volver-inicio">
+          <a routerLink="/">
+            <i class="fa-solid fa-arrow-left"></i>
+            Volver al sitio web
+          </a>
+        </p>
+      </div>
+
+      <!-- PASO 2: Formulario de login -->
+      <div class="login__paso" *ngIf="tipoSeleccionado">
+
+        <button class="login__back" (click)="volverSeleccion()">
+          <i class="fa-solid fa-arrow-left"></i>
+          Cambiar tipo de acceso
+        </button>
+
+        <div class="login__header">
+          <div class="login__tipo-badge" [class.badge--enfermeria]="tipoSeleccionado === 'enfermeria'">
+            <i class="fa-solid fa-person-shelter" *ngIf="tipoSeleccionado === 'residente'"></i>
+            <i class="fa-solid fa-user-nurse" *ngIf="tipoSeleccionado === 'enfermeria'"></i>
+            <span *ngIf="tipoSeleccionado === 'residente'">Acceso Residente</span>
+            <span *ngIf="tipoSeleccionado === 'enfermeria'">Acceso Enfermería</span>
+          </div>
+          <h1 class="login__titulo">Iniciar sesión</h1>
+          <p class="login__subtitulo">Ingresa tus credenciales para continuar</p>
+        </div>
+
+        <form class="login__form" (ngSubmit)="iniciarSesion()">
+
+          <div class="form__grupo">
+            <label class="form__label">Usuario</label>
+            <div class="form__input-wrapper">
+              <i class="fa-solid fa-user form__icon"></i>
+              <input
+                type="text"
+                class="form__input"
+                [placeholder]="tipoSeleccionado === 'residente' ? 'Tu usuario de residente' : 'Tu usuario de enfermería'"
+                [(ngModel)]="formulario.usuario"
+                name="usuario"
+                required
+                autocomplete="username"
+              />
+            </div>
+          </div>
+
+          <div class="form__grupo">
+            <label class="form__label">Contraseña</label>
+            <div class="form__input-wrapper">
+              <i class="fa-solid fa-lock form__icon"></i>
+              <input
+                [type]="mostrarPassword ? 'text' : 'password'"
+                class="form__input"
+                placeholder="Tu contraseña"
+                [(ngModel)]="formulario.password"
+                name="password"
+                required
+                autocomplete="current-password"
+              />
+              <button
+                type="button"
+                class="form__toggle-pass"
+                (click)="togglePassword()"
+              >
+                <i class="fa-solid" [class.fa-eye]="!mostrarPassword" [class.fa-eye-slash]="mostrarPassword"></i>
+              </button>
+            </div>
+          </div>
+
+          <!-- Error -->
+          <div class="login__error" *ngIf="errorMensaje">
+            <i class="fa-solid fa-circle-exclamation"></i>
+            <span>{{ errorMensaje }}</span>
+          </div>
+
+          <!-- Demo hint -->
+          <!-- <div class="login__demo">
+            <i class="fa-solid fa-circle-info"></i>
+            <span>Demo: usuario <strong>{{ tipoSeleccionado }}</strong> / contraseña <strong>1234</strong></span>
+          </div> -->
+
+          <button type="submit" class="btn__ingresar" [disabled]="cargando">
+            <div class="btn__spinner" *ngIf="cargando"></div>
+            <span *ngIf="!cargando">
+              <i class="fa-solid fa-right-to-bracket"></i>
+              Ingresar
+            </span>
+            <span *ngIf="cargando">Verificando...</span>
+          </button>
+
+        </form>
+
+        <p class="login__ayuda">
+          ¿Problemas para ingresar? Contacta a
+          <a href="https://wa.me/51981776156" target="_blank">administración</a>
+        </p>
+
+      </div>
+
+    </div>
+  </div>
+
+</div>

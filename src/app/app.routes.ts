@@ -13,8 +13,23 @@ import { ResidenciaPermanenteComponent } from './pages/servicios/planes-de-estad
 import { ResidenciaTemporalComponent } from './pages/servicios/planes-de-estadia/residencia-temporal/residencia-temporal.component';
 import { ResidenciaPostOperatoriaComponent } from './pages/servicios/planes-de-estadia/residencia-post-operatoria/residencia-post-operatoria.component';
 import { TerapiasYRehabilitacionComponent } from './pages/servicios/terapias-y-rehabilitacion/terapias-y-rehabilitacion.component';
+import { LoginComponent } from './pages/login/login.component';
+import { PortalResidenteComponent } from './pages/portal-residente/portal-residente.component';
+import { PortalEnfermeriaComponent } from './pages/portal-enfermeria/portal-enfermeria.component';
 
 export const routes: Routes = [
+  {
+    path: 'login',
+    component: LoginComponent,
+  },
+  {
+    path: 'portal-residente',
+    component: PortalResidenteComponent,
+  },
+  {
+    path: 'portal-enfermeria',
+    component: PortalEnfermeriaComponent,
+  },
   {
     path: 'inicio',
     component: InicioComponent,
@@ -59,7 +74,7 @@ export const routes: Routes = [
       {
         path: 'terapias-y-rehabilitacion',
         component: TerapiasYRehabilitacionComponent,
-      }
+      },
     ],
   },
   {

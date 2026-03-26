@@ -1,13 +1,23 @@
-<app-header></app-header>
+<app-header *ngIf="mostrarLayout"></app-header>
 <router-outlet></router-outlet>
-<app-footer></app-footer>
+<app-footer *ngIf="mostrarLayout"></app-footer>
 
-<!-- Botón flotante de scroll to top (izquierda abajo) -->
-<button (click)="scrollToTop()" class="float-button scroll-top-button" [class.show]="showScrollButton">
+<!-- Botón flotante scroll to top -->
+<button
+  *ngIf="mostrarLayout"
+  (click)="scrollToTop()"
+  class="float-button scroll-top-button"
+  [class.show]="showScrollButton"
+>
   <i class="fas fa-arrow-up"></i>
 </button>
 
-<!-- Botón flotante de WhatsApp (derecha abajo) - Enlace dinámico -->
-<a [href]="whatsappLink" target="_blank" class="float-button whatsapp-button">
+<!-- Botón flotante WhatsApp -->
+<a
+  *ngIf="mostrarLayout"
+  [href]="whatsappLink"
+  target="_blank"
+  class="float-button whatsapp-button"
+>
   <i class="fab fa-whatsapp"></i>
 </a>

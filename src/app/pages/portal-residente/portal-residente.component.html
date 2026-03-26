@@ -1,0 +1,496 @@
+<div class="portal" [class.sidebar-colapsado]="sidebarColapsado">
+  <!-- SIDEBAR -->
+  <aside class="portal__sidebar">
+    <div class="sidebar__header">
+      <div class="sidebar__perfil">
+        <div class="perfil__foto">
+          <img [src]="residente.foto" [alt]="residente.nombre" />
+        </div>
+        <div>
+          <p class="perfil__nombre">{{ residente.nombre }}</p>
+          <p class="perfil__hab">Hab. {{ residente.habitacion }}</p>
+        </div>
+      </div>
+
+      <button class="sidebar__toggle" (click)="toggleSidebar()">
+        <i
+          class="fa-solid"
+          [class.fa-bars]="sidebarColapsado"
+          [class.fa-xmark]="!sidebarColapsado"
+        ></i>
+      </button>
+    </div>
+
+    <nav class="sidebar__nav">
+      <button
+        class="nav__item"
+        [class.activo]="seccionActiva === 'dashboard'"
+        (click)="navegarA('dashboard')"
+      >
+        <i class="fa-solid fa-house-medical"></i>
+        <span *ngIf="!sidebarColapsado">Inicio</span>
+      </button>
+
+      <button
+        class="nav__item"
+        [class.activo]="seccionActiva === 'signos-vitales'"
+        (click)="navegarA('signos-vitales')"
+      >
+        <i class="fa-solid fa-heart-pulse"></i>
+        <span *ngIf="!sidebarColapsado">Signos Vitales</span>
+      </button>
+
+      <button
+        class="nav__item"
+        [class.activo]="seccionActiva === 'galeria'"
+        (click)="navegarA('galeria')"
+      >
+        <i class="fa-solid fa-images"></i>
+        <span *ngIf="!sidebarColapsado">Galería</span>
+      </button>
+
+      <button
+        class="nav__item"
+        [class.activo]="seccionActiva === 'chat'"
+        (click)="navegarA('chat')"
+      >
+        <i class="fa-solid fa-comments"></i>
+        <span *ngIf="!sidebarColapsado">Chat con Geriatra</span>
+      </button>
+
+      <button
+        class="nav__item"
+        [class.activo]="seccionActiva === 'citas'"
+        (click)="navegarA('citas')"
+      >
+        <i class="fa-solid fa-calendar-check"></i>
+        <span *ngIf="!sidebarColapsado">Citas</span>
+      </button>
+
+      <button
+        class="nav__item"
+        [class.activo]="seccionActiva === 'historial'"
+        (click)="navegarA('historial')"
+      >
+        <i class="fa-solid fa-file-medical"></i>
+        <span *ngIf="!sidebarColapsado">Historial Clínico</span>
+      </button>
+    </nav>
+
+    <button class="sidebar__cerrar-sesion" (click)="cerrarSesion()">
+      <i class="fa-solid fa-right-from-bracket"></i>
+      <span *ngIf="!sidebarColapsado">Cerrar sesión</span>
+    </button>
+  </aside>
+
+  <!-- CONTENIDO PRINCIPAL -->
+  <main class="portal__main">
+    <!-- Topbar -->
+    <div class="portal__topbar">
+      <div class="topbar__izquierda">
+        <h2 class="topbar__titulo">
+          <span *ngIf="seccionActiva === 'dashboard'"
+            >Bienvenido, Portal Familiar</span
+          >
+          <span *ngIf="seccionActiva === 'signos-vitales'">Signos Vitales</span>
+          <span *ngIf="seccionActiva === 'galeria'">Galería de Momentos</span>
+          <span *ngIf="seccionActiva === 'chat'">Chat con Geriatra</span>
+          <span *ngIf="seccionActiva === 'citas'">Citas Médicas</span>
+          <span *ngIf="seccionActiva === 'historial'">Historial Clínico</span>
+        </h2>
+      </div>
+      <div class="topbar__derecha">
+        <div class="topbar__fecha">
+          <i class="fa-regular fa-calendar"></i>
+          <span>{{ residente.familiar }}</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- ==================
+         DASHBOARD
+    =================== -->
+    <div class="portal__contenido" *ngIf="seccionActiva === 'dashboard'">
+      <div class="dashboard__cards">
+        <div class="dash__card">
+          <div class="dash__card-icono dash__card-icono--azul">
+            <i class="fa-solid fa-heart-pulse"></i>
+          </div>
+          <div class="dash__card-info">
+            <p class="dash__card-label">Signos Vitales</p>
+            <p class="dash__card-valor">
+              {{ signosNormales }}/{{ signosVitales.length }} normales
+            </p>
+          </div>
+        </div>
+
+        <div class="dash__card">
+          <div class="dash__card-icono dash__card-icono--dorado">
+            <i class="fa-solid fa-calendar-check"></i>
+          </div>
+          <div class="dash__card-info">
+            <p class="dash__card-label">Próxima Cita</p>
+            <p class="dash__card-valor">
+              {{ proximaCita?.fecha || "Sin citas" }}
+            </p>
+          </div>
+        </div>
+
+        <div class="dash__card">
+          <div class="dash__card-icono dash__card-icono--verde">
+            <i class="fa-solid fa-images"></i>
+          </div>
+          <div class="dash__card-info">
+            <p class="dash__card-label">Fotos y Videos</p>
+            <p class="dash__card-valor">{{ fotos.length }} recientes</p>
+          </div>
+        </div>
+
+        <div class="dash__card">
+          <div class="dash__card-icono dash__card-icono--azul">
+            <i class="fa-solid fa-user-doctor"></i>
+          </div>
+          <div class="dash__card-info">
+            <p class="dash__card-label">Médico Tratante</p>
+            <p class="dash__card-valor">{{ residente.medico }}</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="dashboard__grid">
+        <div class="dashboard__bloque">
+          <h3 class="bloque__titulo">
+            <i class="fa-solid fa-user"></i>
+            Información del Residente
+          </h3>
+          <div class="perfil__detalle">
+            <div class="perfil__detalle-foto">
+              <img [src]="residente.foto" [alt]="residente.nombre" />
+            </div>
+            <div class="perfil__detalle-datos">
+              <p><span>Nombre:</span> {{ residente.nombre }}</p>
+              <p><span>Edad:</span> {{ residente.edad }} años</p>
+              <p><span>Habitación:</span> {{ residente.habitacion }}</p>
+              <p><span>Ingreso:</span> {{ residente.fechaIngreso }}</p>
+              <p><span>Médico:</span> {{ residente.medico }}</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="dashboard__bloque">
+  <h3 class="bloque__titulo">
+    <i class="fa-solid fa-heart-pulse"></i>
+    Últimos Signos Vitales
+  </h3>
+  <div class="signos__mini-grid">
+    <div
+      class="signo__mini"
+      *ngFor="let signo of signosVitales.slice(0, 4)"
+      [class.signo__mini--atencion]="signo.estado === 'atencion'"
+      [class.signo__mini--alerta]="signo.estado === 'alerta'"
+    >
+      <i [class]="signo.icono"></i>
+      <div>
+        <p class="signo__mini-nombre">{{ signo.nombre }}</p>
+        <p class="signo__mini-valor">{{ signo.valor }} <span>{{ signo.unidad }}</span></p>
+      </div>
+    </div>
+  </div>
+  <button class="bloque__ver-mas" (click)="navegarA('signos-vitales')">
+    Ver todos los signos vitales
+    <i class="fa-solid fa-arrow-right"></i>
+  </button>
+</div>
+
+        <div class="dashboard__bloque">
+          <h3 class="bloque__titulo">
+            <i class="fa-solid fa-calendar-check"></i>
+            Próximas Citas
+          </h3>
+          <div class="citas__lista">
+            <div
+              class="cita__mini"
+              *ngFor="let cita of citas"
+              [class.cita__mini--completada]="cita.completada"
+            >
+              <div class="cita__mini-icono">
+                <i [class]="cita.icono"></i>
+              </div>
+              <div class="cita__mini-info">
+                <p class="cita__mini-especialidad">{{ cita.especialidad }}</p>
+                <p class="cita__mini-fecha">
+                  {{ cita.fecha }} — {{ cita.hora }}
+                </p>
+              </div>
+              <span
+                class="cita__mini-badge"
+                [class.badge--pendiente]="!cita.completada"
+                [class.badge--completada]="cita.completada"
+              >
+                <i class="fa-solid fa-clock" *ngIf="!cita.completada"></i>
+                <i class="fa-solid fa-circle-check" *ngIf="cita.completada"></i>
+                {{ cita.completada ? "Realizada" : "Pendiente" }}
+              </span>
+            </div>
+          </div>
+        </div>
+
+        <div class="dashboard__bloque">
+          <h3 class="bloque__titulo">
+            <i class="fa-solid fa-images"></i>
+            Últimas Fotos
+          </h3>
+          <div class="fotos__mini-grid">
+            <div class="foto__mini" *ngFor="let foto of fotos.slice(0, 4)">
+              <img [src]="foto.url" [alt]="foto.descripcion" />
+              <div class="foto__mini-overlay">
+                <i class="fa-solid fa-play" *ngIf="foto.tipo === 'video'"></i>
+              </div>
+            </div>
+          </div>
+          <button class="bloque__ver-mas" (click)="navegarA('galeria')">
+            Ver galería completa
+            <i class="fa-solid fa-arrow-right"></i>
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- ==================
+         SIGNOS VITALES
+    =================== -->
+    <div class="portal__contenido" *ngIf="seccionActiva === 'signos-vitales'">
+      <div class="seccion__descripcion">
+        <p>
+          Registro de signos vitales promedio de
+          <strong>{{ residente.nombre }}</strong
+          >. Actualizado por el equipo de enfermería.
+        </p>
+      </div>
+      <div class="signos__grid">
+        <div
+          class="signo__card"
+          *ngFor="let signo of signosVitales"
+          [class.signo__card--atencion]="signo.estado === 'atencion'"
+          [class.signo__card--alerta]="signo.estado === 'alerta'"
+        >
+          <div class="signo__icono">
+            <i [class]="signo.icono"></i>
+          </div>
+          <div class="signo__info">
+            <p class="signo__nombre">{{ signo.nombre }}</p>
+            <p class="signo__valor">
+              {{ signo.valor }}
+              <span class="signo__unidad">{{ signo.unidad }}</span>
+            </p>
+            <p class="signo__fecha">{{ signo.fecha }}</p>
+          </div>
+          <div class="signo__estado">
+            <span [class]="'estado__badge estado__badge--' + signo.estado">
+              <i
+                class="fa-solid fa-circle-check"
+                *ngIf="signo.estado === 'normal'"
+              ></i>
+              <i
+                class="fa-solid fa-triangle-exclamation"
+                *ngIf="signo.estado === 'atencion'"
+              ></i>
+              <i
+                class="fa-solid fa-circle-exclamation"
+                *ngIf="signo.estado === 'alerta'"
+              ></i>
+              {{
+                signo.estado === "normal"
+                  ? "Normal"
+                  : signo.estado === "atencion"
+                    ? "Atención"
+                    : "Alerta"
+              }}
+            </span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ==================
+         GALERÍA
+    =================== -->
+    <div class="portal__contenido" *ngIf="seccionActiva === 'galeria'">
+      <div class="galeria__filtros">
+        <button
+          class="filtro__btn"
+          [class.activo]="filtroGaleria === 'todos'"
+          (click)="filtroGaleria = 'todos'"
+        >
+          Todos
+        </button>
+        <button
+          class="filtro__btn"
+          [class.activo]="filtroGaleria === 'foto'"
+          (click)="filtroGaleria = 'foto'"
+        >
+          <i class="fa-solid fa-image"></i> Fotos
+        </button>
+        <button
+          class="filtro__btn"
+          [class.activo]="filtroGaleria === 'video'"
+          (click)="filtroGaleria = 'video'"
+        >
+          <i class="fa-solid fa-play"></i> Videos
+        </button>
+      </div>
+
+      <div class="galeria__grid">
+        <div class="galeria__item" *ngFor="let foto of fotasFiltradas">
+          <div class="galeria__imagen">
+            <img [src]="foto.url" [alt]="foto.descripcion" />
+            <div class="galeria__overlay">
+              <i class="fa-solid fa-play" *ngIf="foto.tipo === 'video'"></i>
+              <i
+                class="fa-solid fa-magnifying-glass-plus"
+                *ngIf="foto.tipo === 'foto'"
+              ></i>
+            </div>
+            <span class="galeria__tipo" *ngIf="foto.tipo === 'video'">
+              <i class="fa-solid fa-play"></i> Video
+            </span>
+          </div>
+          <div class="galeria__info">
+            <p class="galeria__descripcion">{{ foto.descripcion }}</p>
+            <p class="galeria__fecha">{{ foto.fecha }}</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ==================
+         CHAT
+    =================== -->
+    <div
+      class="portal__contenido portal__contenido--chat"
+      *ngIf="seccionActiva === 'chat'"
+    >
+      <div class="chat__contenedor">
+        <div class="chat__header">
+          <div class="chat__doctor-info">
+            <div class="chat__doctor-avatar">
+              <i class="fa-solid fa-user-doctor"></i>
+            </div>
+            <div>
+              <p class="chat__doctor-nombre">Dra. Carmen Vásquez</p>
+              <p class="chat__doctor-cargo">Geriatra — Médico Tratante</p>
+            </div>
+          </div>
+          <span class="chat__estado">
+            <i class="fa-solid fa-circle"></i> En línea
+          </span>
+        </div>
+
+        <div class="chat__mensajes">
+          <div
+            class="chat__mensaje"
+            *ngFor="let msg of mensajesChat"
+            [class.chat__mensaje--familia]="msg.autor === 'familia'"
+          >
+            <div class="mensaje__avatar" *ngIf="msg.autor === 'geriatra'">
+              <i class="fa-solid fa-user-doctor"></i>
+            </div>
+            <div class="mensaje__burbuja">
+              <p class="mensaje__autor" *ngIf="msg.autor === 'geriatra'">
+                {{ msg.nombre }}
+              </p>
+              <p class="mensaje__texto">{{ msg.mensaje }}</p>
+              <span class="mensaje__hora">{{ msg.hora }}</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="chat__input">
+          <input
+            type="text"
+            class="chat__input-text"
+            placeholder="Escribe un mensaje..."
+            [(ngModel)]="mensajeNuevo"
+            (keyup.enter)="enviarMensaje()"
+          />
+          <button
+            class="chat__btn-enviar"
+            (click)="enviarMensaje()"
+            [disabled]="!mensajeNuevo.trim()"
+          >
+            <i class="fa-solid fa-paper-plane"></i>
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- ==================
+         CITAS
+    =================== -->
+    <div class="portal__contenido" *ngIf="seccionActiva === 'citas'">
+      <div class="citas__grid">
+        <div
+          class="cita__card"
+          *ngFor="let cita of citas"
+          [class.cita__card--completada]="cita.completada"
+        >
+          <div class="cita__icono">
+            <i [class]="cita.icono"></i>
+          </div>
+          <div class="cita__info">
+            <h3 class="cita__especialidad">{{ cita.especialidad }}</h3>
+            <p class="cita__doctor">{{ cita.doctor }}</p>
+            <div class="cita__tiempo">
+              <span
+                ><i class="fa-regular fa-calendar"></i> {{ cita.fecha }}</span
+              >
+              <span><i class="fa-regular fa-clock"></i> {{ cita.hora }}</span>
+            </div>
+          </div>
+          <span
+            class="cita__badge"
+            [class.badge--pendiente]="!cita.completada"
+            [class.badge--completada]="cita.completada"
+          >
+            <i class="fa-solid fa-clock" *ngIf="!cita.completada"></i>
+            <i class="fa-solid fa-circle-check" *ngIf="cita.completada"></i>
+            {{ cita.completada ? "Realizada" : "Pendiente" }}
+          </span>
+        </div>
+      </div>
+    </div>
+
+    <!-- ==================
+         HISTORIAL
+    =================== -->
+   <div class="portal__contenido" *ngIf="seccionActiva === 'historial'">
+  <div class="historial__info">
+    <i class="fa-solid fa-circle-info"></i>
+    El historial se genera automáticamente con las acciones del equipo de enfermería.
+  </div>
+  <div class="historial__lista">
+    <div class="historial__item" *ngFor="let registro of historialClinico">
+      <div class="historial__icono"
+        [class.historial__icono--signo]="registro.origen === 'signo'"
+        [class.historial__icono--med]="registro.origen === 'medicacion'"
+        [class.historial__icono--cita]="registro.origen === 'cita'"
+      >
+        <i [class]="registro.icono"></i>
+      </div>
+      <div class="historial__linea"></div>
+      <div class="historial__card">
+        <div class="historial__card-header">
+          <span class="historial__tipo">{{ registro.tipo }}</span>
+          <span class="historial__fecha">{{ registro.fecha }} · {{ registro.hora }}</span>
+        </div>
+        <p class="historial__descripcion">{{ registro.descripcion }}</p>
+        <p class="historial__doctor">
+          <i class="fa-solid fa-user-nurse"></i>
+          {{ registro.generadoPor }}
+        </p>
+      </div>
+    </div>
+  </div>
+</div>
+  </main>
+</div>

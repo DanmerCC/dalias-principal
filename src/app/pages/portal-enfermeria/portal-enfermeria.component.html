@@ -1,0 +1,739 @@
+<div class="portal" [class.sidebar-colapsado]="sidebarColapsado">
+
+  <!-- SIDEBAR -->
+  <aside class="portal__sidebar">
+    <div class="sidebar__header">
+      <div class="sidebar__perfil">
+        <div class="perfil__foto">
+          <img [src]="personal.foto" [alt]="personal.nombre" />
+        </div>
+        <div>
+          <p class="perfil__nombre">{{ personal.nombre }}</p>
+          <p class="perfil__cargo">{{ personal.turno }}</p>
+        </div>
+      </div>
+      <button class="sidebar__toggle" (click)="toggleSidebar()">
+        <i class="fa-solid" [class.fa-bars]="sidebarColapsado" [class.fa-xmark]="!sidebarColapsado"></i>
+      </button>
+    </div>
+
+    <nav class="sidebar__nav">
+      <button class="nav__item" [class.activo]="seccionActiva === 'dashboard'" (click)="navegarA('dashboard')">
+        <i class="fa-solid fa-gauge"></i>
+        <span *ngIf="!sidebarColapsado">Dashboard</span>
+      </button>
+      <button class="nav__item" [class.activo]="seccionActiva === 'residentes'" (click)="navegarA('residentes')">
+        <i class="fa-solid fa-bed-pulse"></i>
+        <span *ngIf="!sidebarColapsado">Residentes</span>
+      </button>
+      <button class="nav__item" [class.activo]="seccionActiva === 'signos-vitales'" (click)="navegarA('signos-vitales')">
+        <i class="fa-solid fa-heart-pulse"></i>
+        <span *ngIf="!sidebarColapsado">Signos Vitales</span>
+      </button>
+      <button class="nav__item" [class.activo]="seccionActiva === 'medicacion'" (click)="navegarA('medicacion')">
+        <i class="fa-solid fa-pills"></i>
+        <span *ngIf="!sidebarColapsado">Medicación</span>
+      </button>
+      <button class="nav__item" [class.activo]="seccionActiva === 'turnos'" (click)="navegarA('turnos')">
+        <i class="fa-solid fa-clock-rotate-left"></i>
+        <span *ngIf="!sidebarColapsado">Turnos</span>
+      </button>
+    </nav>
+
+    <button class="sidebar__cerrar-sesion" (click)="cerrarSesion()">
+      <i class="fa-solid fa-right-from-bracket"></i>
+      <span *ngIf="!sidebarColapsado">Cerrar sesión</span>
+    </button>
+  </aside>
+
+  <!-- MAIN -->
+  <main class="portal__main">
+
+    <!-- Topbar -->
+    <div class="portal__topbar">
+      <div class="topbar__izquierda">
+        <button class="topbar__back" *ngIf="residenteSeleccionado" (click)="cerrarFicha()">
+          <i class="fa-solid fa-arrow-left"></i>
+        </button>
+        <h2 class="topbar__titulo">
+          <span *ngIf="!residenteSeleccionado && seccionActiva === 'dashboard'">Dashboard</span>
+          <span *ngIf="!residenteSeleccionado && seccionActiva === 'residentes'">Residentes</span>
+          <span *ngIf="!residenteSeleccionado && seccionActiva === 'signos-vitales'">Signos Vitales</span>
+          <span *ngIf="!residenteSeleccionado && seccionActiva === 'medicacion'">Control de Medicación</span>
+          <span *ngIf="!residenteSeleccionado && seccionActiva === 'turnos'">Turnos del Personal</span>
+          <span *ngIf="residenteSeleccionado">{{ residenteSeleccionado.nombre }}</span>
+        </h2>
+      </div>
+      <div class="topbar__derecha">
+        <div class="topbar__turno">
+          <i class="fa-solid fa-clock"></i>
+          <span>{{ personal.turno }}</span>
+        </div>
+        <div class="topbar__mensajes" *ngIf="totalMensajesNoLeidos > 0">
+          <i class="fa-solid fa-comment-dots"></i>
+          <span>{{ totalMensajesNoLeidos }} nuevo{{ totalMensajesNoLeidos > 1 ? 's' : '' }}</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- ==================
+         DASHBOARD
+    =================== -->
+    <div class="portal__contenido" *ngIf="seccionActiva === 'dashboard' && !residenteSeleccionado">
+      <div class="dashboard__cards">
+        <div class="dash__card">
+          <div class="dash__card-icono dash__icono--azul"><i class="fa-solid fa-bed-pulse"></i></div>
+          <div><p class="dash__label">Total Residentes</p><p class="dash__valor">{{ residentes.length }}</p></div>
+        </div>
+        <div class="dash__card">
+          <div class="dash__card-icono dash__icono--verde"><i class="fa-solid fa-circle-check"></i></div>
+          <div><p class="dash__label">Estables</p><p class="dash__valor">{{ totalEstables }}</p></div>
+        </div>
+        <div class="dash__card">
+          <div class="dash__card-icono dash__icono--amarillo"><i class="fa-solid fa-triangle-exclamation"></i></div>
+          <div><p class="dash__label">En Atención</p><p class="dash__valor">{{ totalAtencion }}</p></div>
+        </div>
+        <div class="dash__card">
+          <div class="dash__card-icono dash__icono--rojo"><i class="fa-solid fa-circle-exclamation"></i></div>
+          <div><p class="dash__label">Críticos</p><p class="dash__valor">{{ totalCriticos }}</p></div>
+        </div>
+        <div class="dash__card">
+          <div class="dash__card-icono dash__icono--azul"><i class="fa-solid fa-pills"></i></div>
+          <div><p class="dash__label">Med. Pendiente</p><p class="dash__valor">{{ totalMedicacionPendiente }}</p></div>
+        </div>
+      </div>
+
+      <div class="dashboard__grid">
+
+        <!-- Medicación: últimos 5 -->
+        <div class="dashboard__bloque">
+          <h3 class="bloque__titulo">
+            <i class="fa-solid fa-pills"></i>
+            Medicación Pendiente
+          </h3>
+          <div class="medicacion__lista">
+            <div
+              class="medicacion__item"
+              *ngFor="let med of medicacionesDashboard"
+              [class.medicacion__item--done]="med.administrado"
+            >
+              <div class="medicacion__estado">
+                <i class="fa-solid fa-circle-check" *ngIf="med.administrado"></i>
+                <i class="fa-regular fa-circle" *ngIf="!med.administrado"></i>
+              </div>
+              <div class="medicacion__info">
+                <p class="medicacion__residente">{{ nombreResidente(med.residenteId) }}</p>
+                <p class="medicacion__detalle">{{ med.medicamento }} · {{ med.dosis }}</p>
+                <span class="medicacion__hora">{{ med.hora }}</span>
+              </div>
+              <button class="btn__administrar" *ngIf="!med.administrado" (click)="marcarAdministrado(med)">
+                <i class="fa-solid fa-check"></i>
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Mensajes no leídos -->
+        <div class="dashboard__bloque">
+          <h3 class="bloque__titulo">
+            <i class="fa-solid fa-comment-dots"></i>
+            Mensajes Nuevos
+            <span class="bloque__badge" *ngIf="totalMensajesNoLeidos > 0">{{ totalMensajesNoLeidos }}</span>
+          </h3>
+
+          <div class="chat__bandeja" *ngIf="residentsConMensajesNoLeidos.length > 0">
+            <div
+              class="bandeja__item"
+              *ngFor="let r of residentsConMensajesNoLeidos"
+              (click)="abrirChatResidente(r)"
+            >
+              <div class="bandeja__foto">
+                <img [src]="r.foto" [alt]="r.nombre" />
+                <span class="bandeja__badge">{{ mensajesNoLeidosDe(r.id) }}</span>
+              </div>
+              <div class="bandeja__info">
+                <p class="bandeja__nombre">{{ r.nombre }}</p>
+                <p class="bandeja__familiar">{{ r.familiar }}</p>
+                <p class="bandeja__ultimo" *ngIf="ultimoMensajeDe(r.id)">
+                  {{ ultimoMensajeDe(r.id)!.mensaje | slice:0:45 }}...
+                </p>
+              </div>
+              <i class="fa-solid fa-chevron-right bandeja__arrow"></i>
+            </div>
+          </div>
+
+          <div class="bandeja__vacio" *ngIf="residentsConMensajesNoLeidos.length === 0">
+            <i class="fa-solid fa-check-circle"></i>
+            <p>Sin mensajes nuevos</p>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- ==================
+         RESIDENTES (lista)
+    =================== -->
+    <div class="portal__contenido" *ngIf="seccionActiva === 'residentes' && !residenteSeleccionado">
+      <div class="residentes__busqueda">
+        <div class="busqueda__wrapper">
+          <i class="fa-solid fa-magnifying-glass"></i>
+          <input type="text" class="busqueda__input" placeholder="Buscar residente..." [(ngModel)]="busquedaResidente" />
+        </div>
+      </div>
+
+      <div class="residentes__grid">
+        <div class="residente__card" *ngFor="let r of residentesFiltrados" (click)="abrirFicha(r)">
+          <div class="residente__card-header">
+            <div class="residente__foto">
+              <img [src]="r.foto" [alt]="r.nombre" />
+            </div>
+            <span class="residente__estado" [class.estado--estable]="r.estado === 'estable'" [class.estado--atencion]="r.estado === 'atencion'" [class.estado--critico]="r.estado === 'critico'">
+              {{ r.estado }}
+            </span>
+          </div>
+          <div class="residente__card-body">
+            <h3 class="residente__nombre">{{ r.nombre }}</h3>
+            <p class="residente__diagnostico" *ngIf="r.diagnostico">{{ r.diagnostico }}</p>
+            <p class="residente__diagnostico residente__sin-diagnostico" *ngIf="!r.diagnostico">Sin diagnóstico registrado</p>
+            <div class="residente__datos">
+              <span><i class="fa-solid fa-door-open"></i> Hab. {{ r.habitacion }}</span>
+              <span><i class="fa-solid fa-cake-candles"></i> {{ r.edad }} años</span>
+            </div>
+            <p class="residente__medico"><i class="fa-solid fa-user-doctor"></i> {{ r.medico }}</p>
+          </div>
+          <div class="residente__card-footer">
+            <span>Ver ficha completa <i class="fa-solid fa-arrow-right"></i></span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ==================
+         FICHA RESIDENTE
+    =================== -->
+    <div class="portal__contenido" *ngIf="residenteSeleccionado">
+
+      <div class="ficha__resumen">
+        <div class="ficha__foto">
+          <img [src]="residenteSeleccionado.foto" [alt]="residenteSeleccionado.nombre" />
+        </div>
+        <div class="ficha__datos">
+          <h2 class="ficha__nombre">{{ residenteSeleccionado.nombre }}</h2>
+          <div class="ficha__meta">
+            <span><i class="fa-solid fa-door-open"></i> Hab. {{ residenteSeleccionado.habitacion }}</span>
+            <span><i class="fa-solid fa-cake-candles"></i> {{ residenteSeleccionado.edad }} años</span>
+            <span><i class="fa-solid fa-user-doctor"></i> {{ residenteSeleccionado.medico }}</span>
+            <span><i class="fa-solid fa-users"></i> {{ residenteSeleccionado.familiar }}</span>
+            <span><i class="fa-regular fa-calendar"></i> Ingreso: {{ residenteSeleccionado.fechaIngreso }}</span>
+          </div>
+          <p class="ficha__diagnostico" *ngIf="residenteSeleccionado.diagnostico">{{ residenteSeleccionado.diagnostico }}</p>
+          <p class="ficha__diagnostico ficha__sin-diagnostico" *ngIf="!residenteSeleccionado.diagnostico">Sin diagnóstico registrado</p>
+        </div>
+        <span class="ficha__estado" [class.estado--estable]="residenteSeleccionado.estado === 'estable'" [class.estado--atencion]="residenteSeleccionado.estado === 'atencion'" [class.estado--critico]="residenteSeleccionado.estado === 'critico'">
+          {{ residenteSeleccionado.estado }}
+        </span>
+      </div>
+
+      <!-- Tabs -->
+      <div class="ficha__tabs">
+        <button class="ficha__tab" [class.activo]="fichaTab === 'signos'" (click)="fichaTab = 'signos'">
+          <i class="fa-solid fa-heart-pulse"></i> Signos Vitales
+        </button>
+        <button class="ficha__tab" [class.activo]="fichaTab === 'medicacion'" (click)="fichaTab = 'medicacion'">
+          <i class="fa-solid fa-pills"></i> Medicación
+        </button>
+        <button class="ficha__tab" [class.activo]="fichaTab === 'citas'" (click)="fichaTab = 'citas'">
+          <i class="fa-solid fa-calendar-check"></i> Citas
+        </button>
+        <button class="ficha__tab" [class.activo]="fichaTab === 'galeria'" (click)="fichaTab = 'galeria'">
+          <i class="fa-solid fa-images"></i> Galería
+        </button>
+        <button class="ficha__tab ficha__tab--chat" [class.activo]="fichaTab === 'chat'" (click)="fichaTab = 'chat'; marcarChatLeido(residenteSeleccionado.id)">
+          <i class="fa-solid fa-comments"></i> Chat
+          <span class="tab__badge" *ngIf="mensajesNoLeidosDe(residenteSeleccionado.id) > 0">{{ mensajesNoLeidosDe(residenteSeleccionado.id) }}</span>
+        </button>
+        <button class="ficha__tab" [class.activo]="fichaTab === 'historial'" (click)="fichaTab = 'historial'">
+          <i class="fa-solid fa-file-medical"></i> Historial
+        </button>
+      </div>
+
+      <!-- TAB: Signos Vitales -->
+      <div class="ficha__contenido" *ngIf="fichaTab === 'signos'">
+        <div class="ficha__accion">
+          <button class="btn__nuevo" (click)="mostrarModalSigno = true">
+            <i class="fa-solid fa-plus"></i> Registrar signos
+          </button>
+        </div>
+        <div class="tabla__wrapper" *ngIf="signosDe(residenteSeleccionado.id).length > 0">
+          <table class="tabla">
+            <thead>
+              <tr><th>Fecha</th><th>Hora</th><th>Presión</th><th>F. Cardíaca</th><th>Temp.</th><th>Saturación</th><th>Glucosa</th><th>Peso</th><th>Registrado por</th></tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let s of signosDe(residenteSeleccionado.id)">
+                <td>{{ s.fecha }}</td>
+                <td>{{ s.hora }}</td>
+                <td>{{ s.presion }} <span class="td__unidad">mmHg</span></td>
+                <td>{{ s.frecuencia }} <span class="td__unidad">bpm</span></td>
+                <td>{{ s.temperatura }} <span class="td__unidad">°C</span></td>
+                <td>{{ s.saturacion }} <span class="td__unidad">%</span></td>
+                <td>{{ s.glucosa }} <span class="td__unidad">mg/dL</span></td>
+                <td>{{ s.peso }} <span class="td__unidad">kg</span></td>
+                <td class="td__registrado">{{ s.registradoPor }}</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="ficha__vacio" *ngIf="signosDe(residenteSeleccionado.id).length === 0">
+          <i class="fa-solid fa-heart-pulse"></i>
+          <p>No hay registros de signos vitales</p>
+        </div>
+      </div>
+
+      <!-- TAB: Medicación -->
+      <div class="ficha__contenido" *ngIf="fichaTab === 'medicacion'">
+        <div class="ficha__accion">
+          <button class="btn__nuevo" (click)="mostrarModalMedicacion = true">
+            <i class="fa-solid fa-plus"></i> Agregar medicamento
+          </button>
+        </div>
+        <div class="tabla__wrapper" *ngIf="medicacionDe(residenteSeleccionado.id).length > 0">
+          <table class="tabla">
+            <thead>
+              <tr><th>Estado</th><th>Medicamento</th><th>Dosis</th><th>Frecuencia</th><th>Hora</th><th>Administrado por</th><th>Acción</th></tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let med of medicacionDe(residenteSeleccionado.id)" [class.fila--done]="med.administrado">
+                <td>
+                  <span class="med__estado" [class.med__estado--ok]="med.administrado" [class.med__estado--pendiente]="!med.administrado">
+                    <i class="fa-solid fa-circle-check" *ngIf="med.administrado"></i>
+                    <i class="fa-solid fa-clock" *ngIf="!med.administrado"></i>
+                    {{ med.administrado ? 'Administrado' : 'Pendiente' }}
+                  </span>
+                </td>
+                <td class="td__nombre">{{ med.medicamento }}</td>
+                <td>{{ med.dosis }}</td>
+                <td>{{ med.frecuencia }}</td>
+                <td>{{ med.hora }}</td>
+                <td class="td__registrado">{{ med.administradoPor || '—' }}</td>
+                <td>
+                  <button class="btn__administrar btn__administrar--tabla" *ngIf="!med.administrado" (click)="marcarAdministrado(med)">
+                    <i class="fa-solid fa-check"></i> Registrar
+                  </button>
+                  <span class="td__ok" *ngIf="med.administrado"><i class="fa-solid fa-check"></i></span>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="ficha__vacio" *ngIf="medicacionDe(residenteSeleccionado.id).length === 0">
+          <i class="fa-solid fa-pills"></i>
+          <p>No hay medicamentos registrados</p>
+        </div>
+      </div>
+
+      <!-- TAB: Citas -->
+      <div class="ficha__contenido" *ngIf="fichaTab === 'citas'">
+        <div class="ficha__accion">
+          <button class="btn__nuevo" (click)="mostrarModalCita = true">
+            <i class="fa-solid fa-plus"></i> Agendar cita
+          </button>
+        </div>
+        <div class="citas__lista-ficha" *ngIf="citasDe(residenteSeleccionado.id).length > 0">
+          <div class="cita__card-ficha" *ngFor="let cita of citasDe(residenteSeleccionado.id)" [class.cita__card--completada]="cita.completada">
+            <div class="cita__card-info">
+              <h3 class="cita__especialidad">{{ cita.especialidad }}</h3>
+              <p class="cita__doctor"><i class="fa-solid fa-user-doctor"></i> {{ cita.doctor }}</p>
+              <div class="cita__tiempo">
+                <span><i class="fa-regular fa-calendar"></i> {{ cita.fecha }}</span>
+                <span><i class="fa-regular fa-clock"></i> {{ cita.hora }}</span>
+              </div>
+              <p class="cita__notas" *ngIf="cita.notas">{{ cita.notas }}</p>
+            </div>
+            <div class="cita__acciones">
+              <span class="cita__badge" [class.badge--pendiente]="!cita.completada" [class.badge--completada]="cita.completada">
+                <i class="fa-solid fa-clock" *ngIf="!cita.completada"></i>
+                <i class="fa-solid fa-circle-check" *ngIf="cita.completada"></i>
+                {{ cita.completada ? 'Realizada' : 'Pendiente' }}
+              </span>
+              <button class="btn__completar" *ngIf="!cita.completada" (click)="completarCita(cita)">
+                <i class="fa-solid fa-check"></i> Marcar como realizada
+              </button>
+            </div>
+          </div>
+        </div>
+        <div class="ficha__vacio" *ngIf="citasDe(residenteSeleccionado.id).length === 0">
+          <i class="fa-solid fa-calendar-check"></i>
+          <p>No hay citas agendadas</p>
+        </div>
+      </div>
+
+      <!-- TAB: Galería -->
+      <div class="ficha__contenido" *ngIf="fichaTab === 'galeria'">
+        <div class="ficha__accion">
+          <button class="btn__nuevo" (click)="mostrarModalFoto = true">
+            <i class="fa-solid fa-plus"></i> Subir foto/video
+          </button>
+        </div>
+        <div class="galeria__grid" *ngIf="galeriaDe(residenteSeleccionado.id).length > 0">
+          <div class="galeria__item" *ngFor="let foto of galeriaDe(residenteSeleccionado.id)">
+            <div class="galeria__imagen">
+              <img [src]="foto.url" [alt]="foto.descripcion" />
+              <div class="galeria__overlay">
+                <i class="fa-solid fa-play" *ngIf="foto.tipo === 'video'"></i>
+                <i class="fa-solid fa-magnifying-glass-plus" *ngIf="foto.tipo === 'foto'"></i>
+              </div>
+              <span class="galeria__tipo" *ngIf="foto.tipo === 'video'">
+                <i class="fa-solid fa-play"></i> Video
+              </span>
+            </div>
+            <div class="galeria__info">
+              <p class="galeria__descripcion">{{ foto.descripcion }}</p>
+              <p class="galeria__meta">{{ foto.fecha }} · {{ foto.subidoPor }}</p>
+            </div>
+          </div>
+        </div>
+        <div class="ficha__vacio" *ngIf="galeriaDe(residenteSeleccionado.id).length === 0">
+          <i class="fa-solid fa-images"></i>
+          <p>No hay fotos ni videos</p>
+        </div>
+      </div>
+
+      <!-- TAB: Chat -->
+      <div class="ficha__contenido ficha__contenido--chat" *ngIf="fichaTab === 'chat'">
+        <div class="chat__contenedor">
+          <div class="chat__header">
+            <div class="chat__doctor-info">
+              <div class="chat__doctor-avatar"><i class="fa-solid fa-users"></i></div>
+              <div>
+                <p class="chat__doctor-nombre">Chat con familia</p>
+                <p class="chat__doctor-cargo">{{ residenteSeleccionado.familiar }}</p>
+              </div>
+            </div>
+          </div>
+          <div class="chat__mensajes">
+            <div class="chat__vacio" *ngIf="chatDe(residenteSeleccionado.id).length === 0">
+              <i class="fa-solid fa-comments"></i>
+              <p>No hay mensajes aún</p>
+            </div>
+            <div
+              class="chat__mensaje"
+              *ngFor="let msg of chatDe(residenteSeleccionado.id)"
+              [class.chat__mensaje--enfermeria]="msg.autor === 'enfermeria'"
+            >
+              <div class="mensaje__avatar" *ngIf="msg.autor === 'familia'">
+                <i class="fa-solid fa-user"></i>
+              </div>
+              <div class="mensaje__burbuja">
+                <p class="mensaje__autor">{{ msg.nombre }}</p>
+                <p class="mensaje__texto">{{ msg.mensaje }}</p>
+                <span class="mensaje__hora">{{ msg.hora }}</span>
+              </div>
+            </div>
+          </div>
+          <div class="chat__input">
+            <input
+              type="text"
+              class="chat__input-text"
+              placeholder="Escribe un mensaje para la familia..."
+              [(ngModel)]="nuevoMensaje"
+              (keyup.enter)="enviarMensaje()"
+            />
+            <button class="chat__btn-enviar" (click)="enviarMensaje()" [disabled]="!nuevoMensaje.trim()">
+              <i class="fa-solid fa-paper-plane"></i>
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- TAB: Historial -->
+      <div class="ficha__contenido" *ngIf="fichaTab === 'historial'">
+        <div class="historial__info">
+          <i class="fa-solid fa-circle-info"></i>
+          El historial se genera automáticamente al registrar signos vitales, administrar medicación o completar una cita.
+        </div>
+        <div class="historial__lista" *ngIf="historialDe(residenteSeleccionado.id).length > 0">
+          <div class="historial__item" *ngFor="let h of historialDe(residenteSeleccionado.id)">
+            <div class="historial__icono" [class.historial__icono--signo]="h.origen === 'signo'" [class.historial__icono--med]="h.origen === 'medicacion'" [class.historial__icono--cita]="h.origen === 'cita'">
+              <i [class]="h.icono"></i>
+            </div>
+            <div class="historial__linea"></div>
+            <div class="historial__card">
+              <div class="historial__card-header">
+                <span class="historial__tipo">{{ h.tipo }}</span>
+                <span class="historial__fecha">{{ h.fecha }} · {{ h.hora }}</span>
+              </div>
+              <p class="historial__descripcion">{{ h.descripcion }}</p>
+              <p class="historial__doctor">
+                <i class="fa-solid fa-user-nurse"></i> {{ h.generadoPor }}
+              </p>
+            </div>
+          </div>
+        </div>
+        <div class="ficha__vacio" *ngIf="historialDe(residenteSeleccionado.id).length === 0">
+          <i class="fa-solid fa-file-medical"></i>
+          <p>No hay registros aún. Se generarán automáticamente con las acciones del personal.</p>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- ==================
+         SIGNOS VITALES global
+    =================== -->
+    <div class="portal__contenido" *ngIf="seccionActiva === 'signos-vitales' && !residenteSeleccionado">
+      <div class="tabla__wrapper">
+        <table class="tabla">
+          <thead>
+            <tr><th>Residente</th><th>Hab.</th><th>Presión</th><th>F. Cardíaca</th><th>Temp.</th><th>Saturación</th><th>Glucosa</th><th>Peso</th><th>Hora</th><th>Registrado por</th></tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let s of signosVitales">
+              <td class="td__nombre">{{ s.residenteNombre }}</td>
+              <td><span class="badge__hab">{{ s.habitacion }}</span></td>
+              <td>{{ s.presion }} <span class="td__unidad">mmHg</span></td>
+              <td>{{ s.frecuencia }} <span class="td__unidad">bpm</span></td>
+              <td>{{ s.temperatura }} <span class="td__unidad">°C</span></td>
+              <td>{{ s.saturacion }} <span class="td__unidad">%</span></td>
+              <td>{{ s.glucosa }} <span class="td__unidad">mg/dL</span></td>
+              <td>{{ s.peso }} <span class="td__unidad">kg</span></td>
+              <td>{{ s.hora }}</td>
+              <td class="td__registrado">{{ s.registradoPor }}</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- ==================
+         MEDICACIÓN global
+    =================== -->
+    <div class="portal__contenido" *ngIf="seccionActiva === 'medicacion' && !residenteSeleccionado">
+      <div class="tabla__wrapper">
+        <table class="tabla">
+          <thead>
+            <tr><th>Estado</th><th>Residente</th><th>Hab.</th><th>Medicamento</th><th>Dosis</th><th>Frecuencia</th><th>Hora</th><th>Administrado por</th><th>Acción</th></tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let med of medicaciones" [class.fila--done]="med.administrado">
+              <td>
+                <span class="med__estado" [class.med__estado--ok]="med.administrado" [class.med__estado--pendiente]="!med.administrado">
+                  <i class="fa-solid fa-circle-check" *ngIf="med.administrado"></i>
+                  <i class="fa-solid fa-clock" *ngIf="!med.administrado"></i>
+                  {{ med.administrado ? 'Administrado' : 'Pendiente' }}
+                </span>
+              </td>
+              <td class="td__nombre">{{ nombreResidente(med.residenteId) }}</td>
+              <td><span class="badge__hab">{{ habitacionResidente(med.residenteId) }}</span></td>
+              <td>{{ med.medicamento }}</td>
+              <td>{{ med.dosis }}</td>
+              <td>{{ med.frecuencia }}</td>
+              <td>{{ med.hora }}</td>
+              <td class="td__registrado">{{ med.administradoPor || '—' }}</td>
+              <td>
+                <button class="btn__administrar btn__administrar--tabla" *ngIf="!med.administrado" (click)="marcarAdministrado(med)">
+                  <i class="fa-solid fa-check"></i> Registrar
+                </button>
+                <span class="td__ok" *ngIf="med.administrado"><i class="fa-solid fa-check"></i></span>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- ==================
+         TURNOS
+    =================== -->
+    <div class="portal__contenido" *ngIf="seccionActiva === 'turnos' && !residenteSeleccionado">
+      <div class="turnos__grupos">
+        <div class="turno__grupo" *ngFor="let turnoNombre of ['mañana', 'tarde', 'noche']">
+          <div class="turno__grupo-header"
+            [class.turno__grupo-header--manana]="turnoNombre === 'mañana'"
+            [class.turno__grupo-header--tarde]="turnoNombre === 'tarde'"
+            [class.turno__grupo-header--noche]="turnoNombre === 'noche'"
+          >
+            <i class="fa-solid fa-sun" *ngIf="turnoNombre === 'mañana'"></i>
+            <i class="fa-solid fa-cloud-sun" *ngIf="turnoNombre === 'tarde'"></i>
+            <i class="fa-solid fa-moon" *ngIf="turnoNombre === 'noche'"></i>
+            <h3>
+              Turno {{ turnoNombre | titlecase }}
+              <span *ngIf="turnoNombre === 'mañana'">07:00 — 15:00</span>
+              <span *ngIf="turnoNombre === 'tarde'">15:00 — 23:00</span>
+              <span *ngIf="turnoNombre === 'noche'">23:00 — 07:00</span>
+            </h3>
+          </div>
+          <div class="turno__lista">
+            <ng-container *ngFor="let t of turnos">
+              <div class="turno__item" *ngIf="t.turno === turnoNombre">
+                <div class="turno__avatar"><i class="fa-solid fa-user-nurse"></i></div>
+                <div class="turno__info">
+                  <p class="turno__nombre">{{ t.personal }}</p>
+                  <p class="turno__cargo">{{ t.cargo }}</p>
+                </div>
+                <span class="turno__estado" [class.turno__estado--activo]="t.estado === 'activo'">
+                  <i class="fa-solid fa-circle"></i> {{ t.estado }}
+                </span>
+              </div>
+            </ng-container>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </main>
+</div>
+
+<!-- ==================
+     MODALES
+=================== -->
+
+<!-- Modal Signos Vitales -->
+<div class="modal__overlay" *ngIf="mostrarModalSigno" (click)="mostrarModalSigno = false">
+  <div class="modal__card" (click)="$event.stopPropagation()">
+    <div class="modal__header">
+      <h3><i class="fa-solid fa-heart-pulse"></i> Registrar Signos Vitales</h3>
+      <button class="modal__close" (click)="mostrarModalSigno = false"><i class="fa-solid fa-xmark"></i></button>
+    </div>
+    <div class="modal__body">
+      <div class="modal__grid">
+        <div class="form__grupo">
+          <label class="form__label">Presión Arterial (mmHg)</label>
+          <input type="text" class="form__input" placeholder="120/80" [(ngModel)]="nuevoSigno.presion" />
+        </div>
+        <div class="form__grupo">
+          <label class="form__label">Frecuencia Cardíaca (bpm)</label>
+          <input type="text" class="form__input" placeholder="72" [(ngModel)]="nuevoSigno.frecuencia" />
+        </div>
+        <div class="form__grupo">
+          <label class="form__label">Temperatura (°C)</label>
+          <input type="text" class="form__input" placeholder="36.5" [(ngModel)]="nuevoSigno.temperatura" />
+        </div>
+        <div class="form__grupo">
+          <label class="form__label">Saturación O₂ (%)</label>
+          <input type="text" class="form__input" placeholder="97" [(ngModel)]="nuevoSigno.saturacion" />
+        </div>
+        <div class="form__grupo">
+          <label class="form__label">Glucosa (mg/dL)</label>
+          <input type="text" class="form__input" placeholder="105" [(ngModel)]="nuevoSigno.glucosa" />
+        </div>
+        <div class="form__grupo">
+          <label class="form__label">Peso (kg)</label>
+          <input type="text" class="form__input" placeholder="65" [(ngModel)]="nuevoSigno.peso" />
+        </div>
+      </div>
+    </div>
+    <div class="modal__footer">
+      <button class="btn__cancelar" (click)="mostrarModalSigno = false">Cancelar</button>
+      <button class="btn__guardar" (click)="guardarSigno()"><i class="fa-solid fa-save"></i> Guardar</button>
+    </div>
+  </div>
+</div>
+
+<!-- Modal Medicación -->
+<div class="modal__overlay" *ngIf="mostrarModalMedicacion" (click)="mostrarModalMedicacion = false">
+  <div class="modal__card" (click)="$event.stopPropagation()">
+    <div class="modal__header">
+      <h3><i class="fa-solid fa-pills"></i> Agregar Medicamento</h3>
+      <button class="modal__close" (click)="mostrarModalMedicacion = false"><i class="fa-solid fa-xmark"></i></button>
+    </div>
+    <div class="modal__body">
+      <div class="modal__grid">
+        <div class="form__grupo form__grupo--full">
+          <label class="form__label">Medicamento</label>
+          <input type="text" class="form__input" placeholder="Ej. Enalapril 10mg" [(ngModel)]="nuevaMedicacion.medicamento" />
+        </div>
+        <div class="form__grupo">
+          <label class="form__label">Dosis</label>
+          <input type="text" class="form__input" placeholder="Ej. 1 tableta" [(ngModel)]="nuevaMedicacion.dosis" />
+        </div>
+        <div class="form__grupo">
+          <label class="form__label">Frecuencia</label>
+          <input type="text" class="form__input" placeholder="Ej. Cada 12h" [(ngModel)]="nuevaMedicacion.frecuencia" />
+        </div>
+        <div class="form__grupo">
+          <label class="form__label">Hora</label>
+          <input type="text" class="form__input" placeholder="Ej. 08:00 am" [(ngModel)]="nuevaMedicacion.hora" />
+        </div>
+      </div>
+    </div>
+    <div class="modal__footer">
+      <button class="btn__cancelar" (click)="mostrarModalMedicacion = false">Cancelar</button>
+      <button class="btn__guardar" (click)="guardarMedicacion()"><i class="fa-solid fa-save"></i> Guardar</button>
+    </div>
+  </div>
+</div>
+
+<!-- Modal Cita -->
+<div class="modal__overlay" *ngIf="mostrarModalCita" (click)="mostrarModalCita = false">
+  <div class="modal__card" (click)="$event.stopPropagation()">
+    <div class="modal__header">
+      <h3><i class="fa-solid fa-calendar-check"></i> Agendar Cita</h3>
+      <button class="modal__close" (click)="mostrarModalCita = false"><i class="fa-solid fa-xmark"></i></button>
+    </div>
+    <div class="modal__body">
+      <div class="modal__grid">
+        <div class="form__grupo">
+          <label class="form__label">Especialidad</label>
+          <input type="text" class="form__input" placeholder="Ej. Geriatría" [(ngModel)]="nuevaCita.especialidad" />
+        </div>
+        <div class="form__grupo">
+          <label class="form__label">Doctor</label>
+          <input type="text" class="form__input" placeholder="Ej. Dra. Carmen Vásquez" [(ngModel)]="nuevaCita.doctor" />
+        </div>
+        <div class="form__grupo">
+          <label class="form__label">Fecha</label>
+          <input type="text" class="form__input" placeholder="Ej. 25 Jun, 2024" [(ngModel)]="nuevaCita.fecha" />
+        </div>
+        <div class="form__grupo">
+          <label class="form__label">Hora</label>
+          <input type="text" class="form__input" placeholder="Ej. 10:00 am" [(ngModel)]="nuevaCita.hora" />
+        </div>
+        <div class="form__grupo form__grupo--full">
+          <label class="form__label">Notas (opcional)</label>
+          <textarea class="form__input form__textarea" placeholder="Observaciones..." [(ngModel)]="nuevaCita.notas"></textarea>
+        </div>
+      </div>
+    </div>
+    <div class="modal__footer">
+      <button class="btn__cancelar" (click)="mostrarModalCita = false">Cancelar</button>
+      <button class="btn__guardar" (click)="guardarCita()"><i class="fa-solid fa-save"></i> Guardar</button>
+    </div>
+  </div>
+</div>
+
+<!-- Modal Foto/Video -->
+<div class="modal__overlay" *ngIf="mostrarModalFoto" (click)="mostrarModalFoto = false">
+  <div class="modal__card" (click)="$event.stopPropagation()">
+    <div class="modal__header">
+      <h3><i class="fa-solid fa-images"></i> Subir Foto / Video</h3>
+      <button class="modal__close" (click)="mostrarModalFoto = false"><i class="fa-solid fa-xmark"></i></button>
+    </div>
+    <div class="modal__body">
+      <div class="modal__grid">
+        <div class="form__grupo form__grupo--full">
+          <label class="form__label">Archivo</label>
+          <label class="form__archivo">
+            <input type="file" accept="image/*,video/*" (change)="onArchivoSeleccionado($event)" />
+            <div class="archivo__contenido">
+              <i class="fa-solid fa-cloud-arrow-up"></i>
+              <span *ngIf="!nuevaFoto.archivoNombre">Selecciona una foto o video</span>
+              <span *ngIf="nuevaFoto.archivoNombre" class="archivo__nombre">{{ nuevaFoto.archivoNombre }}</span>
+            </div>
+          </label>
+        </div>
+        <div class="form__grupo form__grupo--full">
+          <label class="form__label">Descripción</label>
+          <input type="text" class="form__input" placeholder="Ej. Taller de pintura" [(ngModel)]="nuevaFoto.descripcion" />
+        </div>
+      </div>
+    </div>
+    <div class="modal__footer">
+      <button class="btn__cancelar" (click)="mostrarModalFoto = false">Cancelar</button>
+      <button class="btn__guardar" (click)="guardarFoto()" [disabled]="!nuevaFoto.url">
+        <i class="fa-solid fa-save"></i> Guardar
+      </button>
+    </div>
+  </div>
+</div>
