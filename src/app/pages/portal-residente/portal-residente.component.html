@@ -178,29 +178,31 @@
         </div>
 
         <div class="dashboard__bloque">
-  <h3 class="bloque__titulo">
-    <i class="fa-solid fa-heart-pulse"></i>
-    Últimos Signos Vitales
-  </h3>
-  <div class="signos__mini-grid">
-    <div
-      class="signo__mini"
-      *ngFor="let signo of signosVitales.slice(0, 4)"
-      [class.signo__mini--atencion]="signo.estado === 'atencion'"
-      [class.signo__mini--alerta]="signo.estado === 'alerta'"
-    >
-      <i [class]="signo.icono"></i>
-      <div>
-        <p class="signo__mini-nombre">{{ signo.nombre }}</p>
-        <p class="signo__mini-valor">{{ signo.valor }} <span>{{ signo.unidad }}</span></p>
-      </div>
-    </div>
-  </div>
-  <button class="bloque__ver-mas" (click)="navegarA('signos-vitales')">
-    Ver todos los signos vitales
-    <i class="fa-solid fa-arrow-right"></i>
-  </button>
-</div>
+          <h3 class="bloque__titulo">
+            <i class="fa-solid fa-heart-pulse"></i>
+            Últimos Signos Vitales
+          </h3>
+          <div class="signos__mini-grid">
+            <div
+              class="signo__mini"
+              *ngFor="let signo of signosVitales.slice(0, 4)"
+              [class.signo__mini--atencion]="signo.estado === 'atencion'"
+              [class.signo__mini--alerta]="signo.estado === 'alerta'"
+            >
+              <i [class]="signo.icono"></i>
+              <div>
+                <p class="signo__mini-nombre">{{ signo.nombre }}</p>
+                <p class="signo__mini-valor">
+                  {{ signo.valor }} <span>{{ signo.unidad }}</span>
+                </p>
+              </div>
+            </div>
+          </div>
+          <button class="bloque__ver-mas" (click)="navegarA('signos-vitales')">
+            Ver todos los signos vitales
+            <i class="fa-solid fa-arrow-right"></i>
+          </button>
+        </div>
 
         <div class="dashboard__bloque">
           <h3 class="bloque__titulo">
@@ -210,7 +212,7 @@
           <div class="citas__lista">
             <div
               class="cita__mini"
-              *ngFor="let cita of citas"
+              *ngFor="let cita of citas.slice(0, 3)"
               [class.cita__mini--completada]="cita.completada"
             >
               <div class="cita__mini-icono">
@@ -463,34 +465,38 @@
     <!-- ==================
          HISTORIAL
     =================== -->
-   <div class="portal__contenido" *ngIf="seccionActiva === 'historial'">
-  <div class="historial__info">
-    <i class="fa-solid fa-circle-info"></i>
-    El historial se genera automáticamente con las acciones del equipo de enfermería.
-  </div>
-  <div class="historial__lista">
-    <div class="historial__item" *ngFor="let registro of historialClinico">
-      <div class="historial__icono"
-        [class.historial__icono--signo]="registro.origen === 'signo'"
-        [class.historial__icono--med]="registro.origen === 'medicacion'"
-        [class.historial__icono--cita]="registro.origen === 'cita'"
-      >
-        <i [class]="registro.icono"></i>
+    <div class="portal__contenido" *ngIf="seccionActiva === 'historial'">
+      <div class="historial__info">
+        <i class="fa-solid fa-circle-info"></i>
+        El historial se genera automáticamente con las acciones del equipo de
+        enfermería.
       </div>
-      <div class="historial__linea"></div>
-      <div class="historial__card">
-        <div class="historial__card-header">
-          <span class="historial__tipo">{{ registro.tipo }}</span>
-          <span class="historial__fecha">{{ registro.fecha }} · {{ registro.hora }}</span>
+      <div class="historial__lista">
+        <div class="historial__item" *ngFor="let registro of historialClinico">
+          <div
+            class="historial__icono"
+            [class.historial__icono--signo]="registro.origen === 'signo'"
+            [class.historial__icono--med]="registro.origen === 'medicacion'"
+            [class.historial__icono--cita]="registro.origen === 'cita'"
+          >
+            <i [class]="registro.icono"></i>
+          </div>
+          <div class="historial__linea"></div>
+          <div class="historial__card">
+            <div class="historial__card-header">
+              <span class="historial__tipo">{{ registro.tipo }}</span>
+              <span class="historial__fecha"
+                >{{ registro.fecha }} · {{ registro.hora }}</span
+              >
+            </div>
+            <p class="historial__descripcion">{{ registro.descripcion }}</p>
+            <p class="historial__doctor">
+              <i class="fa-solid fa-user-nurse"></i>
+              {{ registro.generadoPor }}
+            </p>
+          </div>
         </div>
-        <p class="historial__descripcion">{{ registro.descripcion }}</p>
-        <p class="historial__doctor">
-          <i class="fa-solid fa-user-nurse"></i>
-          {{ registro.generadoPor }}
-        </p>
       </div>
     </div>
-  </div>
-</div>
   </main>
 </div>
