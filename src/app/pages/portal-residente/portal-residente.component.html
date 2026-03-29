@@ -344,19 +344,23 @@
 
       <div class="galeria__grid">
         <div class="galeria__item" *ngFor="let foto of fotasFiltradas">
-          <div class="galeria__imagen">
-            <img [src]="foto.url" [alt]="foto.descripcion" />
-            <div class="galeria__overlay">
-              <i class="fa-solid fa-play" *ngIf="foto.tipo === 'video'"></i>
-              <i
-                class="fa-solid fa-magnifying-glass-plus"
-                *ngIf="foto.tipo === 'foto'"
-              ></i>
-            </div>
-            <span class="galeria__tipo" *ngIf="foto.tipo === 'video'">
-              <i class="fa-solid fa-play"></i> Video
-            </span>
-          </div>
+        <div class="galeria__imagen">
+  <img [src]="foto.url" [alt]="foto.descripcion" *ngIf="foto.tipo === 'foto'" />
+  <video
+    [src]="foto.url"
+    *ngIf="foto.tipo === 'video'"
+    autoplay
+    loop
+    playsinline
+  ></video>
+  <div class="galeria__overlay">
+    <i class="fa-solid fa-magnifying-glass-plus" *ngIf="foto.tipo === 'foto'"></i>
+    <i class="fa-solid fa-play" *ngIf="foto.tipo === 'video'"></i>
+  </div>
+  <span class="galeria__tipo" *ngIf="foto.tipo === 'video'">
+    <i class="fa-solid fa-play"></i> Video
+  </span>
+</div>
           <div class="galeria__info">
             <p class="galeria__descripcion">{{ foto.descripcion }}</p>
             <p class="galeria__fecha">{{ foto.fecha }}</p>

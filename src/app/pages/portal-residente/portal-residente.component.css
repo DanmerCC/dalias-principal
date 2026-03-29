@@ -743,14 +743,16 @@
   overflow: hidden;
 }
 
-.galeria__imagen img {
+.galeria__imagen img,
+.galeria__imagen video {
   width: 100%;
   height: 100%;
   object-fit: cover;
   transition: transform 0.4s ease;
 }
 
-.galeria__item:hover .galeria__imagen img {
+.galeria__item:hover .galeria__imagen img,
+.galeria__item:hover .galeria__imagen video {
   transform: scale(1.08);
 }
 
@@ -1203,14 +1205,29 @@
   margin-bottom: 1.2rem;
 }
 
-.historial__info i { color: #d9b756; flex-shrink: 0; }
+.historial__info i {
+  color: #d9b756;
+  flex-shrink: 0;
+}
 
-.historial__icono--signo { background: rgba(0, 62, 92, 0.12); }
-.historial__icono--signo i { color: #003e5c; }
-.historial__icono--med { background: rgba(243, 156, 18, 0.15); }
-.historial__icono--med i { color: #f39c12; }
-.historial__icono--cita { background: rgba(37, 211, 102, 0.15); }
-.historial__icono--cita i { color: #25d366; }
+.historial__icono--signo {
+  background: rgba(0, 62, 92, 0.12);
+}
+.historial__icono--signo i {
+  color: #003e5c;
+}
+.historial__icono--med {
+  background: rgba(243, 156, 18, 0.15);
+}
+.historial__icono--med i {
+  color: #f39c12;
+}
+.historial__icono--cita {
+  background: rgba(37, 211, 102, 0.15);
+}
+.historial__icono--cita i {
+  color: #25d366;
+}
 
 /* ===========================
    ANIMACIONES
