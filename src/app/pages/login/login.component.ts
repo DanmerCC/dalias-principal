@@ -3,7 +3,14 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { Router, RouterLink } from '@angular/router';
 
-type TipoUsuario = 'residente' | 'enfermeria' | null;
+type TipoUsuario = 'residente' | 'personal' | null;
+
+// Usuarios estáticos demo — reemplazar con backend real
+const USUARIOS_DEMO = [
+  { username: 'residente',  password: '1234', tipo: 'residente', ruta: '/portal-residente' },
+  { username: 'enfermeria', password: '1234', tipo: 'personal',  ruta: '/portal-enfermeria' },
+  { username: 'admin',      password: '1234', tipo: 'personal',  ruta: '/portal-administrador' },
+];
 
 @Component({
   selector: 'app-login',
@@ -50,24 +57,20 @@ export class LoginComponent {
     this.cargando = true;
     this.errorMensaje = '';
 
-    // Simulación de login — aquí conectarías con tu backend
     setTimeout(() => {
       this.cargando = false;
 
-      if (this.tipoSeleccionado === 'residente') {
-        // Credenciales demo residente
-        if (this.formulario.usuario === 'residente' && this.formulario.password === '1234') {
-          this.router.navigate(['/portal-residente']);
-        } else {
-          this.errorMensaje = 'Usuario o contraseña incorrectos.';
-        }
-      } else if (this.tipoSeleccionado === 'enfermeria') {
-        // Credenciales demo enfermería
-        if (this.formulario.usuario === 'enfermeria' && this.formulario.password === '1234') {
-          this.router.navigate(['/portal-enfermeria']);
-        } else {
-          this.errorMensaje = 'Usuario o contraseña incorrectos.';
-        }
+      const match = USUARIOS_DEMO.find(
+        (u) =>
+          u.username === this.formulario.usuario &&
+          u.password === this.formulario.password &&
+          u.tipo === this.tipoSeleccionado
+      );
+
+      if (match) {
+        this.router.navigate([match.ruta]);
+      } else {
+        this.errorMensaje = 'Usuario o contraseña incorrectos.';
       }
     }, 1200);
   }

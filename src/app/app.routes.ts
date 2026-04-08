@@ -16,11 +16,21 @@ import { TerapiasYRehabilitacionComponent } from './pages/servicios/terapias-y-r
 import { LoginComponent } from './pages/login/login.component';
 import { PortalResidenteComponent } from './pages/portal-residente/portal-residente.component';
 import { PortalEnfermeriaComponent } from './pages/portal-enfermeria/portal-enfermeria.component';
+import { PortalDirectorComponent } from './pages/portal-director/portal-director.component';
+import { PortalAdministradorComponent } from './pages/portal-administrador/portal-administrador.component';
 
 export const routes: Routes = [
   {
     path: 'login',
     component: LoginComponent,
+  },
+  {
+    path: 'portal-director',
+    component: PortalDirectorComponent,
+  },
+  {
+    path: 'portal-administrador',
+    component: PortalAdministradorComponent,
   },
   {
     path: 'portal-residente',

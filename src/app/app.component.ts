@@ -20,7 +20,7 @@ export class AppComponent implements OnInit, OnDestroy {
 
   private routerSubscription?: Subscription;
 
-  private rutasSinLayout: string[] = ['/login', '/portal-residente', '/portal-enfermeria'];
+  private rutasSinLayout: string[] = ['/login', '/portal-residente', '/portal-enfermeria', '/portal-director', '/portal-administrador'];
 
   private whatsappLinks: { [key: string]: string } = {
     '/': 'https://wa.link/58djkj',

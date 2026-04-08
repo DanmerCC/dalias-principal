@@ -10,7 +10,7 @@
         <span>Residencia Las Dalias</span>
       </h2>
       <p class="login__izquierda-descripcion">
-        Acceso exclusivo para residentes y personal de enfermería
+        Acceso exclusivo para residentes, familiares y personal
         de nuestra institución.
       </p>
 
@@ -53,19 +53,23 @@
             <div class="tipo__icono tipo__icono--residente">
               <i class="fa-solid fa-person-shelter"></i>
             </div>
-            <h3>Soy Residente</h3>
-            <p>Accede a tu información personal, actividades y comunicados</p>
+            <div class="tipo__texto">
+              <h3>Residente / Familiar</h3>
+              <p>Consulta signos vitales, galería, citas médicas e historial de tu ser querido</p>
+            </div>
             <span class="tipo__arrow">
               <i class="fa-solid fa-arrow-right"></i>
             </span>
           </button>
 
-          <button class="tipo__card" (click)="seleccionarTipo('enfermeria')">
-            <div class="tipo__icono tipo__icono--enfermeria">
-              <i class="fa-solid fa-user-nurse"></i>
+          <button class="tipo__card" (click)="seleccionarTipo('personal')">
+            <div class="tipo__icono tipo__icono--personal">
+              <i class="fa-solid fa-house-medical-circle-check"></i>
             </div>
-            <h3>Área de Enfermería</h3>
-            <p>Accede al panel de gestión, registros y atención de residentes</p>
+            <div class="tipo__texto">
+              <h3>Personal de la Residencia</h3>
+              <p>Acceso para enfermeros, médicos, administrativos y todo el equipo interno</p>
+            </div>
             <span class="tipo__arrow">
               <i class="fa-solid fa-arrow-right"></i>
             </span>
@@ -90,11 +94,12 @@
         </button>
 
         <div class="login__header">
-          <div class="login__tipo-badge" [class.badge--enfermeria]="tipoSeleccionado === 'enfermeria'">
+          <div class="login__tipo-badge"
+            [class.badge--personal]="tipoSeleccionado === 'personal'">
             <i class="fa-solid fa-person-shelter" *ngIf="tipoSeleccionado === 'residente'"></i>
-            <i class="fa-solid fa-user-nurse" *ngIf="tipoSeleccionado === 'enfermeria'"></i>
-            <span *ngIf="tipoSeleccionado === 'residente'">Acceso Residente</span>
-            <span *ngIf="tipoSeleccionado === 'enfermeria'">Acceso Enfermería</span>
+            <i class="fa-solid fa-house-medical-circle-check" *ngIf="tipoSeleccionado === 'personal'"></i>
+            <span *ngIf="tipoSeleccionado === 'residente'">Acceso Residente / Familiar</span>
+            <span *ngIf="tipoSeleccionado === 'personal'">Acceso Personal</span>
           </div>
           <h1 class="login__titulo">Iniciar sesión</h1>
           <p class="login__subtitulo">Ingresa tus credenciales para continuar</p>
@@ -109,7 +114,7 @@
               <input
                 type="text"
                 class="form__input"
-                [placeholder]="tipoSeleccionado === 'residente' ? 'Tu usuario de residente' : 'Tu usuario de enfermería'"
+                [placeholder]="tipoSeleccionado === 'residente' ? 'Tu usuario de residente' : 'Tu usuario de personal'"
                 [(ngModel)]="formulario.usuario"
                 name="usuario"
                 required
@@ -147,13 +152,7 @@
             <span>{{ errorMensaje }}</span>
           </div>
 
-          <!-- Demo hint -->
-          <!-- <div class="login__demo">
-            <i class="fa-solid fa-circle-info"></i>
-            <span>Demo: usuario <strong>{{ tipoSeleccionado }}</strong> / contraseña <strong>1234</strong></span>
-          </div> -->
-
-          <button type="submit" class="btn__ingresar" [disabled]="cargando">
+          <button type="submit" class="btn__ingresar" [class.btn--personal]="tipoSeleccionado === 'personal'" [disabled]="cargando">
             <div class="btn__spinner" *ngIf="cargando"></div>
             <span *ngIf="!cargando">
               <i class="fa-solid fa-right-to-bracket"></i>

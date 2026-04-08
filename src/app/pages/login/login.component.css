@@ -510,6 +510,51 @@
 }
 
 /* ===========================
+   AÑADIR AL FINAL DE login.component.css
+   =========================== */
+
+/* Ajuste para texto dentro de tipo__card */
+.tipo__texto {
+  flex: 1;
+  text-align: left;
+}
+
+/* Card personal (ex-enfermeria) */
+.tipo__icono--personal {
+  background: linear-gradient(
+    135deg,
+    rgba(217, 183, 86, 0.2) 0%,
+    rgba(201, 167, 70, 0.15) 100%
+  );
+}
+
+.tipo__icono--personal i {
+  color: #d9b756;
+}
+
+.tipo__card:hover .tipo__icono--personal {
+  background: #d9b756;
+}
+
+/* Badge personal */
+.badge--personal {
+  background: rgba(217, 183, 86, 0.12);
+  color: #c9a746;
+}
+
+/* Botón ingresar variante personal */
+.btn__ingresar.btn--personal {
+  background: #d9b756;
+  box-shadow: 0 4px 15px rgba(217, 183, 86, 0.3);
+}
+
+.btn__ingresar.btn--personal:hover:not(:disabled) {
+  background: #c9a746;
+  box-shadow: 0 6px 20px rgba(217, 183, 86, 0.45);
+}
+
+
+/* ===========================
    ANIMACIONES
    =========================== */
 @keyframes fadeInUp {

@@ -1,0 +1,924 @@
+<div class="portal" [class.sidebar-colapsado]="sidebarColapsado">
+
+  <!-- SIDEBAR -->
+  <aside class="portal__sidebar">
+    <div class="sidebar__header">
+      <div class="sidebar__perfil">
+        <div class="perfil__foto">
+          <i class="fa-solid fa-user-shield" *ngIf="!admin.foto"></i>
+          <img *ngIf="admin.foto" [src]="admin.foto" alt="Admin" />
+        </div>
+        <div class="perfil__info">
+          <p class="perfil__nombre">{{ admin.nombre }}</p>
+          <p class="perfil__cargo">{{ admin.cargo }}</p>
+        </div>
+      </div>
+      <button class="sidebar__toggle" (click)="toggleSidebar()">
+        <i class="fa-solid" [class.fa-bars]="sidebarColapsado" [class.fa-xmark]="!sidebarColapsado"></i>
+      </button>
+    </div>
+
+    <nav class="sidebar__nav">
+      <button class="nav__item" [class.activo]="seccionActiva === 'dashboard'" (click)="navegarA('dashboard')">
+        <i class="fa-solid fa-gauge"></i>
+        <span *ngIf="!sidebarColapsado">Dashboard</span>
+      </button>
+      <button class="nav__item" [class.activo]="seccionActiva === 'usuarios'" (click)="navegarA('usuarios')">
+        <i class="fa-solid fa-users"></i>
+        <span *ngIf="!sidebarColapsado">Usuarios</span>
+      </button>
+      <button class="nav__item" [class.activo]="seccionActiva === 'residentes'" (click)="navegarA('residentes')">
+        <i class="fa-solid fa-bed-pulse"></i>
+        <span *ngIf="!sidebarColapsado">Residentes</span>
+      </button>
+      <button class="nav__item" [class.activo]="seccionActiva === 'productos'" (click)="navegarA('productos')">
+        <i class="fa-solid fa-boxes-stacked"></i>
+        <span *ngIf="!sidebarColapsado">Productos y Stock</span>
+      </button>
+      <button class="nav__item" [class.activo]="seccionActiva === 'roles'" (click)="navegarA('roles')">
+        <i class="fa-solid fa-id-badge"></i>
+        <span *ngIf="!sidebarColapsado">Roles y Permisos</span>
+      </button>
+      <button class="nav__item" [class.activo]="seccionActiva === 'configuracion'" (click)="navegarA('configuracion')">
+        <i class="fa-solid fa-sliders"></i>
+        <span *ngIf="!sidebarColapsado">Configuración</span>
+      </button>
+    </nav>
+
+    <button class="sidebar__cerrar-sesion" (click)="cerrarSesion()">
+      <i class="fa-solid fa-right-from-bracket"></i>
+      <span *ngIf="!sidebarColapsado">Cerrar sesión</span>
+    </button>
+  </aside>
+
+  <!-- MAIN -->
+  <main class="portal__main">
+
+    <!-- Topbar -->
+    <div class="portal__topbar">
+      <div class="topbar__izquierda">
+        <h2 class="topbar__titulo">
+          <span *ngIf="seccionActiva === 'dashboard'">Dashboard</span>
+          <span *ngIf="seccionActiva === 'usuarios'">Gestión de Usuarios</span>
+          <span *ngIf="seccionActiva === 'residentes'">Residentes</span>
+          <span *ngIf="seccionActiva === 'productos'">Productos y Stock</span>
+          <span *ngIf="seccionActiva === 'roles'">Roles y Permisos</span>
+          <span *ngIf="seccionActiva === 'configuracion'">Configuración</span>
+        </h2>
+      </div>
+      <div class="topbar__derecha">
+        <div class="topbar__badge">
+          <i class="fa-solid fa-user-shield"></i>
+          <span>Panel de Administración</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- ==================
+         DASHBOARD
+    =================== -->
+    <div class="portal__contenido" *ngIf="seccionActiva === 'dashboard'">
+      <div class="dashboard__cards">
+        <div class="dash__card">
+          <div class="dash__card-icono dash__icono--purple"><i class="fa-solid fa-users"></i></div>
+          <div><p class="dash__label">Total Usuarios</p><p class="dash__valor">{{ usuarios.length }}</p></div>
+        </div>
+        <div class="dash__card">
+          <div class="dash__card-icono dash__icono--blue"><i class="fa-solid fa-bed-pulse"></i></div>
+          <div><p class="dash__label">Residentes</p><p class="dash__valor">{{ residentes.length }}</p></div>
+        </div>
+        <div class="dash__card">
+          <div class="dash__card-icono dash__icono--green"><i class="fa-solid fa-circle-check"></i></div>
+          <div><p class="dash__label">Usuarios Activos</p><p class="dash__valor">{{ totalActivos }}</p></div>
+        </div>
+        <div class="dash__card">
+          <div class="dash__card-icono dash__icono--orange"><i class="fa-solid fa-boxes-stacked"></i></div>
+          <div><p class="dash__label">Stock Bajo / Agotado</p><p class="dash__valor">{{ productosStockBajo }}</p></div>
+        </div>
+      </div>
+
+      <!-- dashboard grid: columna angosta + columna ancha -->
+      <div class="dashboard__grid">
+        <div class="dashboard__bloque dashboard__bloque--narrow">
+          <h3 class="bloque__titulo"><i class="fa-solid fa-users"></i> Últimos Usuarios</h3>
+          <div class="tabla__wrapper">
+            <table class="tabla">
+              <thead><tr><th>Nombre</th><th>Rol</th><th>Estado</th></tr></thead>
+              <tbody>
+                <tr *ngFor="let u of usuarios.slice(0,5)">
+                  <td class="td__nombre">{{ u.nombre }}</td>
+                  <td><span class="badge__rol">{{ u.rol }}</span></td>
+                  <td>
+                    <span class="estado__badge" [class.estado--activo]="u.activo" [class.estado--inactivo]="!u.activo">
+                      <i class="fa-solid fa-circle"></i> {{ u.activo ? 'Activo' : 'Inactivo' }}
+                    </span>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <button class="bloque__ver-mas" (click)="navegarA('usuarios')">Ver todos <i class="fa-solid fa-arrow-right"></i></button>
+        </div>
+
+        <div class="dashboard__bloque dashboard__bloque--wide">
+          <h3 class="bloque__titulo"><i class="fa-solid fa-clipboard-list"></i> Actividad Reciente</h3>
+          <div class="actividad__lista">
+            <div class="actividad__item" *ngFor="let a of actividadReciente.slice(0,8)">
+              <div class="actividad__icono"
+                [class.actividad__icono--crear]="a.accion==='crear'"
+                [class.actividad__icono--editar]="a.accion==='editar'"
+                [class.actividad__icono--eliminar]="a.accion==='eliminar'"
+                [class.actividad__icono--login]="a.accion==='login'">
+                <i class="fa-solid fa-plus" *ngIf="a.accion==='crear'"></i>
+                <i class="fa-solid fa-pen" *ngIf="a.accion==='editar'"></i>
+                <i class="fa-solid fa-trash" *ngIf="a.accion==='eliminar'"></i>
+                <i class="fa-solid fa-right-to-bracket" *ngIf="a.accion==='login'"></i>
+              </div>
+              <div class="actividad__info">
+                <p class="actividad__descripcion">{{ a.descripcion }}</p>
+                <p class="actividad__meta">{{ a.usuario }} · {{ a.fecha }} · {{ a.hora }}</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ==================
+         USUARIOS
+    =================== -->
+    <div class="portal__contenido" *ngIf="seccionActiva === 'usuarios'">
+      <div class="seccion__toolbar">
+        <div class="busqueda__wrapper">
+          <i class="fa-solid fa-magnifying-glass"></i>
+          <input type="text" class="busqueda__input" placeholder="Buscar usuario..." [(ngModel)]="busquedaUsuario" />
+        </div>
+        <button class="btn__nuevo" (click)="abrirModalUsuario()">
+          <i class="fa-solid fa-plus"></i> Nuevo Usuario
+        </button>
+      </div>
+      <div class="tabla__wrapper">
+        <table class="tabla">
+          <thead>
+            <tr>
+              <th>Foto</th><th>Nombre Completo</th><th>Rol</th><th>Usuario</th>
+              <th>Email</th><th>Estado</th><th>Creado</th><th>Acciones</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let u of usuariosFiltrados">
+              <td>
+                <div class="usuario__avatar">
+                  <img *ngIf="u.foto" [src]="u.foto" [alt]="u.nombre" />
+                  <i class="fa-solid fa-user" *ngIf="!u.foto"></i>
+                </div>
+              </td>
+              <td class="td__nombre">{{ u.nombre }}</td>
+              <td><span class="badge__rol">{{ u.rol }}</span></td>
+              <td class="td__usuario">{{ u.username }}</td>
+              <td class="td__email">{{ u.email }}</td>
+              <td>
+                <span class="estado__badge" [class.estado--activo]="u.activo" [class.estado--inactivo]="!u.activo">
+                  <i class="fa-solid fa-circle"></i> {{ u.activo ? 'Activo' : 'Inactivo' }}
+                </span>
+              </td>
+              <td class="td__fecha">{{ u.fechaCreacion }}</td>
+              <td>
+                <div class="acciones__btns">
+                  <button class="btn__accion btn__accion--editar" (click)="editarUsuario(u)" title="Editar"><i class="fa-solid fa-pen"></i></button>
+                  <button class="btn__accion btn__accion--toggle" (click)="toggleEstadoUsuario(u)" [title]="u.activo ? 'Desactivar' : 'Activar'">
+                    <i class="fa-solid" [class.fa-toggle-on]="u.activo" [class.fa-toggle-off]="!u.activo"></i>
+                  </button>
+                  <button class="btn__accion btn__accion--eliminar" (click)="eliminarUsuario(u)" title="Eliminar"><i class="fa-solid fa-trash"></i></button>
+                </div>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- ==================
+         RESIDENTES
+    =================== -->
+    <div class="portal__contenido" *ngIf="seccionActiva === 'residentes'">
+      <div class="seccion__toolbar">
+        <div class="busqueda__wrapper">
+          <i class="fa-solid fa-magnifying-glass"></i>
+          <input type="text" class="busqueda__input" placeholder="Buscar residente..." [(ngModel)]="busquedaResidente" />
+        </div>
+        <button class="btn__nuevo" (click)="abrirModalResidente()">
+          <i class="fa-solid fa-plus"></i> Nuevo Residente
+        </button>
+      </div>
+      <div class="residentes__grid">
+        <div class="residente__card" *ngFor="let r of residentesFiltrados" (click)="abrirFichaResidente(r)">
+          <div class="residente__card-foto">
+            <img *ngIf="r.foto" [src]="r.foto" [alt]="r.nombre" />
+            <i class="fa-solid fa-user" *ngIf="!r.foto"></i>
+          </div>
+          <div class="residente__card-info">
+            <h3 class="residente__nombre">{{ r.nombre }}</h3>
+            <p class="residente__meta">
+              <i class="fa-solid fa-door-open"></i> Hab. {{ r.habitacion }} &nbsp;·&nbsp;
+              <i class="fa-solid fa-cake-candles"></i> {{ r.edad }} años
+            </p>
+            <p class="residente__medico"><i class="fa-solid fa-user-doctor"></i> {{ r.medico }}</p>
+            <span class="residente__estado"
+              [class.estado--estable]="r.estado==='estable'"
+              [class.estado--atencion]="r.estado==='atencion'"
+              [class.estado--critico]="r.estado==='critico'">
+              {{ r.estado }}
+            </span>
+          </div>
+          <div class="residente__card-acciones">
+            <button class="btn__accion btn__accion--editar" (click)="editarResidente(r, $event)" title="Editar"><i class="fa-solid fa-pen"></i></button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ==================
+         PRODUCTOS Y STOCK
+    =================== -->
+    <div class="portal__contenido" *ngIf="seccionActiva === 'productos'">
+      <div class="seccion__toolbar">
+        <div class="busqueda__wrapper">
+          <i class="fa-solid fa-magnifying-glass"></i>
+          <input type="text" class="busqueda__input" placeholder="Buscar producto..." [(ngModel)]="busquedaProducto" />
+        </div>
+        <div class="toolbar__filtros">
+          <button class="filtro__btn" [class.activo]="filtroCategoria === ''" (click)="filtroCategoria = ''">Todos</button>
+          <button class="filtro__btn" *ngFor="let c of categoriasProducto" [class.activo]="filtroCategoria === c" (click)="filtroCategoria = c">{{ c }}</button>
+        </div>
+        <button class="btn__nuevo" (click)="abrirModalProducto()">
+          <i class="fa-solid fa-plus"></i> Nuevo Producto
+        </button>
+      </div>
+
+      <div class="stock__resumen">
+        <div class="stock__card">
+          <div class="stock__card-icono stock__icono--blue"><i class="fa-solid fa-boxes-stacked"></i></div>
+          <div><p class="stock__label">Total Productos</p><p class="stock__valor">{{ productos.length }}</p></div>
+        </div>
+        <div class="stock__card">
+          <div class="stock__card-icono stock__icono--green"><i class="fa-solid fa-circle-check"></i></div>
+          <div><p class="stock__label">En Stock Normal</p><p class="stock__valor">{{ productosEnStockNormal }}</p></div>
+        </div>
+        <div class="stock__card">
+          <div class="stock__card-icono stock__icono--orange"><i class="fa-solid fa-triangle-exclamation"></i></div>
+          <div><p class="stock__label">Stock Bajo</p><p class="stock__valor">{{ productosStockBajo }}</p></div>
+        </div>
+        <div class="stock__card">
+          <div class="stock__card-icono stock__icono--red"><i class="fa-solid fa-circle-exclamation"></i></div>
+          <div><p class="stock__label">Sin Stock</p><p class="stock__valor">{{ productosSinStock }}</p></div>
+        </div>
+      </div>
+
+      <!-- <div class="tabla__wrapper">
+        <table class="tabla">
+          <thead>
+            <tr>
+              <th>Producto</th><th>Categoría</th><th>Proveedor</th>
+              <th>Stock Actual</th><th>Mínimo</th><th>Unidad</th>
+              <th>Precio Unit.</th><th>Estado</th><th>Acciones</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let p of productosFiltrados">
+              <td>
+                <div class="producto__info">
+                  <div class="producto__icono"><i [class]="p.icono"></i></div>
+                  <span class="td__nombre">{{ p.nombre }}</span>
+                </div>
+              </td>
+              <td><span class="badge__categoria">{{ p.categoria }}</span></td>
+              <td class="td__proveedor">{{ p.proveedor }}</td>
+              <td>
+                <div class="stock__celda">
+                  <span class="stock__numero"
+                    [class.stock--bajo]="p.stockActual <= p.stockMinimo && p.stockActual > 0"
+                    [class.stock--agotado]="p.stockActual === 0">{{ p.stockActual }}</span>
+                  <div class="stock__bar">
+                    <div class="stock__bar-fill"
+                      [style.width.%]="calcularPorcentajeStock(p)"
+                      [class.stock__bar--bajo]="p.stockActual <= p.stockMinimo && p.stockActual > 0"
+                      [class.stock__bar--agotado]="p.stockActual === 0">
+                    </div>
+                  </div>
+                </div>
+              </td>
+              <td class="td__fecha">{{ p.stockMinimo }}</td>
+              <td class="td__fecha">{{ p.unidad }}</td>
+              <td class="td__monto">S/ {{ p.precioUnitario | number:'1.2-2' }}</td>
+              <td>
+                <span class="estado__stock"
+                  [class.stock--ok]="p.stockActual > p.stockMinimo"
+                  [class.stock--bajo]="p.stockActual <= p.stockMinimo && p.stockActual > 0"
+                  [class.stock--agotado]="p.stockActual === 0">
+                  <i class="fa-solid fa-circle-check" *ngIf="p.stockActual > p.stockMinimo"></i>
+                  <i class="fa-solid fa-triangle-exclamation" *ngIf="p.stockActual <= p.stockMinimo && p.stockActual > 0"></i>
+                  <i class="fa-solid fa-circle-xmark" *ngIf="p.stockActual === 0"></i>
+                  {{ p.stockActual > p.stockMinimo ? 'Normal' : p.stockActual === 0 ? 'Agotado' : 'Stock bajo' }}
+                </span>
+              </td>
+              <td>
+                <div class="acciones__btns">
+                  <button class="btn__accion btn__accion--editar" (click)="editarProducto(p)" title="Editar"><i class="fa-solid fa-pen"></i></button>
+                  <button class="btn__accion btn__accion--stock" (click)="abrirModalAjusteStock(p)" title="Ajustar stock"><i class="fa-solid fa-plus-minus"></i></button>
+                  <button class="btn__accion btn__accion--eliminar" (click)="eliminarProducto(p)" title="Eliminar"><i class="fa-solid fa-trash"></i></button>
+                </div>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div> -->
+    </div>
+
+    <!-- ==================
+         ROLES Y PERMISOS
+    =================== -->
+    <div class="portal__contenido" *ngIf="seccionActiva === 'roles'">
+      <div class="roles__layout">
+        <div class="roles__lista">
+          <h3 class="roles__lista-titulo">Roles del sistema</h3>
+          <div class="rol__item" *ngFor="let r of roles"
+            [class.activo]="rolSeleccionado?.nombre === r.nombre"
+            (click)="seleccionarRol(r)">
+            <div class="rol__item-icono"><i [class]="r.icono"></i></div>
+            <div class="rol__item-info">
+              <p class="rol__item-nombre">{{ r.nombre }}</p>
+              <p class="rol__item-usuarios">{{ usuariosPorRol(r.nombre) }} usuario(s)</p>
+            </div>
+            <span class="rol__nivel"
+              [class.nivel--total]="r.nivel==='total'"
+              [class.nivel--medio]="r.nivel==='medio'"
+              [class.nivel--basico]="r.nivel==='basico'">
+              {{ r.nivel === 'total' ? 'Total' : r.nivel === 'medio' ? 'Medio' : 'Básico' }}
+            </span>
+          </div>
+        </div>
+
+        <div class="permisos__panel" *ngIf="rolSeleccionado">
+          <div class="permisos__header">
+            <div class="permisos__header-info">
+              <div class="permisos__icono"><i [class]="rolSeleccionado.icono"></i></div>
+              <div>
+                <h3 class="permisos__titulo">{{ rolSeleccionado.nombre }}</h3>
+                <p class="permisos__desc">{{ rolSeleccionado.descripcion }}</p>
+              </div>
+            </div>
+            <button class="btn__guardar-permisos" (click)="guardarPermisos()">
+              <i class="fa-solid fa-save"></i> Guardar cambios
+            </button>
+          </div>
+
+          <div class="permisos__grupos" *ngFor="let grupo of gruposPermisos">
+            <div class="permisos__grupo-header">
+              <i [class]="grupo.icono"></i>
+              <h4>{{ grupo.nombre }}</h4>
+              <label class="check__todos">
+                <input type="checkbox" [checked]="todosMarcados(grupo)" (change)="toggleTodosGrupo(grupo, $event)" />
+                <span>Todos</span>
+              </label>
+            </div>
+            <div class="permisos__lista">
+              <label class="permiso__check" *ngFor="let permiso of grupo.permisos">
+                <input type="checkbox"
+                  [checked]="tienePermiso(rolSeleccionado, permiso.clave)"
+                  (change)="togglePermiso(rolSeleccionado, permiso.clave, $event)" />
+                <span class="permiso__check-custom"></span>
+                <div class="permiso__info">
+                  <span class="permiso__nombre">{{ permiso.nombre }}</span>
+                  <span class="permiso__descripcion">{{ permiso.descripcion }}</span>
+                </div>
+              </label>
+            </div>
+          </div>
+        </div>
+
+        <div class="permisos__placeholder" *ngIf="!rolSeleccionado">
+          <i class="fa-solid fa-id-badge"></i>
+          <p>Selecciona un rol para gestionar sus permisos</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- ==================
+         CONFIGURACIÓN
+    =================== -->
+    <div class="portal__contenido" *ngIf="seccionActiva === 'configuracion'">
+      <div class="config__grid">
+
+        <div class="config__bloque">
+          <h3 class="bloque__titulo"><i class="fa-solid fa-building"></i> Información de la Institución</h3>
+          <div class="config__form">
+            <div class="form__grupo">
+              <label class="form__label">Nombre de la Institución</label>
+              <input type="text" class="form__input" [(ngModel)]="config.nombreInstitucion" />
+            </div>
+            <div class="form__grupo">
+              <label class="form__label">Dirección</label>
+              <input type="text" class="form__input" [(ngModel)]="config.direccion" />
+            </div>
+            <div class="form__grupo">
+              <label class="form__label">Teléfono</label>
+              <input type="text" class="form__input" [(ngModel)]="config.telefono" />
+            </div>
+            <div class="form__grupo">
+              <label class="form__label">Email de Contacto</label>
+              <input type="text" class="form__input" [(ngModel)]="config.email" />
+            </div>
+          </div>
+        </div>
+
+        <div class="config__bloque">
+          <h3 class="bloque__titulo"><i class="fa-solid fa-clock"></i> Configuración de Turnos</h3>
+          <div class="config__form">
+            <div class="form__grupo">
+              <label class="form__label">Turno Mañana (inicio)</label>
+              <input type="time" class="form__input" [(ngModel)]="config.turnoManana" />
+            </div>
+            <div class="form__grupo">
+              <label class="form__label">Turno Noche (inicio)</label>
+              <input type="time" class="form__input" [(ngModel)]="config.turnoNoche" />
+            </div>
+          </div>
+          <div class="turnos__preview">
+            <div class="turno__prev turno__prev--manana">
+              <i class="fa-solid fa-sun"></i>
+              <div><p>Turno Mañana</p><span>{{ config.turnoManana }} — {{ config.turnoNoche }}</span></div>
+            </div>
+            <div class="turno__prev turno__prev--noche">
+              <i class="fa-solid fa-moon"></i>
+              <div><p>Turno Noche</p><span>{{ config.turnoNoche }} — {{ config.turnoManana }}</span></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Proveedores — fila completa -->
+        <div class="config__bloque config__bloque--full">
+          <div class="proveedores__header">
+            <h3 class="bloque__titulo" style="margin-bottom:0"><i class="fa-solid fa-truck"></i> Proveedores</h3>
+            <button class="btn__nuevo btn__nuevo--sm" (click)="abrirModalProveedor()">
+              <i class="fa-solid fa-plus"></i> Nuevo Proveedor
+            </button>
+          </div>
+          <div class="tabla__wrapper" style="margin-top:1rem">
+            <table class="tabla">
+              <thead>
+                <tr><th>Nombre / Empresa</th><th>Categoría</th><th>Contacto</th><th>Teléfono</th><th>Email</th><th>RUC</th><th>Estado</th><th>Acciones</th></tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let pv of proveedores">
+                  <td class="td__nombre">{{ pv.nombre }}</td>
+                  <td><span class="badge__rol">{{ pv.categoria }}</span></td>
+                  <td>{{ pv.contacto }}</td>
+                  <td class="td__fecha">{{ pv.telefono }}</td>
+                  <td class="td__email">{{ pv.email }}</td>
+                  <td class="td__fecha">{{ pv.ruc }}</td>
+                  <td>
+                    <span class="estado__badge" [class.estado--activo]="pv.activo" [class.estado--inactivo]="!pv.activo">
+                      <i class="fa-solid fa-circle"></i> {{ pv.activo ? 'Activo' : 'Inactivo' }}
+                    </span>
+                  </td>
+                  <td>
+                    <div class="acciones__btns">
+                      <button class="btn__accion btn__accion--editar" (click)="editarProveedor(pv)" title="Editar"><i class="fa-solid fa-pen"></i></button>
+                      <button class="btn__accion btn__accion--toggle" (click)="toggleProveedor(pv)">
+                        <i class="fa-solid" [class.fa-toggle-on]="pv.activo" [class.fa-toggle-off]="!pv.activo"></i>
+                      </button>
+                      <button class="btn__accion btn__accion--eliminar" (click)="eliminarProveedor(pv)" title="Eliminar"><i class="fa-solid fa-trash"></i></button>
+                    </div>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+      </div>
+      <div class="config__footer">
+        <button class="btn__guardar"><i class="fa-solid fa-save"></i> Guardar Cambios</button>
+      </div>
+    </div>
+
+  </main>
+</div>
+
+<!-- ==========================================
+     FICHA RESIDENTE (panel lateral)
+=========================================== -->
+<div class="ficha__overlay" *ngIf="residenteActivo" (click)="cerrarFichaResidente()">
+  <div class="ficha__panel" (click)="$event.stopPropagation()">
+
+    <div class="ficha__panel-header">
+      <div class="ficha__panel-perfil">
+        <div class="ficha__panel-foto" (click)="triggerFotoResidente()">
+          <img *ngIf="residenteActivo.foto" [src]="residenteActivo.foto" [alt]="residenteActivo.nombre" />
+          <i class="fa-solid fa-user" *ngIf="!residenteActivo.foto"></i>
+          <div class="ficha__foto-overlay"><i class="fa-solid fa-camera"></i></div>
+          <input type="file" #inputFotoResidente accept="image/*" style="display:none" (change)="onFotoResidenteChange($event)" />
+        </div>
+        <div>
+          <h2 class="ficha__panel-nombre">{{ residenteActivo.nombre }}</h2>
+          <div class="ficha__panel-meta">
+            <span><i class="fa-solid fa-door-open"></i> Hab. {{ residenteActivo.habitacion }}</span>
+            <span><i class="fa-solid fa-cake-candles"></i> {{ residenteActivo.edad }} años</span>
+            <span class="estado__badge"
+              [class.estado--estable]="residenteActivo.estado==='estable'"
+              [class.estado--atencion]="residenteActivo.estado==='atencion'"
+              [class.estado--critico]="residenteActivo.estado==='critico'">
+              <i class="fa-solid fa-circle"></i> {{ residenteActivo.estado }}
+            </span>
+          </div>
+        </div>
+      </div>
+      <button class="ficha__panel-close" (click)="cerrarFichaResidente()">
+        <i class="fa-solid fa-xmark"></i>
+      </button>
+    </div>
+
+    <div class="ficha__tabs">
+      <button class="ficha__tab" [class.activo]="fichaTab==='info'" (click)="fichaTab='info'"><i class="fa-solid fa-circle-info"></i> Info General</button>
+      <button class="ficha__tab" [class.activo]="fichaTab==='emergencia'" (click)="fichaTab='emergencia'"><i class="fa-solid fa-triangle-exclamation"></i> Emergencia</button>
+      <button class="ficha__tab" [class.activo]="fichaTab==='documentos'" (click)="fichaTab='documentos'"><i class="fa-solid fa-folder-open"></i> Documentos</button>
+      <button class="ficha__tab" [class.activo]="fichaTab==='gastos'" (click)="fichaTab='gastos'"><i class="fa-solid fa-wallet"></i> Gastos</button>
+    </div>
+
+    <!-- Tab: Info -->
+    <div class="ficha__tab-content" *ngIf="fichaTab==='info'">
+      <div class="info__grid">
+        <div class="info__bloque">
+          <h4 class="info__bloque-titulo"><i class="fa-solid fa-user"></i> Datos Personales</h4>
+          <div class="info__campos">
+            <div class="info__campo"><label>Nombre completo</label><input type="text" class="form__input" [(ngModel)]="residenteActivo.nombre" /></div>
+            <div class="info__campo"><label>Edad</label><input type="number" class="form__input" [(ngModel)]="residenteActivo.edad" /></div>
+            <div class="info__campo"><label>Habitación</label><input type="text" class="form__input" [(ngModel)]="residenteActivo.habitacion" /></div>
+            <div class="info__campo"><label>Fecha de Ingreso</label><input type="text" class="form__input" [(ngModel)]="residenteActivo.fechaIngreso" /></div>
+            <div class="info__campo"><label>Médico Tratante</label><input type="text" class="form__input" [(ngModel)]="residenteActivo.medico" /></div>
+            <div class="info__campo"><label>Familiar Responsable</label><input type="text" class="form__input" [(ngModel)]="residenteActivo.familiar" /></div>
+            <div class="info__campo info__campo--full"><label>Diagnóstico</label><input type="text" class="form__input" [(ngModel)]="residenteActivo.diagnostico" /></div>
+            <div class="info__campo">
+              <label>Estado</label>
+              <select class="form__input form__select" [(ngModel)]="residenteActivo.estado">
+                <option value="estable">Estable</option>
+                <option value="atencion">En Atención</option>
+                <option value="critico">Crítico</option>
+              </select>
+            </div>
+          </div>
+          <button class="btn__guardar btn__guardar--sm" (click)="guardarInfoResidente()"><i class="fa-solid fa-save"></i> Guardar cambios</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Tab: Emergencia -->
+    <div class="ficha__tab-content" *ngIf="fichaTab==='emergencia'">
+      <div class="emergencia__grid">
+        <div class="emergencia__bloque">
+          <h4 class="info__bloque-titulo"><i class="fa-solid fa-address-card"></i> Contacto de Emergencia</h4>
+          <div class="info__campos">
+            <div class="info__campo"><label>Nombre Contacto</label><input type="text" class="form__input" [(ngModel)]="residenteActivo.contactoEmergencia.nombre" /></div>
+            <div class="info__campo"><label>Parentesco</label><input type="text" class="form__input" [(ngModel)]="residenteActivo.contactoEmergencia.parentesco" /></div>
+            <div class="info__campo"><label>Teléfono Principal</label><input type="text" class="form__input" [(ngModel)]="residenteActivo.contactoEmergencia.telefono" /></div>
+            <div class="info__campo"><label>Teléfono Alternativo</label><input type="text" class="form__input" [(ngModel)]="residenteActivo.contactoEmergencia.telefonoAlt" /></div>
+            <div class="info__campo info__campo--full"><label>Dirección</label><input type="text" class="form__input" [(ngModel)]="residenteActivo.contactoEmergencia.direccion" /></div>
+          </div>
+        </div>
+        <div class="emergencia__bloque">
+          <h4 class="info__bloque-titulo"><i class="fa-solid fa-kit-medical"></i> Ficha Médica de Emergencia</h4>
+          <div class="info__campos">
+            <div class="info__campo">
+              <label>Grupo Sanguíneo</label>
+              <select class="form__input form__select" [(ngModel)]="residenteActivo.fichaEmergencia.grupoSanguineo">
+                <option *ngFor="let g of gruposSanguineos" [value]="g">{{ g }}</option>
+              </select>
+            </div>
+            <div class="info__campo">
+              <label>Factor RH</label>
+              <select class="form__input form__select" [(ngModel)]="residenteActivo.fichaEmergencia.factorRH">
+                <option value="+">Positivo (+)</option>
+                <option value="-">Negativo (-)</option>
+              </select>
+            </div>
+            <div class="info__campo info__campo--full"><label>Alergias conocidas</label><input type="text" class="form__input" [(ngModel)]="residenteActivo.fichaEmergencia.alergias" /></div>
+            <div class="info__campo info__campo--full"><label>Enfermedades crónicas</label><input type="text" class="form__input" [(ngModel)]="residenteActivo.fichaEmergencia.enfermedadesCronicas" /></div>
+            <div class="info__campo info__campo--full"><label>Medicamentos permanentes</label><textarea class="form__input form__textarea" [(ngModel)]="residenteActivo.fichaEmergencia.medicamentosPermanentes"></textarea></div>
+            <div class="info__campo info__campo--full"><label>Instrucciones especiales</label><textarea class="form__input form__textarea" [(ngModel)]="residenteActivo.fichaEmergencia.instrucciones"></textarea></div>
+          </div>
+          <button class="btn__guardar btn__guardar--sm" (click)="guardarEmergencia()"><i class="fa-solid fa-save"></i> Guardar ficha de emergencia</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Tab: Documentos -->
+    <div class="ficha__tab-content" *ngIf="fichaTab==='documentos'">
+      <div class="docs__toolbar">
+        <label class="btn__nuevo btn__nuevo--label">
+          <i class="fa-solid fa-upload"></i> Subir Documento
+          <input type="file" accept=".pdf,.doc,.docx,.jpg,.jpeg,.png" (change)="onDocumentoChange($event)" style="display:none" />
+        </label>
+      </div>
+      <div class="docs__lista" *ngIf="documentosDe(residenteActivo.id).length > 0">
+        <div class="doc__item" *ngFor="let doc of documentosDe(residenteActivo.id)">
+          <div class="doc__icono" [class.doc__icono--pdf]="doc.tipo==='pdf'" [class.doc__icono--img]="doc.tipo==='imagen'" [class.doc__icono--doc]="doc.tipo==='doc'">
+            <i class="fa-solid fa-file-pdf" *ngIf="doc.tipo==='pdf'"></i>
+            <i class="fa-solid fa-file-image" *ngIf="doc.tipo==='imagen'"></i>
+            <i class="fa-solid fa-file-word" *ngIf="doc.tipo==='doc'"></i>
+          </div>
+          <div class="doc__info">
+            <p class="doc__nombre">{{ doc.nombre }}</p>
+            <p class="doc__meta">{{ doc.tamano }} · Subido {{ doc.fecha }}</p>
+          </div>
+          <div class="doc__acciones">
+            <a [href]="doc.url" target="_blank" class="btn__accion btn__accion--editar" title="Ver"><i class="fa-solid fa-eye"></i></a>
+            <button class="btn__accion btn__accion--eliminar" (click)="eliminarDocumento(doc)"><i class="fa-solid fa-trash"></i></button>
+          </div>
+        </div>
+      </div>
+      <div class="ficha__vacio" *ngIf="documentosDe(residenteActivo.id).length === 0">
+        <i class="fa-solid fa-folder-open"></i>
+        <p>No hay documentos cargados para este residente</p>
+      </div>
+    </div>
+
+    <!-- Tab: Gastos -->
+    <div class="ficha__tab-content" *ngIf="fichaTab==='gastos'">
+      <div class="gastos__header">
+        <!-- <div class="gastos__saldo">
+          <div class="saldo__item saldo__item--ingreso">
+            <i class="fa-solid fa-arrow-down"></i>
+            <div><p class="saldo__label">Total Ingresos</p><p class="saldo__valor">S/ {{ saldoDisponible(residenteActivo.id) | number:'1.2-2' }}</p></div>
+          </div>
+          <div class="saldo__item saldo__item--gasto">
+            <i class="fa-solid fa-arrow-up"></i>
+            <div><p class="saldo__label">Total Gastado</p><p class="saldo__valor">S/ {{ totalGastado(residenteActivo.id) | number:'1.2-2' }}</p></div>
+          </div>
+          <div class="saldo__item saldo__item--balance">
+            <i class="fa-solid fa-scale-balanced"></i>
+            <div>
+              <p class="saldo__label">Balance</p>
+              <p class="saldo__valor" [class.balance--positivo]="balanceResidente(residenteActivo.id) >= 0" [class.balance--negativo]="balanceResidente(residenteActivo.id) < 0">
+                S/ {{ balanceResidente(residenteActivo.id) | number:'1.2-2' }}
+              </p>
+            </div>
+          </div>
+        </div> -->
+        <div class="gastos__acciones">
+          <button class="btn__nuevo" (click)="abrirModalGasto('ingreso')"><i class="fa-solid fa-plus"></i> Registrar Ingreso</button>
+          <button class="btn__nuevo btn__nuevo--gasto" (click)="abrirModalGasto('gasto')"><i class="fa-solid fa-minus"></i> Registrar Gasto</button>
+          <button class="btn__nuevo btn__nuevo--pdf" (click)="exportarGastosPDF()"><i class="fa-solid fa-file-pdf"></i> Descargar PDF</button>
+        </div>
+      </div>
+      <div class="tabla__wrapper" *ngIf="gastosDe(residenteActivo.id).length > 0">
+        <table class="tabla">
+          <thead><tr><th>Tipo</th><th>Descripción</th><th>Categoría</th><th>Monto</th><th>Fecha</th><th>Registrado por</th></tr></thead>
+          <tbody>
+            <tr *ngFor="let g of gastosDe(residenteActivo.id)" [class.fila--ingreso]="g.tipo==='ingreso'" [class.fila--gasto]="g.tipo==='gasto'">
+              <td>
+                <span class="tipo__badge" [class.tipo--ingreso]="g.tipo==='ingreso'" [class.tipo--gasto]="g.tipo==='gasto'">
+                  <i class="fa-solid fa-arrow-down" *ngIf="g.tipo==='ingreso'"></i>
+                  <i class="fa-solid fa-arrow-up" *ngIf="g.tipo==='gasto'"></i>
+                  {{ g.tipo | titlecase }}
+                </span>
+              </td>
+              <td>{{ g.descripcion }}</td>
+              <td><span class="badge__categoria">{{ g.categoria }}</span></td>
+              <td class="td__monto" [class.monto--ingreso]="g.tipo==='ingreso'" [class.monto--gasto]="g.tipo==='gasto'">
+                {{ g.tipo === 'ingreso' ? '+' : '-' }} S/ {{ g.monto | number:'1.2-2' }}
+              </td>
+              <td class="td__fecha">{{ g.fecha }}</td>
+              <td class="td__fecha">{{ g.registradoPor }}</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="ficha__vacio" *ngIf="gastosDe(residenteActivo.id).length === 0">
+        <i class="fa-solid fa-wallet"></i>
+        <p>No hay movimientos registrados para este residente</p>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- MODAL USUARIO -->
+<div class="modal__overlay" *ngIf="mostrarModalUsuario" (click)="mostrarModalUsuario = false">
+  <div class="modal__card" (click)="$event.stopPropagation()">
+    <div class="modal__header">
+      <h3><i class="fa-solid fa-user-plus"></i> {{ modoEdicionUsuario ? 'Editar Usuario' : 'Nuevo Usuario' }}</h3>
+      <button class="modal__close" (click)="mostrarModalUsuario = false"><i class="fa-solid fa-xmark"></i></button>
+    </div>
+    <div class="modal__body">
+      <div class="modal__foto-upload">
+        <div class="foto__preview" (click)="triggerFotoUsuario()">
+          <img *ngIf="formularioUsuario.foto" [src]="formularioUsuario.foto" alt="foto" />
+          <i class="fa-solid fa-user" *ngIf="!formularioUsuario.foto"></i>
+          <div class="foto__overlay"><i class="fa-solid fa-camera"></i><span>Subir foto</span></div>
+          <input type="file" #inputFotoUsuario accept="image/*" style="display:none" (change)="onFotoUsuarioChange($event)" />
+        </div>
+        <p class="foto__hint">Haz clic para subir una foto de perfil</p>
+      </div>
+      <div class="modal__grid">
+        <div class="form__grupo form__grupo--full"><label class="form__label">Nombre Completo</label><input type="text" class="form__input" [(ngModel)]="formularioUsuario.nombre" /></div>
+        <div class="form__grupo"><label class="form__label">Usuario (login)</label><input type="text" class="form__input" [(ngModel)]="formularioUsuario.username" /></div>
+        <div class="form__grupo"><label class="form__label">Contraseña</label><input type="password" class="form__input" [(ngModel)]="formularioUsuario.password" /></div>
+        <div class="form__grupo form__grupo--full">
+          <label class="form__label">Rol</label>
+          <select class="form__input form__select" [(ngModel)]="formularioUsuario.rol">
+            <option value="" disabled>Selecciona un rol</option>
+            <option *ngFor="let r of roles" [value]="r.nombre">{{ r.nombre }}</option>
+          </select>
+        </div>
+        <div class="form__grupo"><label class="form__label">Email</label><input type="email" class="form__input" [(ngModel)]="formularioUsuario.email" /></div>
+        <div class="form__grupo"><label class="form__label">Teléfono</label><input type="text" class="form__input" [(ngModel)]="formularioUsuario.telefono" /></div>
+      </div>
+    </div>
+    <div class="modal__footer">
+      <button class="btn__cancelar" (click)="mostrarModalUsuario = false">Cancelar</button>
+      <button class="btn__guardar" (click)="guardarUsuario()"><i class="fa-solid fa-save"></i> {{ modoEdicionUsuario ? 'Actualizar' : 'Crear Usuario' }}</button>
+    </div>
+  </div>
+</div>
+
+<!-- MODAL RESIDENTE -->
+<div class="modal__overlay" *ngIf="mostrarModalResidente" (click)="mostrarModalResidente = false">
+  <div class="modal__card modal__card--lg" (click)="$event.stopPropagation()">
+    <div class="modal__header">
+      <h3><i class="fa-solid fa-bed-pulse"></i> Nuevo Residente</h3>
+      <button class="modal__close" (click)="mostrarModalResidente = false"><i class="fa-solid fa-xmark"></i></button>
+    </div>
+    <div class="modal__body">
+      <div class="modal__foto-upload">
+        <div class="foto__preview" (click)="triggerFotoNuevoResidente()">
+          <img *ngIf="formularioResidente.foto" [src]="formularioResidente.foto" alt="foto" />
+          <i class="fa-solid fa-user" *ngIf="!formularioResidente.foto"></i>
+          <div class="foto__overlay"><i class="fa-solid fa-camera"></i><span>Subir foto</span></div>
+          <input type="file" #inputFotoNuevoResidente accept="image/*" style="display:none" (change)="onFotoNuevoResidenteChange($event)" />
+        </div>
+        <p class="foto__hint">Foto del residente</p>
+      </div>
+      <div class="modal__grid modal__grid--3">
+        <div class="form__grupo form__grupo--full"><label class="form__label">Nombre Completo</label><input type="text" class="form__input" [(ngModel)]="formularioResidente.nombre" /></div>
+        <div class="form__grupo"><label class="form__label">Edad</label><input type="number" class="form__input" [(ngModel)]="formularioResidente.edad" /></div>
+        <div class="form__grupo"><label class="form__label">Habitación</label><input type="text" class="form__input" [(ngModel)]="formularioResidente.habitacion" /></div>
+        <div class="form__grupo"><label class="form__label">Médico Tratante</label><input type="text" class="form__input" [(ngModel)]="formularioResidente.medico" /></div>
+        <div class="form__grupo"><label class="form__label">Familiar Responsable</label><input type="text" class="form__input" [(ngModel)]="formularioResidente.familiar" /></div>
+        <div class="form__grupo"><label class="form__label">Fecha de Ingreso</label><input type="text" class="form__input" [(ngModel)]="formularioResidente.fechaIngreso" /></div>
+        <div class="form__grupo form__grupo--full"><label class="form__label">Diagnóstico</label><input type="text" class="form__input" [(ngModel)]="formularioResidente.diagnostico" /></div>
+      </div>
+    </div>
+    <div class="modal__footer">
+      <button class="btn__cancelar" (click)="mostrarModalResidente = false">Cancelar</button>
+      <button class="btn__guardar" (click)="guardarResidente()"><i class="fa-solid fa-save"></i> Crear Residente</button>
+    </div>
+  </div>
+</div>
+
+<!-- MODAL PRODUCTO -->
+<div class="modal__overlay" *ngIf="mostrarModalProducto" (click)="mostrarModalProducto = false">
+  <div class="modal__card modal__card--lg" (click)="$event.stopPropagation()">
+    <div class="modal__header">
+      <h3><i class="fa-solid fa-boxes-stacked"></i> {{ modoEdicionProducto ? 'Editar Producto' : 'Nuevo Producto' }}</h3>
+      <button class="modal__close" (click)="mostrarModalProducto = false"><i class="fa-solid fa-xmark"></i></button>
+    </div>
+    <div class="modal__body">
+      <div class="modal__grid modal__grid--3">
+        <div class="form__grupo form__grupo--full"><label class="form__label">Nombre del Producto</label><input type="text" class="form__input" placeholder="Ej. Pañales Talla L" [(ngModel)]="formularioProducto.nombre" /></div>
+        <div class="form__grupo">
+          <label class="form__label">Categoría</label>
+          <select class="form__input form__select" [(ngModel)]="formularioProducto.categoria">
+            <option value="" disabled>Seleccionar</option>
+            <option *ngFor="let c of categoriasProducto" [value]="c">{{ c }}</option>
+          </select>
+        </div>
+        <div class="form__grupo">
+          <label class="form__label">Proveedor</label>
+          <select class="form__input form__select" [(ngModel)]="formularioProducto.proveedor">
+            <option value="" disabled>Seleccionar</option>
+            <option *ngFor="let pv of proveedoresActivos" [value]="pv.nombre">{{ pv.nombre }}</option>
+            <option value="Sin proveedor">Sin proveedor</option>
+          </select>
+        </div>
+        <div class="form__grupo"><label class="form__label">Unidad de medida</label><input type="text" class="form__input" placeholder="Ej. unidades, kg" [(ngModel)]="formularioProducto.unidad" /></div>
+        <div class="form__grupo"><label class="form__label">Stock Actual</label><input type="number" class="form__input" [(ngModel)]="formularioProducto.stockActual" min="0" /></div>
+        <div class="form__grupo"><label class="form__label">Stock Mínimo (alerta)</label><input type="number" class="form__input" [(ngModel)]="formularioProducto.stockMinimo" min="0" /></div>
+        <div class="form__grupo"><label class="form__label">Precio Unitario (S/)</label><input type="number" class="form__input" [(ngModel)]="formularioProducto.precioUnitario" min="0" step="0.01" /></div>
+      </div>
+    </div>
+    <div class="modal__footer">
+      <button class="btn__cancelar" (click)="mostrarModalProducto = false">Cancelar</button>
+      <button class="btn__guardar" (click)="guardarProducto()"><i class="fa-solid fa-save"></i> {{ modoEdicionProducto ? 'Actualizar' : 'Crear Producto' }}</button>
+    </div>
+  </div>
+</div>
+
+<!-- MODAL AJUSTE STOCK -->
+<div class="modal__overlay" *ngIf="mostrarModalStock" (click)="mostrarModalStock = false">
+  <div class="modal__card" (click)="$event.stopPropagation()">
+    <div class="modal__header">
+      <h3><i class="fa-solid fa-plus-minus"></i> Ajustar Stock — {{ productoEnAjuste?.nombre }}</h3>
+      <button class="modal__close" (click)="mostrarModalStock = false"><i class="fa-solid fa-xmark"></i></button>
+    </div>
+    <div class="modal__body">
+      <div class="stock__actual-info" *ngIf="productoEnAjuste">
+        <span>Stock actual:</span>
+        <strong>{{ productoEnAjuste.stockActual }} {{ productoEnAjuste.unidad }}</strong>
+      </div>
+      <div class="modal__grid">
+        <div class="form__grupo">
+          <label class="form__label">Tipo de movimiento</label>
+          <select class="form__input form__select" [(ngModel)]="ajusteStock.tipo">
+            <option value="entrada">Entrada (agregar)</option>
+            <option value="salida">Salida (retirar)</option>
+            <option value="ajuste">Ajuste directo</option>
+          </select>
+        </div>
+        <div class="form__grupo">
+          <label class="form__label">{{ ajusteStock.tipo === 'ajuste' ? 'Nuevo stock total' : 'Cantidad' }}</label>
+          <input type="number" class="form__input" [(ngModel)]="ajusteStock.cantidad" min="0" />
+        </div>
+        <div class="form__grupo form__grupo--full">
+          <label class="form__label">Motivo / Observación</label>
+          <input type="text" class="form__input" [(ngModel)]="ajusteStock.motivo" placeholder="Ej. Compra a proveedor, uso mensual..." />
+        </div>
+      </div>
+    </div>
+    <div class="modal__footer">
+      <button class="btn__cancelar" (click)="mostrarModalStock = false">Cancelar</button>
+      <button class="btn__guardar" (click)="guardarAjusteStock()"><i class="fa-solid fa-save"></i> Aplicar</button>
+    </div>
+  </div>
+</div>
+
+<!-- MODAL PROVEEDOR -->
+<div class="modal__overlay" *ngIf="mostrarModalProveedor" (click)="mostrarModalProveedor = false">
+  <div class="modal__card modal__card--lg" (click)="$event.stopPropagation()">
+    <div class="modal__header">
+      <h3><i class="fa-solid fa-truck"></i> {{ modoEdicionProveedor ? 'Editar Proveedor' : 'Nuevo Proveedor' }}</h3>
+      <button class="modal__close" (click)="mostrarModalProveedor = false"><i class="fa-solid fa-xmark"></i></button>
+    </div>
+    <div class="modal__body">
+      <div class="modal__grid modal__grid--3">
+        <div class="form__grupo form__grupo--full"><label class="form__label">Nombre / Empresa</label><input type="text" class="form__input" placeholder="Ej. Farmedic S.A.C." [(ngModel)]="formularioProveedor.nombre" /></div>
+        <div class="form__grupo">
+          <label class="form__label">Categoría</label>
+          <select class="form__input form__select" [(ngModel)]="formularioProveedor.categoria">
+            <option value="" disabled>Seleccionar</option>
+            <option *ngFor="let c of categoriasProducto" [value]="c">{{ c }}</option>
+            <option value="General">General</option>
+          </select>
+        </div>
+        <div class="form__grupo"><label class="form__label">Persona de contacto</label><input type="text" class="form__input" [(ngModel)]="formularioProveedor.contacto" /></div>
+        <div class="form__grupo"><label class="form__label">Teléfono</label><input type="text" class="form__input" [(ngModel)]="formularioProveedor.telefono" /></div>
+        <div class="form__grupo"><label class="form__label">Email</label><input type="email" class="form__input" [(ngModel)]="formularioProveedor.email" /></div>
+        <div class="form__grupo"><label class="form__label">RUC / NIT</label><input type="text" class="form__input" [(ngModel)]="formularioProveedor.ruc" /></div>
+        <div class="form__grupo form__grupo--full"><label class="form__label">Dirección</label><input type="text" class="form__input" [(ngModel)]="formularioProveedor.direccion" /></div>
+        <div class="form__grupo form__grupo--full"><label class="form__label">Notas</label><textarea class="form__input form__textarea" [(ngModel)]="formularioProveedor.notas" placeholder="Condiciones de pago, días de entrega..."></textarea></div>
+      </div>
+    </div>
+    <div class="modal__footer">
+      <button class="btn__cancelar" (click)="mostrarModalProveedor = false">Cancelar</button>
+      <button class="btn__guardar" (click)="guardarProveedor()"><i class="fa-solid fa-save"></i> {{ modoEdicionProveedor ? 'Actualizar' : 'Crear Proveedor' }}</button>
+    </div>
+  </div>
+</div>
+
+<!-- MODAL GASTO -->
+<div class="modal__overlay" *ngIf="mostrarModalGasto" (click)="mostrarModalGasto = false">
+  <div class="modal__card" (click)="$event.stopPropagation()">
+    <div class="modal__header">
+      <h3>
+        <i class="fa-solid fa-arrow-down" *ngIf="tipoMovimiento==='ingreso'"></i>
+        <i class="fa-solid fa-arrow-up" *ngIf="tipoMovimiento==='gasto'"></i>
+        {{ tipoMovimiento === 'ingreso' ? 'Registrar Ingreso de Fondos' : 'Registrar Gasto' }}
+      </h3>
+      <button class="modal__close" (click)="mostrarModalGasto = false"><i class="fa-solid fa-xmark"></i></button>
+    </div>
+    <div class="modal__body">
+      <div class="modal__grid">
+        <div class="form__grupo form__grupo--full">
+          <label class="form__label">Descripción</label>
+          <input type="text" class="form__input" [(ngModel)]="formularioGasto.descripcion"
+            [placeholder]="tipoMovimiento==='ingreso' ? 'Ej. Depósito de familiar para gastos' : 'Ej. Compra de pañales'" />
+        </div>
+        <div class="form__grupo">
+          <label class="form__label">Categoría</label>
+          <select class="form__input form__select" [(ngModel)]="formularioGasto.categoria">
+            <option value="" disabled>Seleccionar</option>
+            <option *ngFor="let c of categoriasGasto" [value]="c">{{ c }}</option>
+          </select>
+        </div>
+        <div class="form__grupo"><label class="form__label">Monto (S/)</label><input type="number" class="form__input" [(ngModel)]="formularioGasto.monto" placeholder="0.00" min="0" step="0.01" /></div>
+        <div class="form__grupo"><label class="form__label">Fecha</label><input type="text" class="form__input" [(ngModel)]="formularioGasto.fecha" placeholder="Hoy" /></div>
+      </div>
+    </div>
+    <div class="modal__footer">
+      <button class="btn__cancelar" (click)="mostrarModalGasto = false">Cancelar</button>
+      <button class="btn__guardar" [class.btn__guardar--gasto]="tipoMovimiento==='gasto'" (click)="guardarGasto()">
+        <i class="fa-solid fa-save"></i> Registrar
+      </button>
+    </div>
+  </div>
+</div>

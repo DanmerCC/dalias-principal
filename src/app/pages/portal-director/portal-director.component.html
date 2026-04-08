@@ -1,0 +1,530 @@
+<div class="portal" [class.sidebar-colapsado]="sidebarColapsado">
+
+  <!-- SIDEBAR -->
+  <aside class="portal__sidebar">
+    <div class="sidebar__header">
+      <div class="sidebar__perfil">
+        <div class="perfil__foto">
+          <img [src]="director.foto" [alt]="director.nombre" />
+          <span class="perfil__badge"><i class="fa-solid fa-crown"></i></span>
+        </div>
+        <div>
+          <p class="perfil__nombre">{{ director.nombre }}</p>
+          <p class="perfil__cargo">{{ director.cargo }}</p>
+        </div>
+      </div>
+      <button class="sidebar__toggle" (click)="toggleSidebar()">
+        <i class="fa-solid" [class.fa-bars]="sidebarColapsado" [class.fa-xmark]="!sidebarColapsado"></i>
+      </button>
+    </div>
+
+    <nav class="sidebar__nav">
+      <button class="nav__item" [class.activo]="seccionActiva === 'dashboard'" (click)="navegarA('dashboard')">
+        <i class="fa-solid fa-gauge-high"></i>
+        <span *ngIf="!sidebarColapsado">Dashboard</span>
+      </button>
+      <button class="nav__item" [class.activo]="seccionActiva === 'residentes'" (click)="navegarA('residentes')">
+        <i class="fa-solid fa-bed-pulse"></i>
+        <span *ngIf="!sidebarColapsado">Residentes</span>
+      </button>
+      <button class="nav__item" [class.activo]="seccionActiva === 'personal'" (click)="navegarA('personal')">
+        <i class="fa-solid fa-users"></i>
+        <span *ngIf="!sidebarColapsado">Personal</span>
+      </button>
+      <button class="nav__item" [class.activo]="seccionActiva === 'finanzas'" (click)="navegarA('finanzas')">
+        <i class="fa-solid fa-chart-pie"></i>
+        <span *ngIf="!sidebarColapsado">Finanzas</span>
+      </button>
+      <button class="nav__item" [class.activo]="seccionActiva === 'reportes'" (click)="navegarA('reportes')">
+        <i class="fa-solid fa-file-chart-column"></i>
+        <span *ngIf="!sidebarColapsado">Reportes</span>
+      </button>
+      <button class="nav__item" [class.activo]="seccionActiva === 'configuracion'" (click)="navegarA('configuracion')">
+        <i class="fa-solid fa-gear"></i>
+        <span *ngIf="!sidebarColapsado">Configuración</span>
+      </button>
+    </nav>
+
+    <div class="sidebar__footer" *ngIf="!sidebarColapsado">
+      <div class="sidebar__acceso-total">
+        <i class="fa-solid fa-shield-check"></i>
+        <span>Acceso Total</span>
+      </div>
+    </div>
+
+    <button class="sidebar__cerrar-sesion" (click)="cerrarSesion()">
+      <i class="fa-solid fa-right-from-bracket"></i>
+      <span *ngIf="!sidebarColapsado">Cerrar sesión</span>
+    </button>
+  </aside>
+
+  <!-- MAIN -->
+  <main class="portal__main">
+
+    <!-- Topbar -->
+    <div class="portal__topbar">
+      <div class="topbar__izquierda">
+        <h2 class="topbar__titulo">
+          <span *ngIf="seccionActiva === 'dashboard'">Dashboard General</span>
+          <span *ngIf="seccionActiva === 'residentes'">Gestión de Residentes</span>
+          <span *ngIf="seccionActiva === 'personal'">Gestión de Personal</span>
+          <span *ngIf="seccionActiva === 'finanzas'">Control Financiero</span>
+          <span *ngIf="seccionActiva === 'reportes'">Reportes</span>
+          <span *ngIf="seccionActiva === 'configuracion'">Configuración</span>
+        </h2>
+      </div>
+      <div class="topbar__derecha">
+        <div class="topbar__alerta-critica" *ngIf="alertasCriticas.length > 0" (click)="navegarA('dashboard')">
+          <i class="fa-solid fa-triangle-exclamation"></i>
+          <span>{{ alertasCriticas.length }} alerta{{ alertasCriticas.length > 1 ? 's' : '' }} crítica{{ alertasCriticas.length > 1 ? 's' : '' }}</span>
+        </div>
+        <div class="topbar__perfil">
+          <img [src]="director.foto" [alt]="director.nombre" />
+          <span>{{ director.nombre }}</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- ==================
+         DASHBOARD
+    =================== -->
+    <div class="portal__contenido" *ngIf="seccionActiva === 'dashboard'">
+
+      <!-- KPIs -->
+      <div class="kpi__grid">
+        <div class="kpi__card" *ngFor="let kpi of kpis" [class]="'kpi__card--' + kpi.color">
+          <div class="kpi__icono">
+            <i [class]="kpi.icono"></i>
+          </div>
+          <div class="kpi__info">
+            <p class="kpi__label">{{ kpi.label }}</p>
+            <p class="kpi__valor">{{ kpi.valor }}</p>
+            <p class="kpi__tendencia" *ngIf="kpi.tendencia"
+               [class.tendencia--positiva]="kpi.tendenciaPositiva"
+               [class.tendencia--negativa]="!kpi.tendenciaPositiva">
+              <i class="fa-solid" [class.fa-arrow-trend-up]="kpi.tendenciaPositiva" [class.fa-arrow-trend-down]="!kpi.tendenciaPositiva"></i>
+              {{ kpi.tendencia }}
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Grid dashboard -->
+      <div class="dashboard__grid">
+
+        <!-- Alertas -->
+        <div class="dashboard__bloque dashboard__bloque--alertas">
+          <h3 class="bloque__titulo">
+            <i class="fa-solid fa-bell"></i>
+            Alertas del Sistema
+            <span class="bloque__badge bloque__badge--rojo" *ngIf="alertasCriticas.length > 0">{{ alertasCriticas.length }}</span>
+          </h3>
+          <div class="alertas__lista">
+            <div class="alerta__item" *ngFor="let alerta of alertas" [class]="'alerta__item--' + alerta.tipo">
+              <div class="alerta__icono">
+                <i [class]="alerta.icono"></i>
+              </div>
+              <div class="alerta__info">
+                <p class="alerta__titulo">{{ alerta.titulo }}</p>
+                <p class="alerta__desc">{{ alerta.descripcion }}</p>
+                <span class="alerta__hora">{{ alerta.hora }}</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Estado residentes -->
+        <div class="dashboard__bloque">
+          <h3 class="bloque__titulo">
+            <i class="fa-solid fa-bed-pulse"></i>
+            Estado de Residentes
+          </h3>
+          <div class="estado__donut">
+            <div class="donut__anillo">
+              <div class="donut__centro">
+                <p class="donut__total">{{ residentes.length }}</p>
+                <p class="donut__sub">Total</p>
+              </div>
+            </div>
+            <div class="donut__leyenda">
+              <div class="leyenda__item">
+                <span class="leyenda__color leyenda__color--estable"></span>
+                <span>Estables</span>
+                <strong>{{ totalEstables }}</strong>
+              </div>
+              <div class="leyenda__item">
+                <span class="leyenda__color leyenda__color--atencion"></span>
+                <span>En Atención</span>
+                <strong>{{ totalAtencion }}</strong>
+              </div>
+              <div class="leyenda__item">
+                <span class="leyenda__color leyenda__color--critico"></span>
+                <span>Críticos</span>
+                <strong>{{ totalCriticos }}</strong>
+              </div>
+            </div>
+          </div>
+
+          <div class="criticos__lista" *ngIf="totalCriticos > 0">
+            <p class="criticos__label">Requieren atención inmediata:</p>
+            <ng-container *ngFor="let r of residentes">
+              <div class="critico__item" *ngIf="r.estado === 'critico'">
+                <i class="fa-solid fa-circle-exclamation"></i>
+                <span>{{ r.nombre }} — Hab. {{ r.habitacion }}</span>
+              </div>
+            </ng-container>
+          </div>
+        </div>
+
+        <!-- Resumen financiero -->
+        <div class="dashboard__bloque">
+          <h3 class="bloque__titulo">
+            <i class="fa-solid fa-chart-pie"></i>
+            Resumen Financiero — Junio 2024
+          </h3>
+          <div class="finanzas__resumen">
+            <div class="finanza__item finanza__item--ingreso">
+              <div class="finanza__icono">
+                <i class="fa-solid fa-arrow-up"></i>
+              </div>
+              <div>
+                <p class="finanza__label">Ingresos</p>
+                <p class="finanza__valor">S/ {{ totalIngresos.toLocaleString() }}</p>
+              </div>
+            </div>
+            <div class="finanza__item finanza__item--egreso">
+              <div class="finanza__icono">
+                <i class="fa-solid fa-arrow-down"></i>
+              </div>
+              <div>
+                <p class="finanza__label">Egresos</p>
+                <p class="finanza__valor">S/ {{ totalEgresos.toLocaleString() }}</p>
+              </div>
+            </div>
+            <div class="finanza__item finanza__item--utilidad">
+              <div class="finanza__icono">
+                <i class="fa-solid fa-chart-line"></i>
+              </div>
+              <div>
+                <p class="finanza__label">Utilidad Neta</p>
+                <p class="finanza__valor">S/ {{ utilidadNeta.toLocaleString() }}</p>
+              </div>
+            </div>
+          </div>
+          <button class="bloque__ver-mas" (click)="navegarA('finanzas')">
+            Ver detalle financiero <i class="fa-solid fa-arrow-right"></i>
+          </button>
+        </div>
+
+        <!-- Personal activo hoy -->
+        <div class="dashboard__bloque">
+          <h3 class="bloque__titulo">
+            <i class="fa-solid fa-users"></i>
+            Personal de Hoy
+          </h3>
+          <div class="personal__mini-lista">
+            <div class="personal__mini-item" *ngFor="let p of personal.slice(0, 6)">
+              <div class="personal__mini-avatar">
+                <i class="fa-solid fa-user-nurse"></i>
+              </div>
+              <div class="personal__mini-info">
+                <p class="personal__mini-nombre">{{ p.nombre }}</p>
+                <p class="personal__mini-cargo">{{ p.cargo }}</p>
+              </div>
+              <span class="personal__mini-estado" [class]="'estado--' + p.estado">
+                <i class="fa-solid fa-circle"></i>
+                {{ p.estado }}
+              </span>
+            </div>
+          </div>
+          <button class="bloque__ver-mas" (click)="navegarA('personal')">
+            Ver todo el personal <i class="fa-solid fa-arrow-right"></i>
+          </button>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- ==================
+         RESIDENTES
+    =================== -->
+    <div class="portal__contenido" *ngIf="seccionActiva === 'residentes'">
+      <div class="seccion__barra">
+        <div class="busqueda__wrapper">
+          <i class="fa-solid fa-magnifying-glass"></i>
+          <input type="text" class="busqueda__input" placeholder="Buscar residente..." [(ngModel)]="busquedaResidente" />
+        </div>
+        <div class="seccion__stats">
+          <span class="stat__chip stat__chip--estable"><i class="fa-solid fa-circle-check"></i> {{ totalEstables }} Estables</span>
+          <span class="stat__chip stat__chip--atencion"><i class="fa-solid fa-triangle-exclamation"></i> {{ totalAtencion }} Atención</span>
+          <span class="stat__chip stat__chip--critico"><i class="fa-solid fa-circle-exclamation"></i> {{ totalCriticos }} Críticos</span>
+        </div>
+      </div>
+
+      <div class="tabla__wrapper">
+        <table class="tabla">
+          <thead>
+            <tr>
+              <th>Residente</th>
+              <th>Edad</th>
+              <th>Hab.</th>
+              <th>Estado</th>
+              <th>Diagnóstico</th>
+              <th>Médico</th>
+              <th>Familiar</th>
+              <th>Plan</th>
+              <th>Ingreso</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let r of residentesFiltrados">
+              <td>
+                <div class="td__residente">
+                  <div class="td__foto">
+                    <img [src]="r.foto" [alt]="r.nombre" />
+                  </div>
+                  <span class="td__nombre">{{ r.nombre }}</span>
+                </div>
+              </td>
+              <td>{{ r.edad }} años</td>
+              <td><span class="badge__hab">{{ r.habitacion }}</span></td>
+              <td>
+                <span class="residente__estado"
+                  [class.estado--estable]="r.estado === 'estable'"
+                  [class.estado--atencion]="r.estado === 'atencion'"
+                  [class.estado--critico]="r.estado === 'critico'">
+                  {{ r.estado }}
+                </span>
+              </td>
+              <td class="td__diagnostico">{{ r.diagnostico || '—' }}</td>
+              <td class="td__medico">{{ r.medico }}</td>
+              <td class="td__familiar">{{ r.familiar }}</td>
+              <td><span class="badge__plan">{{ r.planPago }}</span></td>
+              <td class="td__fecha">{{ r.fechaIngreso }}</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- ==================
+         PERSONAL
+    =================== -->
+    <div class="portal__contenido" *ngIf="seccionActiva === 'personal'">
+      <div class="seccion__barra">
+        <div class="busqueda__wrapper">
+          <i class="fa-solid fa-magnifying-glass"></i>
+          <input type="text" class="busqueda__input" placeholder="Buscar personal..." [(ngModel)]="busquedaPersonal" />
+        </div>
+        <div class="filtros__grupo">
+          <button class="filtro__btn" [class.activo]="filtroEstadoPersonal === 'todos'" (click)="filtroEstadoPersonal = 'todos'">Todos</button>
+          <button class="filtro__btn" [class.activo]="filtroEstadoPersonal === 'activo'" (click)="filtroEstadoPersonal = 'activo'">Activos</button>
+          <button class="filtro__btn" [class.activo]="filtroEstadoPersonal === 'vacaciones'" (click)="filtroEstadoPersonal = 'vacaciones'">De vacaciones</button>
+        </div>
+      </div>
+
+      <div class="personal__grid">
+        <div class="personal__card" *ngFor="let p of personalFiltrado">
+          <div class="personal__card-header">
+            <div class="personal__avatar">
+              <i class="fa-solid fa-user-nurse"></i>
+            </div>
+            <span class="personal__estado-badge" [class]="'estado--' + p.estado">
+              <i class="fa-solid fa-circle"></i>
+              {{ p.estado }}
+            </span>
+          </div>
+          <div class="personal__card-body">
+            <h3 class="personal__nombre">{{ p.nombre }}</h3>
+            <p class="personal__cargo">{{ p.cargo }}</p>
+            <div class="personal__meta">
+              <span><i class="fa-solid fa-clock"></i> Turno {{ p.turno }}</span>
+              <span><i class="fa-solid fa-phone"></i> {{ p.telefono }}</span>
+              <span><i class="fa-regular fa-calendar"></i> Desde {{ p.fechaIngreso }}</span>
+            </div>
+          </div>
+          <div class="personal__card-footer">
+            <span class="personal__rol">{{ p.rol }}</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ==================
+         FINANZAS
+    =================== -->
+    <div class="portal__contenido" *ngIf="seccionActiva === 'finanzas'">
+      <div class="finanzas__kpis">
+        <div class="finanza__kpi finanza__kpi--ingreso">
+          <i class="fa-solid fa-arrow-trend-up"></i>
+          <div>
+            <p class="finanza__kpi-label">Total Ingresos</p>
+            <p class="finanza__kpi-valor">S/ {{ totalIngresos.toLocaleString() }}</p>
+          </div>
+        </div>
+        <div class="finanza__kpi finanza__kpi--egreso">
+          <i class="fa-solid fa-arrow-trend-down"></i>
+          <div>
+            <p class="finanza__kpi-label">Total Egresos</p>
+            <p class="finanza__kpi-valor">S/ {{ totalEgresos.toLocaleString() }}</p>
+          </div>
+        </div>
+        <div class="finanza__kpi finanza__kpi--utilidad">
+          <i class="fa-solid fa-sack-dollar"></i>
+          <div>
+            <p class="finanza__kpi-label">Utilidad Neta</p>
+            <p class="finanza__kpi-valor">S/ {{ utilidadNeta.toLocaleString() }}</p>
+          </div>
+        </div>
+        <div class="finanza__kpi finanza__kpi--margen">
+          <i class="fa-solid fa-percent"></i>
+          <div>
+            <p class="finanza__kpi-label">Margen</p>
+            <p class="finanza__kpi-valor">{{ margenNeto }}%</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="tabla__wrapper">
+        <table class="tabla">
+          <thead>
+            <tr>
+              <th>Tipo</th>
+              <th>Concepto</th>
+              <th>Categoría</th>
+              <th>Período</th>
+              <th>Monto</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let m of movimientos"
+                [class.fila--ingreso]="m.tipo === 'ingreso'"
+                [class.fila--egreso]="m.tipo === 'egreso'">
+              <td>
+                <span class="tipo__badge"
+                  [class.tipo__badge--ingreso]="m.tipo === 'ingreso'"
+                  [class.tipo__badge--egreso]="m.tipo === 'egreso'">
+                  <i class="fa-solid fa-arrow-up" *ngIf="m.tipo === 'ingreso'"></i>
+                  <i class="fa-solid fa-arrow-down" *ngIf="m.tipo === 'egreso'"></i>
+                  {{ m.tipo | titlecase }}
+                </span>
+              </td>
+              <td class="td__nombre">{{ m.concepto }}</td>
+              <td><span class="badge__categoria">{{ m.categoria }}</span></td>
+              <td class="td__fecha">{{ m.fecha }}</td>
+              <td class="td__monto"
+                  [class.monto--ingreso]="m.tipo === 'ingreso'"
+                  [class.monto--egreso]="m.tipo === 'egreso'">
+                {{ m.tipo === 'ingreso' ? '+' : '-' }} S/ {{ m.monto.toLocaleString() }}
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- ==================
+         REPORTES
+    =================== -->
+    <div class="portal__contenido" *ngIf="seccionActiva === 'reportes'">
+      <div class="reportes__grid">
+        <div class="reporte__card" *ngFor="let reporte of reportes">
+          <div class="reporte__card-header" [class]="'reporte__header--' + reporte.color">
+            <i [class]="reporte.icono"></i>
+          </div>
+          <div class="reporte__card-body">
+            <h3 class="reporte__titulo">{{ reporte.titulo }}</h3>
+            <p class="reporte__desc">{{ reporte.desc }}</p>
+            <p class="reporte__periodo"><i class="fa-regular fa-calendar"></i> {{ reporte.periodo }}</p>
+          </div>
+          <div class="reporte__card-footer">
+            <button class="btn__descargar">
+              <i class="fa-solid fa-download"></i> Descargar PDF
+            </button>
+            <button class="btn__ver">
+              <i class="fa-solid fa-eye"></i> Ver
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ==================
+         CONFIGURACIÓN
+    =================== -->
+    <div class="portal__contenido" *ngIf="seccionActiva === 'configuracion'">
+      <div class="config__grid">
+
+        <div class="config__bloque">
+          <h3 class="bloque__titulo"><i class="fa-solid fa-building-columns"></i> Información de la Institución</h3>
+          <div class="config__form">
+            <div class="config__campo">
+              <label>Nombre de la residencia</label>
+              <input type="text" class="form__input" value="Residencia Las Dalias" />
+            </div>
+            <div class="config__campo">
+              <label>Dirección</label>
+              <input type="text" class="form__input" value="Av. Las Flores 234, Cusco" />
+            </div>
+            <div class="config__campo">
+              <label>Teléfono de contacto</label>
+              <input type="text" class="form__input" value="+51 981 776 156" />
+            </div>
+            <div class="config__campo">
+              <label>Capacidad máxima</label>
+              <input type="number" class="form__input" value="50" />
+            </div>
+            <button class="btn__guardar-config"><i class="fa-solid fa-save"></i> Guardar cambios</button>
+          </div>
+        </div>
+
+        <div class="config__bloque">
+          <h3 class="bloque__titulo"><i class="fa-solid fa-bell"></i> Notificaciones</h3>
+          <div class="config__toggles">
+            <div class="toggle__item" *ngFor="let notif of notificaciones">
+              <div class="toggle__info">
+                <p class="toggle__titulo">{{ notif.titulo }}</p>
+                <p class="toggle__desc">{{ notif.desc }}</p>
+              </div>
+              <div class="toggle__switch" [class.activo]="notif.activo" (click)="notif.activo = !notif.activo"></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="config__bloque">
+          <h3 class="bloque__titulo"><i class="fa-solid fa-shield-halved"></i> Seguridad</h3>
+          <div class="config__form">
+            <div class="config__campo">
+              <label>Contraseña actual</label>
+              <input type="password" class="form__input" placeholder="••••••••" />
+            </div>
+            <div class="config__campo">
+              <label>Nueva contraseña</label>
+              <input type="password" class="form__input" placeholder="••••••••" />
+            </div>
+            <div class="config__campo">
+              <label>Confirmar contraseña</label>
+              <input type="password" class="form__input" placeholder="••••••••" />
+            </div>
+            <button class="btn__guardar-config"><i class="fa-solid fa-lock"></i> Cambiar contraseña</button>
+          </div>
+        </div>
+
+        <div class="config__bloque">
+          <h3 class="bloque__titulo"><i class="fa-solid fa-money-bill-wave"></i> Planes de Pago</h3>
+          <div class="planes__lista">
+            <div class="plan__item" *ngFor="let plan of planes" [class]="'plan__item--' + plan.color">
+              <div class="plan__info">
+                <p class="plan__nombre">{{ plan.nombre }}</p>
+                <p class="plan__detalle">{{ plan.detalle }}</p>
+              </div>
+              <p class="plan__precio">{{ plan.precio }}</p>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+  </main>
+</div>
