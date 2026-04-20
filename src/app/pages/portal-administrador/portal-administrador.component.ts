@@ -2,8 +2,9 @@ import { Component, ViewChild, ElementRef } from '@angular/core';
 import { CommonModule, DecimalPipe, TitleCasePipe } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 
-type SeccionActiva = 'dashboard' | 'usuarios' | 'residentes' | 'productos' | 'roles' | 'configuracion';
+type SeccionActiva = 'dashboard' | 'usuarios' | 'residentes' | 'detalle-residente' | 'medicacion' | 'productos' | 'roles' | 'configuracion';
 type FichaTab = 'info' | 'emergencia' | 'documentos' | 'gastos';
+type DetalleTab = 'info' | 'emergencia' | 'documentos' | 'gastos';
 type TipoMovimiento = 'ingreso' | 'gasto';
 
 export interface Usuario {
@@ -21,12 +22,34 @@ export interface FichaEmergencia {
   enfermedadesCronicas: string; medicamentosPermanentes: string; instrucciones: string;
 }
 
+export interface Evacuacion {
+  lugar: string; nombreLugar: string; direccion: string; telefono: string;
+}
+
 export interface Residente {
-  id: number; nombre: string; edad: number; habitacion: string; medico: string;
-  foto: string; estado: 'estable' | 'atencion' | 'critico'; diagnostico: string;
-  fechaIngreso: string; familiar: string;
+  id: number;
+  nombre: string;
+  edad: number;
+  habitacion: string;
+  piso: string;
+  medico: string;
+  foto: string;
+  estado: 'estable' | 'atencion' | 'critico';
+  diagnostico: string;
+  fechaIngreso: string;
+  familiar: string;
+  // Nuevos campos
+  dni: string;
+  fechaNacimiento: string;
+  sexo: string;
+  nacionalidad: string;
+  altura: number;
+  peso: number;
+  apodo: string;
+  tipoResidente: string;
   contactoEmergencia: ContactoEmergencia;
   fichaEmergencia: FichaEmergencia;
+  evacuacion: Evacuacion;
 }
 
 export interface Documento {
@@ -100,7 +123,11 @@ export class PortalAdministradorComponent {
   modoEdicionProducto = false;
   modoEdicionProveedor = false;
   fichaTab: FichaTab = 'info';
+  detalleTab: DetalleTab = 'info';
+
   residenteActivo: Residente | null = null;
+  residenteDetalle: Residente | null = null;
+
   rolSeleccionado: Rol | null = null;
   tipoMovimiento: TipoMovimiento = 'ingreso';
   productoEnAjuste: Producto | null = null;
@@ -112,7 +139,14 @@ export class PortalAdministradorComponent {
   admin = { nombre: 'Admin Sistema', cargo: 'Administrador', foto: '' };
 
   formularioUsuario: Partial<Usuario> & { foto: string } = { nombre: '', username: '', password: '', rol: '', email: '', telefono: '', foto: '' };
-  formularioResidente: Omit<Residente, 'id' | 'contactoEmergencia' | 'fichaEmergencia'> & { foto: string } = { nombre: '', edad: 0, habitacion: '', medico: '', foto: '', estado: 'estable', diagnostico: '', fechaIngreso: '', familiar: '' };
+
+  formularioResidente: Omit<Residente, 'id' | 'contactoEmergencia' | 'fichaEmergencia' | 'evacuacion'> & { foto: string } = {
+    nombre: '', edad: 0, habitacion: '', piso: '1', medico: '', foto: '', estado: 'estable',
+    diagnostico: '', fechaIngreso: '', familiar: '',
+    dni: '', fechaNacimiento: '', sexo: 'masculino', nacionalidad: 'Peruana',
+    altura: 0, peso: 0, apodo: '', tipoResidente: 'Riesgo Bajo'
+  };
+
   formularioGasto = { descripcion: '', categoria: '', monto: 0, fecha: '' };
   formularioProducto: Omit<Producto, 'id'> = { nombre: '', categoria: '', proveedor: '', unidad: 'unidades', stockActual: 0, stockMinimo: 5, precioUnitario: 0, icono: 'fa-solid fa-box' };
   formularioProveedor: Omit<Proveedor, 'id' | 'activo'> = { nombre: '', categoria: '', contacto: '', telefono: '', email: '', ruc: '', direccion: '', notas: '' };
@@ -170,24 +204,15 @@ export class PortalAdministradorComponent {
   ];
 
   roles: Rol[] = [
-    { nombre: 'Director General', descripcion: 'Acceso total a la plataforma', icono: 'fa-solid fa-star', nivel: 'total',
-      permisosActivos: ['res.ver','res.crear','res.editar','res.eliminar','res.documentos','res.emergencia','cli.signos','cli.medicacion','cli.citas','cli.historial','com.chat','com.galeria','adm.usuarios','adm.roles','adm.config','adm.gastos','adm.turnos','adm.stock','adm.proveedores'] },
-    { nombre: 'Coordinador de Marketing', descripcion: 'Acceso total a la plataforma', icono: 'fa-solid fa-bullhorn', nivel: 'total',
-      permisosActivos: ['res.ver','res.documentos','cli.historial','com.chat','com.galeria'] },
-    { nombre: 'Administrador', descripcion: 'Gestión de usuarios y configuración', icono: 'fa-solid fa-user-shield', nivel: 'total',
-      permisosActivos: ['res.ver','res.crear','res.editar','res.documentos','res.emergencia','adm.usuarios','adm.roles','adm.config','adm.gastos','adm.turnos','adm.stock','adm.proveedores'] },
-    { nombre: 'Director Médico', descripcion: 'Supervisión clínica completa', icono: 'fa-solid fa-user-doctor', nivel: 'total',
-      permisosActivos: ['res.ver','res.editar','res.documentos','res.emergencia','cli.signos','cli.medicacion','cli.citas','cli.historial','com.chat','adm.turnos'] },
-    { nombre: 'Médico Geriatra', descripcion: 'Atención médica especializada', icono: 'fa-solid fa-stethoscope', nivel: 'medio',
-      permisosActivos: ['res.ver','res.emergencia','cli.signos','cli.medicacion','cli.citas','cli.historial','com.chat'] },
-    { nombre: 'Fisioterapeuta', descripcion: 'Rehabilitación y fisioterapia', icono: 'fa-solid fa-person-walking', nivel: 'basico',
-      permisosActivos: ['res.ver','cli.citas','cli.historial'] },
-    { nombre: 'Jefa de Turno', descripcion: 'Coordinación del personal de turno', icono: 'fa-solid fa-clipboard-user', nivel: 'medio',
-      permisosActivos: ['res.ver','res.editar','res.emergencia','cli.signos','cli.medicacion','cli.citas','cli.historial','com.chat','com.galeria','adm.turnos'] },
-    { nombre: 'Enfermero/a', descripcion: 'Cuidado y atención de residentes', icono: 'fa-solid fa-user-nurse', nivel: 'basico',
-      permisosActivos: ['res.ver','res.emergencia','cli.signos','cli.medicacion','cli.historial','com.chat','com.galeria'] },
-    { nombre: 'Cuidador', descripcion: 'Asistencia básica a residentes', icono: 'fa-solid fa-hand-holding-heart', nivel: 'basico',
-      permisosActivos: ['res.ver','com.galeria'] },
+    { nombre: 'Director General', descripcion: 'Acceso total a la plataforma', icono: 'fa-solid fa-star', nivel: 'total', permisosActivos: ['res.ver','res.crear','res.editar','res.eliminar','res.documentos','res.emergencia','cli.signos','cli.medicacion','cli.citas','cli.historial','com.chat','com.galeria','adm.usuarios','adm.roles','adm.config','adm.gastos','adm.turnos','adm.stock','adm.proveedores'] },
+    { nombre: 'Coordinador de Marketing', descripcion: 'Acceso total a la plataforma', icono: 'fa-solid fa-bullhorn', nivel: 'total', permisosActivos: ['res.ver','res.documentos','cli.historial','com.chat','com.galeria'] },
+    { nombre: 'Administrador', descripcion: 'Gestión de usuarios y configuración', icono: 'fa-solid fa-user-shield', nivel: 'total', permisosActivos: ['res.ver','res.crear','res.editar','res.documentos','res.emergencia','adm.usuarios','adm.roles','adm.config','adm.gastos','adm.turnos','adm.stock','adm.proveedores'] },
+    { nombre: 'Director Médico', descripcion: 'Supervisión clínica completa', icono: 'fa-solid fa-user-doctor', nivel: 'total', permisosActivos: ['res.ver','res.editar','res.documentos','res.emergencia','cli.signos','cli.medicacion','cli.citas','cli.historial','com.chat','adm.turnos'] },
+    { nombre: 'Médico Geriatra', descripcion: 'Atención médica especializada', icono: 'fa-solid fa-stethoscope', nivel: 'medio', permisosActivos: ['res.ver','res.emergencia','cli.signos','cli.medicacion','cli.citas','cli.historial','com.chat'] },
+    { nombre: 'Fisioterapeuta', descripcion: 'Rehabilitación y fisioterapia', icono: 'fa-solid fa-person-walking', nivel: 'basico', permisosActivos: ['res.ver','cli.citas','cli.historial'] },
+    { nombre: 'Jefa de Turno', descripcion: 'Coordinación del personal de turno', icono: 'fa-solid fa-clipboard-user', nivel: 'medio', permisosActivos: ['res.ver','res.editar','res.emergencia','cli.signos','cli.medicacion','cli.citas','cli.historial','com.chat','com.galeria','adm.turnos'] },
+    { nombre: 'Enfermero/a', descripcion: 'Cuidado y atención de residentes', icono: 'fa-solid fa-user-nurse', nivel: 'basico', permisosActivos: ['res.ver','res.emergencia','cli.signos','cli.medicacion','cli.historial','com.chat','com.galeria'] },
+    { nombre: 'Cuidador', descripcion: 'Asistencia básica a residentes', icono: 'fa-solid fa-hand-holding-heart', nivel: 'basico', permisosActivos: ['res.ver','com.galeria'] },
   ];
 
   usuarios: Usuario[] = [
@@ -200,15 +225,39 @@ export class PortalAdministradorComponent {
   ];
 
   residentes: Residente[] = [
-    { id: 1, nombre: 'María Elena Sánchez', edad: 78, habitacion: '204', medico: 'Dra. Carmen Vásquez', foto: '', estado: 'estable', diagnostico: 'Hipertensión controlada', fechaIngreso: '12 Mar, 2023', familiar: 'Carlos Sánchez (hijo)',
+    {
+      id: 1, nombre: 'María Elena Sánchez', edad: 78, habitacion: '204', piso: '2',
+      medico: 'Dra. Carmen Vásquez', foto: '', estado: 'estable',
+      diagnostico: 'Hipertensión controlada', fechaIngreso: '12 Mar, 2023', familiar: 'Carlos Sánchez (hijo)',
+      dni: '09876789', fechaNacimiento: '18/07/1967', sexo: 'femenino',
+      nacionalidad: 'Peruana', altura: 162, peso: 65, apodo: 'Malena',
+      tipoResidente: 'Riesgo Bajo',
       contactoEmergencia: { nombre: 'Carlos Sánchez', parentesco: 'Hijo', telefono: '+51 987 654 321', telefonoAlt: '+51 987 654 000', direccion: 'Av. El Sol 456, Cusco' },
-      fichaEmergencia: { grupoSanguineo: 'O', factorRH: '+', alergias: 'Penicilina', enfermedadesCronicas: 'Hipertensión arterial', medicamentosPermanentes: 'Enalapril 10mg - 1 tableta cada 12h\nAspirín 100mg - 1 tableta al día', instrucciones: 'No administrar AINEs. Preferir acceso venoso en brazo izquierdo.' } },
-    { id: 2, nombre: 'José Antonio Ríos', edad: 82, habitacion: '105', medico: 'Dr. Luis Paredes', foto: '', estado: 'atencion', diagnostico: 'Diabetes tipo 2', fechaIngreso: '05 Ene, 2023', familiar: 'Laura Ríos (hija)',
+      fichaEmergencia: { grupoSanguineo: 'O', factorRH: '+', alergias: 'Penicilina', enfermedadesCronicas: 'Hipertensión arterial', medicamentosPermanentes: 'Enalapril 10mg - 1 tableta cada 12h\nAspirín 100mg - 1 tableta al día', instrucciones: 'No administrar AINEs. Preferir acceso venoso en brazo izquierdo.' },
+      evacuacion: { lugar: 'clinica', nombreLugar: 'Clínica Anglo Americana', direccion: 'Sede San Isidro', telefono: '+51 1 616 8900' }
+    },
+    {
+      id: 2, nombre: 'José Antonio Ríos', edad: 82, habitacion: '105', piso: '1',
+      medico: 'Dr. Luis Paredes', foto: '', estado: 'atencion',
+      diagnostico: 'Diabetes tipo 2', fechaIngreso: '05 Ene, 2023', familiar: 'Laura Ríos (hija)',
+      dni: '07654321', fechaNacimiento: '22/04/1942', sexo: 'masculino',
+      nacionalidad: 'Peruana', altura: 170, peso: 72, apodo: 'Pepe',
+      tipoResidente: 'Riesgo Medio',
       contactoEmergencia: { nombre: 'Laura Ríos', parentesco: 'Hija', telefono: '+51 987 000 111', telefonoAlt: '', direccion: 'Jr. Ayacucho 123, Cusco' },
-      fichaEmergencia: { grupoSanguineo: 'A', factorRH: '+', alergias: 'Ninguna conocida', enfermedadesCronicas: 'Diabetes tipo 2, Hipertensión', medicamentosPermanentes: 'Metformina 850mg - con desayuno y cena\nEnalapril 5mg - cada 24h', instrucciones: 'Control de glucosa antes de cada comida.' } },
-    { id: 3, nombre: 'Carmen Rosa Delgado', edad: 75, habitacion: '301', medico: 'Dra. Carmen Vásquez', foto: '', estado: 'estable', diagnostico: '', fechaIngreso: '20 Jun, 2023', familiar: 'Pedro Delgado (hijo)',
+      fichaEmergencia: { grupoSanguineo: 'A', factorRH: '+', alergias: 'Ninguna conocida', enfermedadesCronicas: 'Diabetes tipo 2, Hipertensión', medicamentosPermanentes: 'Metformina 850mg - con desayuno y cena\nEnalapril 5mg - cada 24h', instrucciones: 'Control de glucosa antes de cada comida.' },
+      evacuacion: { lugar: 'hospital', nombreLugar: 'Hospital Regional Cusco', direccion: 'Av. De la Cultura s/n, Cusco', telefono: '+51 84 223691' }
+    },
+    {
+      id: 3, nombre: 'Carmen Rosa Delgado', edad: 75, habitacion: '301', piso: '3',
+      medico: 'Dra. Carmen Vásquez', foto: '', estado: 'estable',
+      diagnostico: '', fechaIngreso: '20 Jun, 2023', familiar: 'Pedro Delgado (hijo)',
+      dni: '12345678', fechaNacimiento: '05/11/1949', sexo: 'femenino',
+      nacionalidad: 'Peruana', altura: 155, peso: 58, apodo: '',
+      tipoResidente: 'Riesgo Bajo',
       contactoEmergencia: { nombre: 'Pedro Delgado', parentesco: 'Hijo', telefono: '+51 987 222 333', telefonoAlt: '', direccion: 'Urb. Magisterio, Cusco' },
-      fichaEmergencia: { grupoSanguineo: 'B', factorRH: '-', alergias: 'Ibuprofeno', enfermedadesCronicas: '', medicamentosPermanentes: '', instrucciones: '' } },
+      fichaEmergencia: { grupoSanguineo: 'B', factorRH: '-', alergias: 'Ibuprofeno', enfermedadesCronicas: '', medicamentosPermanentes: '', instrucciones: '' },
+      evacuacion: { lugar: 'clinica', nombreLugar: 'Clínica Pardo', direccion: 'Av. Pardo 978, Cusco', telefono: '+51 84 224041' }
+    },
   ];
 
   documentos: Documento[] = [
@@ -249,11 +298,6 @@ export class PortalAdministradorComponent {
     { id: 1, accion: 'login', descripcion: 'Inicio de sesión exitoso', usuario: 'admin', fecha: 'Hoy', hora: '08:00 am' },
     { id: 2, accion: 'crear', descripcion: 'Usuario "jramirez" creado con rol Fisioterapeuta', usuario: 'admin', fecha: 'Hoy', hora: '08:15 am' },
     { id: 3, accion: 'editar', descripcion: 'Rol de "pmorales" actualizado a Enfermero/a', usuario: 'admin', fecha: 'Hoy', hora: '09:00 am' },
-    { id: 4, accion: 'login', descripcion: 'Inicio de sesión exitoso', usuario: 'cvazquez', fecha: 'Hoy', hora: '09:30 am' },
-    { id: 5, accion: 'crear', descripcion: 'Producto "Pañales Talla L" añadido al inventario', usuario: 'admin', fecha: 'Hoy', hora: '10:00 am' },
-    { id: 6, accion: 'editar', descripcion: 'Stock de "Alcohol 70%" ajustado a 0 unidades', usuario: 'admin', fecha: 'Hoy', hora: '10:30 am' },
-    { id: 7, accion: 'eliminar', descripcion: 'Usuario temporal "test01" eliminado', usuario: 'admin', fecha: 'Ayer', hora: '05:45 pm' },
-    { id: 8, accion: 'editar', descripcion: 'Ficha de emergencia de "María Elena Sánchez" actualizada', usuario: 'admin', fecha: 'Ayer', hora: '03:20 pm' },
   ];
 
   // ---- Getters ----
@@ -280,15 +324,13 @@ export class PortalAdministradorComponent {
   }
 
   get proveedoresActivos(): Proveedor[] { return this.proveedores.filter(p => p.activo); }
-
   get productosEnStockNormal(): number { return this.productos.filter(p => p.stockActual > p.stockMinimo).length; }
-  get productosStockBajo(): number { return this.productos.filter(p => p.stockActual <= p.stockMinimo).length; }
+  get productosStockBajo(): number { return this.productos.filter(p => p.stockActual <= p.stockMinimo && p.stockActual > 0).length; }
   get productosSinStock(): number { return this.productos.filter(p => p.stockActual === 0).length; }
 
   usuariosPorRol(rolNombre: string): number { return this.usuarios.filter(u => u.rol === rolNombre).length; }
   documentosDe(residenteId: number): Documento[] { return this.documentos.filter(d => d.residenteId === residenteId); }
   gastosDe(residenteId: number): Gasto[] { return this.gastos.filter(g => g.residenteId === residenteId); }
-
   saldoDisponible(id: number): number { return this.gastosDe(id).filter(g => g.tipo === 'ingreso').reduce((s, g) => s + g.monto, 0); }
   totalGastado(id: number): number { return this.gastosDe(id).filter(g => g.tipo === 'gasto').reduce((s, g) => s + g.monto, 0); }
   balanceResidente(id: number): number { return this.saldoDisponible(id) - this.totalGastado(id); }
@@ -306,7 +348,10 @@ export class PortalAdministradorComponent {
   }
 
   // ---- Navegación ----
-  navegarA(seccion: SeccionActiva): void { this.seccionActiva = seccion; }
+  navegarA(seccion: SeccionActiva): void {
+    this.seccionActiva = seccion;
+    if (seccion !== 'detalle-residente') this.residenteDetalle = null;
+  }
   toggleSidebar(): void { this.sidebarColapsado = !this.sidebarColapsado; }
 
   // ---- Usuarios ----
@@ -315,13 +360,7 @@ export class PortalAdministradorComponent {
     this.formularioUsuario = { nombre: '', username: '', password: '', rol: '', email: '', telefono: '', foto: '' };
     this.mostrarModalUsuario = true;
   }
-
-  editarUsuario(u: Usuario): void {
-    this.modoEdicionUsuario = true;
-    this.formularioUsuario = { ...u };
-    this.mostrarModalUsuario = true;
-  }
-
+  editarUsuario(u: Usuario): void { this.modoEdicionUsuario = true; this.formularioUsuario = { ...u }; this.mostrarModalUsuario = true; }
   guardarUsuario(): void {
     if (!this.formularioUsuario.nombre || !this.formularioUsuario.username || !this.formularioUsuario.rol) return;
     if (this.modoEdicionUsuario) {
@@ -335,56 +374,48 @@ export class PortalAdministradorComponent {
     }
     this.mostrarModalUsuario = false;
   }
-
-  toggleEstadoUsuario(u: Usuario): void {
-    u.activo = !u.activo;
-    this.registrarActividad('editar', `Usuario "${u.username}" ${u.activo ? 'activado' : 'desactivado'}`);
-  }
-
-  eliminarUsuario(u: Usuario): void {
-    this.usuarios = this.usuarios.filter(usr => usr.id !== u.id);
-    this.registrarActividad('eliminar', `Usuario "${u.username}" eliminado`);
-  }
-
+  toggleEstadoUsuario(u: Usuario): void { u.activo = !u.activo; this.registrarActividad('editar', `Usuario "${u.username}" ${u.activo ? 'activado' : 'desactivado'}`); }
+  eliminarUsuario(u: Usuario): void { this.usuarios = this.usuarios.filter(usr => usr.id !== u.id); this.registrarActividad('eliminar', `Usuario "${u.username}" eliminado`); }
   triggerFotoUsuario(): void { this.inputFotoUsuario?.nativeElement.click(); }
-
   onFotoUsuarioChange(event: Event): void {
     const input = event.target as HTMLInputElement;
-    if (input.files?.[0]) {
-      const reader = new FileReader();
-      reader.onload = (e) => { this.formularioUsuario.foto = e.target?.result as string; };
-      reader.readAsDataURL(input.files[0]);
-    }
+    if (input.files?.[0]) { const reader = new FileReader(); reader.onload = (e) => { this.formularioUsuario.foto = e.target?.result as string; }; reader.readAsDataURL(input.files[0]); }
   }
 
   // ---- Residentes ----
   abrirModalResidente(): void {
-    this.formularioResidente = { nombre: '', edad: 0, habitacion: '', medico: '', foto: '', estado: 'estable', diagnostico: '', fechaIngreso: '', familiar: '' };
+    this.formularioResidente = { nombre: '', edad: 0, habitacion: '', piso: '1', medico: '', foto: '', estado: 'estable', diagnostico: '', fechaIngreso: '', familiar: '', dni: '', fechaNacimiento: '', sexo: 'masculino', nacionalidad: 'Peruana', altura: 0, peso: 0, apodo: '', tipoResidente: 'Riesgo Bajo' };
     this.mostrarModalResidente = true;
   }
 
-  editarResidente(r: Residente, event: Event): void {
+  // Ícono OJO → panel lateral
+  abrirFichaResidente(r: Residente): void { this.residenteActivo = { ...r }; this.fichaTab = 'info'; }
+  cerrarFichaResidente(): void { this.residenteActivo = null; }
+
+  // Ícono LÁPIZ → página detalle
+  abrirDetalleResidente(r: Residente, event: Event): void {
     event.stopPropagation();
-    this.residenteActivo = { ...r };
-    this.fichaTab = 'info';
+    this.residenteDetalle = { ...r };
+    this.detalleTab = 'info';
+    this.seccionActiva = 'detalle-residente';
   }
+  volverAResidentes(): void { this.seccionActiva = 'residentes'; this.residenteDetalle = null; }
 
   guardarResidente(): void {
     if (!this.formularioResidente.nombre) return;
     const nuevo: Residente = {
-      id: this.residentes.length + 1, ...this.formularioResidente,
+      id: this.residentes.length + 1,
+      ...this.formularioResidente,
       contactoEmergencia: { nombre: '', parentesco: '', telefono: '', telefonoAlt: '', direccion: '' },
       fichaEmergencia: { grupoSanguineo: 'O', factorRH: '+', alergias: '', enfermedadesCronicas: '', medicamentosPermanentes: '', instrucciones: '' },
+      evacuacion: { lugar: 'hospital', nombreLugar: '', direccion: '', telefono: '' }
     };
     this.residentes.push(nuevo);
     this.registrarActividad('crear', `Residente "${nuevo.nombre}" creado`);
     this.mostrarModalResidente = false;
   }
 
-  abrirFichaResidente(r: Residente): void { this.residenteActivo = { ...r }; this.fichaTab = 'info'; }
-  cerrarFichaResidente(): void { this.residenteActivo = null; }
   triggerFotoResidente(): void { this.inputFotoResidente?.nativeElement.click(); }
-
   onFotoResidenteChange(event: Event): void {
     const input = event.target as HTMLInputElement;
     if (input.files?.[0] && this.residenteActivo) {
@@ -401,28 +432,37 @@ export class PortalAdministradorComponent {
   }
 
   triggerFotoNuevoResidente(): void { this.inputFotoNuevoResidente?.nativeElement.click(); }
-
   onFotoNuevoResidenteChange(event: Event): void {
     const input = event.target as HTMLInputElement;
-    if (input.files?.[0]) {
-      const reader = new FileReader();
-      reader.onload = (e) => { this.formularioResidente.foto = e.target?.result as string; };
-      reader.readAsDataURL(input.files[0]);
-    }
+    if (input.files?.[0]) { const reader = new FileReader(); reader.onload = (e) => { this.formularioResidente.foto = e.target?.result as string; }; reader.readAsDataURL(input.files[0]); }
   }
 
+  // Guardar desde panel lateral
   guardarInfoResidente(): void {
     if (!this.residenteActivo) return;
     const idx = this.residentes.findIndex(r => r.id === this.residenteActivo!.id);
     if (idx > -1) this.residentes[idx] = { ...this.residenteActivo };
     this.registrarActividad('editar', `Datos de "${this.residenteActivo.nombre}" actualizados`);
   }
-
   guardarEmergencia(): void {
     if (!this.residenteActivo) return;
     const idx = this.residentes.findIndex(r => r.id === this.residenteActivo!.id);
     if (idx > -1) this.residentes[idx] = { ...this.residenteActivo };
     this.registrarActividad('editar', `Ficha de emergencia de "${this.residenteActivo.nombre}" actualizada`);
+  }
+
+  // Guardar desde página detalle
+  guardarInfoDetalleResidente(): void {
+    if (!this.residenteDetalle) return;
+    const idx = this.residentes.findIndex(r => r.id === this.residenteDetalle!.id);
+    if (idx > -1) this.residentes[idx] = { ...this.residenteDetalle };
+    this.registrarActividad('editar', `Datos de "${this.residenteDetalle.nombre}" actualizados`);
+  }
+  guardarEmergenciaDetalle(): void {
+    if (!this.residenteDetalle) return;
+    const idx = this.residentes.findIndex(r => r.id === this.residenteDetalle!.id);
+    if (idx > -1) this.residentes[idx] = { ...this.residenteDetalle };
+    this.registrarActividad('editar', `Ficha de emergencia de "${this.residenteDetalle.nombre}" actualizada`);
   }
 
   // ---- Documentos ----
@@ -436,7 +476,16 @@ export class PortalAdministradorComponent {
     this.documentos.push({ id: this.documentos.length + 1, residenteId: this.residenteActivo.id, nombre: file.name, tipo, tamano, fecha: 'Hoy', url: URL.createObjectURL(file) });
     this.registrarActividad('crear', `Documento "${file.name}" subido para ${this.residenteActivo.nombre}`);
   }
-
+  onDocumentoDetalleChange(event: Event): void {
+    const input = event.target as HTMLInputElement;
+    if (!input.files?.[0] || !this.residenteDetalle) return;
+    const file = input.files[0];
+    const ext = file.name.split('.').pop()?.toLowerCase() || '';
+    const tipo: Documento['tipo'] = ext === 'pdf' ? 'pdf' : ['jpg','jpeg','png'].includes(ext) ? 'imagen' : 'doc';
+    const tamano = file.size < 1024 * 1024 ? `${(file.size / 1024).toFixed(0)} KB` : `${(file.size / 1024 / 1024).toFixed(1)} MB`;
+    this.documentos.push({ id: this.documentos.length + 1, residenteId: this.residenteDetalle.id, nombre: file.name, tipo, tamano, fecha: 'Hoy', url: URL.createObjectURL(file) });
+    this.registrarActividad('crear', `Documento "${file.name}" subido para ${this.residenteDetalle.nombre}`);
+  }
   eliminarDocumento(doc: Documento): void { this.documentos = this.documentos.filter(d => d.id !== doc.id); }
 
   // ---- Gastos ----
@@ -445,19 +494,31 @@ export class PortalAdministradorComponent {
     this.formularioGasto = { descripcion: '', categoria: '', monto: 0, fecha: 'Hoy' };
     this.mostrarModalGasto = true;
   }
-
+  abrirModalGastoDetalle(tipo: TipoMovimiento): void {
+    if (this.residenteDetalle) this.residenteActivo = this.residenteDetalle;
+    this.tipoMovimiento = tipo;
+    this.formularioGasto = { descripcion: '', categoria: '', monto: 0, fecha: 'Hoy' };
+    this.mostrarModalGasto = true;
+  }
   guardarGasto(): void {
     if (!this.residenteActivo || !this.formularioGasto.descripcion || !this.formularioGasto.monto) return;
     const nuevo: Gasto = { id: this.gastos.length + 1, residenteId: this.residenteActivo.id, tipo: this.tipoMovimiento, descripcion: this.formularioGasto.descripcion, categoria: this.formularioGasto.categoria || 'Otros', monto: this.formularioGasto.monto, fecha: this.formularioGasto.fecha || 'Hoy', registradoPor: this.admin.nombre };
     this.gastos.push(nuevo);
     this.registrarActividad('crear', `${this.tipoMovimiento === 'ingreso' ? 'Ingreso' : 'Gasto'} de S/ ${nuevo.monto} registrado para ${this.residenteActivo.nombre}`);
+    if (this.seccionActiva === 'detalle-residente') this.residenteActivo = null;
     this.mostrarModalGasto = false;
   }
 
   exportarGastosPDF(): void {
     if (!this.residenteActivo) return;
-    const gastos = this.gastosDe(this.residenteActivo.id);
-    const r = this.residenteActivo;
+    this._generarPDF(this.residenteActivo);
+  }
+  exportarGastosDetalleResidente(): void {
+    if (!this.residenteDetalle) return;
+    this._generarPDF(this.residenteDetalle);
+  }
+  private _generarPDF(r: Residente): void {
+    const gastos = this.gastosDe(r.id);
     const balance = this.balanceResidente(r.id);
     const contenido = `<!DOCTYPE html><html lang="es"><head><meta charset="UTF-8"><title>Reporte Gastos - ${r.nombre}</title>
     <style>*{margin:0;padding:0;box-sizing:border-box}body{font-family:Arial,sans-serif;color:#333;padding:30px}.header{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:30px;border-bottom:3px solid #1a1a2e;padding-bottom:20px}.titulo{font-size:22px;font-weight:bold;color:#1a1a2e}.subtitulo{font-size:13px;color:#888;margin-top:4px}.fecha{font-size:12px;color:#aaa;text-align:right}.resumen{display:flex;gap:20px;margin-bottom:30px}.ri{flex:1;padding:15px;border-radius:8px;text-align:center}.ri.ing{background:#e8fdf0;border:1px solid #a3e4be}.ri.gas{background:#fef0f0;border:1px solid #f5b8b8}.ri.bal{background:#f0f0fe;border:1px solid #b8b8f5}.lbl{font-size:11px;color:#888;text-transform:uppercase}.val{font-size:20px;font-weight:bold;margin-top:5px}.ing .val{color:#1a9e4c}.gas .val{color:#e74c3c}.bal .val{color:${balance>=0?'#1a9e4c':'#e74c3c'}}table{width:100%;border-collapse:collapse;font-size:13px}th{background:#1a1a2e;color:#fff;padding:10px 12px;text-align:left;font-size:11px;text-transform:uppercase}td{padding:9px 12px;border-bottom:1px solid #eee}.badge{padding:3px 8px;border-radius:12px;font-size:11px;font-weight:bold}.badge.i{background:#e8fdf0;color:#1a9e4c}.badge.g{background:#fef0f0;color:#e74c3c}.mi{color:#1a9e4c;font-weight:bold}.mg{color:#e74c3c;font-weight:bold}.footer{margin-top:30px;padding-top:15px;border-top:1px solid #eee;font-size:11px;color:#aaa;text-align:center}</style></head>
@@ -475,13 +536,7 @@ export class PortalAdministradorComponent {
     this.formularioProducto = { nombre: '', categoria: '', proveedor: '', unidad: 'unidades', stockActual: 0, stockMinimo: 5, precioUnitario: 0, icono: 'fa-solid fa-box' };
     this.mostrarModalProducto = true;
   }
-
-  editarProducto(p: Producto): void {
-    this.modoEdicionProducto = true;
-    this.formularioProducto = { ...p };
-    this.mostrarModalProducto = true;
-  }
-
+  editarProducto(p: Producto): void { this.modoEdicionProducto = true; this.formularioProducto = { ...p }; this.mostrarModalProducto = true; }
   guardarProducto(): void {
     if (!this.formularioProducto.nombre) return;
     if (this.modoEdicionProducto) {
@@ -489,25 +544,14 @@ export class PortalAdministradorComponent {
       if (idx > -1) this.productos[idx] = { ...this.productos[idx], ...this.formularioProducto };
       this.registrarActividad('editar', `Producto "${this.formularioProducto.nombre}" actualizado`);
     } else {
-      const iconoMap: Record<string, string> = { 'Higiene y cuidado': 'fa-solid fa-pump-soap', 'Medicamentos': 'fa-solid fa-pills', 'Alimentación': 'fa-solid fa-utensils', 'Limpieza': 'fa-solid fa-spray-can', 'Ropa y textiles': 'fa-solid fa-shirt', 'Equipamiento médico': 'fa-solid fa-stethoscope' };
       const nuevo: Producto = { id: this.productos.length + 1, ...this.formularioProducto };
       this.productos.push(nuevo);
       this.registrarActividad('crear', `Producto "${nuevo.nombre}" añadido al inventario`);
     }
     this.mostrarModalProducto = false;
   }
-
-  eliminarProducto(p: Producto): void {
-    this.productos = this.productos.filter(prod => prod.id !== p.id);
-    this.registrarActividad('eliminar', `Producto "${p.nombre}" eliminado del inventario`);
-  }
-
-  abrirModalAjusteStock(p: Producto): void {
-    this.productoEnAjuste = p;
-    this.ajusteStock = { tipo: 'entrada', cantidad: 0, motivo: '' };
-    this.mostrarModalStock = true;
-  }
-
+  eliminarProducto(p: Producto): void { this.productos = this.productos.filter(prod => prod.id !== p.id); this.registrarActividad('eliminar', `Producto "${p.nombre}" eliminado del inventario`); }
+  abrirModalAjusteStock(p: Producto): void { this.productoEnAjuste = p; this.ajusteStock = { tipo: 'entrada', cantidad: 0, motivo: '' }; this.mostrarModalStock = true; }
   guardarAjusteStock(): void {
     if (!this.productoEnAjuste || !this.ajusteStock.cantidad) return;
     const p = this.productos.find(prod => prod.id === this.productoEnAjuste!.id);
@@ -521,18 +565,8 @@ export class PortalAdministradorComponent {
   }
 
   // ---- Proveedores ----
-  abrirModalProveedor(): void {
-    this.modoEdicionProveedor = false;
-    this.formularioProveedor = { nombre: '', categoria: '', contacto: '', telefono: '', email: '', ruc: '', direccion: '', notas: '' };
-    this.mostrarModalProveedor = true;
-  }
-
-  editarProveedor(pv: Proveedor): void {
-    this.modoEdicionProveedor = true;
-    this.formularioProveedor = { ...pv };
-    this.mostrarModalProveedor = true;
-  }
-
+  abrirModalProveedor(): void { this.modoEdicionProveedor = false; this.formularioProveedor = { nombre: '', categoria: '', contacto: '', telefono: '', email: '', ruc: '', direccion: '', notas: '' }; this.mostrarModalProveedor = true; }
+  editarProveedor(pv: Proveedor): void { this.modoEdicionProveedor = true; this.formularioProveedor = { ...pv }; this.mostrarModalProveedor = true; }
   guardarProveedor(): void {
     if (!this.formularioProveedor.nombre) return;
     if (this.modoEdicionProveedor) {
@@ -545,25 +579,21 @@ export class PortalAdministradorComponent {
     }
     this.mostrarModalProveedor = false;
   }
-
   toggleProveedor(pv: Proveedor): void { pv.activo = !pv.activo; }
   eliminarProveedor(pv: Proveedor): void { this.proveedores = this.proveedores.filter(p => p.id !== pv.id); }
 
   // ---- Roles ----
   seleccionarRol(r: Rol): void { this.rolSeleccionado = r; }
   tienePermiso(rol: Rol, clave: string): boolean { return rol.permisosActivos.includes(clave); }
-
   togglePermiso(rol: Rol, clave: string, event: Event): void {
     const checked = (event.target as HTMLInputElement).checked;
     if (checked) { if (!rol.permisosActivos.includes(clave)) rol.permisosActivos.push(clave); }
     else { rol.permisosActivos = rol.permisosActivos.filter(p => p !== clave); }
   }
-
   todosMarcados(grupo: GrupoPermisos): boolean {
     if (!this.rolSeleccionado) return false;
     return grupo.permisos.every(p => this.rolSeleccionado!.permisosActivos.includes(p.clave));
   }
-
   toggleTodosGrupo(grupo: GrupoPermisos, event: Event): void {
     if (!this.rolSeleccionado) return;
     const checked = (event.target as HTMLInputElement).checked;
@@ -572,7 +602,6 @@ export class PortalAdministradorComponent {
       else { this.rolSeleccionado!.permisosActivos = this.rolSeleccionado!.permisosActivos.filter(x => x !== p.clave); }
     });
   }
-
   guardarPermisos(): void {
     if (!this.rolSeleccionado) return;
     const idx = this.roles.findIndex(r => r.nombre === this.rolSeleccionado!.nombre);
