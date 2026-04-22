@@ -518,16 +518,367 @@
 
     </div>
 
-    <!-- ==================
-         MEDICACIÓN (placeholder — próximamente)
-    =================== -->
-    <div class="portal__contenido" *ngIf="seccionActiva === 'medicacion'">
-      <div class="medicacion__proximamente">
-        <div class="medicacion__prox-icono"><i class="fa-solid fa-pills"></i></div>
-        <h3 class="medicacion__prox-titulo">Sección Medicación</h3>
-        <p class="medicacion__prox-desc">lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam auctor, nisl eget ultricies tincidunt, nunc nisl aliquam nisl, eget aliquam nisl nunc eget nisl.</p>
+   <!-- ==================
+     MEDICACIÓN
+=================== -->
+<div class="portal__contenido" *ngIf="seccionActiva === 'medicacion'">
+
+  <!-- BARRA SUPERIOR: Filtros + Acción -->
+  <div class="med__topbar">
+    <div class="med__filtros-grupo">
+
+      <!-- Selector de Residentes -->
+      <div class="med__filtro-bloque">
+        <label class="med__filtro-label"><i class="fa-solid fa-users"></i> Residentes</label>
+        <div class="med__multi-select" (click)="toggleDropdownResidentes()" (clickOutside)="dropdownResidentesAbierto = false">
+          <div class="med__multi-select-display">
+            <span *ngIf="residentesFiltroMed.length === 0" class="med__placeholder">Todos los residentes</span>
+            <span *ngIf="residentesFiltroMed.length > 0" class="med__selected-count">
+              {{ residentesFiltroMed.length }} seleccionado(s)
+            </span>
+            <i class="fa-solid fa-chevron-down"></i>
+          </div>
+          <div class="med__dropdown" *ngIf="dropdownResidentesAbierto" (click)="$event.stopPropagation()">
+            <label class="med__dropdown-item" *ngFor="let r of residentes">
+              <input type="checkbox" [value]="r.id" [checked]="residentesFiltroMed.includes(r.id)" (change)="toggleResidenteFiltro(r.id)" />
+              <span class="med__dropdown-check"></span>
+              <span>{{ r.nombre }} — Hab. {{ r.habitacion }}</span>
+            </label>
+          </div>
+        </div>
+      </div>
+
+      <!-- Selector de Turno -->
+      <div class="med__filtro-bloque">
+        <label class="med__filtro-label"><i class="fa-solid fa-clock"></i> Turno</label>
+        <div class="med__turno-toggle">
+          <button class="med__turno-btn" [class.activo]="turnoMed === 'dia'" (click)="turnoMed = 'dia'">
+            <i class="fa-solid fa-sun"></i> Día (07:00 – 19:00)
+          </button>
+          <button class="med__turno-btn" [class.activo]="turnoMed === 'noche'" (click)="turnoMed = 'noche'">
+            <i class="fa-solid fa-moon"></i> Noche (19:00 – 07:00)
+          </button>
+        </div>
+      </div>
+
+      <!-- Rango de horas -->
+      <div class="med__filtro-bloque">
+        <label class="med__filtro-label"><i class="fa-solid fa-hourglass-half"></i> Rango horario</label>
+        <div class="med__rango-horas">
+          <input type="time" class="form__input med__time-input" [(ngModel)]="rangoHoraDesde" />
+          <span class="med__rango-sep">—</span>
+          <input type="time" class="form__input med__time-input" [(ngModel)]="rangoHoraHasta" />
+        </div>
+      </div>
+
+    </div>
+
+    <button class="btn__nuevo med__btn-nueva" (click)="abrirModalNuevaMedicacion()">
+      <i class="fa-solid fa-plus"></i> Nueva Medicación
+    </button>
+  </div>
+
+  <!-- TABS TIPO DE MEDICACIÓN -->
+  <div class="med__tabs-bar">
+    <button class="med__tab" [class.activo]="medTab === 'diaria'" (click)="medTab = 'diaria'">
+      <i class="fa-solid fa-calendar-day"></i> Med. Diaria
+      <span class="med__tab-badge">{{ contarPorTipo('diaria') }}</span>
+    </button>
+    <button class="med__tab" [class.activo]="medTab === 'condicional'" (click)="medTab = 'condicional'">
+      <i class="fa-solid fa-bolt"></i> Med. Condicional
+      <span class="med__tab-badge med__tab-badge--sos">{{ contarPorTipo('condicional') }}</span>
+    </button>
+    <button class="med__tab" [class.activo]="medTab === 'tratamiento'" (click)="medTab = 'tratamiento'">
+      <i class="fa-solid fa-notes-medical"></i> Med. Tratamiento
+      <span class="med__tab-badge med__tab-badge--trat">{{ contarPorTipo('tratamiento') }}</span>
+    </button>
+    <button class="med__tab" [class.activo]="medTab === 'suspendida'" (click)="medTab = 'suspendida'">
+      <i class="fa-solid fa-ban"></i> Med. Suspendida
+      <span class="med__tab-badge med__tab-badge--susp">{{ contarPorTipo('suspendida') }}</span>
+    </button>
+  </div>
+
+  <!-- LAYOUT PRINCIPAL -->
+  <div class="med__layout">
+    <div class="med__lista-col">
+
+      <!-- Mensaje vacío -->
+      <div class="ficha__vacio" *ngIf="medicacionesFiltradas.length === 0">
+        <i class="fa-solid fa-pills"></i>
+        <p>No hay medicaciones en esta categoría para los filtros seleccionados</p>
+      </div>
+
+      <!-- TARJETAS DE MEDICACIÓN -->
+      <div class="med__residente-card" *ngFor="let pm of medicacionesFiltradas">
+
+        <div class="med__residente-header">
+          <div class="med__residente-foto"><i class="fa-solid fa-user"></i></div>
+          <div class="med__residente-info">
+            <h4 class="med__residente-nombre">{{ pm.residente }}</h4>
+            <div class="med__residente-meta">
+              <span class="med__room-badge">HAB. {{ pm.habitacion }}</span>
+              <span class="med__alergia-badge" *ngIf="pm.alergia">
+                <i class="fa-solid fa-triangle-exclamation"></i> ALERGIA: {{ pm.alergia }}
+              </span>
+              <!-- Fecha específica solo para tratamiento -->
+              <span class="med__fecha-badge" *ngIf="pm.tipo === 'tratamiento' && pm.fechaTratamiento">
+                <i class="fa-solid fa-calendar-check"></i> {{ pm.fechaTratamiento }}
+              </span>
+            </div>
+          </div>
+          <div class="med__last-taken" *ngIf="pm.ultimaToma">
+            <span class="med__last-label">Última toma</span>
+            <span class="med__last-hora">{{ pm.ultimaToma }}</span>
+          </div>
+        </div>
+
+        <div class="med__medicamento-item" *ngFor="let med of pm.medicamentos; let i = index">
+          <div class="med__med-icono" [class.med__med-icono--susp]="pm.tipo === 'suspendida'">
+            <i class="fa-solid fa-capsules" *ngIf="pm.tipo !== 'suspendida'"></i>
+            <i class="fa-solid fa-ban" *ngIf="pm.tipo === 'suspendida'"></i>
+          </div>
+          <div class="med__med-info">
+            <p class="med__med-nombre">{{ med.nombre }}</p>
+            <p class="med__med-dosis">{{ med.indicacion }}</p>
+            <p class="med__med-hora" *ngIf="med.hora"><i class="fa-regular fa-clock"></i> {{ med.hora }}</p>
+          </div>
+
+          <!-- SUSPENDIDA: solo mostrar estado -->
+          <ng-container *ngIf="pm.tipo === 'suspendida'">
+            <span class="med__estado-suspendida"><i class="fa-solid fa-ban"></i> Suspendida</span>
+          </ng-container>
+
+          <!-- ACTIVA: botones o estado -->
+          <ng-container *ngIf="pm.tipo !== 'suspendida'">
+
+            <ng-container *ngIf="med.estado === 'tomado'">
+              <span class="med__estado-tomado"><i class="fa-solid fa-check"></i> Tomado</span>
+            </ng-container>
+
+            <ng-container *ngIf="med.estado === 'no-tomado'">
+              <div class="med__no-tomado-col">
+                <span class="med__estado-no-tomado"><i class="fa-solid fa-xmark"></i> No Tomado</span>
+                <button class="med__ver-evidencia-btn" *ngIf="med.evidencia" (click)="verEvidencia(med)">
+                  <i class="fa-solid fa-eye"></i> Ver evidencia
+                </button>
+              </div>
+            </ng-container>
+
+            <ng-container *ngIf="med.estado === 'pendiente'">
+              <div class="med__acciones-row">
+                <button class="med__btn-tomado" (click)="marcarMedicamento(pm, med, 'tomado')">
+                  <i class="fa-solid fa-check"></i> Tomado
+                </button>
+                <button class="med__btn-no-tomado" (click)="iniciarNoTomado(pm, med)">
+                  <i class="fa-solid fa-xmark"></i> No Tomado
+                </button>
+              </div>
+            </ng-container>
+
+            <!-- Panel de evidencia al marcar No Tomado -->
+            <ng-container *ngIf="med.estado === 'evidencia-pendiente'">
+              <div class="med__evidencia-panel">
+                <p class="med__evidencia-titulo"><i class="fa-solid fa-file-circle-exclamation"></i> Registrar motivo / evidencia</p>
+                <textarea class="form__input form__textarea med__evidencia-texto"
+                  placeholder="Escribe el motivo (ej. residente se negó, medicamento agotado...)"
+                  [(ngModel)]="med.textoEvidencia" rows="2"></textarea>
+                <div class="med__evidencia-btns">
+                  <button class="med__ev-btn" (click)="adjuntarEvidencia(med, 'voz')" title="Mensaje de voz">
+                    <i class="fa-solid fa-microphone"></i> Voz
+                  </button>
+                  <button class="med__ev-btn" (click)="adjuntarEvidencia(med, 'video')" title="Video">
+                    <i class="fa-solid fa-video"></i> Video
+                  </button>
+                  <label class="med__ev-btn" title="Adjuntar archivo">
+                    <i class="fa-solid fa-paperclip"></i> Archivo
+                    <input type="file" style="display:none" accept="image/*,video/*,audio/*" (change)="onArchivoEvidencia($event, med)" />
+                  </label>
+                  <button class="med__ev-btn med__ev-btn--confirmar" (click)="confirmarNoTomado(pm, med)">
+                    <i class="fa-solid fa-save"></i> Confirmar
+                  </button>
+                </div>
+              </div>
+            </ng-container>
+
+          </ng-container>
+        </div>
+
       </div>
     </div>
+
+    <!-- SIDEBAR DERECHO -->
+    <div class="med__sidebar-col">
+
+      <!-- Alerta inventario -->
+      <div class="med__inventario-card">
+        <div class="med__inv-header">
+          <h3 class="med__inv-titulo"><i class="fa-solid fa-triangle-exclamation"></i> Alerta de Inventario</h3>
+        </div>
+        <div class="med__inv-item" *ngFor="let inv of alertasInventario">
+          <div class="med__inv-item-top">
+            <div>
+              <p class="med__inv-nombre">{{ inv.medicamento }}</p>
+              <p class="med__inv-lote">Lote: {{ inv.lote }}</p>
+            </div>
+            <span class="med__inv-unidades" [class.med__inv--critico]="inv.unidades <= 10">
+              {{ inv.unidades }} Uds. restantes
+            </span>
+          </div>
+          <div class="med__inv-barra-bg">
+            <div class="med__inv-barra-fill"
+              [style.width.%]="(inv.unidades / inv.max) * 100"
+              [class.med__inv-barra--critico]="inv.unidades <= 10"
+              [class.med__inv-barra--medio]="inv.unidades > 10 && inv.unidades <= 30">
+            </div>
+          </div>
+          <p class="med__inv-deplecion"><i class="fa-regular fa-calendar"></i> Depleción: {{ inv.deplecion }}</p>
+        </div>
+        <button class="med__btn-reorder">
+          <i class="fa-solid fa-cart-shopping"></i> Reordenar Suministros
+        </button>
+      </div>
+
+      <!-- Resumen turno -->
+      <div class="med__resumen-card">
+        <h3 class="bloque__titulo"><i class="fa-solid fa-chart-simple"></i> Resumen del Turno</h3>
+        <div class="med__resumen-grid">
+          <div class="med__resumen-item med__resumen--ok">
+            <span class="med__resumen-num">{{ contarEstado('tomado') }}</span>
+            <span class="med__resumen-label">Administradas</span>
+          </div>
+          <div class="med__resumen-item med__resumen--warn">
+            <span class="med__resumen-num">{{ contarEstado('pendiente') }}</span>
+            <span class="med__resumen-label">Pendientes</span>
+          </div>
+          <div class="med__resumen-item med__resumen--err">
+            <span class="med__resumen-num">{{ contarEstado('no-tomado') }}</span>
+            <span class="med__resumen-label">No Tomadas</span>
+          </div>
+          <div class="med__resumen-item med__resumen--susp">
+            <span class="med__resumen-num">{{ contarPorTipo('suspendida') }}</span>
+            <span class="med__resumen-label">Suspendidas</span>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+</div>
+
+<!-- ==========================================
+     MODAL NUEVA MEDICACIÓN
+=========================================== -->
+<div class="modal__overlay" *ngIf="mostrarModalMedicacion" (click)="mostrarModalMedicacion = false">
+  <div class="modal__card modal__card--lg" (click)="$event.stopPropagation()">
+    <div class="modal__header">
+      <h3><i class="fa-solid fa-pills"></i> Nueva Medicación</h3>
+      <button class="modal__close" (click)="mostrarModalMedicacion = false"><i class="fa-solid fa-xmark"></i></button>
+    </div>
+    <div class="modal__body">
+      <div class="modal__grid modal__grid--3">
+
+        <div class="form__grupo form__grupo--full">
+          <label class="form__label">Residente</label>
+          <select class="form__input form__select" [(ngModel)]="formularioMedicacion.residenteId">
+            <option value="" disabled>Seleccionar residente</option>
+            <option *ngFor="let r of residentes" [value]="r.id">{{ r.nombre }} — Hab. {{ r.habitacion }}</option>
+          </select>
+        </div>
+
+        <div class="form__grupo form__grupo--full">
+          <label class="form__label">Nombre del Medicamento</label>
+          <input type="text" class="form__input" placeholder="Ej. Metformina 850mg" [(ngModel)]="formularioMedicacion.nombre" />
+        </div>
+
+        <div class="form__grupo form__grupo--full">
+          <label class="form__label">Indicación / Instrucción</label>
+          <input type="text" class="form__input" placeholder="Ej. Con desayuno — Antidiabético" [(ngModel)]="formularioMedicacion.indicacion" />
+        </div>
+
+        <div class="form__grupo">
+          <label class="form__label">Tipo de Medicación</label>
+          <select class="form__input form__select" [(ngModel)]="formularioMedicacion.tipo">
+            <option value="diaria">Diaria</option>
+            <option value="condicional">Condicional (SOS)</option>
+            <option value="tratamiento">Tratamiento específico</option>
+            <option value="suspendida">Suspendida</option>
+          </select>
+        </div>
+
+        <div class="form__grupo">
+          <label class="form__label">Hora de administración</label>
+          <input type="time" class="form__input" [(ngModel)]="formularioMedicacion.hora" />
+        </div>
+
+        <div class="form__grupo">
+          <label class="form__label">Turno</label>
+          <select class="form__input form__select" [(ngModel)]="formularioMedicacion.turno">
+            <option value="dia">Día (07:00 – 19:00)</option>
+            <option value="noche">Noche (19:00 – 07:00)</option>
+            <option value="ambos">Ambos</option>
+          </select>
+        </div>
+
+        <!-- Fecha específica solo si es tratamiento -->
+        <div class="form__grupo form__grupo--full" *ngIf="formularioMedicacion.tipo === 'tratamiento'">
+          <label class="form__label"><i class="fa-solid fa-calendar-check"></i> Fecha de administración (tratamiento)</label>
+          <input type="date" class="form__input" [(ngModel)]="formularioMedicacion.fechaTratamiento" />
+        </div>
+
+        <!-- Condición solo si es condicional -->
+        <div class="form__grupo form__grupo--full" *ngIf="formularioMedicacion.tipo === 'condicional'">
+          <label class="form__label">Condición para administrar</label>
+          <input type="text" class="form__input" placeholder="Ej. Dolor > 7/10 · Fiebre > 38°C" [(ngModel)]="formularioMedicacion.condicion" />
+        </div>
+
+        <div class="form__grupo form__grupo--full">
+          <label class="form__label">Notas adicionales</label>
+          <textarea class="form__input form__textarea" [(ngModel)]="formularioMedicacion.notas" placeholder="Observaciones, dosis máxima, contraindicaciones..."></textarea>
+        </div>
+
+      </div>
+    </div>
+    <div class="modal__footer">
+      <button class="btn__cancelar" (click)="mostrarModalMedicacion = false">Cancelar</button>
+      <button class="btn__guardar" (click)="guardarNuevaMedicacion()">
+        <i class="fa-solid fa-save"></i> Guardar Medicación
+      </button>
+    </div>
+  </div>
+</div>
+
+<!-- MODAL VER EVIDENCIA -->
+<div class="modal__overlay" *ngIf="mostrarModalEvidencia" (click)="mostrarModalEvidencia = false">
+  <div class="modal__card" (click)="$event.stopPropagation()">
+    <div class="modal__header">
+      <h3><i class="fa-solid fa-file-circle-exclamation"></i> Evidencia — No Tomado</h3>
+      <button class="modal__close" (click)="mostrarModalEvidencia = false"><i class="fa-solid fa-xmark"></i></button>
+    </div>
+    <div class="modal__body" *ngIf="evidenciaActiva">
+      <div class="med__evidencia-ver">
+        <p class="med__evidencia-med-nombre">{{ evidenciaActiva.nombre }}</p>
+        <div class="med__evidencia-texto-box" *ngIf="evidenciaActiva.textoEvidencia">
+          <i class="fa-solid fa-comment-dots"></i>
+          <p>{{ evidenciaActiva.textoEvidencia }}</p>
+        </div>
+        <div class="med__evidencia-archivo-box" *ngIf="evidenciaActiva.archivoEvidencia">
+          <i class="fa-solid fa-paperclip"></i>
+          <span>{{ evidenciaActiva.archivoEvidencia }}</span>
+        </div>
+        <div class="med__evidencia-tipo-box" *ngIf="evidenciaActiva.tipoEvidencia === 'voz'">
+          <i class="fa-solid fa-microphone"></i> <span>Mensaje de voz registrado</span>
+        </div>
+        <div class="med__evidencia-tipo-box" *ngIf="evidenciaActiva.tipoEvidencia === 'video'">
+          <i class="fa-solid fa-video"></i> <span>Video registrado</span>
+        </div>
+      </div>
+    </div>
+    <div class="modal__footer">
+      <button class="btn__cancelar" (click)="mostrarModalEvidencia = false">Cerrar</button>
+    </div>
+  </div>
+</div>
 
     <!-- ==================
          PRODUCTOS Y STOCK

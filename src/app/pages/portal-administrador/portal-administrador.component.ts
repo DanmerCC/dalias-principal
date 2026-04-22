@@ -161,6 +161,179 @@ export class PortalAdministradorComponent {
     turnoNoche: '19:00',
   };
 
+  // ---- MEDICACIÓN ----
+medTab: 'diaria' | 'condicional' | 'tratamiento' | 'suspendida' = 'diaria';
+turnoMed: 'dia' | 'noche' = 'dia';
+rangoHoraDesde = '07:00';
+rangoHoraHasta = '19:00';
+residentesFiltroMed: number[] = [];
+dropdownResidentesAbierto = false;
+mostrarModalMedicacion = false;
+mostrarModalEvidencia = false;
+evidenciaActiva: any = null;
+
+formularioMedicacion: any = {
+  residenteId: '', nombre: '', indicacion: '', tipo: 'diaria',
+  hora: '', turno: 'dia', fechaTratamiento: '', condicion: '', notas: ''
+};
+
+medicaciones: any[] = [
+  {
+    id: 1, residenteId: 1, residente: 'María Elena Sánchez', habitacion: '204',
+    alergia: 'PENICILINA', ultimaToma: '08:15 AM', tipo: 'diaria', turno: 'dia',
+    medicamentos: [
+      { nombre: 'Enalapril 10mg', indicacion: 'Con desayuno — Antihipertensivo', hora: '08:00', estado: 'tomado', evidencia: false, textoEvidencia: '', archivoEvidencia: '', tipoEvidencia: '' },
+      { nombre: 'Aspirín 100mg', indicacion: 'Con almuerzo', hora: '13:00', estado: 'pendiente', evidencia: false, textoEvidencia: '', archivoEvidencia: '', tipoEvidencia: '' },
+    ]
+  },
+  {
+    id: 2, residenteId: 2, residente: 'José Antonio Ríos', habitacion: '105',
+    alergia: '', ultimaToma: '07:50 AM', tipo: 'diaria', turno: 'dia',
+    medicamentos: [
+      { nombre: 'Metformina 850mg', indicacion: 'Con desayuno — Antidiabético', hora: '08:00', estado: 'pendiente', evidencia: false, textoEvidencia: '', archivoEvidencia: '', tipoEvidencia: '' },
+      { nombre: 'Enalapril 5mg', indicacion: 'Cada 24h — Antihipertensivo', hora: '09:00', estado: 'no-tomado', evidencia: true, textoEvidencia: 'Residente se negó a tomar', archivoEvidencia: '', tipoEvidencia: '' },
+    ]
+  },
+  {
+    id: 3, residenteId: 3, residente: 'Carmen Rosa Delgado', habitacion: '301',
+    alergia: 'IBUPROFENO', ultimaToma: '08:00 AM', tipo: 'condicional', turno: 'dia',
+    condicion: 'Dolor > 7/10',
+    medicamentos: [
+      { nombre: 'Tramadol 50mg', indicacion: 'Máx. cada 6h — Verificar última dosis', hora: '', estado: 'pendiente', evidencia: false, textoEvidencia: '', archivoEvidencia: '', tipoEvidencia: '' },
+    ]
+  },
+  {
+    id: 4, residenteId: 1, residente: 'María Elena Sánchez', habitacion: '204',
+    alergia: 'PENICILINA', ultimaToma: '', tipo: 'tratamiento', turno: 'dia',
+    fechaTratamiento: '24/04/2026',
+    medicamentos: [
+      { nombre: 'Amoxicilina 500mg', indicacion: 'Cada 8h — 7 días', hora: '08:00', estado: 'pendiente', evidencia: false, textoEvidencia: '', archivoEvidencia: '', tipoEvidencia: '' },
+    ]
+  },
+  {
+    id: 5, residenteId: 2, residente: 'José Antonio Ríos', habitacion: '105',
+    alergia: '', ultimaToma: '', tipo: 'suspendida', turno: 'dia',
+    medicamentos: [
+      { nombre: 'Ibuprofeno 400mg', indicacion: 'Suspendido por indicación médica', hora: '', estado: 'suspendida', evidencia: false, textoEvidencia: '', archivoEvidencia: '', tipoEvidencia: '' },
+    ]
+  },
+  {
+    id: 6, residenteId: 3, residente: 'Carmen Rosa Delgado', habitacion: '301',
+    alergia: 'IBUPROFENO', ultimaToma: '20:00 PM', tipo: 'diaria', turno: 'noche',
+    medicamentos: [
+      { nombre: 'Atorvastatina 20mg', indicacion: 'Noche — Con o sin alimentos', hora: '21:00', estado: 'pendiente', evidencia: false, textoEvidencia: '', archivoEvidencia: '', tipoEvidencia: '' },
+    ]
+  },
+];
+
+alertasInventario = [
+  { medicamento: 'Levotiroxina 50mcg', lote: '#A9902', unidades: 8, max: 100, deplecion: '24 Oct (3 días)' },
+  { medicamento: 'Quetiapina 25mg', lote: '#C2203', unidades: 45, max: 100, deplecion: '12 Nov (21 días)' },
+  { medicamento: 'Furosemida 40mg', lote: '#B1105', unidades: 12, max: 60, deplecion: '28 Oct (7 días)' },
+];
+
+get medicacionesFiltradas(): any[] {
+  return this.medicaciones.filter(pm => {
+    const matchTipo = pm.tipo === this.medTab;
+    const matchTurno = pm.turno === this.turnoMed || pm.turno === 'ambos';
+    const matchResidente = this.residentesFiltroMed.length === 0 || this.residentesFiltroMed.includes(pm.residenteId);
+    const matchHora = pm.medicamentos.some((m: any) => {
+      if (!m.hora) return true;
+      return m.hora >= this.rangoHoraDesde && m.hora <= this.rangoHoraHasta;
+    });
+    return matchTipo && matchTurno && matchResidente && matchHora;
+  });
+}
+
+contarPorTipo(tipo: string): number {
+  return this.medicaciones.filter(m => m.tipo === tipo).length;
+}
+
+contarEstado(estado: string): number {
+  let count = 0;
+  this.medicaciones.forEach(pm => {
+    pm.medicamentos.forEach((m: any) => { if (m.estado === estado) count++; });
+  });
+  return count;
+}
+
+toggleDropdownResidentes(): void {
+  this.dropdownResidentesAbierto = !this.dropdownResidentesAbierto;
+}
+
+toggleResidenteFiltro(id: number): void {
+  const idx = this.residentesFiltroMed.indexOf(id);
+  if (idx > -1) this.residentesFiltroMed.splice(idx, 1);
+  else this.residentesFiltroMed.push(id);
+}
+
+marcarMedicamento(pm: any, med: any, estado: string): void {
+  med.estado = estado;
+}
+
+iniciarNoTomado(pm: any, med: any): void {
+  med.estado = 'evidencia-pendiente';
+  med.textoEvidencia = '';
+}
+
+adjuntarEvidencia(med: any, tipo: 'voz' | 'video'): void {
+  med.tipoEvidencia = tipo;
+  alert(`🎙️ ${tipo === 'voz' ? 'Grabación de voz' : 'Grabación de video'} iniciada (simulado)`);
+}
+
+onArchivoEvidencia(event: Event, med: any): void {
+  const input = event.target as HTMLInputElement;
+  if (input.files?.[0]) {
+    med.archivoEvidencia = input.files[0].name;
+    med.tipoEvidencia = 'archivo';
+  }
+}
+
+confirmarNoTomado(pm: any, med: any): void {
+  med.estado = 'no-tomado';
+  med.evidencia = true;
+}
+
+verEvidencia(med: any): void {
+  this.evidenciaActiva = med;
+  this.mostrarModalEvidencia = true;
+}
+
+abrirModalNuevaMedicacion(): void {
+  this.formularioMedicacion = {
+    residenteId: '', nombre: '', indicacion: '', tipo: 'diaria',
+    hora: '', turno: 'dia', fechaTratamiento: '', condicion: '', notas: ''
+  };
+  this.mostrarModalMedicacion = true;
+}
+
+guardarNuevaMedicacion(): void {
+  if (!this.formularioMedicacion.residenteId || !this.formularioMedicacion.nombre) return;
+  const residente = this.residentes.find(r => r.id == this.formularioMedicacion.residenteId);
+  if (!residente) return;
+  const nueva = {
+    id: this.medicaciones.length + 1,
+    residenteId: residente.id,
+    residente: residente.nombre,
+    habitacion: residente.habitacion,
+    alergia: residente.fichaEmergencia.alergias || '',
+    ultimaToma: '',
+    tipo: this.formularioMedicacion.tipo,
+    turno: this.formularioMedicacion.turno,
+    fechaTratamiento: this.formularioMedicacion.fechaTratamiento || '',
+    condicion: this.formularioMedicacion.condicion || '',
+    medicamentos: [{
+      nombre: this.formularioMedicacion.nombre,
+      indicacion: this.formularioMedicacion.indicacion || '',
+      hora: this.formularioMedicacion.hora || '',
+      estado: 'pendiente',
+      evidencia: false, textoEvidencia: '', archivoEvidencia: '', tipoEvidencia: ''
+    }]
+  };
+  this.medicaciones.push(nueva);
+  this.mostrarModalMedicacion = false;
+}
+
   gruposPermisos: GrupoPermisos[] = [
     {
       nombre: 'Residentes', icono: 'fa-solid fa-bed-pulse',
