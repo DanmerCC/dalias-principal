@@ -81,6 +81,40 @@
 .topbar__titulo { color: #1a1a2e; font-size: 1.2rem; font-weight: 600; margin: 0; }
 .topbar__badge { display: flex; align-items: center; gap: 0.5rem; background: rgba(139,92,246,0.1); color: #8b5cf6; padding: 0.5rem 1rem; border-radius: 2rem; font-size: 0.82rem; font-weight: 600; }
 
+.topbar__derecha { display: flex; align-items: center; gap: 1rem; }
+.topbar__notif-btn {
+  position: relative;
+  background: #f0f2f5;
+  border: none;
+  width: 2.4rem;
+  height: 2.4rem;
+  border-radius: 0.6rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  color: #666;
+  font-size: 1rem;
+  transition: all 0.2s ease;
+}
+.topbar__notif-btn:hover { background: #e0e2e5; color: #1a1a2e; }
+.topbar__notif-badge {
+  position: absolute;
+  top: -0.3rem;
+  right: -0.3rem;
+  background: #e74c3c;
+  color: #fff;
+  font-size: 0.6rem;
+  font-weight: 700;
+  width: 1.1rem;
+  height: 1.1rem;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 2px solid #fff;
+}
+
 .portal__contenido { padding: 2rem; flex: 1; animation: fadeInUp 0.3s ease-out; }
 
 /* ===========================
@@ -89,16 +123,304 @@
 .dashboard__top-grid { display: grid; grid-template-columns: 1fr 2fr; gap: 1.5rem; margin-bottom: 1.5rem; align-items: start; }
 .dashboard__bottom-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; align-items: start; }
 
-.dash__ocupacion-card { background: #fff; border-radius: 1rem; padding: 1.5rem; box-shadow: 0 2px 8px rgba(0,0,0,0.05); display: flex; flex-direction: column; align-items: center; gap: 1rem; }
-.ocupacion__donut-wrapper { position: relative; width: 9rem; height: 9rem; display: flex; align-items: center; justify-content: center; }
+
+/* === SINIESTRALIDAD === */
+.dash__siniestralidad-card {
+  background: #1a1a2e;
+  border-radius: 1rem;
+  padding: 1.8rem 2rem;
+  margin-top: 1.5rem;
+  display: grid;
+  grid-template-columns: 18rem 1fr 12rem;
+  gap: 1.5rem;
+  align-items: center;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.15);
+}
+
+.siniestralidad__izquierda {
+  display: flex;
+  flex-direction: column;
+  gap: 0.9rem;
+  min-width: 0;
+}
+
+.siniestralidad__titulo-row {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.9rem;
+}
+.siniestralidad__icono-titulo {
+  width: 2.8rem;
+  height: 2.8rem;
+  border-radius: 0.7rem;
+  background: rgba(231,76,60,0.2);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+.siniestralidad__icono-titulo i { color: #e74c3c; font-size: 1.1rem; }
+
+.siniestralidad__titulo { color: #fff; font-size: 1rem; font-weight: 700; margin: 0 0 0.25rem 0; }
+.siniestralidad__subtitulo { color: rgba(255,255,255,0.45); font-size: 0.78rem; margin: 0; line-height: 1.5; }
+.siniestralidad__subtitulo strong { color: rgba(255,255,255,0.75); }
+
+.siniestralidad__periodo {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  background: rgba(255,255,255,0.06);
+  border-radius: 0.5rem;
+  padding: 0.55rem 0.9rem;
+  font-size: 0.75rem;
+  color: rgba(255,255,255,0.45);
+}
+.siniestralidad__periodo i { color: #8b5cf6; font-size: 0.8rem; }
+.siniestralidad__periodo strong { color: rgba(255,255,255,0.75); }
+
+/* Métricas */
+.siniestralidad__metricas {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 0.7rem;
+}
+.siniestralidad__metrica {
+  background: rgba(255,255,255,0.05);
+  border-radius: 0.7rem;
+  padding: 0.65rem 0.8rem;
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  border: 1px solid rgba(255,255,255,0.07);
+  transition: background 0.2s ease;
+}
+.siniestralidad__metrica:hover { background: rgba(255,255,255,0.09); }
+
+.siniestralidad__met-icono {
+  width: 2.2rem;
+  height: 2.2rem;
+  border-radius: 0.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  font-size: 0.9rem;
+}
+.siniestralidad__met-icono--rojo    { background: rgba(231,76,60,0.2);   color: #e74c3c; }
+.siniestralidad__met-icono--naranja { background: rgba(230,126,34,0.2);  color: #e67e22; }
+.siniestralidad__met-icono--amarillo{ background: rgba(243,156,18,0.2);  color: #f39c12; }
+.siniestralidad__met-icono--azul    { background: rgba(74,158,190,0.2);  color: #4a9ebe; }
+.siniestralidad__met-icono--gris    { background: rgba(255,255,255,0.1); color: #aaa; }
+
+.siniestralidad__met-info { flex: 1; min-width: 0; display: flex; flex-direction: column; gap: 0.1rem; }
+.siniestralidad__met-numero { color: #fff; font-size: 1.2rem; font-weight: 800; line-height: 1; }
+.siniestralidad__met-label  { color: rgba(255,255,255,0.45); font-size: 0.68rem; }
+
+.siniestralidad__met-badge {
+  font-size: 0.6rem;
+  font-weight: 700;
+  padding: 0.15rem 0.5rem;
+  border-radius: 2rem;
+  white-space: nowrap;
+  flex-shrink: 0;
+  align-self: flex-start;
+}
+.siniestralidad__met-badge--alto  { background: rgba(231,76,60,0.25);  color: #e74c3c; }
+.siniestralidad__met-badge--medio { background: rgba(243,156,18,0.25); color: #f39c12; }
+.siniestralidad__met-badge--bajo  { background: rgba(74,158,190,0.25); color: #4a9ebe; }
+
+/* Derecha — total */
+.siniestralidad__derecha {
+  background: rgba(255,255,255,0.06);
+  border-radius: 0.9rem;
+  padding: 1.2rem 1rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.3rem;
+  border: 1px solid rgba(255,255,255,0.08);
+  text-align: center;
+  min-width: 0;
+}
+.siniestralidad__total-label {
+  color: rgba(255,255,255,0.4);
+  font-size: 0.65rem;
+  font-weight: 700;
+  letter-spacing: 0.06rem;
+  text-transform: uppercase;
+  margin: 0;
+}
+.siniestralidad__total-numero {
+  color: #fff;
+  font-size: 2.4rem;
+  font-weight: 800;
+  line-height: 1;
+  margin: 0.3rem 0;
+}
+.siniestralidad__total-sub {
+  color: rgba(255,255,255,0.4);
+  font-size: 0.75rem;
+  margin: 0 0 0.8rem 0;
+}
+.siniestralidad__indice {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.3rem;
+  padding-top: 0.8rem;
+  border-top: 1px solid rgba(255,255,255,0.08);
+  width: 100%;
+}
+.siniestralidad__indice-label {
+  color: rgba(255,255,255,0.35);
+  font-size: 0.65rem;
+  text-transform: uppercase;
+  letter-spacing: 0.04rem;
+}
+.siniestralidad__indice-valor {
+  font-size: 0.82rem;
+  font-weight: 700;
+  padding: 0.25rem 0.9rem;
+  border-radius: 2rem;
+}
+.siniestralidad__indice--medio { background: rgba(243,156,18,0.25); color: #f39c12; }
+.siniestralidad__indice--alto  { background: rgba(231,76,60,0.25);  color: #e74c3c; }
+.siniestralidad__indice--bajo  { background: rgba(37,211,102,0.2);  color: #25d366; }
+
+
+
+/* === OCUPACIÓN === */
+.dash__ocupacion-card {
+  background: #fff;
+  border-radius: 1rem;
+  padding: 1.5rem;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.5rem;
+}
+.ocupacion__donut-wrapper {
+  position: relative;
+  width: 13rem;
+  height: 13rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
 .donut__svg { width: 100%; height: 100%; position: absolute; top: 0; left: 0; }
 .donut__label { display: flex; flex-direction: column; align-items: center; z-index: 1; }
-.donut__porcentaje { font-size: 1.8rem; font-weight: 800; color: #1a1a2e; line-height: 1; }
-.donut__sub { font-size: 0.65rem; font-weight: 700; color: #aaa; letter-spacing: 0.08rem; margin-top: 0.2rem; }
-.ocupacion__stats { display: flex; gap: 2rem; justify-content: center; width: 100%; border-top: 1px solid #f0f0f0; padding-top: 1rem; }
+.donut__porcentaje { font-size: 2.4rem; font-weight: 800; color: #1a1a2e; line-height: 1; }
+.donut__sub { font-size: 0.65rem; font-weight: 700; color: #aaa; letter-spacing: 0.08rem; margin-top: 0.3rem; }
+.ocupacion__stats {
+  display: flex;
+  gap: 2rem;
+  justify-content: center;
+  width: 100%;
+  border-top: 1px solid #f0f0f0;
+  padding-top: 1rem;
+}
 .ocupacion__stat { display: flex; flex-direction: column; align-items: center; gap: 0.2rem; }
-.ocupacion__numero { font-size: 1.4rem; font-weight: 700; color: #1a1a2e; }
+.ocupacion__numero { font-size: 1.6rem; font-weight: 700; color: #1a1a2e; }
+.ocupacion__numero--gris { color: #c8c8c8; font-weight: 600; }
 .ocupacion__desc { font-size: 0.72rem; color: #aaa; text-align: center; }
+
+/* === ENFERMERÍA === */
+.dash__enfermeria-card {
+  background: #fff;
+  border-radius: 1rem;
+  padding: 1.5rem;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+}
+.enfermeria__header-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 1.2rem;
+  padding-bottom: 0.8rem;
+  border-bottom: 1px solid #f0f0f0;
+}
+.enfermeria__filtro-btn {
+  background: #f0f2f5;
+  border: none;
+  color: #888;
+  width: 2.2rem;
+  height: 2.2rem;
+  border-radius: 0.5rem;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.9rem;
+  transition: all 0.2s ease;
+  flex-shrink: 0;
+}
+.enfermeria__filtro-btn:hover { background: #e0e2e5; color: #1a1a2e; }
+
+.enfermeria__lista {
+  display: flex;
+  flex-direction: column;
+}
+.enfermeria__item {
+  display: flex;
+  gap: 0.8rem;
+  align-items: stretch;
+}
+.enfermeria__linea-col {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  flex-shrink: 0;
+  width: 0.7rem;
+}
+.enfermeria__punto {
+  width: 0.7rem;
+  height: 0.7rem;
+  border-radius: 50%;
+  flex-shrink: 0;
+  margin-top: 0.35rem;
+}
+.enfermeria__punto--activo { background: #1a1a2e; }
+.enfermeria__punto--inactivo { background: #ccc; }
+.enfermeria__linea-vert {
+  width: 2px;
+  flex: 1;
+  background: #e8e8e8;
+  margin-top: 0.2rem;
+  /* sin min-height para que llegue exacto al siguiente punto */
+}
+.enfermeria__contenido {
+  flex: 1;
+  min-width: 0;
+  padding-bottom: 1.4rem;
+}
+/* el último item no tiene padding inferior */
+.enfermeria__item:last-child .enfermeria__contenido {
+  padding-bottom: 0;
+}
+.enfermeria__meta-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 0.3rem;
+  gap: 0.5rem;
+}
+.enfermeria__hora { font-size: 0.7rem; font-weight: 700; color: #888; letter-spacing: 0.03rem; text-transform: uppercase; }
+.enfermeria__texto { font-size: 0.82rem; color: #555; margin: 0; line-height: 1.5; font-style: italic; }
+
+.enf__badge {
+  font-size: 0.7rem;
+  font-weight: 700;
+  padding: 0.2rem 0.7rem;
+  border-radius: 2rem;
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+.enf__badge--estable     { background: #25d366; color: #fff; }
+.enf__badge--supervision { background: #f39c12; color: #fff; }
+.enf__badge--importante  { background: #e74c3c; color: #fff; }
+.enf__badge--cambio      { background: #00bcd4; color: #fff; }
+
 
 .dash__alertas-card { background: #fff; border-radius: 1rem; padding: 1.5rem; box-shadow: 0 2px 8px rgba(0,0,0,0.05); display: flex; flex-direction: column; gap: 0.9rem; }
 .alertas__header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 0.3rem; }
@@ -145,6 +467,70 @@
 .medicacion__hora { font-size: 0.85rem; font-weight: 700; color: #1a1a2e; flex-shrink: 0; }
 .medicacion__btn-confirmar { background: #1a1a2e; color: #fff; border: none; border-radius: 0.7rem; padding: 0.85rem 1.2rem; font-size: 0.88rem; font-weight: 600; cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 0.5rem; width: 100%; margin-top: 0.5rem; transition: background 0.2s ease; }
 .medicacion__btn-confirmar:hover { background: #2d2d5e; }
+
+
+/* === RESUMEN RESIDENTES === */
+.residentes__resumen-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+}
+.residentes__resumen-card {
+  border-radius: 0.8rem;
+  padding: 1.1rem 1.4rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  border: 1.5px solid transparent;
+}
+.residentes__resumen-card--azul {
+  background: rgba(74,158,190,0.08);
+  border-color: rgba(74,158,190,0.3);
+}
+.residentes__resumen-card--amarillo {
+  background: rgba(243,156,18,0.08);
+  border-color: rgba(243,156,18,0.3);
+}
+.residentes__resumen-card--oscuro {
+  background: #fff;
+  border-color: #e0e0e0;
+}
+.residentes__resumen-info {
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+}
+.residentes__resumen-label {
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.04rem;
+  color: #555;
+}
+.residentes__resumen-card--azul .residentes__resumen-label { color: #4a9ebe; }
+.residentes__resumen-card--amarillo .residentes__resumen-label { color: #c0870a; }
+.residentes__resumen-card--oscuro .residentes__resumen-label { color: #1a1a2e; }
+
+.residentes__resumen-desc {
+  font-size: 0.72rem;
+  color: #aaa;
+}
+.residentes__resumen-numero {
+  width: 2.6rem;
+  height: 2.6rem;
+  border-radius: 0.6rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.1rem;
+  font-weight: 800;
+  flex-shrink: 0;
+}
+.residentes__resumen-numero--azul    { background: #4a9ebe; color: #fff; }
+.residentes__resumen-numero--amarillo{ background: #f39c12; color: #fff; }
+.residentes__resumen-numero--oscuro  { background: #1a1a2e; color: #fff; }
+
 
 /* ===========================
    TOOLBAR
@@ -800,6 +1186,215 @@
 /* ===========================
    FICHA RESIDENTE (panel lateral)
    =========================== */
+
+   /* ===== TAB MEDICACIÓN FICHA ===== */
+.fmed__export-row {
+  display: flex;
+  justify-content: flex-end;
+  margin-bottom: 1rem;
+}
+.fmed__export-btn {
+  background: #e74c3c;
+  color: #fff;
+  border: none;
+  padding: 0.6rem 1.2rem;
+  border-radius: 0.6rem;
+  font-size: 0.82rem;
+  font-weight: 600;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  transition: all 0.2s ease;
+}
+.fmed__export-btn:hover { background: #c0392b; }
+
+.fmed__bloque { background: #f8f9fa; border-radius: 0.8rem; overflow: hidden; border: 1px solid #eee; }
+.fmed__bloque-header {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  padding: 0.8rem 1.2rem;
+  font-size: 0.85rem;
+  font-weight: 700;
+}
+.fmed__bloque-header h4 { margin: 0; font-size: 0.88rem; }
+.fmed__bloque-header--diaria { background: rgba(74,158,190,0.1); color: #4a9ebe; border-bottom: 1px solid rgba(74,158,190,0.2); }
+.fmed__bloque-header--sos { background: rgba(243,156,18,0.1); color: #c0870a; border-bottom: 1px solid rgba(243,156,18,0.2); }
+
+.fmed__tabla-wrapper { overflow-x: auto; }
+.fmed__tabla { width: 100%; border-collapse: collapse; font-size: 0.82rem; }
+.fmed__tabla thead tr { background: #f0f2f5; }
+.fmed__tabla th { padding: 0.65rem 1rem; text-align: left; color: #888; font-size: 0.68rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.04rem; white-space: nowrap; }
+.fmed__tabla td { padding: 0.75rem 1rem; border-bottom: 1px solid #f0f0f0; vertical-align: middle; }
+.fmed__tabla tbody tr:last-child td { border-bottom: none; }
+.fmed__hora { color: #1a1a2e; font-weight: 700; font-size: 0.85rem; white-space: nowrap; }
+.fmed__med-nombre { color: #1a1a2e; font-size: 0.85rem; font-weight: 600; margin: 0; }
+.fmed__med-tipo { color: #aaa; font-size: 0.65rem; font-weight: 700; letter-spacing: 0.03rem; margin: 0; }
+.fmed__dosis { color: #555; font-size: 0.82rem; white-space: nowrap; }
+.fmed__obs { color: #888; font-size: 0.78rem; }
+.fmed__obs--alerta { color: #e74c3c; font-weight: 600; }
+.fmed__estado {
+  display: inline-flex; align-items: center; gap: 0.35rem;
+  font-size: 0.72rem; font-weight: 700; padding: 0.25rem 0.65rem;
+  border-radius: 2rem; white-space: nowrap;
+}
+.fmed__estado--ok   { background: rgba(37,211,102,0.12); color: #1a9e4c; }
+.fmed__estado--err  { background: rgba(231,76,60,0.12);  color: #e74c3c; }
+.fmed__estado--pend { background: rgba(243,156,18,0.12); color: #c0870a; }
+
+/* SOS */
+.fmed__sos-lista { display: flex; flex-direction: column; gap: 0; }
+.fmed__sos-item {
+  display: flex; align-items: center; gap: 1rem;
+  padding: 0.9rem 1.2rem; border-bottom: 1px solid #f0f0f0;
+  flex-wrap: wrap;
+}
+.fmed__sos-item:last-child { border-bottom: none; }
+.fmed__sos-info { min-width: 8rem; flex-shrink: 0; }
+.fmed__sos-dosis, .fmed__sos-condicion, .fmed__sos-ultima {
+  display: flex; flex-direction: column; gap: 0.1rem; flex: 1; min-width: 5rem;
+}
+.fmed__sos-dosis-label { color: #aaa; font-size: 0.62rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.03rem; }
+.fmed__sos-dosis span, .fmed__sos-condicion span, .fmed__sos-ultima span { color: #333; font-size: 0.8rem; }
+.fmed__sos-btn {
+  background: #f39c12; color: #fff; border: none;
+  padding: 0.5rem 0.9rem; border-radius: 0.5rem;
+  font-size: 0.7rem; font-weight: 700; cursor: pointer;
+  white-space: nowrap; transition: background 0.2s ease;
+  flex-shrink: 0;
+}
+.fmed__sos-btn:hover { background: #c0870a; }
+
+/* Alergias */
+.fmed__alergias-row {
+  display: flex; align-items: center; gap: 0.6rem;
+  background: rgba(231,76,60,0.07); border: 1px solid rgba(231,76,60,0.2);
+  border-radius: 0.6rem; padding: 0.75rem 1rem; margin-top: 1rem;
+  font-size: 0.82rem;
+}
+.fmed__alergias-row > i { color: #e74c3c; flex-shrink: 0; }
+.fmed__alergias-label { color: #e74c3c; font-weight: 700; font-size: 0.72rem; letter-spacing: 0.03rem; }
+.fmed__alergias-valor { color: #333; }
+
+/* ===== TAB EXÁMENES ===== */
+.fexam__header {
+  display: flex; align-items: center; justify-content: space-between;
+  margin-bottom: 1rem; gap: 1rem;
+}
+.fexam__toggle {
+  display: flex; border: 1.5px solid #e0e0e0;
+  border-radius: 0.5rem; overflow: hidden;
+}
+.fexam__toggle-btn {
+  background: #fff; border: none; padding: 0.45rem 1rem;
+  font-size: 0.72rem; font-weight: 700; color: #aaa;
+  cursor: pointer; letter-spacing: 0.03rem; transition: all 0.2s ease;
+}
+.fexam__toggle-btn--activo { background: #1a1a2e; color: #fff; }
+
+.fexam__lista { display: flex; flex-direction: column; gap: 0.5rem; }
+.fexam__item {
+  display: flex; align-items: center; justify-content: space-between;
+  background: #f8f9fa; border-radius: 0.7rem; padding: 0.85rem 1rem;
+  border: 1px solid #eee; gap: 1rem; transition: border-color 0.2s ease;
+}
+.fexam__item:hover { border-color: rgba(139,92,246,0.3); }
+.fexam__item-izq { display: flex; align-items: center; gap: 0.8rem; flex: 1; min-width: 0; }
+.fexam__icono {
+  width: 2.4rem; height: 2.4rem; border-radius: 0.6rem;
+  display: flex; align-items: center; justify-content: center;
+  flex-shrink: 0; font-size: 1rem;
+}
+.fexam__icono--azul  { background: rgba(74,158,190,0.15);  color: #4a9ebe; }
+.fexam__icono--gris  { background: rgba(170,170,170,0.15); color: #888; }
+.fexam__icono--rojo  { background: rgba(231,76,60,0.15);   color: #e74c3c; }
+.fexam__icono--verde { background: rgba(37,211,102,0.15);  color: #25d366; }
+.fexam__item-info { min-width: 0; }
+.fexam__nombre { color: #1a1a2e; font-size: 0.85rem; font-weight: 600; margin: 0 0 0.15rem 0; }
+.fexam__meta   { color: #aaa; font-size: 0.72rem; margin: 0; }
+.fexam__item-der { display: flex; align-items: center; gap: 0.8rem; flex-shrink: 0; }
+.fexam__fecha {
+  background: #1a1a2e; color: #fff;
+  font-size: 0.65rem; font-weight: 700;
+  padding: 0.25rem 0.65rem; border-radius: 0.35rem;
+  letter-spacing: 0.04rem; white-space: nowrap;
+}
+.fexam__acciones { display: flex; gap: 0.4rem; }
+
+/* ===== TAB DOCUMENTOS ===== */
+.fdoc__dni-section { margin-bottom: 1.5rem; }
+.fdoc__dni-grid {
+  display: grid; grid-template-columns: 1fr 1fr;
+  gap: 1rem; margin-top: 0.8rem;
+}
+.fdoc__dni-card {
+  background: #f8f9fa; border-radius: 0.8rem;
+  border: 1.5px dashed #d0d0d0; padding: 1.2rem;
+  display: flex; flex-direction: column; align-items: center; gap: 0.8rem;
+  transition: border-color 0.2s ease;
+}
+.fdoc__dni-card:hover { border-color: #8b5cf6; }
+.fdoc__dni-preview {
+  display: flex; flex-direction: column; align-items: center; gap: 0.4rem;
+  color: #aaa; font-size: 0.8rem;
+}
+.fdoc__dni-preview i { font-size: 2.5rem; color: #ccc; }
+.fdoc__dni-acciones { display: flex; gap: 0.5rem; }
+.fdoc__dni-subir {
+  background: #fff; border: 1.5px solid #e0e0e0;
+  color: #666; font-size: 0.75rem; font-weight: 600;
+  padding: 0.45rem 0.9rem; border-radius: 0.5rem;
+  cursor: pointer; display: inline-flex; align-items: center; gap: 0.4rem;
+  transition: all 0.2s ease;
+}
+.fdoc__dni-subir:hover { border-color: #8b5cf6; color: #8b5cf6; }
+.fdoc__otros-header {
+  display: flex; align-items: center; justify-content: space-between;
+  margin-bottom: 1rem; padding-bottom: 0.8rem;
+  border-bottom: 1px solid #f0f0f0;
+}
+
+/* ===== TAB GASTOS FICHA ===== */
+.fgas__saldo-row {
+  display: grid; grid-template-columns: 1fr 1fr 1fr;
+  gap: 0.8rem; margin-bottom: 1.2rem;
+}
+.fgas__saldo-card {
+  border-radius: 0.7rem; padding: 0.9rem 1rem;
+  display: flex; flex-direction: column; gap: 0.3rem;
+  border: 1.5px solid transparent;
+}
+.fgas__saldo-card--ingreso { background: rgba(37,211,102,0.07); border-color: rgba(37,211,102,0.25); }
+.fgas__saldo-card--gasto   { background: rgba(231,76,60,0.07);  border-color: rgba(231,76,60,0.25); }
+.fgas__saldo-card--balance { background: rgba(74,158,190,0.07); border-color: rgba(74,158,190,0.25); }
+.fgas__saldo-label { font-size: 0.62rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.04rem; color: #aaa; }
+.fgas__saldo-valor { font-size: 1.1rem; font-weight: 800; }
+.fgas__saldo-valor--verde { color: #1a9e4c; }
+.fgas__saldo-valor--rojo  { color: #e74c3c; }
+.fgas__saldo-valor--azul  { color: #4a9ebe; }
+.fgas__estado-badge {
+  font-size: 0.68rem; font-weight: 700;
+  padding: 0.2rem 0.6rem; border-radius: 2rem; white-space: nowrap;
+}
+.fgas__estado-badge--ok { background: rgba(37,211,102,0.12); color: #1a9e4c; }
+.fgas__estado-badge--pend { background: rgba(243,156,18,0.12); color: #c0870a; }
+
+/* emergencia contacto card */
+.femerg__export-row { display: flex; justify-content: flex-end; margin-bottom: 1.2rem; }
+.femerg__contacto-card {
+  display: flex; align-items: center; gap: 1rem;
+  background: rgba(139,92,246,0.06); border: 1px solid rgba(139,92,246,0.2);
+  border-radius: 0.8rem; padding: 1rem 1.2rem;
+}
+.femerg__contacto-avatar {
+  width: 3rem; height: 3rem; border-radius: 50%;
+  background: rgba(139,92,246,0.15); display: flex;
+  align-items: center; justify-content: center; flex-shrink: 0;
+}
+.femerg__contacto-avatar i { color: #8b5cf6; font-size: 1.2rem; }
+.femerg__contacto-nombre { color: #1a1a2e; font-size: 0.95rem; font-weight: 700; margin: 0 0 0.2rem 0; }
+.femerg__contacto-parentesco { color: #8b5cf6; font-size: 0.78rem; font-weight: 600; margin: 0; }
 .ficha__overlay { position: fixed; inset: 0; background: rgba(0,0,0,0.55); backdrop-filter: blur(4px); z-index: 998; animation: fadeIn 0.2s ease; }
 .ficha__panel { position: fixed; top: 0; right: 0; width: min(55rem,100vw); height: 100vh; background: #fff; box-shadow: -1rem 0 3rem rgba(0,0,0,0.2); display: flex; flex-direction: column; z-index: 999; animation: slideInRight 0.35s cubic-bezier(0.4,0,0.2,1); overflow: hidden; }
 .ficha__panel-header { background: #1a1a2e; padding: 1.5rem 2rem; display: flex; align-items: center; justify-content: space-between; flex-shrink: 0; }

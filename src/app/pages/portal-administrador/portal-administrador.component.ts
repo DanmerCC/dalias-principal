@@ -3,7 +3,8 @@ import { CommonModule, DecimalPipe, TitleCasePipe } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 
 type SeccionActiva = 'dashboard' | 'usuarios' | 'residentes' | 'detalle-residente' | 'medicacion' | 'productos' | 'roles' | 'configuracion';
-type FichaTab = 'info' | 'emergencia' | 'documentos' | 'gastos';
+// ANTES
+type FichaTab = 'info' | 'emergencia' | 'documentos' | 'gastos' | 'medicacion' | 'examenes';
 type DetalleTab = 'info' | 'emergencia' | 'documentos' | 'gastos';
 type TipoMovimiento = 'ingreso' | 'gasto';
 
@@ -333,6 +334,57 @@ guardarNuevaMedicacion(): void {
   this.medicaciones.push(nueva);
   this.mostrarModalMedicacion = false;
 }
+
+get residentesFuera(): number {
+  return this.residentes.filter(r => r.estado === 'atencion').length;
+}
+
+
+exportarMedicacionPDF(): void {
+  const r = this.residenteActivo;
+  if (!r) return;
+  const contenido = `<!DOCTYPE html><html lang="es"><head><meta charset="UTF-8"><title>Medicación - ${r.nombre}</title>
+  <style>*{margin:0;padding:0;box-sizing:border-box}body{font-family:Arial,sans-serif;color:#333;padding:30px}.header{border-bottom:3px solid #1a1a2e;padding-bottom:15px;margin-bottom:25px}.titulo{font-size:20px;font-weight:bold;color:#1a1a2e}.sub{font-size:13px;color:#888;margin-top:4px}table{width:100%;border-collapse:collapse;font-size:13px;margin-bottom:20px}th{background:#1a1a2e;color:#fff;padding:9px 12px;text-align:left;font-size:11px;text-transform:uppercase}td{padding:9px 12px;border-bottom:1px solid #eee}.ok{color:#1a9e4c;font-weight:bold}.err{color:#e74c3c;font-weight:bold}.pend{color:#f39c12;font-weight:bold}.alergia{background:#fff5f5;border:1px solid #f5b8b8;border-radius:6px;padding:10px 15px;font-size:13px;color:#e74c3c;margin-top:10px}.footer{margin-top:30px;font-size:11px;color:#aaa;text-align:center;border-top:1px solid #eee;padding-top:15px}</style></head>
+  <body><div class="header"><div class="titulo">Medicación — ${r.nombre}</div><div class="sub">Hab. ${r.habitacion} · DNI: ${r.dni || '—'} · Generado: ${new Date().toLocaleDateString('es-PE',{day:'2-digit',month:'long',year:'numeric'})}</div></div>
+  <h3 style="margin-bottom:10px;font-size:14px;color:#1a1a2e">Medicación Diaria</h3>
+  <table><thead><tr><th>Hora</th><th>Medicamento</th><th>Dosis</th><th>Estado</th><th>Observación</th></tr></thead>
+  <tbody><tr><td>08:00</td><td>Enalapril 10mg</td><td>10 mg</td><td class="ok">Suministrado</td><td>Sin observaciones</td></tr>
+  <tr><td>10:00</td><td>Vitamina D3</td><td>2000 UI</td><td class="err">Omitido</td><td>Rechazo por náuseas</td></tr>
+  <tr><td>14:00</td><td>Enalapril 5mg</td><td>10 mg</td><td class="pend">Pendiente</td><td>—</td></tr></tbody></table>
+  <h3 style="margin-bottom:10px;font-size:14px;color:#1a1a2e">Condicionales (SOS)</h3>
+  <table><thead><tr><th>Medicamento</th><th>Dosis Máx.</th><th>Condición</th><th>Última Toma</th></tr></thead>
+  <tbody><tr><td>Paracetamol</td><td>3g / 24h</td><td>Fiebre > 38°C o Cefalea fuerte</td><td>Ayer, 21:30</td></tr>
+  <tr><td>Loperamida</td><td>2 cápsulas</td><td>Episodio diarreico</td><td>Hace 3 días</td></tr></tbody></table>
+  <div class="alergia"><strong>⚠ ALERGIAS CONOCIDAS:</strong> ${r.fichaEmergencia.alergias || 'Ninguna registrada'}</div>
+  <div class="footer">Residencia Las Dalias · Documento generado automáticamente</div></body></html>`;
+  const w = window.open('', '_blank');
+  if (w) { w.document.write(contenido); w.document.close(); w.focus(); setTimeout(() => w.print(), 500); }
+}
+
+exportarEmergenciaPDF(): void {
+  const r = this.residenteActivo;
+  if (!r) return;
+  const contenido = `<!DOCTYPE html><html lang="es"><head><meta charset="UTF-8"><title>Ficha Emergencia - ${r.nombre}</title>
+  <style>*{margin:0;padding:0;box-sizing:border-box}body{font-family:Arial,sans-serif;color:#333;padding:30px}.header{background:#1a1a2e;color:#fff;padding:20px 25px;border-radius:8px;margin-bottom:25px}.titulo{font-size:20px;font-weight:bold}.sub{font-size:13px;opacity:0.6;margin-top:4px}.grid{display:grid;grid-template-columns:1fr 1fr;gap:20px;margin-bottom:20px}.bloque{background:#f8f9fa;border-radius:8px;padding:15px;border-left:4px solid #e74c3c}.bloque-titulo{font-size:12px;font-weight:bold;text-transform:uppercase;color:#888;margin-bottom:10px}.campo{margin-bottom:8px}.campo-label{font-size:11px;color:#aaa;text-transform:uppercase;font-weight:bold}.campo-valor{font-size:14px;color:#1a1a2e;font-weight:600;margin-top:2px}.alergia{background:#fff5f5;border:2px solid #e74c3c;border-radius:8px;padding:12px 15px;font-size:14px;color:#e74c3c;font-weight:bold;margin-bottom:20px}.footer{font-size:11px;color:#aaa;text-align:center;border-top:1px solid #eee;padding-top:15px;margin-top:20px}</style></head>
+  <body><div class="header"><div class="titulo">🚨 Ficha de Emergencia</div><div class="sub">${r.nombre} · Hab. ${r.habitacion} · DNI: ${r.dni || '—'}</div></div>
+  <div class="alergia">⚠ ALERGIAS: ${r.fichaEmergencia.alergias || 'Ninguna conocida'}</div>
+  <div class="grid">
+  <div class="bloque"><div class="bloque-titulo">Contacto de Emergencia</div>
+  <div class="campo"><div class="campo-label">Nombre</div><div class="campo-valor">${r.contactoEmergencia.nombre || '—'}</div></div>
+  <div class="campo"><div class="campo-label">Parentesco</div><div class="campo-valor">${r.contactoEmergencia.parentesco || '—'}</div></div>
+  <div class="campo"><div class="campo-label">Teléfono</div><div class="campo-valor">${r.contactoEmergencia.telefono || '—'}</div></div>
+  <div class="campo"><div class="campo-label">Teléfono Alt.</div><div class="campo-valor">${r.contactoEmergencia.telefonoAlt || '—'}</div></div>
+  <div class="campo"><div class="campo-label">Dirección</div><div class="campo-valor">${r.contactoEmergencia.direccion || '—'}</div></div></div>
+  <div class="bloque"><div class="bloque-titulo">Datos Médicos</div>
+  <div class="campo"><div class="campo-label">Grupo Sanguíneo</div><div class="campo-valor">${r.fichaEmergencia.grupoSanguineo} ${r.fichaEmergencia.factorRH === '+' ? 'Positivo (+)' : 'Negativo (-)'}</div></div>
+  <div class="campo"><div class="campo-label">Enfermedades Crónicas</div><div class="campo-valor">${r.fichaEmergencia.enfermedadesCronicas || 'Ninguna'}</div></div>
+  <div class="campo"><div class="campo-label">Medicamentos Permanentes</div><div class="campo-valor">${r.fichaEmergencia.medicamentosPermanentes || '—'}</div></div>
+  <div class="campo"><div class="campo-label">Instrucciones Especiales</div><div class="campo-valor">${r.fichaEmergencia.instrucciones || '—'}</div></div></div></div>
+  <div class="footer">Residencia Las Dalias · Ficha generada el ${new Date().toLocaleDateString('es-PE',{day:'2-digit',month:'long',year:'numeric'})}</div></body></html>`;
+  const w = window.open('', '_blank');
+  if (w) { w.document.write(contenido); w.document.close(); w.focus(); setTimeout(() => w.print(), 500); }
+}
+
 
   gruposPermisos: GrupoPermisos[] = [
     {

@@ -73,11 +73,17 @@
         </h2>
       </div>
       <div class="topbar__derecha">
-        <div class="topbar__badge">
-          <i class="fa-solid fa-user-shield"></i>
-          <span>Panel de Administración</span>
-        </div>
-      </div>
+  <div class="topbar__notificaciones">
+    <button class="topbar__notif-btn">
+      <i class="fa-solid fa-bell"></i>
+      <span class="topbar__notif-badge">3</span>
+    </button>
+  </div>
+  <div class="topbar__badge">
+    <i class="fa-solid fa-user-shield"></i>
+    <span>Panel de Administración</span>
+  </div>
+</div>
     </div>
 
     <!-- ==================
@@ -85,25 +91,31 @@
     =================== -->
     <div class="portal__contenido" *ngIf="seccionActiva === 'dashboard'">
       <div class="dashboard__top-grid">
-        <div class="dash__ocupacion-card">
-          <h3 class="bloque__titulo"><i class="fa-solid fa-bed"></i> Ocupación</h3>
-          <div class="ocupacion__donut-wrapper">
-            <svg viewBox="0 0 120 120" class="donut__svg">
-              <circle cx="60" cy="60" r="48" fill="none" stroke="#e8e8e8" stroke-width="12"/>
-              <circle cx="60" cy="60" r="48" fill="none" stroke="#1a1a2e" stroke-width="12"
-                stroke-dasharray="301.6" stroke-dashoffset="54.3"
-                stroke-linecap="round" transform="rotate(-90 60 60)"/>
-            </svg>
-            <div class="donut__label">
-              <span class="donut__porcentaje">82%</span>
-              <span class="donut__sub">OCUPADO</span>
-            </div>
-          </div>
-          <div class="ocupacion__stats">
-            <div class="ocupacion__stat"><span class="ocupacion__numero">45</span><span class="ocupacion__desc">Camas Ocupadas</span></div>
-            <div class="ocupacion__stat"><span class="ocupacion__numero">10</span><span class="ocupacion__desc">Camas Libres</span></div>
-          </div>
-        </div>
+<div class="dash__ocupacion-card">
+  <h3 class="bloque__titulo"><i class="fa-solid fa-bed"></i> Ocupación</h3>
+  <div class="ocupacion__donut-wrapper">
+    <svg viewBox="0 0 120 120" class="donut__svg">
+      <circle cx="60" cy="60" r="46" fill="none" stroke="#e8e8e8" stroke-width="16"/>
+      <circle cx="60" cy="60" r="46" fill="none" stroke="#1a1a2e" stroke-width="16"
+        stroke-dasharray="289.0" stroke-dashoffset="52.0"
+        stroke-linecap="round" transform="rotate(-90 60 60)"/>
+    </svg>
+    <div class="donut__label">
+      <span class="donut__porcentaje">82%</span>
+      <span class="donut__sub">OCUPADO</span>
+    </div>
+  </div>
+  <div class="ocupacion__stats">
+    <div class="ocupacion__stat">
+      <span class="ocupacion__numero">45</span>
+      <span class="ocupacion__desc">Camas Ocupadas</span>
+    </div>
+    <div class="ocupacion__stat ocupacion__stat--libre">
+      <span class="ocupacion__numero ocupacion__numero--gris">10</span>
+      <span class="ocupacion__desc">Camas Libres</span>
+    </div>
+  </div>
+</div>
         <div class="dash__alertas-card">
           <div class="alertas__header">
             <h3 class="bloque__titulo" style="margin-bottom:0"><i class="fa-solid fa-bell"></i> Alertas Activas</h3>
@@ -127,32 +139,72 @@
         </div>
       </div>
       <div class="dashboard__bottom-grid">
-        <div class="dash__enfermeria-card">
-          <h3 class="bloque__titulo"><i class="fa-solid fa-notes-medical"></i> Observaciones de Enfermería</h3>
-          <div class="enfermeria__lista">
-            <div class="enfermeria__item">
-              <div class="enfermeria__punto enfermeria__punto--activo"></div>
-              <div class="enfermeria__contenido">
-                <div class="enfermeria__meta-row"><span class="enfermeria__hora">HOY, 14:30 · ENFERMERO M. RUIZ</span><div class="enfermeria__barra-verde"></div></div>
-                <p class="enfermeria__texto">"Residente 305 muestra mejoría en la movilidad tras sesión de fisioterapia matutina. Apetito normal durante el almuerzo."</p>
-              </div>
-            </div>
-            <div class="enfermeria__item">
-              <div class="enfermeria__punto enfermeria__punto--inactivo"></div>
-              <div class="enfermeria__contenido">
-                <div class="enfermeria__meta-row"><span class="enfermeria__hora">HOY, 12:15 · ENFERMERA S. COSTA</span></div>
-                <p class="enfermeria__texto">"Administrada cura tópica en extremidad inferior derecha. Sin signos de inflamación. El paciente se encuentra descansando."</p>
-              </div>
-            </div>
-            <div class="enfermeria__item">
-              <div class="enfermeria__punto enfermeria__punto--inactivo"></div>
-              <div class="enfermeria__contenido">
-                <div class="enfermeria__meta-row"><span class="enfermeria__hora">HOY, 09:00 · ENFERMERO M. RUIZ</span></div>
-                <p class="enfermeria__texto">"Cambio de turno sin incidencias reseñables. Se monitoriza hidratación de Hab. 102."</p>
-              </div>
-            </div>
-          </div>
+       <div class="dash__enfermeria-card">
+  <div class="enfermeria__header-row">
+    <h3 class="bloque__titulo" style="margin-bottom:0; border-bottom:none; padding-bottom:0">
+      <i class="fa-solid fa-notes-medical"></i> Observaciones de Enfermería
+    </h3>
+    <button class="enfermeria__filtro-btn"><i class="fa-solid fa-sliders"></i></button>
+  </div>
+  <div class="enfermeria__lista">
+
+    <div class="enfermeria__item">
+      <div class="enfermeria__linea-col">
+        <div class="enfermeria__punto enfermeria__punto--activo"></div>
+        <div class="enfermeria__linea-vert"></div>
+      </div>
+      <div class="enfermeria__contenido">
+        <div class="enfermeria__meta-row">
+          <span class="enfermeria__hora">HOY, 14:30 · ENFERMERO M. RUIZ</span>
+          <span class="enf__badge enf__badge--estable">Estable</span>
         </div>
+        <p class="enfermeria__texto">"Residente 305 muestra mejoría en la movilidad tras sesión de fisioterapia matutina. Apetito normal durante el almuerzo."</p>
+      </div>
+    </div>
+
+    <div class="enfermeria__item">
+      <div class="enfermeria__linea-col">
+        <div class="enfermeria__punto enfermeria__punto--inactivo"></div>
+        <div class="enfermeria__linea-vert"></div>
+      </div>
+      <div class="enfermeria__contenido">
+        <div class="enfermeria__meta-row">
+          <span class="enfermeria__hora">HOY, 12:15 · ENFERMERA S. COSTA</span>
+          <span class="enf__badge enf__badge--supervision">Supervisión</span>
+        </div>
+        <p class="enfermeria__texto">"Administrada cura tópica en extremidad inferior derecha. Sin signos de inflamación. El paciente se encuentra descansando."</p>
+      </div>
+    </div>
+
+    <div class="enfermeria__item">
+      <div class="enfermeria__linea-col">
+        <div class="enfermeria__punto enfermeria__punto--inactivo"></div>
+        <div class="enfermeria__linea-vert"></div>
+      </div>
+      <div class="enfermeria__contenido">
+        <div class="enfermeria__meta-row">
+          <span class="enfermeria__hora">HOY, 09:00 · ENFERMERO M. RUIZ</span>
+          <span class="enf__badge enf__badge--importante">Importante</span>
+        </div>
+        <p class="enfermeria__texto">"Cambio de turno sin incidencias reseñables. Se monitoriza hidratación de Hab. 102."</p>
+      </div>
+    </div>
+
+    <div class="enfermeria__item">
+      <div class="enfermeria__linea-col">
+        <div class="enfermeria__punto enfermeria__punto--inactivo"></div>
+      </div>
+      <div class="enfermeria__contenido">
+        <div class="enfermeria__meta-row">
+          <span class="enfermeria__hora">HOY, 09:00 · ENFERMERO M. RUIZ</span>
+          <span class="enf__badge enf__badge--cambio">Cambio</span>
+        </div>
+        <p class="enfermeria__texto">"Cambio de turno sin incidencias reseñables. Se monitoriza hidratación de Hab. 102."</p>
+      </div>
+    </div>
+
+  </div>
+</div>
         <div class="dash__medicacion-card">
           <h3 class="bloque__titulo"><i class="fa-solid fa-pills"></i> Medicaciones del Turno</h3>
           <div class="medicacion__lista">
@@ -163,6 +215,104 @@
           <button class="medicacion__btn-confirmar"><i class="fa-solid fa-check"></i> Confirmar Administración</button>
         </div>
       </div>
+
+      <div class="dash__siniestralidad-card">
+  <div class="siniestralidad__izquierda">
+    <div class="siniestralidad__titulo-row">
+      <div class="siniestralidad__icono-titulo">
+        <i class="fa-solid fa-triangle-exclamation"></i>
+      </div>
+      <div>
+        <h3 class="siniestralidad__titulo">Orden de Siniestralidad</h3>
+        <p class="siniestralidad__subtitulo">Registro de incidentes detectados en los últimos <strong>129 días</strong></p>
+      </div>
+    </div>
+    <div class="siniestralidad__periodo">
+      <i class="fa-solid fa-calendar-days"></i>
+      <span>Período: <strong>18 Dic, 2025 — 26 Abr, 2026</strong></span>
+    </div>
+  </div>
+
+  <div class="siniestralidad__metricas">
+
+    <div class="siniestralidad__metrica">
+      <div class="siniestralidad__met-icono siniestralidad__met-icono--rojo">
+        <i class="fa-solid fa-person-falling"></i>
+      </div>
+      <div class="siniestralidad__met-info">
+        <span class="siniestralidad__met-numero">3</span>
+        <span class="siniestralidad__met-label">Caídas</span>
+      </div>
+      <span class="siniestralidad__met-badge siniestralidad__met-badge--alto">Alto</span>
+    </div>
+
+    <div class="siniestralidad__metrica">
+      <div class="siniestralidad__met-icono siniestralidad__met-icono--naranja">
+        <i class="fa-solid fa-head-side-virus"></i>
+      </div>
+      <div class="siniestralidad__met-info">
+        <span class="siniestralidad__met-numero">2</span>
+        <span class="siniestralidad__met-label">Desvanecimientos</span>
+      </div>
+      <span class="siniestralidad__met-badge siniestralidad__met-badge--medio">Medio</span>
+    </div>
+
+    <div class="siniestralidad__metrica">
+      <div class="siniestralidad__met-icono siniestralidad__met-icono--rojo">
+        <i class="fa-solid fa-heart-pulse"></i>
+      </div>
+      <div class="siniestralidad__met-info">
+        <span class="siniestralidad__met-numero">1</span>
+        <span class="siniestralidad__met-label">Episodios Cardíacos</span>
+      </div>
+      <span class="siniestralidad__met-badge siniestralidad__met-badge--alto">Crítico</span>
+    </div>
+
+    <div class="siniestralidad__metrica">
+      <div class="siniestralidad__met-icono siniestralidad__met-icono--amarillo">
+        <i class="fa-solid fa-temperature-high"></i>
+      </div>
+      <div class="siniestralidad__met-info">
+        <span class="siniestralidad__met-numero">5</span>
+        <span class="siniestralidad__met-label">Fiebres Registradas</span>
+      </div>
+      <span class="siniestralidad__met-badge siniestralidad__met-badge--medio">Medio</span>
+    </div>
+
+    <div class="siniestralidad__metrica">
+      <div class="siniestralidad__met-icono siniestralidad__met-icono--azul">
+        <i class="fa-solid fa-bed-pulse"></i>
+      </div>
+      <div class="siniestralidad__met-info">
+        <span class="siniestralidad__met-numero">2</span>
+        <span class="siniestralidad__met-label">Hospitalizaciones</span>
+      </div>
+      <span class="siniestralidad__met-badge siniestralidad__met-badge--bajo">Bajo</span>
+    </div>
+
+    <div class="siniestralidad__metrica">
+      <div class="siniestralidad__met-icono siniestralidad__met-icono--gris">
+        <i class="fa-solid fa-circle-exclamation"></i>
+      </div>
+      <div class="siniestralidad__met-info">
+        <span class="siniestralidad__met-numero">4</span>
+        <span class="siniestralidad__met-label">Otras Alertas</span>
+      </div>
+      <span class="siniestralidad__met-badge siniestralidad__met-badge--bajo">Bajo</span>
+    </div>
+
+  </div>
+
+  <div class="siniestralidad__derecha">
+    <p class="siniestralidad__total-label">TOTAL INCIDENTES</p>
+    <span class="siniestralidad__total-numero">17</span>
+    <p class="siniestralidad__total-sub">en 129 días</p>
+    <div class="siniestralidad__indice">
+      <span class="siniestralidad__indice-label">Índice de riesgo</span>
+      <span class="siniestralidad__indice-valor siniestralidad__indice--medio">MEDIO</span>
+    </div>
+  </div>
+</div>
     </div>
 
     <!-- ==================
@@ -202,12 +352,41 @@
          RESIDENTES
     =================== -->
     <div class="portal__contenido" *ngIf="seccionActiva === 'residentes'">
+      <div class="residentes__resumen-grid">
+  <div class="residentes__resumen-card residentes__resumen-card--azul">
+    <div class="residentes__resumen-info">
+      <span class="residentes__resumen-label">EN RESIDENCIA</span>
+      <span class="residentes__resumen-desc">Residentes en el centro</span>
+    </div>
+    <div class="residentes__resumen-numero residentes__resumen-numero--azul">
+      {{ residentes.length - residentesFuera }}
+    </div>
+  </div>
+  <div class="residentes__resumen-card residentes__resumen-card--amarillo">
+    <div class="residentes__resumen-info">
+      <span class="residentes__resumen-label">FUERA DE LA RESIDENCIA</span>
+      <span class="residentes__resumen-desc">Residentes fuera del centro</span>
+    </div>
+    <div class="residentes__resumen-numero residentes__resumen-numero--amarillo">
+      {{ residentesFuera }}
+    </div>
+  </div>
+  <div class="residentes__resumen-card residentes__resumen-card--oscuro">
+    <div class="residentes__resumen-info">
+      <span class="residentes__resumen-label">TOTAL</span>
+      <span class="residentes__resumen-desc">Residentes registrados</span>
+    </div>
+    <div class="residentes__resumen-numero residentes__resumen-numero--oscuro">
+      {{ residentes.length }}
+    </div>
+  </div>
+</div>
       <div class="seccion__toolbar">
         <div class="busqueda__wrapper"><i class="fa-solid fa-magnifying-glass"></i><input type="text" class="busqueda__input" placeholder="Buscar residente..." [(ngModel)]="busquedaResidente" /></div>
         <button class="btn__nuevo" (click)="abrirModalResidente()"><i class="fa-solid fa-plus"></i> Nuevo Residente</button>
       </div>
       <div class="residentes__grid">
-        <div class="residente__card" *ngFor="let r of residentesFiltrados" (click)="abrirFichaResidente(r)">
+        <div class="residente__card" *ngFor="let r of residentesFiltrados" (click)="abrirDetalleResidente(r, $event)">
           <div class="residente__card-foto"><img *ngIf="r.foto" [src]="r.foto" [alt]="r.nombre" /><i class="fa-solid fa-user" *ngIf="!r.foto"></i></div>
           <div class="residente__card-info">
             <h3 class="residente__nombre">{{ r.nombre }}</h3>
@@ -217,7 +396,7 @@
           </div>
           <div class="residente__card-acciones">
             <button class="btn__accion btn__accion--ver" (click)="abrirFichaResidente(r); $event.stopPropagation()" title="Ver ficha rápida"><i class="fa-solid fa-eye"></i></button>
-            <button class="btn__accion btn__accion--editar" (click)="abrirDetalleResidente(r, $event)" title="Ver detalle completo"><i class="fa-solid fa-pen"></i></button>
+            <!-- <button class="btn__accion btn__accion--editar" (click)="abrirDetalleResidente(r, $event)" title="Ver detalle completo"><i class="fa-solid fa-pen"></i></button> -->
           </div>
         </div>
       </div>
@@ -1011,6 +1190,8 @@
 =========================================== -->
 <div class="ficha__overlay" *ngIf="residenteActivo" (click)="cerrarFichaResidente()">
   <div class="ficha__panel" (click)="$event.stopPropagation()">
+
+    <!-- HEADER -->
     <div class="ficha__panel-header">
       <div class="ficha__panel-perfil">
         <div class="ficha__panel-foto" (click)="triggerFotoResidente()">
@@ -1023,75 +1204,387 @@
           <h2 class="ficha__panel-nombre">{{ residenteActivo.nombre }}</h2>
           <div class="ficha__panel-meta">
             <span><i class="fa-solid fa-door-open"></i> Hab. {{ residenteActivo.habitacion }}</span>
-            <span><i class="fa-solid fa-cake-candles"></i> {{ residenteActivo.edad }} años</span>
-            <span class="estado__badge" [class.estado--estable]="residenteActivo.estado==='estable'" [class.estado--atencion]="residenteActivo.estado==='atencion'" [class.estado--critico]="residenteActivo.estado==='critico'"><i class="fa-solid fa-circle"></i> {{ residenteActivo.estado }}</span>
+            <span><i class="fa-solid fa-cake-candles"></i> {{ residenteActivo.fechaNacimiento || '—' }}</span>
+            <span class="estado__badge"
+              [class.estado--estable]="residenteActivo.estado==='estable'"
+              [class.estado--atencion]="residenteActivo.estado==='atencion'"
+              [class.estado--critico]="residenteActivo.estado==='critico'">
+              <i class="fa-solid fa-circle"></i> {{ residenteActivo.estado }}
+            </span>
           </div>
         </div>
       </div>
       <button class="ficha__panel-close" (click)="cerrarFichaResidente()"><i class="fa-solid fa-xmark"></i></button>
     </div>
+
+    <!-- TABS -->
     <div class="ficha__tabs">
       <button class="ficha__tab" [class.activo]="fichaTab==='info'" (click)="fichaTab='info'"><i class="fa-solid fa-circle-info"></i> Info General</button>
+      <button class="ficha__tab" [class.activo]="fichaTab==='medicacion'" (click)="fichaTab='medicacion'"><i class="fa-solid fa-pills"></i> Medicación</button>
+      <button class="ficha__tab" [class.activo]="fichaTab==='examenes'" (click)="fichaTab='examenes'"><i class="fa-solid fa-flask"></i> Exámenes</button>
       <button class="ficha__tab" [class.activo]="fichaTab==='emergencia'" (click)="fichaTab='emergencia'"><i class="fa-solid fa-triangle-exclamation"></i> Emergencia</button>
       <button class="ficha__tab" [class.activo]="fichaTab==='documentos'" (click)="fichaTab='documentos'"><i class="fa-solid fa-folder-open"></i> Documentos</button>
       <button class="ficha__tab" [class.activo]="fichaTab==='gastos'" (click)="fichaTab='gastos'"><i class="fa-solid fa-wallet"></i> Gastos</button>
     </div>
+
+    <!-- ===== TAB INFO GENERAL ===== -->
     <div class="ficha__tab-content" *ngIf="fichaTab==='info'">
       <div class="info__grid">
         <div class="info__bloque">
           <h4 class="info__bloque-titulo"><i class="fa-solid fa-user"></i> Datos Personales</h4>
           <div class="info__campos">
             <div class="info__campo"><label>Nombre completo</label><input type="text" class="form__input" [(ngModel)]="residenteActivo.nombre" /></div>
-            <div class="info__campo"><label>Edad</label><input type="number" class="form__input" [(ngModel)]="residenteActivo.edad" /></div>
-            <div class="info__campo"><label>Habitación</label><input type="text" class="form__input" [(ngModel)]="residenteActivo.habitacion" /></div>
+            <div class="info__campo"><label>DNI / Documento</label><input type="text" class="form__input" [(ngModel)]="residenteActivo.dni" /></div>
+            <div class="info__campo"><label>Fecha de Nacimiento</label><input type="text" class="form__input" [(ngModel)]="residenteActivo.fechaNacimiento" placeholder="DD/MM/AAAA" /></div>
             <div class="info__campo"><label>Fecha de Ingreso</label><input type="text" class="form__input" [(ngModel)]="residenteActivo.fechaIngreso" /></div>
             <div class="info__campo"><label>Médico Tratante</label><input type="text" class="form__input" [(ngModel)]="residenteActivo.medico" /></div>
             <div class="info__campo"><label>Familiar Responsable</label><input type="text" class="form__input" [(ngModel)]="residenteActivo.familiar" /></div>
-            <div class="info__campo info__campo--full"><label>Diagnóstico</label><input type="text" class="form__input" [(ngModel)]="residenteActivo.diagnostico" /></div>
-            <div class="info__campo"><label>Estado</label><select class="form__input form__select" [(ngModel)]="residenteActivo.estado"><option value="estable">Estable</option><option value="atencion">En Atención</option><option value="critico">Crítico</option></select></div>
+            <div class="info__campo info__campo--full">
+              <label>Diagnóstico</label>
+              <textarea class="form__input form__textarea" [(ngModel)]="residenteActivo.diagnostico" rows="3" placeholder="Describe el diagnóstico del residente..."></textarea>
+            </div>
           </div>
           <button class="btn__guardar btn__guardar--sm" (click)="guardarInfoResidente()"><i class="fa-solid fa-save"></i> Guardar cambios</button>
         </div>
       </div>
     </div>
+
+    <!-- ===== TAB MEDICACIÓN ===== -->
+    <div class="ficha__tab-content" *ngIf="fichaTab==='medicacion'">
+
+      <div class="fmed__export-row">
+        <button class="fmed__export-btn" (click)="exportarMedicacionPDF()">
+          <i class="fa-solid fa-file-pdf"></i> Exportar PDF
+        </button>
+      </div>
+
+      <!-- Medicación Diaria -->
+      <div class="fmed__bloque">
+        <div class="fmed__bloque-header fmed__bloque-header--diaria">
+          <i class="fa-solid fa-calendar-day"></i>
+          <h4>Medicación Diaria</h4>
+        </div>
+        <div class="fmed__tabla-wrapper">
+          <table class="fmed__tabla">
+            <thead>
+              <tr>
+                <th>HORA</th>
+                <th>MEDICAMENTO</th>
+                <th>DOSIS</th>
+                <th>ESTADO</th>
+                <th>OBSERVACIÓN</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td class="fmed__hora">08:00</td>
+                <td>
+                  <p class="fmed__med-nombre">Enalapril 10mg</p>
+                  <p class="fmed__med-tipo">ANTIHIPERTENSIVO</p>
+                </td>
+                <td class="fmed__dosis">10 mg</td>
+                <td><span class="fmed__estado fmed__estado--ok"><i class="fa-solid fa-circle-check"></i> Suministrado</span></td>
+                <td class="fmed__obs">Sin observaciones</td>
+              </tr>
+              <tr>
+                <td class="fmed__hora">10:00</td>
+                <td>
+                  <p class="fmed__med-nombre">Vitamina D3</p>
+                  <p class="fmed__med-tipo">SUPLEMENTO</p>
+                </td>
+                <td class="fmed__dosis">2000 UI</td>
+                <td><span class="fmed__estado fmed__estado--err"><i class="fa-solid fa-circle-xmark"></i> Omitido</span></td>
+                <td class="fmed__obs fmed__obs--alerta">Rechazo por náuseas</td>
+              </tr>
+              <tr>
+                <td class="fmed__hora">14:00</td>
+                <td>
+                  <p class="fmed__med-nombre">Enalapril 5mg</p>
+                  <p class="fmed__med-tipo">CONTROL PRESIÓN</p>
+                </td>
+                <td class="fmed__dosis">10 mg</td>
+                <td><span class="fmed__estado fmed__estado--pend"><i class="fa-solid fa-clock"></i> Pendiente</span></td>
+                <td class="fmed__obs">—</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- Condicionales SOS -->
+      <div class="fmed__bloque" style="margin-top:1.2rem">
+        <div class="fmed__bloque-header fmed__bloque-header--sos">
+          <i class="fa-solid fa-bolt"></i>
+          <h4>Condicionales (SOS)</h4>
+        </div>
+        <div class="fmed__sos-lista">
+          <div class="fmed__sos-item">
+            <div class="fmed__sos-info">
+              <p class="fmed__med-nombre">Paracetamol</p>
+              <p class="fmed__med-tipo">ANALGÉSICO</p>
+            </div>
+            <div class="fmed__sos-dosis">
+              <span class="fmed__sos-dosis-label">DOSIS MÁX.</span>
+              <span>3g / 24h</span>
+            </div>
+            <div class="fmed__sos-condicion">
+              <span class="fmed__sos-dosis-label">MOTIVO/CONDICIÓN</span>
+              <span>Fiebre > 38°C o Cefalea fuerte</span>
+            </div>
+            <div class="fmed__sos-ultima">
+              <span class="fmed__sos-dosis-label">ÚLTIMA TOMA</span>
+              <span>Ayer, 21:30</span>
+            </div>
+            <button class="fmed__sos-btn">REGISTRAR TOMA</button>
+          </div>
+          <div class="fmed__sos-item">
+            <div class="fmed__sos-info">
+              <p class="fmed__med-nombre">Loperamida</p>
+              <p class="fmed__med-tipo">ANTIDIARREICO</p>
+            </div>
+            <div class="fmed__sos-dosis">
+              <span class="fmed__sos-dosis-label">DOSIS MÁX.</span>
+              <span>2 cápsulas</span>
+            </div>
+            <div class="fmed__sos-condicion">
+              <span class="fmed__sos-dosis-label">MOTIVO/CONDICIÓN</span>
+              <span>Episodio diarreico</span>
+            </div>
+            <div class="fmed__sos-ultima">
+              <span class="fmed__sos-dosis-label">ÚLTIMA TOMA</span>
+              <span>Hace 3 días</span>
+            </div>
+            <button class="fmed__sos-btn">REGISTRAR TOMA</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Alergias -->
+      <div class="fmed__alergias-row">
+        <i class="fa-solid fa-triangle-exclamation"></i>
+        <span class="fmed__alergias-label">ALERGIAS CONOCIDAS:</span>
+        <span class="fmed__alergias-valor">{{ residenteActivo.fichaEmergencia.alergias || 'Ninguna registrada' }}</span>
+      </div>
+
+    </div>
+
+    <!-- ===== TAB EXÁMENES ===== -->
+    <div class="ficha__tab-content" *ngIf="fichaTab==='examenes'">
+      <div class="fexam__header">
+        <div class="fexam__toggle">
+          <button class="fexam__toggle-btn fexam__toggle-btn--activo">RECIENTES</button>
+          <button class="fexam__toggle-btn">ANUALES</button>
+        </div>
+        <label class="btn__nuevo btn__nuevo--sm btn__nuevo--label">
+          <i class="fa-solid fa-upload"></i> Subir Examen
+          <input type="file" accept=".pdf" style="display:none" />
+        </label>
+      </div>
+      <div class="fexam__lista">
+        <div class="fexam__item">
+          <div class="fexam__item-izq">
+            <div class="fexam__icono fexam__icono--azul"><i class="fa-solid fa-droplet"></i></div>
+            <div class="fexam__item-info">
+              <p class="fexam__nombre">Análisis de Sangre Completo</p>
+              <p class="fexam__meta">Dr. Alejandro Méndez · Laboratorio Central</p>
+            </div>
+          </div>
+          <div class="fexam__item-der">
+            <span class="fexam__fecha">12 OCT 2023</span>
+            <div class="fexam__acciones">
+              <button class="btn__accion btn__accion--editar" title="Ver"><i class="fa-solid fa-eye"></i></button>
+              <button class="btn__accion btn__accion--eliminar" title="Eliminar"><i class="fa-solid fa-trash"></i></button>
+            </div>
+          </div>
+        </div>
+        <div class="fexam__item">
+          <div class="fexam__item-izq">
+            <div class="fexam__icono fexam__icono--gris"><i class="fa-solid fa-lungs"></i></div>
+            <div class="fexam__item-info">
+              <p class="fexam__nombre">Radiografía de Tórax</p>
+              <p class="fexam__meta">Dra. Beatriz Soler · Unidad de Imagenología</p>
+            </div>
+          </div>
+          <div class="fexam__item-der">
+            <span class="fexam__fecha">28 SEP 2023</span>
+            <div class="fexam__acciones">
+              <button class="btn__accion btn__accion--editar" title="Ver"><i class="fa-solid fa-eye"></i></button>
+              <button class="btn__accion btn__accion--eliminar" title="Eliminar"><i class="fa-solid fa-trash"></i></button>
+            </div>
+          </div>
+        </div>
+        <div class="fexam__item">
+          <div class="fexam__item-izq">
+            <div class="fexam__icono fexam__icono--rojo"><i class="fa-solid fa-heart-pulse"></i></div>
+            <div class="fexam__item-info">
+              <p class="fexam__nombre">Electrocardiograma (EKG)</p>
+              <p class="fexam__meta">Dr. Ricardo Valls · Cardiología Preventiva</p>
+            </div>
+          </div>
+          <div class="fexam__item-der">
+            <span class="fexam__fecha">15 AGO 2023</span>
+            <div class="fexam__acciones">
+              <button class="btn__accion btn__accion--editar" title="Ver"><i class="fa-solid fa-eye"></i></button>
+              <button class="btn__accion btn__accion--eliminar" title="Eliminar"><i class="fa-solid fa-trash"></i></button>
+            </div>
+          </div>
+        </div>
+        <div class="fexam__item">
+          <div class="fexam__item-izq">
+            <div class="fexam__icono fexam__icono--verde"><i class="fa-solid fa-brain"></i></div>
+            <div class="fexam__item-info">
+              <p class="fexam__nombre">Evaluación Cognitiva</p>
+              <p class="fexam__meta">Dra. Carmen Vásquez · Neurología</p>
+            </div>
+          </div>
+          <div class="fexam__item-der">
+            <span class="fexam__fecha">02 JUL 2023</span>
+            <div class="fexam__acciones">
+              <button class="btn__accion btn__accion--editar" title="Ver"><i class="fa-solid fa-eye"></i></button>
+              <button class="btn__accion btn__accion--eliminar" title="Eliminar"><i class="fa-solid fa-trash"></i></button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ===== TAB EMERGENCIA ===== -->
     <div class="ficha__tab-content" *ngIf="fichaTab==='emergencia'">
+      <div class="femerg__export-row">
+        <button class="fmed__export-btn" (click)="exportarEmergenciaPDF()">
+          <i class="fa-solid fa-file-pdf"></i> Descargar Ficha de Emergencia
+        </button>
+      </div>
       <div class="emergencia__grid">
         <div class="emergencia__bloque">
-          <h4 class="info__bloque-titulo"><i class="fa-solid fa-address-card"></i> Contacto de Emergencia</h4>
-          <div class="info__campos">
-            <div class="info__campo"><label>Nombre Contacto</label><input type="text" class="form__input" [(ngModel)]="residenteActivo.contactoEmergencia.nombre" /></div>
-            <div class="info__campo"><label>Parentesco</label><input type="text" class="form__input" [(ngModel)]="residenteActivo.contactoEmergencia.parentesco" /></div>
+          <h4 class="info__bloque-titulo"><i class="fa-solid fa-address-card"></i> Contacto Principal</h4>
+          <div class="femerg__contacto-card">
+            <div class="femerg__contacto-avatar"><i class="fa-solid fa-user"></i></div>
+            <div class="femerg__contacto-info">
+              <p class="femerg__contacto-nombre">{{ residenteActivo.contactoEmergencia.nombre || '—' }}</p>
+              <p class="femerg__contacto-parentesco">{{ residenteActivo.contactoEmergencia.parentesco || '—' }}</p>
+            </div>
+          </div>
+          <div class="info__campos" style="margin-top:1rem">
             <div class="info__campo"><label>Teléfono Principal</label><input type="text" class="form__input" [(ngModel)]="residenteActivo.contactoEmergencia.telefono" /></div>
             <div class="info__campo"><label>Teléfono Alternativo</label><input type="text" class="form__input" [(ngModel)]="residenteActivo.contactoEmergencia.telefonoAlt" /></div>
             <div class="info__campo info__campo--full"><label>Dirección</label><input type="text" class="form__input" [(ngModel)]="residenteActivo.contactoEmergencia.direccion" /></div>
           </div>
         </div>
         <div class="emergencia__bloque">
-          <h4 class="info__bloque-titulo"><i class="fa-solid fa-kit-medical"></i> Ficha Médica de Emergencia</h4>
+          <h4 class="info__bloque-titulo"><i class="fa-solid fa-kit-medical"></i> Ficha Médica</h4>
           <div class="info__campos">
-            <div class="info__campo"><label>Grupo Sanguíneo</label><select class="form__input form__select" [(ngModel)]="residenteActivo.fichaEmergencia.grupoSanguineo"><option *ngFor="let g of gruposSanguineos" [value]="g">{{ g }}</option></select></div>
-            <div class="info__campo"><label>Factor RH</label><select class="form__input form__select" [(ngModel)]="residenteActivo.fichaEmergencia.factorRH"><option value="+">Positivo (+)</option><option value="-">Negativo (-)</option></select></div>
+            <div class="info__campo"><label>Grupo Sanguíneo</label>
+              <select class="form__input form__select" [(ngModel)]="residenteActivo.fichaEmergencia.grupoSanguineo">
+                <option *ngFor="let g of gruposSanguineos" [value]="g">{{ g }}</option>
+              </select>
+            </div>
+            <div class="info__campo"><label>Factor RH</label>
+              <select class="form__input form__select" [(ngModel)]="residenteActivo.fichaEmergencia.factorRH">
+                <option value="+">Positivo (+)</option>
+                <option value="-">Negativo (-)</option>
+              </select>
+            </div>
             <div class="info__campo info__campo--full"><label>Alergias conocidas</label><input type="text" class="form__input" [(ngModel)]="residenteActivo.fichaEmergencia.alergias" /></div>
             <div class="info__campo info__campo--full"><label>Enfermedades crónicas</label><input type="text" class="form__input" [(ngModel)]="residenteActivo.fichaEmergencia.enfermedadesCronicas" /></div>
             <div class="info__campo info__campo--full"><label>Medicamentos permanentes</label><textarea class="form__input form__textarea" [(ngModel)]="residenteActivo.fichaEmergencia.medicamentosPermanentes"></textarea></div>
             <div class="info__campo info__campo--full"><label>Instrucciones especiales</label><textarea class="form__input form__textarea" [(ngModel)]="residenteActivo.fichaEmergencia.instrucciones"></textarea></div>
           </div>
-          <button class="btn__guardar btn__guardar--sm" (click)="guardarEmergencia()"><i class="fa-solid fa-save"></i> Guardar ficha de emergencia</button>
+          <button class="btn__guardar btn__guardar--sm" (click)="guardarEmergencia()"><i class="fa-solid fa-save"></i> Guardar ficha</button>
         </div>
       </div>
     </div>
+
+    <!-- ===== TAB DOCUMENTOS ===== -->
     <div class="ficha__tab-content" *ngIf="fichaTab==='documentos'">
-      <div class="docs__toolbar"><label class="btn__nuevo btn__nuevo--label"><i class="fa-solid fa-upload"></i> Subir Documento<input type="file" accept=".pdf,.doc,.docx,.jpg,.jpeg,.png" (change)="onDocumentoChange($event)" style="display:none" /></label></div>
+
+      <!-- DNI ambas caras -->
+      <div class="fdoc__dni-section">
+        <h4 class="info__bloque-titulo"><i class="fa-solid fa-id-card"></i> DNI del Residente</h4>
+        <div class="fdoc__dni-grid">
+          <div class="fdoc__dni-card">
+            <div class="fdoc__dni-preview">
+              <i class="fa-solid fa-id-card"></i>
+              <span>Anverso (Frente)</span>
+            </div>
+            <div class="fdoc__dni-acciones">
+              <button class="btn__accion btn__accion--editar" title="Ver"><i class="fa-solid fa-eye"></i></button>
+              <button class="btn__accion btn__accion--eliminar" title="Eliminar"><i class="fa-solid fa-trash"></i></button>
+            </div>
+            <label class="fdoc__dni-subir">
+              <i class="fa-solid fa-upload"></i> Subir anverso
+              <input type="file" accept="image/*,.pdf" style="display:none" />
+            </label>
+          </div>
+          <div class="fdoc__dni-card">
+            <div class="fdoc__dni-preview">
+              <i class="fa-solid fa-id-card"></i>
+              <span>Reverso (Dorso)</span>
+            </div>
+            <div class="fdoc__dni-acciones">
+              <button class="btn__accion btn__accion--editar" title="Ver"><i class="fa-solid fa-eye"></i></button>
+              <button class="btn__accion btn__accion--eliminar" title="Eliminar"><i class="fa-solid fa-trash"></i></button>
+            </div>
+            <label class="fdoc__dni-subir">
+              <i class="fa-solid fa-upload"></i> Subir reverso
+              <input type="file" accept="image/*,.pdf" style="display:none" />
+            </label>
+          </div>
+        </div>
+      </div>
+
+      <!-- Otros documentos -->
+      <div class="fdoc__otros-header">
+        <h4 class="info__bloque-titulo" style="margin-bottom:0; border-bottom:none; padding-bottom:0"><i class="fa-solid fa-folder-open"></i> Otros Documentos</h4>
+        <label class="btn__nuevo btn__nuevo--sm btn__nuevo--label">
+          <i class="fa-solid fa-upload"></i> Subir Documento
+          <input type="file" accept=".pdf,.doc,.docx,.jpg,.jpeg,.png" (change)="onDocumentoChange($event)" style="display:none" />
+        </label>
+      </div>
+
       <div class="docs__lista" *ngIf="documentosDe(residenteActivo.id).length > 0">
         <div class="doc__item" *ngFor="let doc of documentosDe(residenteActivo.id)">
-          <div class="doc__icono" [class.doc__icono--pdf]="doc.tipo==='pdf'" [class.doc__icono--img]="doc.tipo==='imagen'" [class.doc__icono--doc]="doc.tipo==='doc'"><i class="fa-solid fa-file-pdf" *ngIf="doc.tipo==='pdf'"></i><i class="fa-solid fa-file-image" *ngIf="doc.tipo==='imagen'"></i><i class="fa-solid fa-file-word" *ngIf="doc.tipo==='doc'"></i></div>
-          <div class="doc__info"><p class="doc__nombre">{{ doc.nombre }}</p><p class="doc__meta">{{ doc.tamano }} · Subido {{ doc.fecha }}</p></div>
-          <div class="doc__acciones"><a [href]="doc.url" target="_blank" class="btn__accion btn__accion--editar" title="Ver"><i class="fa-solid fa-eye"></i></a><button class="btn__accion btn__accion--eliminar" (click)="eliminarDocumento(doc)"><i class="fa-solid fa-trash"></i></button></div>
+          <div class="doc__icono" [class.doc__icono--pdf]="doc.tipo==='pdf'" [class.doc__icono--img]="doc.tipo==='imagen'" [class.doc__icono--doc]="doc.tipo==='doc'">
+            <i class="fa-solid fa-file-pdf" *ngIf="doc.tipo==='pdf'"></i>
+            <i class="fa-solid fa-file-image" *ngIf="doc.tipo==='imagen'"></i>
+            <i class="fa-solid fa-file-word" *ngIf="doc.tipo==='doc'"></i>
+          </div>
+          <div class="doc__info">
+            <p class="doc__nombre">{{ doc.nombre }}</p>
+            <p class="doc__meta">{{ doc.tamano }} · Subido {{ doc.fecha }}</p>
+          </div>
+          <div class="doc__acciones">
+            <a [href]="doc.url" target="_blank" class="btn__accion btn__accion--editar" title="Ver"><i class="fa-solid fa-eye"></i></a>
+            <button class="btn__accion btn__accion--eliminar" (click)="eliminarDocumento(doc)"><i class="fa-solid fa-trash"></i></button>
+          </div>
         </div>
       </div>
-      <div class="ficha__vacio" *ngIf="documentosDe(residenteActivo.id).length === 0"><i class="fa-solid fa-folder-open"></i><p>No hay documentos cargados para este residente</p></div>
+      <div class="ficha__vacio" *ngIf="documentosDe(residenteActivo.id).length === 0">
+        <i class="fa-solid fa-folder-open"></i>
+        <p>No hay documentos cargados</p>
+      </div>
     </div>
+
+    <!-- ===== TAB GASTOS ===== -->
     <div class="ficha__tab-content" *ngIf="fichaTab==='gastos'">
+
+      <!-- Saldo del mes -->
+      <div class="fgas__saldo-row">
+        <div class="fgas__saldo-card fgas__saldo-card--ingreso">
+          <span class="fgas__saldo-label">INGRESOS DEL MES</span>
+          <span class="fgas__saldo-valor fgas__saldo-valor--verde">+ S/ 700.00</span>
+        </div>
+        <div class="fgas__saldo-card fgas__saldo-card--gasto">
+          <span class="fgas__saldo-label">GASTOS DEL MES</span>
+          <span class="fgas__saldo-valor fgas__saldo-valor--rojo">- S/ 73.50</span>
+        </div>
+        <div class="fgas__saldo-card fgas__saldo-card--balance">
+          <span class="fgas__saldo-label">SALDO DISPONIBLE DEL MES</span>
+          <span class="fgas__saldo-valor fgas__saldo-valor--azul">S/ 626.50</span>
+        </div>
+      </div>
+
+      <!-- Acciones -->
       <div class="gastos__header">
         <div class="gastos__acciones">
           <button class="btn__nuevo" (click)="abrirModalGasto('ingreso')"><i class="fa-solid fa-plus"></i> Registrar Ingreso</button>
@@ -1099,23 +1592,54 @@
           <button class="btn__nuevo btn__nuevo--pdf" (click)="exportarGastosPDF()"><i class="fa-solid fa-file-pdf"></i> Descargar PDF</button>
         </div>
       </div>
+
+      <!-- Tabla -->
       <div class="tabla__wrapper" *ngIf="gastosDe(residenteActivo.id).length > 0">
         <table class="tabla">
-          <thead><tr><th>Tipo</th><th>Descripción</th><th>Categoría</th><th>Monto</th><th>Fecha</th><th>Registrado por</th></tr></thead>
+          <thead>
+            <tr>
+              <th>Fecha</th>
+              <th>Tipo</th>
+              <th>Descripción</th>
+              <th>Categoría</th>
+              <th>Monto</th>
+              <th>Estado</th>
+            </tr>
+          </thead>
           <tbody>
-            <tr *ngFor="let g of gastosDe(residenteActivo.id)" [class.fila--ingreso]="g.tipo==='ingreso'" [class.fila--gasto]="g.tipo==='gasto'">
-              <td><span class="tipo__badge" [class.tipo--ingreso]="g.tipo==='ingreso'" [class.tipo--gasto]="g.tipo==='gasto'"><i class="fa-solid fa-arrow-down" *ngIf="g.tipo==='ingreso'"></i><i class="fa-solid fa-arrow-up" *ngIf="g.tipo==='gasto'"></i>{{ g.tipo | titlecase }}</span></td>
+            <tr *ngFor="let g of gastosDe(residenteActivo.id)"
+              [class.fila--ingreso]="g.tipo==='ingreso'"
+              [class.fila--gasto]="g.tipo==='gasto'">
+              <td class="td__fecha">{{ g.fecha }}</td>
+              <td>
+                <span class="tipo__badge"
+                  [class.tipo--ingreso]="g.tipo==='ingreso'"
+                  [class.tipo--gasto]="g.tipo==='gasto'">
+                  <i class="fa-solid fa-arrow-down" *ngIf="g.tipo==='ingreso'"></i>
+                  <i class="fa-solid fa-arrow-up" *ngIf="g.tipo==='gasto'"></i>
+                  {{ g.tipo | titlecase }}
+                </span>
+              </td>
               <td>{{ g.descripcion }}</td>
               <td><span class="badge__categoria">{{ g.categoria }}</span></td>
-              <td class="td__monto" [class.monto--ingreso]="g.tipo==='ingreso'" [class.monto--gasto]="g.tipo==='gasto'">{{ g.tipo === 'ingreso' ? '+' : '-' }} S/ {{ g.monto | number:'1.2-2' }}</td>
-              <td class="td__fecha">{{ g.fecha }}</td>
-              <td class="td__fecha">{{ g.registradoPor }}</td>
+              <td class="td__monto"
+                [class.monto--ingreso]="g.tipo==='ingreso'"
+                [class.monto--gasto]="g.tipo==='gasto'">
+                {{ g.tipo === 'ingreso' ? '+' : '-' }} S/ {{ g.monto | number:'1.2-2' }}
+              </td>
+              <td>
+                <span class="fgas__estado-badge fgas__estado-badge--ok">Abonado</span>
+              </td>
             </tr>
           </tbody>
         </table>
       </div>
-      <div class="ficha__vacio" *ngIf="gastosDe(residenteActivo.id).length === 0"><i class="fa-solid fa-wallet"></i><p>No hay movimientos registrados para este residente</p></div>
+      <div class="ficha__vacio" *ngIf="gastosDe(residenteActivo.id).length === 0">
+        <i class="fa-solid fa-wallet"></i>
+        <p>No hay movimientos registrados</p>
+      </div>
     </div>
+
   </div>
 </div>
 
