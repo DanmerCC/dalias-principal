@@ -76,7 +76,8 @@ export class CmsService {
 
   // ---- Mapeos Payload → modelo de vista ----
 
-  private mapActividad(d: any): Actividad {
+  // Público: lo usa Live Preview para mapear el doc editado en vivo.
+  mapActividad(d: any): Actividad {
     return {
       id: d?.id,
       titulo: d?.titulo ?? '',
