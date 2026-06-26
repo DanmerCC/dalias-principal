@@ -1,0 +1,18 @@
+:4001 {
+	encode gzip
+
+	# API del CMS (Payload) en el mismo origen: evita CORS y no expone la API cross-origin.
+	handle /api/* {
+		reverse_proxy 127.0.0.1:4000 {
+			lb_try_duration 3s
+			lb_try_interval 250ms
+		}
+	}
+
+	# Estáticos del SPA Angular con fallback a index.html (rutas del router).
+	handle {
+		root * /opt/dalias-landing/app
+		try_files {path} /index.html
+		file_server
+	}
+}
