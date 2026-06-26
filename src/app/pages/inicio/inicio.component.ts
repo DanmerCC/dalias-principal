@@ -18,6 +18,8 @@ import { trigger, transition, style, animate } from '@angular/animations';
 import { FormsModule } from '@angular/forms';
 import { Router, RouterLink } from '@angular/router';
 import { AgendarVisitaModalComponent } from '../../components/agendar-visita-modal/agendar-visita-modal.component';
+import { CmsService } from '../../services/cms.service';
+import { environment } from '../../../environments/environment';
 
 interface AcordeonItem {
   id: number;
@@ -145,6 +147,7 @@ export class InicioComponent implements OnInit, OnDestroy {
     @Inject(PLATFORM_ID) private platformId: Object,
     private http: HttpClient,
     private router: Router,
+    private cms: CmsService,
   ) {}
 
   navegarAPlan(plan: string): void {
@@ -389,21 +392,10 @@ export class InicioComponent implements OnInit, OnDestroy {
   }
 
   cargarActividades(): void {
-    this.http
-      .get<Actividad[]>('https://backend-dalias.onrender.com/actividades')
-      .subscribe({
-        next: (response) => {
-          this.actividades = response.map((actividad) => ({
-            ...actividad,
-            fecha: actividad.subtitulo,
-          })) as any;
-          console.log('Actividades cargadas:', this.actividades);
-        },
-        error: (error) => {
-          console.error('Error al cargar actividades:', error);
-          this.actividades = [];
-        },
-      });
+    // Fuente única: CMS (Payload). El servicio ya mapea y tolera errores (devuelve []).
+    this.cms.getActividades().subscribe((acts) => {
+      this.actividades = acts as any;
+    });
   }
 
   ngOnDestroy(): void {
@@ -596,7 +588,7 @@ export class InicioComponent implements OnInit, OnDestroy {
     const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
 
     this.http
-      .post('https://backend-dalias.onrender.com/contacto', payload, {
+      .post(`${environment.apiUrl}/contacto`, payload, {
         headers,
       })
       .subscribe({
