@@ -7,6 +7,7 @@ import {
   OnDestroy,
   ViewChild,
   ElementRef,
+  NgZone,
 } from '@angular/core';
 import {
   HttpClient,
@@ -20,6 +21,7 @@ import { Router, RouterLink } from '@angular/router';
 import { AgendarVisitaModalComponent } from '../../components/agendar-visita-modal/agendar-visita-modal.component';
 import { CmsService } from '../../services/cms.service';
 import { environment } from '../../../environments/environment';
+import { subscribe, unsubscribe, ready } from '@payloadcms/live-preview';
 
 interface AcordeonItem {
   id: number;
@@ -143,11 +145,15 @@ export class InicioComponent implements OnInit, OnDestroy {
     return [...this.actividades, { final: true }];
   }
 
+  // Handler de la suscripción de Live Preview (para desuscribir en destroy).
+  private livePreviewUnsub?: (event: MessageEvent) => void;
+
   constructor(
     @Inject(PLATFORM_ID) private platformId: Object,
     private http: HttpClient,
     private router: Router,
     private cms: CmsService,
+    private ngZone: NgZone,
   ) {}
 
   navegarAPlan(plan: string): void {
@@ -389,6 +395,7 @@ export class InicioComponent implements OnInit, OnDestroy {
     this.inicializarNoticias();
     this.precargarImagenes();
     this.cargarActividades();
+    this.initLivePreview();
   }
 
   cargarActividades(): void {
@@ -398,8 +405,49 @@ export class InicioComponent implements OnInit, OnDestroy {
     });
   }
 
+  // Live Preview de Payload: solo se activa dentro del iframe del admin. Recibe el
+  // documento de actividad editado por postMessage y lo inyecta en el carrusel, en vivo.
+  private initLivePreview(): void {
+    if (!isPlatformBrowser(this.platformId)) return;
+    if (window.self === window.top) return; // solo dentro del iframe del admin
+    const serverURL = environment.cmsUrl || 'http://localhost:3000';
+    this.livePreviewUnsub = subscribe({
+      serverURL,
+      depth: 1,
+      initialData: {} as any,
+      // Fusión del lado CLIENTE: el app es de otro origen que el CMS, así que el fetch
+      // por defecto de mergeData (a /api) lo bloquearía por CORS. Los datos del
+      // formulario ya vienen en el postMessage, así que los devolvemos tal cual.
+      requestHandler: (args: any) =>
+        Promise.resolve({ json: async () => args?.data?.data ?? {} }) as any,
+      callback: (doc: any) =>
+        this.ngZone.run(() => this.upsertActividadPreview(doc)),
+    });
+    ready({ serverURL });
+  }
+
+  private upsertActividadPreview(doc: any): void {
+    if (!doc || !doc.id || !doc.titulo) return;
+    const mapped = this.cms.mapActividad(doc) as any;
+    const idx = this.actividades.findIndex((a: any) => a.id === doc.id);
+    if (idx >= 0) {
+      // conservar la imagen previa si el preview aún no la trae poblada
+      if (!mapped.imagen && (this.actividades[idx] as any).imagen) {
+        mapped.imagen = (this.actividades[idx] as any).imagen;
+      }
+      this.actividades[idx] = mapped;
+    } else {
+      this.actividades = [mapped, ...this.actividades];
+    }
+    // nueva referencia para forzar el refresco del carrusel
+    this.actividades = [...this.actividades];
+  }
+
   ngOnDestroy(): void {
     this.detenerCarruselNosotros();
+    if (this.livePreviewUnsub) {
+      unsubscribe(this.livePreviewUnsub);
+    }
   }
 
   precargarImagenes(): void {
