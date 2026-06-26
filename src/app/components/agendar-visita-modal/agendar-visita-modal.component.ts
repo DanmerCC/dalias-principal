@@ -7,6 +7,7 @@ import {
 } from '@angular/core';
 import { CommonModule, isPlatformBrowser } from '@angular/common';
 import { FormsModule } from '@angular/forms';
+import { environment } from '../../../environments/environment';
 import {
   HttpClient,
   HttpClientModule,
@@ -515,7 +516,7 @@ export class AgendarVisitaModalComponent {
     const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
 
     this.http
-      .post('https://backend-dalias.onrender.com/visitas/agendar', payload, {
+      .post(`${environment.apiUrl}/visitas/agendar`, payload, {
         headers,
       })
       .subscribe({
@@ -547,7 +548,7 @@ export class AgendarVisitaModalComponent {
   verificarDisponibilidadAPI(fecha: string, hora: string): void {
     this.http
       .get(
-        `https://backend-dalias.onrender.com/visitas/verificar-disponibilidad`,
+        `${environment.apiUrl}/visitas/verificar-disponibilidad`,
         {
           params: { fecha, hora },
         },

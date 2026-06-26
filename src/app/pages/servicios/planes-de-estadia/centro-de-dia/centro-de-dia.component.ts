@@ -1,6 +1,7 @@
 import { Component, PLATFORM_ID, Inject } from '@angular/core';
 import { CommonModule, isPlatformBrowser } from '@angular/common';
 import { Router, RouterLink } from '@angular/router';
+import { environment } from '../../../../../environments/environment';
 import {
   HttpClient,
   HttpClientModule,
@@ -272,7 +273,7 @@ export class CentroDeDiaComponent {
     const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
 
     this.http
-      .post('https://backend-dalias.onrender.com/contacto', payload, {
+      .post(`${environment.apiUrl}/contacto`, payload, {
         headers,
       })
       .subscribe({

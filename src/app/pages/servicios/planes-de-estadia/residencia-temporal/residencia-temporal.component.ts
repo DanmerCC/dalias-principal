@@ -13,6 +13,7 @@ import {
 } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
 import { RouterLink } from '@angular/router';
+import { environment } from '../../../../../environments/environment';
 
 interface ImagenGaleria {
   src: string;
@@ -366,7 +367,7 @@ export class ResidenciaTemporalComponent {
     const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
 
     this.http
-      .post('https://backend-dalias.onrender.com/contacto', payload, {
+      .post(`${environment.apiUrl}/contacto`, payload, {
         headers,
       })
       .subscribe({

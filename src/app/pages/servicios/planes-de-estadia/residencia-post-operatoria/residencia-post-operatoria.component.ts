@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { HttpClient, HttpClientModule, HttpHeaders } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
 import { RouterLink } from '@angular/router';
+import { environment } from '../../../../../environments/environment';
 
 interface PreguntaFrecuente {
   id: number;
@@ -176,7 +177,7 @@ export class ResidenciaPostOperatoriaComponent {
     const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
 
     this.http
-      .post('https://backend-dalias.onrender.com/contacto', payload, {
+      .post(`${environment.apiUrl}/contacto`, payload, {
         headers,
       })
       .subscribe({

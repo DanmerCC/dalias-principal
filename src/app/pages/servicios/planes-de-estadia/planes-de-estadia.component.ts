@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Router } from '@angular/router';
+import { environment } from '../../../../environments/environment';
 import {
   HttpClient,
   HttpClientModule,
@@ -304,7 +305,7 @@ export class PlanesDeEstadiaComponent {
     const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
 
     this.http
-      .post('https://backend-dalias.onrender.com/contacto', payload, {
+      .post(`${environment.apiUrl}/contacto`, payload, {
         headers,
       })
       .subscribe({

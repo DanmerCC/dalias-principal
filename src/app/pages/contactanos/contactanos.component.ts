@@ -2,6 +2,7 @@ import { Component, AfterViewInit, ElementRef, ViewChild, PLATFORM_ID, Inject } 
 import { CommonModule, isPlatformBrowser } from '@angular/common';
 import { HttpClient, HttpClientModule, HttpHeaders } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
+import { environment } from '../../../environments/environment';
 
 interface FormularioVisita {
   nombre: string;
@@ -194,7 +195,7 @@ export class ContactanosComponent implements AfterViewInit {
     const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
 
     this.http
-      .post('https://backend-dalias.onrender.com/contacto', payload, { headers })
+      .post(`${environment.apiUrl}/contacto`, payload, { headers })
       .subscribe({
         next: (response: any) => {
           console.log('Respuesta exitosa:', response);
