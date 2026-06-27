@@ -19,7 +19,7 @@ import { trigger, transition, style, animate } from '@angular/animations';
 import { FormsModule } from '@angular/forms';
 import { Router, RouterLink } from '@angular/router';
 import { AgendarVisitaModalComponent } from '../../components/agendar-visita-modal/agendar-visita-modal.component';
-import { CmsService } from '../../services/cms.service';
+import { CmsService, BannerInicio } from '../../services/cms.service';
 import { environment } from '../../../environments/environment';
 import { subscribe, unsubscribe, ready } from '@payloadcms/live-preview';
 
@@ -145,8 +145,23 @@ export class InicioComponent implements OnInit, OnDestroy {
     return [...this.actividades, { final: true }];
   }
 
-  // Handler de la suscripción de Live Preview (para desuscribir en destroy).
+  banner: BannerInicio = {
+    imagenFondo: '/slider1.png',
+    logo: '/logo_slider2.png',
+    descripcion:
+      'En Residencia Las Dalias ofrecemos planes de estadía pensados para el bienestar, cuidado y tranquilidad de nuestros residentes, adaptándonos a cada necesidad y etapa.',
+    textoCTA: 'Explora nuestros planes de estadía',
+    planes: [
+      { etiqueta: 'Residencia Permanente', slug: 'residencia-permanente' },
+      { etiqueta: 'Residencia Temporal', slug: 'temporal' },
+      { etiqueta: 'Centro de Día', slug: 'centro-de-dia' },
+      { etiqueta: 'Residencia Post Operatoria', slug: 'post-operatoria' },
+    ],
+  };
+
+  // Handlers de Live Preview (para desuscribir en destroy).
   private livePreviewUnsub?: (event: MessageEvent) => void;
+  private bannerPreviewHandler?: (event: MessageEvent) => void;
 
   constructor(
     @Inject(PLATFORM_ID) private platformId: Object,
@@ -395,7 +410,15 @@ export class InicioComponent implements OnInit, OnDestroy {
     this.inicializarNoticias();
     this.precargarImagenes();
     this.cargarActividades();
+    this.cargarBanner();
     this.initLivePreview();
+    this.initBannerLivePreview();
+  }
+
+  cargarBanner(): void {
+    this.cms.getBannerInicio().subscribe((b) => {
+      this.banner = b;
+    });
   }
 
   cargarActividades(): void {
@@ -421,9 +444,83 @@ export class InicioComponent implements OnInit, OnDestroy {
       requestHandler: (args: any) =>
         Promise.resolve({ json: async () => args?.data?.data ?? {} }) as any,
       callback: (doc: any) =>
-        this.ngZone.run(() => this.upsertActividadPreview(doc)),
+        this.ngZone.run(() => this.handleLivePreviewDoc(doc)),
     });
     ready({ serverURL });
+  }
+
+  // Listener directo para el global banner-inicio: lee globalSlug del evento raw
+  // antes de que la librería lo consuma, evitando detección frágil por campos.
+  // Llama al endpoint de merge de Payload para poblar relaciones (imágenes).
+  private initBannerLivePreview(): void {
+    if (!isPlatformBrowser(this.platformId)) return;
+    if (window.self === window.top) return;
+    const serverURL = environment.cmsUrl || 'http://localhost:3000';
+
+    this.bannerPreviewHandler = (event: MessageEvent) => {
+      if (
+        event.origin !== serverURL ||
+        event.data?.type !== 'payload-live-preview' ||
+        event.data?.globalSlug !== 'banner-inicio'
+      ) return;
+
+      const incomingData = event.data?.data;
+      console.log('[BannerPreview] raw event.data:', JSON.stringify(event.data, null, 2));
+      if (!incomingData) return;
+
+      // Llama al mismo endpoint que usa mergeData internamente; el servidor
+      // devuelve el doc con depth=1 (imágenes y relaciones pobladas).
+      // Usa ruta relativa para que el proxy de Angular evite el bloqueo CORS.
+      fetch(`/api/globals/banner-inicio`, {
+        method: 'POST',
+        credentials: 'include',
+        headers: {
+          'Content-Type': 'application/json',
+          'X-Payload-HTTP-Method-Override': 'GET',
+        },
+        body: JSON.stringify({ data: incomingData, depth: 1, flattenLocales: false }),
+      })
+        .then((res) => res.json())
+        .then((doc) => {
+          const resolveImg = (url?: string) =>
+            url ? (url.startsWith('http') ? url : `${serverURL}${url}`) : '';
+
+          this.ngZone.run(() => {
+            this.banner = {
+              imagenFondo: resolveImg(doc?.imagenFondo?.url) || this.banner.imagenFondo,
+              logo: resolveImg(doc?.logo?.url) || this.banner.logo,
+              descripcion: doc?.descripcion || this.banner.descripcion,
+              textoCTA: doc?.textoCTA || this.banner.textoCTA,
+              planes: Array.isArray(doc?.planes) && doc.planes.length
+                ? doc.planes.map((p: any) => ({ etiqueta: p.etiqueta ?? '', slug: p.slug ?? '' }))
+                : this.banner.planes,
+            };
+          });
+        })
+        .catch(() => {
+          // Fallback sin populate: al menos actualizamos los campos de texto
+          const resolveImg = (url?: string) =>
+            url ? (url.startsWith('http') ? url : `${serverURL}${url}`) : '';
+          this.ngZone.run(() => {
+            this.banner = {
+              imagenFondo: resolveImg(incomingData?.imagenFondo?.url) || this.banner.imagenFondo,
+              logo: resolveImg(incomingData?.logo?.url) || this.banner.logo,
+              descripcion: incomingData?.descripcion || this.banner.descripcion,
+              textoCTA: incomingData?.textoCTA || this.banner.textoCTA,
+              planes: Array.isArray(incomingData?.planes) && incomingData.planes.length
+                ? incomingData.planes.map((p: any) => ({ etiqueta: p.etiqueta ?? '', slug: p.slug ?? '' }))
+                : this.banner.planes,
+            };
+          });
+        });
+    };
+
+    window.addEventListener('message', this.bannerPreviewHandler);
+  }
+
+  private handleLivePreviewDoc(doc: any): void {
+    if (!doc) return;
+    this.upsertActividadPreview(doc);
   }
 
   private upsertActividadPreview(doc: any): void {
@@ -445,6 +542,9 @@ export class InicioComponent implements OnInit, OnDestroy {
 
   ngOnDestroy(): void {
     this.detenerCarruselNosotros();
+    if (this.bannerPreviewHandler) {
+      window.removeEventListener('message', this.bannerPreviewHandler);
+    }
     if (this.livePreviewUnsub) {
       unsubscribe(this.livePreviewUnsub);
     }

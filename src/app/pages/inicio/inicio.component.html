@@ -1,30 +1,25 @@
 <div class="contenedor__slider">
-  <div class="slider__img">
+  <div class="slider__img" [style.backgroundImage]="'url(' + banner.imagenFondo + ')'">
     <div class="content__slider">
       <div class="card__text">
-        <img src="/logo_slider2.png" alt="Las Dalias" />
+        <img [src]="banner.logo" alt="Las Dalias" />
 
-        <p>
-          En <strong>Residencia Las Dalias</strong> ofrecemos planes de estadía
-          pensados para el bienestar, cuidado y tranquilidad de nuestros
-          residentes, adaptándonos a cada necesidad y etapa.
-        </p>
+        <p>{{ banner.descripcion }}</p>
       </div>
 
       <div class="card__input">
         <div class="text__input">
           <i class="bx bx-heart"></i>
 
-          <b>Explora nuestros planes de estadía</b>
+          <b>{{ banner.textoCTA }}</b>
         </div>
 
         <div class="select__slider">
           <select #planSelector (change)="navegarAPlan(planSelector.value)">
             <option value="" disabled selected>Selecciona un plan</option>
-            <option value="residencia-permanente">Residencia Permanente</option>
-            <option value="temporal">Residencia Temporal</option>
-            <option value="centro-de-dia">Centro de Día</option>
-            <option value="post-operatoria">Residencia Post Operatoria</option>
+            @for (plan of banner.planes; track plan.slug) {
+              <option [value]="plan.slug">{{ plan.etiqueta }}</option>
+            }
           </select>
           <i class="bx bx-search"></i>
         </div>

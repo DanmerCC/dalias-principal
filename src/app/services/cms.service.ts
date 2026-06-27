@@ -36,6 +36,19 @@ export interface GaleriaItem {
   imagenes: string[];
 }
 
+export interface PlanBanner {
+  etiqueta: string;
+  slug: string;
+}
+
+export interface BannerInicio {
+  imagenFondo: string;
+  logo: string;
+  descripcion: string;
+  textoCTA: string;
+  planes: PlanBanner[];
+}
+
 // Forma estándar de la REST API de Payload (listados)
 interface PayloadList<T> {
   docs: T[];
@@ -46,6 +59,36 @@ interface PayloadList<T> {
 export class CmsService {
   private http = inject(HttpClient);
   private base = `${environment.cmsUrl}/api`;
+
+  private readonly BANNER_DEFAULTS: BannerInicio = {
+    imagenFondo: '/slider1.png',
+    logo: '/logo_slider2.png',
+    descripcion:
+      'En Residencia Las Dalias ofrecemos planes de estadía pensados para el bienestar, cuidado y tranquilidad de nuestros residentes, adaptándonos a cada necesidad y etapa.',
+    textoCTA: 'Explora nuestros planes de estadía',
+    planes: [
+      { etiqueta: 'Residencia Permanente', slug: 'residencia-permanente' },
+      { etiqueta: 'Residencia Temporal', slug: 'temporal' },
+      { etiqueta: 'Centro de Día', slug: 'centro-de-dia' },
+      { etiqueta: 'Residencia Post Operatoria', slug: 'post-operatoria' },
+    ],
+  };
+
+  getBannerInicio(): Observable<BannerInicio> {
+    const url = `${this.base}/globals/banner-inicio?depth=1`;
+    return this.http.get<any>(url).pipe(
+      map((d) => ({
+        imagenFondo: this.resolveImg(d?.imagenFondo?.url) || this.BANNER_DEFAULTS.imagenFondo,
+        logo: this.resolveImg(d?.logo?.url) || this.BANNER_DEFAULTS.logo,
+        descripcion: d?.descripcion || this.BANNER_DEFAULTS.descripcion,
+        textoCTA: d?.textoCTA || this.BANNER_DEFAULTS.textoCTA,
+        planes: Array.isArray(d?.planes) && d.planes.length
+          ? d.planes.map((p: any) => ({ etiqueta: p.etiqueta ?? '', slug: p.slug ?? '' }))
+          : this.BANNER_DEFAULTS.planes,
+      })),
+      catchError(() => of(this.BANNER_DEFAULTS)),
+    );
+  }
 
   // Solo actividades activas; depth=1 para poblar la relación de imagen (media.url).
   getActividades(): Observable<Actividad[]> {
