@@ -7,4 +7,8 @@ export const environment = {
   production: false,
   cmsUrl: '',
   apiUrl: 'http://localhost:3001',
+  // Cuenta de Cloudinary de la organización (fuente única del cloud name).
+  // Las imágenes estáticas usan este cloud en sus URLs; para construir URLs
+  // dinámicas/nuevas, referenciar SIEMPRE esta constante en vez de hardcodear.
+  cloudinaryCloudName: 'depdqybjp',
 };

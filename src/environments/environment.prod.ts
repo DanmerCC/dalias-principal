@@ -6,4 +6,6 @@ export const environment = {
   production: true,
   cmsUrl: '',
   apiUrl: 'https://backend-dalias.onrender.com',
+  // Cuenta de Cloudinary de la organización (fuente única del cloud name).
+  cloudinaryCloudName: 'depdqybjp',
 };

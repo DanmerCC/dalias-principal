@@ -64,76 +64,76 @@ export class ResidenciaTemporalComponent {
     // Slide 1
     [
       {
-        src: 'https://res.cloudinary.com/dd5mnpde5/image/upload/f_auto,q_60,w_1200,c_limit/v1770770414/gallery1_eewi4e.jpg',
+        src: 'https://res.cloudinary.com/depdqybjp/image/upload/f_auto,q_60,w_1200,c_limit/v1770770414/gallery1_eewi4e.jpg',
         alt: 'Habitación Principal',
       },
       {
-        src: 'https://res.cloudinary.com/dd5mnpde5/image/upload/f_auto,q_60,w_1200,c_limit/v1770770415/gallery2_tabp74.jpg',
+        src: 'https://res.cloudinary.com/depdqybjp/image/upload/f_auto,q_60,w_1200,c_limit/v1770770415/gallery2_tabp74.jpg',
         alt: 'Habitación con Sala',
       },
       {
-        src: 'https://res.cloudinary.com/dd5mnpde5/image/upload/f_auto,q_60,w_1200,c_limit/v1770770414/gallery3_wnjuta.jpg',
+        src: 'https://res.cloudinary.com/depdqybjp/image/upload/f_auto,q_60,w_1200,c_limit/v1770770414/gallery3_wnjuta.jpg',
         alt: 'Baño 1',
       },
       {
-        src: 'https://res.cloudinary.com/dd5mnpde5/image/upload/f_auto,q_60,w_1200,c_limit/v1770770414/gallery4_ebhvti.jpg',
+        src: 'https://res.cloudinary.com/depdqybjp/image/upload/f_auto,q_60,w_1200,c_limit/v1770770414/gallery4_ebhvti.jpg',
         alt: 'Baño 2',
       },
     ],
     // Slide 2
     [
       {
-        src: 'https://res.cloudinary.com/dd5mnpde5/image/upload/f_auto,q_60,w_1200,c_limit/v1770770513/gallery5_cdjjk7.jpg',
+        src: 'https://res.cloudinary.com/depdqybjp/image/upload/f_auto,q_60,w_1200,c_limit/v1770770513/gallery5_cdjjk7.jpg',
         alt: 'Comedor',
       },
       {
-        src: 'https://res.cloudinary.com/dd5mnpde5/image/upload/f_auto,q_60,w_1200,c_limit/v1770770515/gallery6_srr3if.jpg',
+        src: 'https://res.cloudinary.com/depdqybjp/image/upload/f_auto,q_60,w_1200,c_limit/v1770770515/gallery6_srr3if.jpg',
         alt: 'Sala de Terapias',
       },
       {
-        src: 'https://res.cloudinary.com/dd5mnpde5/image/upload/f_auto,q_60,w_1200,c_limit/v1770770514/gallery7_mmxso9.jpg',
+        src: 'https://res.cloudinary.com/depdqybjp/image/upload/f_auto,q_60,w_1200,c_limit/v1770770514/gallery7_mmxso9.jpg',
         alt: 'Cocina',
       },
       {
-        src: 'https://res.cloudinary.com/dd5mnpde5/image/upload/f_auto,q_60,w_1200,c_limit/v1770770514/gallery8_ekedtm.png',
+        src: 'https://res.cloudinary.com/depdqybjp/image/upload/f_auto,q_60,w_1200,c_limit/v1770770514/gallery8_ekedtm.png',
         alt: 'Recepción',
       },
     ],
     // Slide 3
     [
       {
-        src: 'https://res.cloudinary.com/dd5mnpde5/image/upload/f_auto,q_60,w_1200,c_limit/v1770770674/gallery9_ttjwjf.jpg',
+        src: 'https://res.cloudinary.com/depdqybjp/image/upload/f_auto,q_60,w_1200,c_limit/v1770770674/gallery9_ttjwjf.jpg',
         alt: 'Piscina',
       },
       {
-        src: 'https://res.cloudinary.com/dd5mnpde5/image/upload/f_auto,q_60,w_1200,c_limit/v1770770689/gallery10_wr2j7z.jpg',
+        src: 'https://res.cloudinary.com/depdqybjp/image/upload/f_auto,q_60,w_1200,c_limit/v1770770689/gallery10_wr2j7z.jpg',
         alt: 'Área de Lectura',
       },
       {
-        src: 'https://res.cloudinary.com/dd5mnpde5/image/upload/f_auto,q_60,w_1200,c_limit/v1770770677/gallery11_ztskys.jpg',
+        src: 'https://res.cloudinary.com/depdqybjp/image/upload/f_auto,q_60,w_1200,c_limit/v1770770677/gallery11_ztskys.jpg',
         alt: 'Habitación Suite',
       },
       {
-        src: 'https://res.cloudinary.com/dd5mnpde5/image/upload/f_auto,q_60,w_1200,c_limit/v1770770677/gallery12_upywwv.jpg',
+        src: 'https://res.cloudinary.com/depdqybjp/image/upload/f_auto,q_60,w_1200,c_limit/v1770770677/gallery12_upywwv.jpg',
         alt: 'Terraza',
       },
     ],
     // Slide 4
     [
       {
-        src: 'https://res.cloudinary.com/dd5mnpde5/image/upload/f_auto,q_60,w_1200,c_limit/v1770770677/gallery13_wijvv4.jpg',
+        src: 'https://res.cloudinary.com/depdqybjp/image/upload/f_auto,q_60,w_1200,c_limit/v1770770677/gallery13_wijvv4.jpg',
         alt: 'Gimnasio',
       },
       {
-        src: 'https://res.cloudinary.com/dd5mnpde5/image/upload/f_auto,q_60,w_1200,c_limit/v1770770681/gallery14_sfgg98.jpg',
+        src: 'https://res.cloudinary.com/depdqybjp/image/upload/f_auto,q_60,w_1200,c_limit/v1770770681/gallery14_sfgg98.jpg',
         alt: 'Sala de Actividades',
       },
       {
-        src: 'https://res.cloudinary.com/dd5mnpde5/image/upload/f_auto,q_60,w_1200,c_limit/v1770770678/gallery15_zfve6c.jpg',
+        src: 'https://res.cloudinary.com/depdqybjp/image/upload/f_auto,q_60,w_1200,c_limit/v1770770678/gallery15_zfve6c.jpg',
         alt: 'Capilla',
       },
       {
-        src: 'https://res.cloudinary.com/dd5mnpde5/image/upload/f_auto,q_60,w_1200,c_limit/v1770770679/gallery16_zpvkev.jpg',
+        src: 'https://res.cloudinary.com/depdqybjp/image/upload/f_auto,q_60,w_1200,c_limit/v1770770679/gallery16_zpvkev.jpg',
         alt: 'Enfermería',
       },
     ],
