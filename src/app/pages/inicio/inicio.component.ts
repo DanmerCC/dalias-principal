@@ -428,12 +428,35 @@ export class InicioComponent implements OnInit, OnDestroy {
     });
   }
 
+  private getPreviewEmbedOrigin(): string | null {
+    if (isPlatformBrowser(this.platformId) && document.referrer) {
+      try {
+        return new URL(document.referrer).origin;
+      } catch {
+        return null;
+      }
+    }
+    return null;
+  }
+
+  private getPreviewServerURL(): string | null {
+    const embedOrigin = this.getPreviewEmbedOrigin();
+    if (embedOrigin && environment.previewOrigins.includes(embedOrigin)) return embedOrigin;
+    if (environment.cmsUrl && environment.previewOrigins.includes(environment.cmsUrl)) return environment.cmsUrl;
+    return environment.previewOrigins[0] || null;
+  }
+
+  private isAllowedPreviewOrigin(origin: string, embedOrigin: string | null): boolean {
+    return environment.previewOrigins.includes(origin) && (!embedOrigin || origin === embedOrigin);
+  }
+
   // Live Preview de Payload: solo se activa dentro del iframe del admin. Recibe el
   // documento de actividad editado por postMessage y lo inyecta en el carrusel, en vivo.
   private initLivePreview(): void {
     if (!isPlatformBrowser(this.platformId)) return;
     if (window.self === window.top) return; // solo dentro del iframe del admin
-    const serverURL = environment.cmsUrl || 'http://localhost:3000';
+    const serverURL = this.getPreviewServerURL();
+    if (!serverURL) return;
     this.livePreviewUnsub = subscribe({
       serverURL,
       depth: 1,
@@ -455,17 +478,18 @@ export class InicioComponent implements OnInit, OnDestroy {
   private initBannerLivePreview(): void {
     if (!isPlatformBrowser(this.platformId)) return;
     if (window.self === window.top) return;
-    const serverURL = environment.cmsUrl || 'http://localhost:3000';
+    const serverURL = this.getPreviewServerURL();
+    if (!serverURL) return;
+    const embedOrigin = this.getPreviewEmbedOrigin();
 
     this.bannerPreviewHandler = (event: MessageEvent) => {
       if (
-        event.origin !== serverURL ||
+        !this.isAllowedPreviewOrigin(event.origin, embedOrigin) ||
         event.data?.type !== 'payload-live-preview' ||
         event.data?.globalSlug !== 'banner-inicio'
       ) return;
 
       const incomingData = event.data?.data;
-      console.log('[BannerPreview] raw event.data:', JSON.stringify(event.data, null, 2));
       if (!incomingData) return;
 
       // Llama al mismo endpoint que usa mergeData internamente; el servidor

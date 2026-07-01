@@ -5,6 +5,7 @@
 export const environment = {
   production: true,
   cmsUrl: '',
+  previewOrigins: ['https://cms.residencialasdalias.pe'],
   apiUrl: 'https://backend-dalias.onrender.com',
   // Cuenta de Cloudinary de la organización (fuente única del cloud name).
   cloudinaryCloudName: 'depdqybjp',
