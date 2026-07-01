@@ -299,6 +299,13 @@
 
   <div class="arrows__actividades">
     <div class="arrows__content">
+      <button
+        class="btn__atv prev__atv"
+        (click)="anteriorActividad()"
+        [disabled]="slideActualActividades === 0"
+      >
+        <i class="bx bx-chevron-left"></i>
+      </button>
       <div class="dots__actividades">
         <span
           *ngFor="let actividad of actividadesConFinal; let i = index"
@@ -306,22 +313,13 @@
           (click)="irAActividad(i)"
         ></span>
       </div>
-      <div class="btns__actividades">
-        <button
-          class="btn__atv prev__atv"
-          (click)="anteriorActividad()"
-          [disabled]="slideActualActividades === 0"
-        >
-          <i class="bx bx-chevron-left"></i>
-        </button>
-        <button
-          class="btn__atv next__atv"
-          (click)="siguienteActividad()"
-          [disabled]="slideActualActividades === actividadesConFinal.length - 1"
-        >
-          <i class="bx bx-chevron-right"></i>
-        </button>
-      </div>
+      <button
+        class="btn__atv next__atv"
+        (click)="siguienteActividad()"
+        [disabled]="slideActualActividades === actividadesConFinal.length - 1"
+      >
+        <i class="bx bx-chevron-right"></i>
+      </button>
     </div>
   </div>
 </section>

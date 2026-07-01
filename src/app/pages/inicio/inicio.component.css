@@ -728,17 +728,16 @@
 
 .arrows__actividades {
   display: flex;
-  justify-content: flex-end;
+  justify-content: center;
   align-items: center;
   margin-top: 3rem;
 }
 
 .arrows__content {
-  margin-right: 11rem;
   display: flex;
-  justify-content: flex-end;
+  justify-content: center;
   align-items: center;
-  gap: 2rem;
+  gap: 1.5rem;
 }
 
 .dots__actividades {
@@ -764,13 +763,6 @@
 
 .dots__actividades span:hover {
   background-color: rgba(217, 183, 86, 0.6);
-}
-
-.btns__actividades {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  gap: 1rem;
 }
 
 .btn__atv {
@@ -2224,11 +2216,6 @@ select.form__input {
     min-width: 60%;
   }
 
-  .arrows__content {
-    width: 90%;
-    margin-right: 2rem;
-  }
-
   /* ESTADÍSTICAS */
   .seccion__estadisticas {
     flex-direction: column;
@@ -2456,21 +2443,8 @@ select.form__input {
   }
 
   .arrows__content {
-    width: 95%;
-    margin-right: 1rem;
-    flex-direction: column;
     gap: 1rem;
-    align-items: center;
   }
-
-  .btns__actividades {
-    width: 100%;
-    justify-content: space-between;
-    margin-top: -2.7rem;
-  }
-
-  .btn__atv.next__atv { margin-right: 2rem; }
-  .btn__atv.prev__atv { margin-left: 2rem; }
 
   /* ESTADÍSTICAS */
   .estadisticas__imagen {
