@@ -98,11 +98,8 @@ interface Actividad {
   animations: [
     trigger('fadeInOut', [
       transition('* => *', [
-        style({ opacity: 0, transform: 'scale(1.05)' }),
-        animate(
-          '1500ms ease-in-out',
-          style({ opacity: 1, transform: 'scale(1)' }),
-        ),
+        style({ opacity: 0 }),
+        animate('1500ms ease-in-out', style({ opacity: 1 })),
       ]),
     ]),
   ],
