@@ -843,7 +843,9 @@
 }
 
 .nosotros__imagen img.center-image {
-  object-position: top;
+  object-position: 48% 20%;
+  transform: scale(1.2);
+  transform-origin: 48% 20%;
 }
 
 .imagen__badge {
