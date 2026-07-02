@@ -1,4 +1,4 @@
-:4002 {
+:4001 {
 	encode gzip
 
 	# API del CMS (Payload) en el mismo origen: evita CORS y no expone la API cross-origin.
@@ -11,7 +11,7 @@
 
 	# Estáticos del SPA Angular con fallback a index.html (rutas del router).
 	handle {
-		root * /opt/dalias-principal/app
+		root * /opt/dalias-landing/app
 		try_files {path} /index.html
 		file_server
 	}

@@ -11,6 +11,8 @@ concurrency:
 
 jobs:
   deploy:
+    # Solo en el repo de la org: los forks no tienen runner y los runs quedan en cola.
+    if: github.repository == 'Residencia-Las-Dalias/dalias-principal'
     runs-on: [self-hosted, linux, dalias-principal]
     steps:
       - uses: actions/checkout@v4
@@ -23,15 +25,16 @@ jobs:
 
       - name: Publish build
         run: |
-          mkdir -p /opt/dalias-principal/app
-          rsync -a --delete dist/dalias/browser/ /opt/dalias-principal/app/
+          mkdir -p /opt/dalias-landing/app
+          rsync -a --delete dist/dalias/browser/ /opt/dalias-landing/app/
 
       - name: Sync Caddyfile + restart
         run: |
-          cp Caddyfile /opt/dalias-principal/Caddyfile
-          sudo systemctl restart dalias-principal
+          cp Caddyfile /opt/dalias-landing/Caddyfile
+          sudo systemctl restart dalias-landing
 
       - name: Health check
         run: |
           sleep 2
-          curl -fsS -o /dev/null -w "principal %{http_code}\n" http://127.0.0.1:4002/
+          curl -fsS -o /dev/null -w "landing %{http_code}\n" http://127.0.0.1:4001/
+          curl -fsS -o /dev/null -w "api %{http_code}\n" "http://127.0.0.1:4001/api/actividades?limit=1"
