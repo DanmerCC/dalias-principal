@@ -1238,10 +1238,55 @@
     grid-template-columns: repeat(2, 1fr);
     gap: 1.5rem;
   }
+
+  .seccion__servicio {
+    padding: 3rem 2rem;
+  }
+
+  .servicio__contenido {
+    flex-direction: column;
+    gap: 2.5rem;
+  }
+
+  .servicio__imagen {
+    width: 100%;
+    flex: none;
+  }
+
+  .servicio__texto {
+    flex: none;
+    width: 100%;
+  }
+
+  .seccion__elegirnos {
+    padding: 4rem 2rem;
+  }
+
+  .elegirnos__grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1.5rem;
+  }
 }
 
 @media (max-width: 680px) {
   .dimensiones__grid {
+    grid-template-columns: 1fr;
+  }
+
+  .seccion__servicio {
+    padding: 2.5rem 1rem;
+  }
+
+  .planes__grid {
+    grid-template-columns: 1fr;
+    gap: 0.7rem;
+  }
+
+  .seccion__elegirnos {
+    padding: 3rem 1rem;
+  }
+
+  .elegirnos__grid {
     grid-template-columns: 1fr;
   }
 }
