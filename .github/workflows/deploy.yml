@@ -21,20 +21,28 @@ jobs:
         run: npm ci
 
       - name: Build
-        run: npm run build # -> dist/dalias/browser
+        run: npm run build # -> dist/dalias/{browser,server}
 
       - name: Publish build
         run: |
           mkdir -p /opt/dalias-landing/app
-          rsync -a --delete dist/dalias/browser/ /opt/dalias-landing/app/
+          rsync -a --delete dist/dalias/ /opt/dalias-landing/app/
 
-      - name: Sync Caddyfile + restart
+      - name: Sync systemd unit + Caddyfile
         run: |
+          sudo cp deploy/dalias-ssr.service /etc/systemd/system/dalias-ssr.service
+          sudo systemctl daemon-reload
           cp Caddyfile /opt/dalias-landing/Caddyfile
+
+      - name: Restart services
+        run: |
+          sudo systemctl restart dalias-ssr
           sudo systemctl restart dalias-landing
 
       - name: Health check
         run: |
           sleep 2
+          # El SSR responde y el HTML trae contenido renderizado (no un cascarón).
+          curl -fsS http://127.0.0.1:4101/ | grep -q "Nuestras Actividades"
           curl -fsS -o /dev/null -w "landing %{http_code}\n" http://127.0.0.1:4001/
           curl -fsS -o /dev/null -w "api %{http_code}\n" "http://127.0.0.1:4001/api/actividades?limit=1"

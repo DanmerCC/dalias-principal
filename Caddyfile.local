@@ -1,0 +1,35 @@
+# Réplica local de la topología de producción para probar SSR de punta a punta.
+#
+# Requisitos corriendo:
+#   - CMS local:    pnpm -C dalias-cms dev            → :3000
+#   - SSR local:    npm run build && PORT=4101 CMS_INTERNAL_URL=http://localhost:3000 node dist/dalias/server/server.mjs
+#
+# Levantar:  caddy run --config Caddyfile.local --adapter caddyfile
+# Probar:    http://localhost:8082  (y `curl -s http://localhost:8082/ | grep Actividades`)
+
+:8082 {
+	encode gzip
+
+	handle /api/* {
+		reverse_proxy 127.0.0.1:3000
+	}
+
+	handle {
+		root * dist/dalias/browser
+
+		@estatico file
+		file_server @estatico
+
+		reverse_proxy 127.0.0.1:4101
+	}
+
+	# Mismo fallback que producción: sin SSR, el sitio degrada a SPA.
+	handle_errors {
+		@ssrCaido expression {err.status_code} >= 502
+		handle @ssrCaido {
+			root * dist/dalias/browser
+			rewrite * /index.csr.html
+			file_server
+		}
+	}
+}

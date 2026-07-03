@@ -1,0 +1,22 @@
+# Servidor SSR del landing (Angular Universal / @angular/ssr).
+# El deploy (deploy.yml) copia este archivo a /etc/systemd/system/ y lo recarga;
+# el bootstrap inicial (enable + sudoers del runner) se hace una vez a mano —
+# ver DESPLIEGUE_LANDING.md.
+[Unit]
+Description=SSR del landing dalias-principal (Angular)
+After=network.target
+
+[Service]
+User=danmer
+WorkingDirectory=/opt/dalias-landing/app
+# Puerto propio del SSR; Caddy (:4001) le proxya las peticiones de páginas.
+Environment=PORT=4101
+# Base absoluta del API para los fetch del render (CMS en la misma máquina).
+Environment=CMS_INTERNAL_URL=http://127.0.0.1:4000
+Environment=NODE_ENV=production
+ExecStart=/usr/bin/env node server/server.mjs
+Restart=always
+RestartSec=3
+
+[Install]
+WantedBy=multi-user.target
