@@ -1266,6 +1266,19 @@
     grid-template-columns: repeat(2, 1fr);
     gap: 1.5rem;
   }
+
+  .seccion__momentos {
+    padding: 4rem 2rem;
+  }
+
+  .momentos__grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1.5rem;
+  }
+
+  .seccion__noticias {
+    padding: 4rem 2rem;
+  }
 }
 
 @media (max-width: 680px) {
@@ -1287,6 +1300,22 @@
   }
 
   .elegirnos__grid {
+    grid-template-columns: 1fr;
+  }
+
+  .seccion__momentos {
+    padding: 3rem 1rem;
+  }
+
+  .momentos__grid {
+    grid-template-columns: 1fr;
+  }
+
+  .seccion__noticias {
+    padding: 3rem 1rem;
+  }
+
+  .noticias__grid {
     grid-template-columns: 1fr;
   }
 }
