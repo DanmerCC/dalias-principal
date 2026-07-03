@@ -1232,6 +1232,20 @@
   opacity: 0.7;
 }
 
+/* RESPONSIVE */
+@media (max-width: 768px) {
+  .dimensiones__grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1.5rem;
+  }
+}
+
+@media (max-width: 680px) {
+  .dimensiones__grid {
+    grid-template-columns: 1fr;
+  }
+}
+
 @keyframes fadeInUp {
   from {
     opacity: 0;
