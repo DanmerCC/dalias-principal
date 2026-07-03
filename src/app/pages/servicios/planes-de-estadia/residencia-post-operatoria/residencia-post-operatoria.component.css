@@ -2250,3 +2250,15 @@
     font-size: 0.95rem;
   }
 }
+/* RESPONSIVE - explorar otros planes */
+@media (max-width: 768px) {
+  .explorar-planes__grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 680px) {
+  .explorar-planes__grid {
+    grid-template-columns: 1fr;
+  }
+}

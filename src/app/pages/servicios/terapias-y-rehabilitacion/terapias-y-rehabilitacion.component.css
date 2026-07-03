@@ -1028,6 +1028,19 @@
     grid-template-columns: repeat(2, 1fr);
     gap: 1.5rem;
   }
+
+  .seccion__terapias-rehab {
+    padding: 4rem 2rem;
+  }
+
+  .terapias-rehab__grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1.5rem;
+  }
+
+  .seccion__noticias {
+    padding: 4rem 2rem;
+  }
 }
 
 @media (max-width: 680px) {
@@ -1041,6 +1054,22 @@
   }
 
   .experiencia-terapeutica__grid {
+    grid-template-columns: 1fr;
+  }
+
+  .seccion__terapias-rehab {
+    padding: 3rem 1rem;
+  }
+
+  .terapias-rehab__grid {
+    grid-template-columns: 1fr;
+  }
+
+  .seccion__noticias {
+    padding: 3rem 1rem;
+  }
+
+  .noticias__grid {
     grid-template-columns: 1fr;
   }
 }
