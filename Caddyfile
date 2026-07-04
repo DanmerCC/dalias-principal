@@ -9,10 +9,29 @@
 		}
 	}
 
-	# Estáticos del SPA Angular con fallback a index.html (rutas del router).
 	handle {
-		root * /opt/dalias-landing/app
-		try_files {path} /index.html
-		file_server
+		root * /opt/dalias-landing/app/browser
+
+		# Los archivos que existen en disco (JS, CSS, imágenes) se sirven directo:
+		# el SSR solo recibe peticiones de páginas.
+		@estatico file
+		file_server @estatico
+
+		# Render en servidor (servicio systemd dalias-ssr).
+		reverse_proxy 127.0.0.1:4101 {
+			lb_try_duration 3s
+			lb_try_interval 250ms
+		}
+	}
+
+	# Red de seguridad: si el SSR está caído, degradar a SPA estática
+	# (index.csr.html es el index client-side que genera el build con SSR activo).
+	handle_errors {
+		@ssrCaido expression {err.status_code} >= 502
+		handle @ssrCaido {
+			root * /opt/dalias-landing/app/browser
+			rewrite * /index.csr.html
+			file_server
+		}
 	}
 }
