@@ -54,7 +54,11 @@
 
 /* Botón de WhatsApp (derecha) */
 .whatsapp-button {
-  right: 30px;
+  right: 34px;
+  bottom: 34px;
+  width: 72px;
+  height: 72px;
+  font-size: 34px;
   background: linear-gradient(135deg, #25D366 0%, #128C7E 100%);
   color: white;
   animation: pulse 2s ease-in-out infinite;
@@ -133,7 +137,11 @@
   }
   
   .whatsapp-button {
-    right: 20px;
+    right: 24px;
+    bottom: 24px;
+    width: 64px;
+    height: 64px;
+    font-size: 30px;
   }
 }
 
@@ -151,6 +159,10 @@
   }
   
   .whatsapp-button {
-    right: 15px;
+    right: 20px;
+    bottom: 20px;
+    width: 60px;
+    height: 60px;
+    font-size: 28px;
   }
 }
