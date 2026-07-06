@@ -2,6 +2,8 @@
 <router-outlet></router-outlet>
 <app-footer *ngIf="mostrarLayout"></app-footer>
 
+<app-anuncio-popup *ngIf="mostrarLayout"></app-anuncio-popup>
+
 <!-- Botón flotante scroll to top -->
 <button
   *ngIf="mostrarLayout"

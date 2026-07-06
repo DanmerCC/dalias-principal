@@ -50,6 +50,17 @@ export interface BannerInicio {
   planes: PlanBanner[];
 }
 
+export interface Anuncio {
+  activo: boolean;
+  tipo: 'contenido' | 'solo-imagen';
+  titulo: string;
+  mensaje: string;
+  imagen: string;
+  imagenAlt: string;
+  textoBoton: string;
+  enlace: string;
+}
+
 // Forma estándar de la REST API de Payload (listados)
 interface PayloadList<T> {
   docs: T[];
@@ -88,6 +99,36 @@ export class CmsService {
           : this.BANNER_DEFAULTS.planes,
       })),
       catchError(() => of(this.BANNER_DEFAULTS)),
+    );
+  }
+
+  // Sin activo=true no hay popup que mostrar; ante error de red tampoco (evita
+  // molestar al visitante con un popup vacío/roto).
+  private readonly ANUNCIO_DEFAULTS: Anuncio = {
+    activo: false,
+    tipo: 'contenido',
+    titulo: '',
+    mensaje: '',
+    imagen: '',
+    imagenAlt: '',
+    textoBoton: '',
+    enlace: '',
+  };
+
+  getAnuncio(): Observable<Anuncio> {
+    const url = `${this.base}/globals/anuncio?depth=1`;
+    return this.http.get<any>(url).pipe(
+      map((d): Anuncio => ({
+        activo: !!d?.activo,
+        tipo: d?.tipo === 'solo-imagen' ? 'solo-imagen' : 'contenido',
+        titulo: d?.titulo ?? '',
+        mensaje: d?.mensaje ?? '',
+        imagen: this.resolveImg(d?.imagen?.url),
+        imagenAlt: d?.imagen?.alt ?? '',
+        textoBoton: d?.textoBoton ?? '',
+        enlace: d?.enlace ?? '',
+      })),
+      catchError(() => of(this.ANUNCIO_DEFAULTS)),
     );
   }
 

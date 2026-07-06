@@ -2,13 +2,14 @@ import { Component, HostListener, OnInit, OnDestroy } from '@angular/core';
 import { Router, RouterOutlet, NavigationEnd } from '@angular/router';
 import { HeaderComponent } from './pages/header/header.component';
 import { FooterComponent } from './pages/footer/footer.component';
+import { AnuncioPopupComponent } from './components/anuncio-popup/anuncio-popup.component';
 import { CommonModule } from '@angular/common';
 import { Subscription } from 'rxjs';
 import { filter } from 'rxjs/operators';
 
 @Component({
   selector: 'app-root',
-  imports: [RouterOutlet, HeaderComponent, FooterComponent, CommonModule],
+  imports: [RouterOutlet, HeaderComponent, FooterComponent, AnuncioPopupComponent, CommonModule],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css',
 })
