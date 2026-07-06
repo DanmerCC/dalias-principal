@@ -17,8 +17,8 @@
         <div class="select__slider">
           <select #planSelector (change)="navegarAPlan(planSelector.value)">
             <option value="" disabled selected>Selecciona un plan</option>
-            @for (plan of banner.planes; track plan.slug) {
-              <option [value]="plan.slug">{{ plan.etiqueta }}</option>
+            @for (plan of banner.planes; track plan.link) {
+              <option [value]="plan.link">{{ plan.etiqueta }}</option>
             }
           </select>
           <i class="bx bx-search"></i>

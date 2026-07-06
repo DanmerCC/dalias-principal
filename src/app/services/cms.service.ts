@@ -39,6 +39,7 @@ export interface GaleriaItem {
 export interface PlanBanner {
   etiqueta: string;
   slug: string;
+  link: string; // destino configurable desde el CMS (ruta interna o URL externa)
 }
 
 export interface BannerInicio {
@@ -67,10 +68,10 @@ export class CmsService {
       'En Residencia Las Dalias ofrecemos planes de estadía pensados para el bienestar, cuidado y tranquilidad de nuestros residentes, adaptándonos a cada necesidad y etapa.',
     textoCTA: 'Explora nuestros planes de estadía',
     planes: [
-      { etiqueta: 'Residencia Permanente', slug: 'residencia-permanente' },
-      { etiqueta: 'Residencia Temporal', slug: 'temporal' },
-      { etiqueta: 'Centro de Día', slug: 'centro-de-dia' },
-      { etiqueta: 'Residencia Post Operatoria', slug: 'post-operatoria' },
+      { etiqueta: 'Residencia Permanente', slug: 'residencia-permanente', link: '/servicios/planes-de-estadia/residencia-permanente' },
+      { etiqueta: 'Residencia Temporal', slug: 'temporal', link: '/servicios/planes-de-estadia/residencia-temporal' },
+      { etiqueta: 'Centro de Día', slug: 'centro-de-dia', link: '/servicios/planes-de-estadia/centro-de-dia' },
+      { etiqueta: 'Residencia Post Operatoria', slug: 'post-operatoria', link: '/servicios/planes-de-estadia/residencia-post-operatoria' },
     ],
   };
 
@@ -83,7 +84,7 @@ export class CmsService {
         descripcion: d?.descripcion || this.BANNER_DEFAULTS.descripcion,
         textoCTA: d?.textoCTA || this.BANNER_DEFAULTS.textoCTA,
         planes: Array.isArray(d?.planes) && d.planes.length
-          ? d.planes.map((p: any) => ({ etiqueta: p.etiqueta ?? '', slug: p.slug ?? '' }))
+          ? d.planes.map((p: any) => ({ etiqueta: p.etiqueta ?? '', slug: p.slug ?? '', link: p.link ?? '' }))
           : this.BANNER_DEFAULTS.planes,
       })),
       catchError(() => of(this.BANNER_DEFAULTS)),
