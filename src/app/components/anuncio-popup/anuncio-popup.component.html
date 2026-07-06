@@ -1,0 +1,59 @@
+<div
+  class="anuncio-popup__overlay"
+  *ngIf="visible && anuncio"
+  (click)="cerrar()"
+>
+  <div
+    #contenedor
+    class="anuncio-popup__contenedor"
+    [class.anuncio-popup__contenedor--solo-imagen]="anuncio.tipo === 'solo-imagen'"
+    role="dialog"
+    aria-modal="true"
+    [attr.aria-label]="anuncio.tipo === 'solo-imagen' ? anuncio.imagenAlt : anuncio.titulo"
+    (click)="$event.stopPropagation()"
+  >
+    <button
+      type="button"
+      class="anuncio-popup__cerrar"
+      (click)="cerrar()"
+      aria-label="Cerrar anuncio"
+    >
+      <i class="fas fa-times" aria-hidden="true"></i>
+    </button>
+
+    <!-- Modo solo imagen: únicamente la imagen, clickeable si tiene enlace -->
+    <ng-container *ngIf="anuncio.tipo === 'solo-imagen'; else contenido">
+      <button
+        *ngIf="anuncio.enlace; else soloImagenSinEnlace"
+        type="button"
+        (click)="irAlEnlace()"
+        class="anuncio-popup__imagen-link"
+      >
+        <img [src]="anuncio.imagen" [alt]="anuncio.imagenAlt" class="anuncio-popup__imagen-full" />
+      </button>
+      <ng-template #soloImagenSinEnlace>
+        <img [src]="anuncio.imagen" [alt]="anuncio.imagenAlt" class="anuncio-popup__imagen-full" />
+      </ng-template>
+    </ng-container>
+
+    <!-- Modo contenido: título + mensaje + imagen opcional + CTA opcional -->
+    <ng-template #contenido>
+      <img
+        *ngIf="anuncio.imagen"
+        [src]="anuncio.imagen"
+        [alt]="anuncio.imagenAlt"
+        class="anuncio-popup__imagen"
+      />
+      <h2 class="anuncio-popup__titulo">{{ anuncio.titulo }}</h2>
+      <p class="anuncio-popup__mensaje">{{ anuncio.mensaje }}</p>
+      <button
+        *ngIf="anuncio.textoBoton"
+        type="button"
+        class="anuncio-popup__boton"
+        (click)="irAlEnlace()"
+      >
+        {{ anuncio.textoBoton }}
+      </button>
+    </ng-template>
+  </div>
+</div>
