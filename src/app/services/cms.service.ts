@@ -91,8 +91,10 @@ export class CmsService {
   }
 
   // Solo actividades activas; depth=1 para poblar la relación de imagen (media.url).
+  // sort=createdAt: sin él Payload devuelve -createdAt y el carrusel sale invertido
+  // respecto al orden del seed (issues #5 y #9).
   getActividades(): Observable<Actividad[]> {
-    const url = `${this.base}/actividades?where[estado][equals]=activo&depth=1&limit=100`;
+    const url = `${this.base}/actividades?where[estado][equals]=activo&depth=1&limit=100&sort=createdAt`;
     return this.http.get<PayloadList<any>>(url).pipe(
       map((res) => (res?.docs ?? []).map((d) => this.mapActividad(d))),
       catchError(() => of([])),
