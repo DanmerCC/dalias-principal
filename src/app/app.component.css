@@ -75,6 +75,27 @@
   transform: translateY(-4px) scale(0.95);
 }
 
+/* Efecto "water drop": dos ondas verdes suaves que se expanden desde el botón
+   y se desvanecen, como una gota al caer en el agua. Van detrás del botón
+   (z-index -1) para no tapar el ícono. */
+.whatsapp-button::after,
+.whatsapp-button__onda {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  border: 3px solid rgba(37, 211, 102, 0.6);
+  opacity: 0;
+  z-index: -1;
+  pointer-events: none;
+  animation: waterDrop 2.6s ease-out infinite;
+}
+
+/* La segunda onda arranca a mitad de ciclo para un efecto continuo */
+.whatsapp-button__onda {
+  animation-delay: -1.3s;
+}
+
 /* Animaciones */
 @keyframes bounceIn {
   0% {
@@ -101,6 +122,26 @@
   50% {
     transform: scale(1.05);
     box-shadow: 0 8px 35px rgba(37, 211, 102, 0.4);
+  }
+}
+
+@keyframes waterDrop {
+  0% {
+    transform: scale(1);
+    opacity: 0.7;
+  }
+  100% {
+    transform: scale(2.2);
+    opacity: 0;
+  }
+}
+
+/* Respeta a quien prefiere menos movimiento (accesibilidad) */
+@media (prefers-reduced-motion: reduce) {
+  .whatsapp-button,
+  .whatsapp-button::after,
+  .whatsapp-button__onda {
+    animation: none;
   }
 }
 
