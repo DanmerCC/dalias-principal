@@ -149,10 +149,10 @@ export class InicioComponent implements OnInit, OnDestroy {
       'En Residencia Las Dalias ofrecemos planes de estadía pensados para el bienestar, cuidado y tranquilidad de nuestros residentes, adaptándonos a cada necesidad y etapa.',
     textoCTA: 'Explora nuestros planes de estadía',
     planes: [
-      { etiqueta: 'Residencia Permanente', slug: 'residencia-permanente' },
-      { etiqueta: 'Residencia Temporal', slug: 'temporal' },
-      { etiqueta: 'Centro de Día', slug: 'centro-de-dia' },
-      { etiqueta: 'Residencia Post Operatoria', slug: 'post-operatoria' },
+      { etiqueta: 'Residencia Permanente', slug: 'residencia-permanente', link: '/servicios/planes-de-estadia/residencia-permanente' },
+      { etiqueta: 'Residencia Temporal', slug: 'temporal', link: '/servicios/planes-de-estadia/residencia-temporal' },
+      { etiqueta: 'Centro de Día', slug: 'centro-de-dia', link: '/servicios/planes-de-estadia/centro-de-dia' },
+      { etiqueta: 'Residencia Post Operatoria', slug: 'post-operatoria', link: '/servicios/planes-de-estadia/residencia-post-operatoria' },
     ],
   };
 
@@ -168,22 +168,18 @@ export class InicioComponent implements OnInit, OnDestroy {
     private ngZone: NgZone,
   ) {}
 
-  navegarAPlan(plan: string): void {
-    if (!plan) {
+  // Navega al destino del plan. `enlace` viene configurado desde el CMS: puede
+  // ser una ruta interna del sitio (ej. /servicios/...) o una URL externa
+  // (https://...). Ya no hay rutas fijas en el código.
+  navegarAPlan(enlace: string): void {
+    if (!enlace) {
       return;
     }
 
-    const rutasPlanes: { [key: string]: string } = {
-      'residencia-permanente':
-        '/servicios/planes-de-estadia/residencia-permanente',
-      'centro-de-dia': '/servicios/planes-de-estadia/centro-de-dia',
-      'temporal': '/servicios/planes-de-estadia/residencia-temporal',
-      'post-operatoria': '/servicios/planes-de-estadia/residencia-post-operatoria',
-    };
-
-    const ruta = rutasPlanes[plan];
-    if (ruta) {
-      this.router.navigate([ruta]);
+    if (/^https?:\/\//i.test(enlace)) {
+      window.open(enlace, '_blank', 'noopener');
+    } else {
+      this.router.navigate([enlace]);
     }
   }
 
@@ -513,7 +509,7 @@ export class InicioComponent implements OnInit, OnDestroy {
               descripcion: doc?.descripcion || this.banner.descripcion,
               textoCTA: doc?.textoCTA || this.banner.textoCTA,
               planes: Array.isArray(doc?.planes) && doc.planes.length
-                ? doc.planes.map((p: any) => ({ etiqueta: p.etiqueta ?? '', slug: p.slug ?? '' }))
+                ? doc.planes.map((p: any) => ({ etiqueta: p.etiqueta ?? '', slug: p.slug ?? '', link: p.link ?? '' }))
                 : this.banner.planes,
             };
           });
@@ -529,7 +525,7 @@ export class InicioComponent implements OnInit, OnDestroy {
               descripcion: incomingData?.descripcion || this.banner.descripcion,
               textoCTA: incomingData?.textoCTA || this.banner.textoCTA,
               planes: Array.isArray(incomingData?.planes) && incomingData.planes.length
-                ? incomingData.planes.map((p: any) => ({ etiqueta: p.etiqueta ?? '', slug: p.slug ?? '' }))
+                ? incomingData.planes.map((p: any) => ({ etiqueta: p.etiqueta ?? '', slug: p.slug ?? '', link: p.link ?? '' }))
                 : this.banner.planes,
             };
           });
