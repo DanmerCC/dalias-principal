@@ -45,7 +45,7 @@ export interface PlanBanner {
 export interface BannerInicio {
   imagenFondo: string;
   logo: string;
-  imagenAreasVerdes: string;
+  facilitiesImage: string;
   descripcion: string;
   textoCTA: string;
   planes: PlanBanner[];
@@ -76,7 +76,7 @@ export class CmsService {
   private readonly BANNER_DEFAULTS: BannerInicio = {
     imagenFondo: '/slider1.png',
     logo: '/logo_slider2.png',
-    imagenAreasVerdes: '/casa.png',
+    facilitiesImage: '/casa.png',
     descripcion:
       'En Residencia Las Dalias ofrecemos planes de estadía pensados para el bienestar, cuidado y tranquilidad de nuestros residentes, adaptándonos a cada necesidad y etapa.',
     textoCTA: 'Explora nuestros planes de estadía',
@@ -94,7 +94,7 @@ export class CmsService {
       map((d) => ({
         imagenFondo: this.resolveImg(d?.imagenFondo, 'banner') || this.BANNER_DEFAULTS.imagenFondo,
         logo: this.resolveImg(d?.logo) || this.BANNER_DEFAULTS.logo,
-        imagenAreasVerdes: this.resolveImg(d?.imagenAreasVerdes, 'banner') || this.BANNER_DEFAULTS.imagenAreasVerdes,
+        facilitiesImage: this.resolveImg(d?.facilitiesImage, 'banner') || this.BANNER_DEFAULTS.facilitiesImage,
         descripcion: d?.descripcion || this.BANNER_DEFAULTS.descripcion,
         textoCTA: d?.textoCTA || this.BANNER_DEFAULTS.textoCTA,
         planes: Array.isArray(d?.planes) && d.planes.length
