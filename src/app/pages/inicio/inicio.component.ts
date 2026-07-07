@@ -145,6 +145,7 @@ export class InicioComponent implements OnInit, OnDestroy {
   banner: BannerInicio = {
     imagenFondo: '/slider1.png',
     logo: '/logo_slider2.png',
+    imagenAreasVerdes: '/casa.png',
     descripcion:
       'En Residencia Las Dalias ofrecemos planes de estadía pensados para el bienestar, cuidado y tranquilidad de nuestros residentes, adaptándonos a cada necesidad y etapa.',
     textoCTA: 'Explora nuestros planes de estadía',
@@ -506,6 +507,7 @@ export class InicioComponent implements OnInit, OnDestroy {
             this.banner = {
               imagenFondo: resolveImg(doc?.imagenFondo?.url) || this.banner.imagenFondo,
               logo: resolveImg(doc?.logo?.url) || this.banner.logo,
+              imagenAreasVerdes: resolveImg(doc?.imagenAreasVerdes?.url) || this.banner.imagenAreasVerdes,
               descripcion: doc?.descripcion || this.banner.descripcion,
               textoCTA: doc?.textoCTA || this.banner.textoCTA,
               planes: Array.isArray(doc?.planes) && doc.planes.length
@@ -522,6 +524,7 @@ export class InicioComponent implements OnInit, OnDestroy {
             this.banner = {
               imagenFondo: resolveImg(incomingData?.imagenFondo?.url) || this.banner.imagenFondo,
               logo: resolveImg(incomingData?.logo?.url) || this.banner.logo,
+              imagenAreasVerdes: resolveImg(incomingData?.imagenAreasVerdes?.url) || this.banner.imagenAreasVerdes,
               descripcion: incomingData?.descripcion || this.banner.descripcion,
               textoCTA: incomingData?.textoCTA || this.banner.textoCTA,
               planes: Array.isArray(incomingData?.planes) && incomingData.planes.length
