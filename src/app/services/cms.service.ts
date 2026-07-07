@@ -90,8 +90,8 @@ export class CmsService {
     const url = `${this.base}/globals/banner-inicio?depth=1`;
     return this.http.get<any>(url).pipe(
       map((d) => ({
-        imagenFondo: this.resolveImg(d?.imagenFondo?.url) || this.BANNER_DEFAULTS.imagenFondo,
-        logo: this.resolveImg(d?.logo?.url) || this.BANNER_DEFAULTS.logo,
+        imagenFondo: this.resolveImg(d?.imagenFondo, 'banner') || this.BANNER_DEFAULTS.imagenFondo,
+        logo: this.resolveImg(d?.logo) || this.BANNER_DEFAULTS.logo,
         descripcion: d?.descripcion || this.BANNER_DEFAULTS.descripcion,
         textoCTA: d?.textoCTA || this.BANNER_DEFAULTS.textoCTA,
         planes: Array.isArray(d?.planes) && d.planes.length
@@ -171,7 +171,7 @@ export class CmsService {
       subtitulo: d?.subtitulo ?? '',
       fecha: d?.subtitulo ?? '',
       descripcion: this.richTextToPlain(d?.descripcion),
-      imagen: this.resolveImg(d?.imagen?.url),
+      imagen: this.resolveImg(d?.imagen, 'actividad'),
     };
   }
 
@@ -180,7 +180,7 @@ export class CmsService {
       id: d?.id,
       titulo: d?.titulo ?? '',
       descripcionCorta: d?.descripcionCorta ?? '',
-      imagen: this.resolveImg(d?.imagenPrincipal?.url),
+      imagen: this.resolveImg(d?.imagenPrincipal, 'blog'),
       cuerpo: this.richTextToPlain(d?.cuerpo),
       categorias: Array.isArray(d?.categoria) ? d.categoria : d?.categoria ? [d.categoria] : [],
       fecha: this.formatFecha(d?.fechaPublicacion),
@@ -198,8 +198,13 @@ export class CmsService {
     };
   }
 
-  // Prefija cmsUrl a rutas relativas de imágenes (ej. /media/foo.jpg).
-  private resolveImg(url?: string): string {
+  // Acepta la url plana (compatibilidad) o el documento de media completo: si
+  // se pide `crop` y el CMS lo expone (media.crops, ya recortado en Cloudinary
+  // al punto focal — ver dalias-cms/src/collections/Media.ts), usa esa
+  // variante; si no, cae a la url plana (mismo comportamiento que antes, sin
+  // regresión). Prefija cmsUrl a rutas relativas (ej. /media/foo.jpg).
+  private resolveImg(media?: { url?: string; crops?: Record<string, string> } | string, crop?: 'banner' | 'actividad' | 'blog'): string {
+    const url = typeof media === 'string' ? media : (crop && media?.crops?.[crop]) || media?.url;
     if (!url) return '';
     return url.startsWith('http') ? url : `${environment.cmsUrl}${url}`;
   }
