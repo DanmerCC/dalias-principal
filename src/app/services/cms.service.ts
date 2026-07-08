@@ -62,6 +62,20 @@ export interface Anuncio {
   enlace: string;
 }
 
+// Item del menú de navegación (global `navegacion` del CMS). Una sola lista
+// alimenta el header de escritorio y el panel móvil (ver
+// dalias-cms/src/globals/Navegacion.ts).
+export interface NavItem {
+  etiqueta: string;
+  enlace: string;
+  icono: string;
+  tipo: 'enlace' | 'boton';
+  variante: 'primario' | 'secundario'; // solo aplica a tipo 'boton'
+  subtexto: string; // segunda línea, solo botones (ej. contacto)
+  nuevaPestana: boolean;
+  visible: boolean;
+}
+
 // Forma estándar de la REST API de Payload (listados)
 interface PayloadList<T> {
   docs: T[];
@@ -133,6 +147,51 @@ export class CmsService {
       })),
       catchError(() => of(this.ANUNCIO_DEFAULTS)),
     );
+  }
+
+  // Menú por defecto: el header es crítico (aparece en TODAS las páginas), así
+  // que si el CMS no responde el sitio NUNCA debe quedar sin navegación. Estos
+  // defaults replican el menú histórico hardcodeado y son también el estado
+  // inicial síncrono del header en SSR (ver header.component.ts).
+  readonly NAVEGACION_DEFAULTS: NavItem[] = [
+    { etiqueta: 'Inicio', enlace: '/', icono: 'fas fa-home', tipo: 'enlace', variante: 'primario', subtexto: '', nuevaPestana: false, visible: true },
+    { etiqueta: 'Nosotros', enlace: '/nosotros', icono: 'fas fa-building', tipo: 'enlace', variante: 'primario', subtexto: '', nuevaPestana: false, visible: true },
+    { etiqueta: 'Servicios', enlace: '/servicios', icono: 'fas fa-cog', tipo: 'enlace', variante: 'primario', subtexto: '', nuevaPestana: false, visible: true },
+    { etiqueta: 'Actividades', enlace: '/actividades', icono: 'fas fa-calendar-alt', tipo: 'enlace', variante: 'primario', subtexto: '', nuevaPestana: false, visible: true },
+    { etiqueta: 'Trabaja con nosotros', enlace: '/trabaja-con-nosotros', icono: 'fas fa-briefcase', tipo: 'enlace', variante: 'primario', subtexto: '', nuevaPestana: false, visible: true },
+    { etiqueta: 'Contáctanos', enlace: '/contactanos', icono: 'fas fa-envelope', tipo: 'enlace', variante: 'primario', subtexto: '', nuevaPestana: false, visible: true },
+    { etiqueta: 'Blog', enlace: '/blog', icono: 'fas fa-newspaper', tipo: 'enlace', variante: 'primario', subtexto: '', nuevaPestana: false, visible: true },
+    { etiqueta: '+51 981 776 156', enlace: 'https://wa.link/iv575a', icono: 'bx bx-phone', tipo: 'boton', variante: 'primario', subtexto: '¿Alguna duda? Contáctanos', nuevaPestana: true, visible: true },
+    { etiqueta: 'Portal Dalias', enlace: '/login', icono: 'bx bx-user', tipo: 'boton', variante: 'secundario', subtexto: '', nuevaPestana: false, visible: true },
+  ];
+
+  // Menú del sitio. depth=0: no hay relaciones que poblar (todo son campos
+  // planos). Filtra los items ocultos y cae a los defaults si el CMS no
+  // responde o devuelve la lista vacía.
+  getNavegacion(): Observable<NavItem[]> {
+    const url = `${this.base}/globals/navegacion?depth=0`;
+    return this.http.get<any>(url).pipe(
+      map((d) => {
+        const items = (Array.isArray(d?.items) ? d.items : [])
+          .filter((i: any) => i?.visible !== false)
+          .map((i: any) => this.mapNavItem(i));
+        return items.length ? items : this.NAVEGACION_DEFAULTS;
+      }),
+      catchError(() => of(this.NAVEGACION_DEFAULTS)),
+    );
+  }
+
+  private mapNavItem(i: any): NavItem {
+    return {
+      etiqueta: i?.etiqueta ?? '',
+      enlace: i?.enlace ?? '',
+      icono: i?.icono ?? '',
+      tipo: i?.tipo === 'boton' ? 'boton' : 'enlace',
+      variante: i?.variante === 'secundario' ? 'secundario' : 'primario',
+      subtexto: i?.subtexto ?? '',
+      nuevaPestana: !!i?.nuevaPestana,
+      visible: i?.visible !== false,
+    };
   }
 
   // Solo actividades activas; depth=1 para poblar la relación de imagen (media.url).
