@@ -2,7 +2,7 @@ import { Component, HostListener, Inject, NgZone, OnDestroy, PLATFORM_ID, inject
 import { Router, NavigationEnd, RouterLink } from '@angular/router';
 import { filter } from 'rxjs/operators';
 import { CommonModule, isPlatformBrowser } from '@angular/common';
-import { CmsService, NavItem } from '../../services/cms.service';
+import { CmsService, NavItem, NavegacionGlobal } from '../../services/cms.service';
 import { environment } from '../../../environments/environment';
 
 @Component({
@@ -25,14 +25,16 @@ export class HeaderComponent implements OnDestroy {
   // menú completo desde el primer paint (sin parpadeo); el fetch al CMS lo
   // actualiza luego en el cliente. Si el CMS no responde, getNavegacion() ya
   // cae a estos mismos defaults.
-  items: NavItem[] = this.cms.NAVEGACION_DEFAULTS;
+  navegacion: NavegacionGlobal = this.cms.NAVEGACION_DEFAULTS;
+  get items(): NavItem[] { return this.navegacion.items; }
+  get posicionPanel(): 'derecha' | 'izquierda' { return this.navegacion.posicionPanel; }
 
   constructor(
     private router: Router,
     @Inject(PLATFORM_ID) private platformId: Object,
     private ngZone: NgZone,
   ) {
-    this.cms.getNavegacion().subscribe((items) => (this.items = items));
+    this.cms.getNavegacion().subscribe((n) => (this.navegacion = n));
 
     this.router.events
       .pipe(filter(event => event instanceof NavigationEnd))
@@ -104,9 +106,9 @@ export class HeaderComponent implements OnDestroy {
         },
         body: JSON.stringify({ data: incomingData, depth: 0, flattenLocales: false }),
       })
-        .then((res) => res.json())
-        .then((doc) => this.ngZone.run(() => (this.items = this.cms.mapNavegacionDoc(doc))))
-        .catch(() => this.ngZone.run(() => (this.items = this.cms.mapNavegacionDoc(incomingData))));
+.then((res) => res.json())
+      .then((doc) => this.ngZone.run(() => (this.navegacion = this.cms.mapNavegacionDoc(doc))))
+      .catch(() => this.ngZone.run(() => (this.navegacion = this.cms.mapNavegacionDoc(incomingData))));
     };
 
     window.addEventListener('message', this.previewHandler);

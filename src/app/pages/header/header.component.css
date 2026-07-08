@@ -238,6 +238,17 @@
   right: 0;
 }
 
+/* Variante izquierda: el panel se desliza desde la izquierda */
+.panel-mobile.izquierda {
+  right: auto;
+  left: -100%;
+  box-shadow: 8px 0 30px rgba(0, 0, 0, 0.2);
+  transition: left 0.38s cubic-bezier(0.4, 0, 0.2, 1);
+}
+.panel-mobile.izquierda.abierto {
+  left: 0;
+}
+
 /* Cabecera del panel (zona oscura con logo + X) */
 .panel-head {
   display: flex;
@@ -335,8 +346,6 @@
   text-decoration: none;
   border-radius: 0.9rem;
   padding: 0.75rem 1rem;
-  min-height: 3.4rem;
-  box-sizing: border-box;
   transition: transform 0.2s ease, filter 0.2s ease;
 }
 .btn-panel:hover {

@@ -76,6 +76,14 @@ export interface NavItem {
   visible: boolean;
 }
 
+export type PosicionPanel = 'derecha' | 'izquierda';
+
+// Forma global del menú: items + config del panel móvil.
+export interface NavegacionGlobal {
+  items: NavItem[];
+  posicionPanel: PosicionPanel;
+}
+
 // Forma estándar de la REST API de Payload (listados)
 interface PayloadList<T> {
   docs: T[];
@@ -153,22 +161,25 @@ export class CmsService {
   // que si el CMS no responde el sitio NUNCA debe quedar sin navegación. Estos
   // defaults replican el menú histórico hardcodeado y son también el estado
   // inicial síncrono del header en SSR (ver header.component.ts).
-  readonly NAVEGACION_DEFAULTS: NavItem[] = [
-    { etiqueta: 'Inicio', enlace: '/', icono: 'fas fa-home', tipo: 'enlace', variante: 'primario', subtexto: '', nuevaPestana: false, visible: true },
-    { etiqueta: 'Nosotros', enlace: '/nosotros', icono: 'fas fa-building', tipo: 'enlace', variante: 'primario', subtexto: '', nuevaPestana: false, visible: true },
-    { etiqueta: 'Servicios', enlace: '/servicios', icono: 'fas fa-cog', tipo: 'enlace', variante: 'primario', subtexto: '', nuevaPestana: false, visible: true },
-    { etiqueta: 'Actividades', enlace: '/actividades', icono: 'fas fa-calendar-alt', tipo: 'enlace', variante: 'primario', subtexto: '', nuevaPestana: false, visible: true },
-    { etiqueta: 'Trabaja con nosotros', enlace: '/trabaja-con-nosotros', icono: 'fas fa-briefcase', tipo: 'enlace', variante: 'primario', subtexto: '', nuevaPestana: false, visible: true },
-    { etiqueta: 'Contáctanos', enlace: '/contactanos', icono: 'fas fa-envelope', tipo: 'enlace', variante: 'primario', subtexto: '', nuevaPestana: false, visible: true },
-    { etiqueta: 'Blog', enlace: '/blog', icono: 'fas fa-newspaper', tipo: 'enlace', variante: 'primario', subtexto: '', nuevaPestana: false, visible: true },
-    { etiqueta: '+51 981 776 156', enlace: 'https://wa.link/iv575a', icono: 'bx bx-phone', tipo: 'boton', variante: 'primario', subtexto: '¿Alguna duda? Contáctanos', nuevaPestana: true, visible: true },
-    { etiqueta: 'Portal Dalias', enlace: '/login', icono: 'bx bx-user', tipo: 'boton', variante: 'secundario', subtexto: '', nuevaPestana: false, visible: true },
-  ];
+  readonly NAVEGACION_DEFAULTS: NavegacionGlobal = {
+    posicionPanel: 'derecha',
+    items: [
+      { etiqueta: 'Inicio', enlace: '/', icono: 'fas fa-home', tipo: 'enlace', variante: 'primario', subtexto: '', nuevaPestana: false, visible: true },
+      { etiqueta: 'Nosotros', enlace: '/nosotros', icono: 'fas fa-building', tipo: 'enlace', variante: 'primario', subtexto: '', nuevaPestana: false, visible: true },
+      { etiqueta: 'Servicios', enlace: '/servicios', icono: 'fas fa-cog', tipo: 'enlace', variante: 'primario', subtexto: '', nuevaPestana: false, visible: true },
+      { etiqueta: 'Actividades', enlace: '/actividades', icono: 'fas fa-calendar-alt', tipo: 'enlace', variante: 'primario', subtexto: '', nuevaPestana: false, visible: true },
+      { etiqueta: 'Trabaja con nosotros', enlace: '/trabaja-con-nosotros', icono: 'fas fa-briefcase', tipo: 'enlace', variante: 'primario', subtexto: '', nuevaPestana: false, visible: true },
+      { etiqueta: 'Contáctanos', enlace: '/contactanos', icono: 'fas fa-envelope', tipo: 'enlace', variante: 'primario', subtexto: '', nuevaPestana: false, visible: true },
+      { etiqueta: 'Blog', enlace: '/blog', icono: 'fas fa-newspaper', tipo: 'enlace', variante: 'primario', subtexto: '', nuevaPestana: false, visible: true },
+      { etiqueta: '+51 981 776 156', enlace: 'https://wa.link/iv575a', icono: 'bx bx-phone', tipo: 'boton', variante: 'primario', subtexto: '¿Alguna duda? Contáctanos', nuevaPestana: true, visible: true },
+      { etiqueta: 'Portal Dalias', enlace: '/login', icono: 'bx bx-user', tipo: 'boton', variante: 'secundario', subtexto: '', nuevaPestana: false, visible: true },
+    ],
+  };
 
   // Menú del sitio. depth=0: no hay relaciones que poblar (todo son campos
   // planos). Filtra los items ocultos y cae a los defaults si el CMS no
   // responde o devuelve la lista vacía.
-  getNavegacion(): Observable<NavItem[]> {
+  getNavegacion(): Observable<NavegacionGlobal> {
     const url = `${this.base}/globals/navegacion?depth=0`;
     return this.http.get<any>(url).pipe(
       map((d) => this.mapNavegacionDoc(d)),
@@ -177,11 +188,14 @@ export class CmsService {
   }
 
   // Público: lo usa el Live Preview del header para mapear el doc editado en vivo.
-  mapNavegacionDoc(d: any): NavItem[] {
+  mapNavegacionDoc(d: any): NavegacionGlobal {
     const items = (Array.isArray(d?.items) ? d.items : [])
       .filter((i: any) => i?.visible !== false)
       .map((i: any) => this.mapNavItem(i));
-    return items.length ? items : this.NAVEGACION_DEFAULTS;
+    const posicionPanel: PosicionPanel = d?.posicionPanel === 'izquierda' ? 'izquierda' : 'derecha';
+    return items.length
+      ? { posicionPanel, items }
+      : this.NAVEGACION_DEFAULTS;
   }
 
   private mapNavItem(i: any): NavItem {
