@@ -17,31 +17,52 @@
         </a>
       </div>
 
-      <!-- Acciones desktop -->
+      <!-- Enlaces desktop (editables desde el CMS: global "navegacion") -->
       <ul class="menu">
-        <li *ngIf="showInicio">
-          <a routerLink="/">Inicio</a>
+        <li *ngFor="let item of enlaces">
+          <a *ngIf="!esExterno(item.enlace)" [routerLink]="item.enlace">{{ item.etiqueta }}</a>
+          <a *ngIf="esExterno(item.enlace)" [href]="item.enlace"
+             [attr.target]="item.nuevaPestana ? '_blank' : null"
+             [attr.rel]="item.nuevaPestana ? 'noopener noreferrer' : null">{{ item.etiqueta }}</a>
         </li>
-        <li><a routerLink="/nosotros">Nosotros</a></li>
-        <li><a routerLink="/servicios">Servicios</a></li>
-        <li><a routerLink="/actividades">Actividades</a></li>
-        <li><a routerLink="/trabaja-con-nosotros">Trabaja con nosotros</a></li>
-        <li><a routerLink="/contactanos">Contáctanos</a></li>
-        <li><a routerLink="/blog">Blog</a></li>
       </ul>
 
+      <!-- Acciones desktop (botones destacados editables desde el CMS) -->
       <div class="header-actions">
-        <a href="https://wa.link/iv575a" target="_blank" rel="noopener noreferrer" class="btn_header">
-          <i class="bx bx-phone"></i>
-          <div class="contact_header">
-            <span>+51 981 776 156</span>
-            ¿Alguna duda? Contáctanos
-          </div>
-        </a>
-        <a routerLink="/login" class="btn-residente">
-          <i class="bx bx-user"></i>
-          <span>Portal <br /> Dalias</span>
-        </a>
+        <ng-container *ngFor="let item of botones">
+          <!-- Botón primario (destacado / dorado, con subtexto opcional) -->
+          <ng-container *ngIf="item.variante !== 'secundario'">
+            <a *ngIf="esExterno(item.enlace)" [href]="item.enlace" class="btn_header"
+               [attr.target]="item.nuevaPestana ? '_blank' : null"
+               [attr.rel]="item.nuevaPestana ? 'noopener noreferrer' : null">
+              <i *ngIf="item.icono" [ngClass]="item.icono"></i>
+              <div class="contact_header">
+                <span>{{ item.etiqueta }}</span>
+                {{ item.subtexto }}
+              </div>
+            </a>
+            <a *ngIf="!esExterno(item.enlace)" [routerLink]="item.enlace" class="btn_header">
+              <i *ngIf="item.icono" [ngClass]="item.icono"></i>
+              <div class="contact_header">
+                <span>{{ item.etiqueta }}</span>
+                {{ item.subtexto }}
+              </div>
+            </a>
+          </ng-container>
+          <!-- Botón secundario (oscuro) -->
+          <ng-container *ngIf="item.variante === 'secundario'">
+            <a *ngIf="!esExterno(item.enlace)" [routerLink]="item.enlace" class="btn-residente">
+              <i *ngIf="item.icono" [ngClass]="item.icono"></i>
+              <span>{{ item.etiqueta }}</span>
+            </a>
+            <a *ngIf="esExterno(item.enlace)" [href]="item.enlace" class="btn-residente"
+               [attr.target]="item.nuevaPestana ? '_blank' : null"
+               [attr.rel]="item.nuevaPestana ? 'noopener noreferrer' : null">
+              <i *ngIf="item.icono" [ngClass]="item.icono"></i>
+              <span>{{ item.etiqueta }}</span>
+            </a>
+          </ng-container>
+        </ng-container>
       </div>
 
       <!-- Botón hamburguesa (solo mobile) -->
@@ -67,58 +88,56 @@
       </button>
     </div>
 
-    <!-- enlaces -->
+    <!-- Enlaces (misma fuente que el desktop: global "navegacion" del CMS) -->
     <ul class="menu-mobile">
-      <li *ngIf="showInicio">
-        <a routerLink="/" (click)="cerrarMenu()">
-          <i class="fas fa-home"></i> Inicio
+      <li *ngFor="let item of enlaces">
+        <a *ngIf="!esExterno(item.enlace)" [routerLink]="item.enlace" (click)="cerrarMenu()">
+          <i *ngIf="item.icono" [ngClass]="item.icono"></i> {{ item.etiqueta }}
         </a>
-      </li>
-      <li>
-        <a routerLink="/nosotros" (click)="cerrarMenu()">
-          <i class="fas fa-building"></i> Nosotros
-        </a>
-      </li>
-      <li>
-        <a routerLink="/servicios" (click)="cerrarMenu()">
-          <i class="fas fa-cog"></i> Servicios
-        </a>
-      </li>
-      <li>
-        <a routerLink="/actividades" (click)="cerrarMenu()">
-          <i class="fas fa-calendar-alt"></i> Actividades
-        </a>
-      </li>
-      <li>
-        <a routerLink="/trabaja-con-nosotros" (click)="cerrarMenu()">
-          <i class="fas fa-briefcase"></i> Trabaja con nosotros
-        </a>
-      </li>
-      <li>
-        <a routerLink="/contactanos" (click)="cerrarMenu()">
-          <i class="fas fa-envelope"></i> Contáctanos
-        </a>
-      </li>
-      <li>
-        <a routerLink="/blog" (click)="cerrarMenu()">
-          <i class="fas fa-newspaper"></i> Blog
+        <a *ngIf="esExterno(item.enlace)" [href]="item.enlace" (click)="cerrarMenu()"
+           [attr.target]="item.nuevaPestana ? '_blank' : null"
+           [attr.rel]="item.nuevaPestana ? 'noopener noreferrer' : null">
+          <i *ngIf="item.icono" [ngClass]="item.icono"></i> {{ item.etiqueta }}
         </a>
       </li>
     </ul>
 
-    <!-- Botones inferiores -->
+    <!-- Botones inferiores (mismos botones destacados del CMS) -->
     <div class="panel-acciones">
-      <a href="https://wa.link/iv575a" target="_blank" rel="noopener noreferrer" class="btn-panel btn-panel-contacto" (click)="cerrarMenu()">
-        <i class="bx bx-phone"></i>
-        <div>
-          <span class="btn-panel-numero">+51 981 776 156</span>
-          <span class="btn-panel-sub">¿Alguna duda? Contáctanos</span>
-        </div>
-      </a>
-      <a routerLink="/login" class="btn-panel btn-panel-residente" (click)="cerrarMenu()">
-        <i class="bx bx-user"></i>
-        <span>Portal Dalias</span>
-      </a>
+      <ng-container *ngFor="let item of botones">
+        <!-- Botón primario / contacto (dorado) -->
+        <ng-container *ngIf="item.variante !== 'secundario'">
+          <a *ngIf="esExterno(item.enlace)" [href]="item.enlace" class="btn-panel btn-panel-contacto" (click)="cerrarMenu()"
+             [attr.target]="item.nuevaPestana ? '_blank' : null"
+             [attr.rel]="item.nuevaPestana ? 'noopener noreferrer' : null">
+            <i *ngIf="item.icono" [ngClass]="item.icono"></i>
+            <div>
+              <span class="btn-panel-numero">{{ item.etiqueta }}</span>
+              <span class="btn-panel-sub" *ngIf="item.subtexto">{{ item.subtexto }}</span>
+            </div>
+          </a>
+          <a *ngIf="!esExterno(item.enlace)" [routerLink]="item.enlace" class="btn-panel btn-panel-contacto" (click)="cerrarMenu()">
+            <i *ngIf="item.icono" [ngClass]="item.icono"></i>
+            <div>
+              <span class="btn-panel-numero">{{ item.etiqueta }}</span>
+              <span class="btn-panel-sub" *ngIf="item.subtexto">{{ item.subtexto }}</span>
+            </div>
+          </a>
+        </ng-container>
+        <!-- Botón secundario / portal (oscuro) -->
+        <ng-container *ngIf="item.variante === 'secundario'">
+          <a *ngIf="!esExterno(item.enlace)" [routerLink]="item.enlace" class="btn-panel btn-panel-residente" (click)="cerrarMenu()">
+            <i *ngIf="item.icono" [ngClass]="item.icono"></i>
+            <span>{{ item.etiqueta }}</span>
+          </a>
+          <a *ngIf="esExterno(item.enlace)" [href]="item.enlace" class="btn-panel btn-panel-residente" (click)="cerrarMenu()"
+             [attr.target]="item.nuevaPestana ? '_blank' : null"
+             [attr.rel]="item.nuevaPestana ? 'noopener noreferrer' : null">
+            <i *ngIf="item.icono" [ngClass]="item.icono"></i>
+            <span>{{ item.etiqueta }}</span>
+          </a>
+        </ng-container>
+      </ng-container>
     </div>
   </aside>
 </header>
