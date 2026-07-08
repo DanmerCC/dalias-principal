@@ -29,10 +29,16 @@
         (click)="irAlEnlace()"
         class="anuncio-popup__imagen-link"
       >
-        <img [src]="anuncio.imagen" [alt]="anuncio.imagenAlt" class="anuncio-popup__imagen-full" />
+        <picture>
+          <source media="(max-width: 767px)" [srcset]="anuncio.imagenMovil" />
+          <img [src]="anuncio.imagenDesktop" [alt]="anuncio.imagenAlt" class="anuncio-popup__imagen-full" />
+        </picture>
       </button>
       <ng-template #soloImagenSinEnlace>
-        <img [src]="anuncio.imagen" [alt]="anuncio.imagenAlt" class="anuncio-popup__imagen-full" />
+        <picture>
+          <source media="(max-width: 767px)" [srcset]="anuncio.imagenMovil" />
+          <img [src]="anuncio.imagenDesktop" [alt]="anuncio.imagenAlt" class="anuncio-popup__imagen-full" />
+        </picture>
       </ng-template>
     </ng-container>
 

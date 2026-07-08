@@ -58,6 +58,8 @@ export interface Anuncio {
   mensaje: string;
   imagen: string;
   imagenAlt: string;
+  imagenMovil: string;
+  imagenDesktop: string;
   textoBoton: string;
   enlace: string;
 }
@@ -136,6 +138,8 @@ export class CmsService {
     mensaje: '',
     imagen: '',
     imagenAlt: '',
+    imagenMovil: '',
+    imagenDesktop: '',
     textoBoton: '',
     enlace: '',
   };
@@ -149,7 +153,9 @@ export class CmsService {
         titulo: d?.titulo ?? '',
         mensaje: d?.mensaje ?? '',
         imagen: this.resolveImg(d?.imagen?.url),
-        imagenAlt: d?.imagen?.alt ?? '',
+        imagenAlt: d?.imagen?.alt ?? d?.imagenDesktop?.alt ?? d?.imagenMovil?.alt ?? '',
+        imagenMovil: this.resolveImg(d?.imagenMovil?.url),
+        imagenDesktop: this.resolveImg(d?.imagenDesktop?.url),
         textoBoton: d?.textoBoton ?? '',
         enlace: d?.enlace ?? '',
       })),

@@ -136,7 +136,9 @@ export class AnuncioPopupComponent implements OnInit, OnDestroy {
       titulo: doc?.titulo ?? '',
       mensaje: doc?.mensaje ?? '',
       imagen: resolveImg(doc?.imagen?.url),
-      imagenAlt: doc?.imagen?.alt ?? '',
+      imagenAlt: doc?.imagen?.alt ?? doc?.imagenDesktop?.alt ?? doc?.imagenMovil?.alt ?? '',
+      imagenMovil: resolveImg(doc?.imagenMovil?.url),
+      imagenDesktop: resolveImg(doc?.imagenDesktop?.url),
       textoBoton: doc?.textoBoton ?? '',
       enlace: doc?.enlace ?? '',
     };
