@@ -161,8 +161,8 @@ export class CmsService {
     { etiqueta: 'Trabaja con nosotros', enlace: '/trabaja-con-nosotros', icono: 'fas fa-briefcase', tipo: 'enlace', variante: 'primario', subtexto: '', nuevaPestana: false, visible: true },
     { etiqueta: 'Contáctanos', enlace: '/contactanos', icono: 'fas fa-envelope', tipo: 'enlace', variante: 'primario', subtexto: '', nuevaPestana: false, visible: true },
     { etiqueta: 'Blog', enlace: '/blog', icono: 'fas fa-newspaper', tipo: 'enlace', variante: 'primario', subtexto: '', nuevaPestana: false, visible: true },
-    { etiqueta: '+51 981 776 156', enlace: 'https://wa.link/iv575a', icono: 'bx bx-phone', tipo: 'enlace', variante: 'primario', subtexto: '¿Alguna duda? Contáctanos', nuevaPestana: true, visible: true },
-    { etiqueta: 'Portal Dalias', enlace: '/login', icono: 'bx bx-user', tipo: 'enlace', variante: 'secundario', subtexto: '', nuevaPestana: false, visible: true },
+    { etiqueta: '+51 981 776 156', enlace: 'https://wa.link/iv575a', icono: 'bx bx-phone', tipo: 'boton', variante: 'primario', subtexto: '¿Alguna duda? Contáctanos', nuevaPestana: true, visible: true },
+    { etiqueta: 'Portal Dalias', enlace: '/login', icono: 'bx bx-user', tipo: 'boton', variante: 'secundario', subtexto: '', nuevaPestana: false, visible: true },
   ];
 
   // Menú del sitio. depth=0: no hay relaciones que poblar (todo son campos
@@ -171,14 +171,17 @@ export class CmsService {
   getNavegacion(): Observable<NavItem[]> {
     const url = `${this.base}/globals/navegacion?depth=0`;
     return this.http.get<any>(url).pipe(
-      map((d) => {
-        const items = (Array.isArray(d?.items) ? d.items : [])
-          .filter((i: any) => i?.visible !== false)
-          .map((i: any) => this.mapNavItem(i));
-        return items.length ? items : this.NAVEGACION_DEFAULTS;
-      }),
+      map((d) => this.mapNavegacionDoc(d)),
       catchError(() => of(this.NAVEGACION_DEFAULTS)),
     );
+  }
+
+  // Público: lo usa el Live Preview del header para mapear el doc editado en vivo.
+  mapNavegacionDoc(d: any): NavItem[] {
+    const items = (Array.isArray(d?.items) ? d.items : [])
+      .filter((i: any) => i?.visible !== false)
+      .map((i: any) => this.mapNavItem(i));
+    return items.length ? items : this.NAVEGACION_DEFAULTS;
   }
 
   private mapNavItem(i: any): NavItem {
