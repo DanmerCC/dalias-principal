@@ -78,7 +78,7 @@
   <div class="overlay-menu" [class.activo]="menuAbierto" (click)="cerrarMenu()"></div>
 
   <!-- Panel lateral mobile -->
-  <aside class="panel-mobile" [class.abierto]="menuAbierto">
+  <aside class="panel-mobile" [class.izquierda]="posicionPanel === 'izquierda'" [class.abierto]="menuAbierto">
 
     <!-- Cabecera del panel: logo + X -->
     <div class="panel-head">
