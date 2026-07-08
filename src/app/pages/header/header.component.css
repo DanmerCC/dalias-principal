@@ -274,12 +274,13 @@
   font-size: 0.9rem;
 }
 
-/* Menú enlaces */
+/* Menú enlaces (debajo de los botones destacados) */
 .menu-mobile {
   list-style: none;
-  padding: 0.8rem 1.2rem 0;
+  padding: 0.6rem 1.2rem 1rem;
   margin: 0;
   flex: 1;
+  border-top: 1px solid #e0e0e0;
 }
 .menu-mobile li {
   position: relative;
@@ -320,13 +321,12 @@
   flex-shrink: 0;
 }
 
-/* Botones inferiores del panel */
+/* Botones destacados del panel (van ARRIBA, bajo la cabecera) */
 .panel-acciones {
   display: flex;
   flex-direction: column;
   gap: 0.7rem;
-  padding: 1.2rem 1.2rem 2rem;
-  margin-top: auto;
+  padding: 1.2rem 1.2rem 1rem;
 }
 .btn-panel {
   display: flex;
@@ -448,7 +448,7 @@
   }
 
   .menu-mobile {
-    padding: 0.4rem 1rem 0;
+    padding: 0.4rem 1rem 1rem;
   }
 
   .menu-mobile a {
@@ -458,7 +458,7 @@
   }
 
   .panel-acciones {
-    padding: 1rem 1rem 1.8rem;
+    padding: 1rem 1rem 0.8rem;
     gap: 0.6rem;
   }
 

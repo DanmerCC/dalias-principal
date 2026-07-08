@@ -88,21 +88,8 @@
       </button>
     </div>
 
-    <!-- Enlaces (misma fuente que el desktop: global "navegacion" del CMS) -->
-    <ul class="menu-mobile">
-      <li *ngFor="let item of enlaces">
-        <a *ngIf="!esExterno(item.enlace)" [routerLink]="item.enlace" (click)="cerrarMenu()">
-          <i *ngIf="item.icono" [ngClass]="item.icono"></i> {{ item.etiqueta }}
-        </a>
-        <a *ngIf="esExterno(item.enlace)" [href]="item.enlace" (click)="cerrarMenu()"
-           [attr.target]="item.nuevaPestana ? '_blank' : null"
-           [attr.rel]="item.nuevaPestana ? 'noopener noreferrer' : null">
-          <i *ngIf="item.icono" [ngClass]="item.icono"></i> {{ item.etiqueta }}
-        </a>
-      </li>
-    </ul>
-
-    <!-- Botones inferiores (mismos botones destacados del CMS) -->
+    <!-- Botones destacados ARRIBA (mismos botones del CMS). En móvil van al tope
+         del panel, no al fondo, para no colisionar con el WhatsApp flotante (#29). -->
     <div class="panel-acciones">
       <ng-container *ngFor="let item of botones">
         <!-- Botón primario / contacto (dorado) -->
@@ -139,5 +126,19 @@
         </ng-container>
       </ng-container>
     </div>
+
+    <!-- Enlaces (misma fuente que el desktop: global "navegacion" del CMS) -->
+    <ul class="menu-mobile">
+      <li *ngFor="let item of enlaces">
+        <a *ngIf="!esExterno(item.enlace)" [routerLink]="item.enlace" (click)="cerrarMenu()">
+          <i *ngIf="item.icono" [ngClass]="item.icono"></i> {{ item.etiqueta }}
+        </a>
+        <a *ngIf="esExterno(item.enlace)" [href]="item.enlace" (click)="cerrarMenu()"
+           [attr.target]="item.nuevaPestana ? '_blank' : null"
+           [attr.rel]="item.nuevaPestana ? 'noopener noreferrer' : null">
+          <i *ngIf="item.icono" [ngClass]="item.icono"></i> {{ item.etiqueta }}
+        </a>
+      </li>
+    </ul>
   </aside>
 </header>
