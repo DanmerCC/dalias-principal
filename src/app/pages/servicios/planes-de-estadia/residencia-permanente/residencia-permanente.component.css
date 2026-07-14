@@ -1764,8 +1764,8 @@
 @media (max-width: 680px) {
   /* HERO */
   .hero__residencia {
-    height: 75vh;
-    min-height: 450px;
+    height: 67.5vh;
+    min-height: 405px;
   }
 
   .hero__contenido {
