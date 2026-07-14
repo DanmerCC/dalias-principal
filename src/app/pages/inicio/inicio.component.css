@@ -568,6 +568,7 @@
 
 /* Sección actividades */
 .section__actividades {
+  --actividad-card-height: 26rem;
   width: 100%;
   padding: 5rem 3rem;
   position: relative;
@@ -607,7 +608,8 @@
   max-width: 1400px;
   margin: 0 auto;
   display: flex;
-  align-items: center;
+  height: var(--actividad-card-height);
+  align-items: stretch;
   justify-content: space-between;
   gap: 1rem;
   overflow: auto;
@@ -619,12 +621,13 @@
   background: #f5f5ef;
   width: 73%;
   min-width: 73%;
-  height: 26rem;
+  height: 100%;
   display: flex;
   justify-content: center;
   align-items: center;
   gap: 1rem;
   border-radius: 1.5rem;
+  overflow: hidden;
   transition: transform 0.3s ease;
 }
 
@@ -638,6 +641,7 @@
   object-fit: cover;
   object-position: center;
   border-radius: 1rem;
+  flex-shrink: 0;
 }
 
 .fecha__atv {
@@ -660,6 +664,32 @@
   color: #555;
   line-height: 1.6;
   font-size: 0.95rem;
+  margin: 0;
+}
+
+.btn__leer-mas-actividad {
+  margin-top: 0.8rem;
+  padding: 0;
+  border: 0;
+  border-bottom: 1px solid currentColor;
+  background: transparent;
+  color: #006b83;
+  font: inherit;
+  font-size: 0.9rem;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.btn__leer-mas-actividad:hover,
+.btn__leer-mas-actividad:focus-visible {
+  color: #003e5c;
+}
+
+.btn__leer-mas-actividad:focus-visible,
+.actividad-modal__cerrar:focus-visible,
+.actividad-modal__accion:focus-visible {
+  outline: 3px solid #d9b756;
+  outline-offset: 3px;
 }
 
 .text__atv {
@@ -670,6 +700,78 @@
   flex-direction: column;
   justify-content: center;
   align-items: flex-start;
+  min-width: 0;
+}
+
+.actividad-modal__backdrop {
+  position: fixed;
+  z-index: 1000;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  padding: 1.5rem;
+  background: rgba(0, 62, 92, 0.62);
+}
+
+.actividad-modal {
+  position: relative;
+  width: min(100%, 38rem);
+  max-height: min(80vh, 42rem);
+  overflow: auto;
+  border-radius: 1.5rem;
+  padding: 2.5rem;
+  background: #f5f5ef;
+  box-shadow: 0 1.5rem 4rem rgba(0, 62, 92, 0.3);
+}
+
+.actividad-modal__cerrar {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  display: grid;
+  width: 2.5rem;
+  height: 2.5rem;
+  place-items: center;
+  border: 0;
+  border-radius: 50%;
+  background: #fff;
+  color: #003e5c;
+  font-size: 1.5rem;
+  cursor: pointer;
+}
+
+.actividad-modal__subtitulo {
+  margin: 0 3rem 0.75rem 0;
+  color: #006b83;
+  font-size: 0.85rem;
+  font-weight: 600;
+  letter-spacing: 0.05rem;
+  text-transform: uppercase;
+}
+
+.actividad-modal h2 {
+  margin: 0 3rem 1rem 0;
+  color: #003e5c;
+  font-size: 2rem;
+}
+
+.actividad-modal__descripcion {
+  margin: 0;
+  color: #333;
+  line-height: 1.7;
+  white-space: pre-line;
+}
+
+.actividad-modal__accion {
+  margin-top: 1.5rem;
+  border: 0;
+  border-radius: 2rem;
+  padding: 0.8rem 1.5rem;
+  background: #d9b756;
+  color: #fff;
+  font: inherit;
+  font-weight: 700;
+  cursor: pointer;
 }
 
 /* Slide final "Ver todas" */
@@ -2178,6 +2280,7 @@ select.form__input {
 
   /* ACTIVIDADES */
   .section__actividades {
+    --actividad-card-height: 38rem;
     padding: 4rem 2rem;
   }
 
@@ -2193,7 +2296,7 @@ select.form__input {
   .art__atv {
     width: 85%;
     min-width: 85%;
-    height: auto;
+    height: 100%;
     flex-direction: column;
     padding: 2rem;
   }
@@ -2204,6 +2307,7 @@ select.form__input {
   }
 
   .text__atv {
+    flex: 1;
     width: 100%;
     padding: 1.5rem 0;
   }
@@ -2417,6 +2521,7 @@ select.form__input {
 
   /* ACTIVIDADES */
   .section__actividades {
+    --actividad-card-height: 35rem;
     padding: 3rem 1rem;
   }
 
@@ -2432,6 +2537,19 @@ select.form__input {
 
   .art__atv img {
     height: 13rem;
+  }
+
+  .actividad-modal__backdrop {
+    padding: 1rem;
+  }
+
+  .actividad-modal {
+    max-height: 85vh;
+    padding: 2rem 1.5rem;
+  }
+
+  .actividad-modal h2 {
+    font-size: 1.55rem;
   }
 
   .text__atv h3 {

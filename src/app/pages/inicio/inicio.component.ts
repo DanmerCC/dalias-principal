@@ -2,6 +2,7 @@ import {
   Component,
   OnInit,
   AfterViewInit,
+  HostListener,
   PLATFORM_ID,
   Inject,
   OnDestroy,
@@ -107,6 +108,7 @@ interface Actividad {
 export class InicioComponent implements OnInit, OnDestroy {
   @ViewChild('actividadesCarrusel') actividadesCarrusel!: ElementRef;
   @ViewChild('modalVisita') modalVisita!: AgendarVisitaModalComponent;
+  @ViewChild('cerrarModalActividad') cerrarModalActividad?: ElementRef<HTMLButtonElement>;
 
   slideActual = 0;
   indicePaginaNoticias = 0;
@@ -137,9 +139,51 @@ export class InicioComponent implements OnInit, OnDestroy {
 
   // Actividades para el carrusel
   actividades: Actividad[] = [];
+  actividadExpandida: Actividad | null = null;
+
+  readonly textoLeerMas = 'Leer más';
+  readonly textoCerrarDescripcion = 'Cerrar';
+  private readonly descripcionPreviewMaxLength = 180;
+  private ultimoFocoDescripcion?: HTMLElement;
 
   get actividadesConFinal() {
     return [...this.actividades, { final: true }];
+  }
+
+  descripcionPrevia(descripcion: string): string {
+    const texto = (descripcion ?? '').replace(/\s+/g, ' ').trim();
+    const caracteres = Array.from(texto);
+
+    if (caracteres.length <= this.descripcionPreviewMaxLength) return texto;
+
+    const previa = caracteres.slice(0, this.descripcionPreviewMaxLength).join('');
+    const ultimoEspacio = previa.lastIndexOf(' ');
+    return `${(ultimoEspacio > 0 ? previa.slice(0, ultimoEspacio) : previa).trimEnd()}…`;
+  }
+
+  tieneDescripcionExtendida(descripcion: string): boolean {
+    return Array.from((descripcion ?? '').replace(/\s+/g, ' ').trim()).length > this.descripcionPreviewMaxLength;
+  }
+
+  abrirDescripcion(actividad: Actividad, event: MouseEvent): void {
+    this.ultimoFocoDescripcion = event.currentTarget as HTMLElement;
+    this.actividadExpandida = actividad;
+    if (isPlatformBrowser(this.platformId)) {
+      setTimeout(() => this.cerrarModalActividad?.nativeElement.focus());
+    }
+  }
+
+  cerrarDescripcion(): void {
+    if (!this.actividadExpandida) return;
+    this.actividadExpandida = null;
+    if (isPlatformBrowser(this.platformId)) {
+      setTimeout(() => this.ultimoFocoDescripcion?.focus());
+    }
+  }
+
+  @HostListener('document:keydown.escape')
+  alPresionarEscape(): void {
+    this.cerrarDescripcion();
   }
 
   banner: BannerInicio = {

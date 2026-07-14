@@ -278,7 +278,17 @@
         <div>
           <p class="fecha__atv">{{ actividad.subtitulo }}</p>
           <h3>{{ actividad.titulo }}</h3>
-          <p class="descripcion__atv">{{ actividad.descripcion }}</p>
+          <p class="descripcion__atv">{{ descripcionPrevia(actividad.descripcion) }}</p>
+          <button
+            *ngIf="tieneDescripcionExtendida(actividad.descripcion)"
+            type="button"
+            class="btn__leer-mas-actividad"
+            [attr.aria-label]="textoLeerMas + ' sobre ' + actividad.titulo"
+            aria-haspopup="dialog"
+            (click)="abrirDescripcion(actividad, $event)"
+          >
+            {{ textoLeerMas }}
+          </button>
         </div>
       </div>
       <img [src]="actividad.imagen" [alt]="actividad.titulo" />
@@ -323,6 +333,36 @@
     </div>
   </div>
 </section>
+
+<div
+  *ngIf="actividadExpandida"
+  class="actividad-modal__backdrop"
+  (click)="cerrarDescripcion()"
+>
+  <section
+    class="actividad-modal"
+    role="dialog"
+    aria-modal="true"
+    aria-labelledby="actividad-modal-titulo"
+    (click)="$event.stopPropagation()"
+  >
+    <button
+      type="button"
+      class="actividad-modal__cerrar"
+      #cerrarModalActividad
+      [attr.aria-label]="textoCerrarDescripcion"
+      (click)="cerrarDescripcion()"
+    >
+      <i class="bx bx-x" aria-hidden="true"></i>
+    </button>
+    <p class="actividad-modal__subtitulo">{{ actividadExpandida.subtitulo }}</p>
+    <h2 id="actividad-modal-titulo">{{ actividadExpandida.titulo }}</h2>
+    <p class="actividad-modal__descripcion">{{ actividadExpandida.descripcion }}</p>
+    <button type="button" class="actividad-modal__accion" (click)="cerrarDescripcion()">
+      {{ textoCerrarDescripcion }}
+    </button>
+  </section>
+</div>
 
 <!-- Sección estadísticas -->
 <section class="seccion__estadisticas">
